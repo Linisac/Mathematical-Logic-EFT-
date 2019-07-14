@@ -1,0 +1,1551 @@
+%Chapter VIII------------------------------------------------------------------------------------------------
+{\LARGE \bfseries VIII \\ \\ Syntactic Interpretations and\\ \\Normal Forms}
+\\
+\\
+\\
+%Section VIII.1------------------------------------------------------------------------------------
+{\large \S1. Term-Reduced Formulas and Relational Symbol Sets}
+\begin{enumerate}[1.]
+\item \textbf{Note to Theorem 1.3.} In the proof of part (a) in text, the following statement is missing:\smallskip\\
+\begin{tabular}{lll}
+$\relational{[c \equiv x]}$ & $\colonequals$ & $Cx$.
+\end{tabular}\smallskip\\
+In part (b), it is more appropriate to set\smallskip\\
+\begin{tabular}{lll}
+$\invrelational{[F\enum[1]{y}{n}x]}$ & $\colonequals$ & $f\enum[1]{y}{n} \equal x$, \cr
+$\invrelational{[Cx]}$ & $\colonequals$ & $c \equal x$
+\end{tabular}\smallskip\\
+because $\relational{S}$ has no function or constant symbols.\bigskip\\
+Also, this theorem can be specialized to the case of sentences and structures (using Coincidence Lemma).\bigskip\\
+In the following we investigate relational symbol sets in more depth concerning validity. Again, let $S$ be an arbitrary symbol set, and $S^r$ the corresponding relational symbol set. More precisely,
+\begin{enumerate}[(1)]
+\item If $f \in S$ is an $n$-ary function symbol, then we assign to it $F \in S^r$ the corresponding $(n + 1)$-ary relation symbol;
+%%
+\item If $c \in S$ is a constant symbol, then we assign to it $C \in S^r$ the corresponding unary relation symbol.
+\end{enumerate}
+Let $\psi$ be an $S$-sentence, and $\psi^r$ an $S^r$-sentence defined as in the proof. Without loss of generality, we may assume that $S$ is finite, and hence so is $S^r$. Furthermore, let $\chi$ be the $S^r$-sentence which is the conjunction of the $S^r$-sentences in the set below:
+\[
+\begin{array}{r}
+\{ \forall v_0 \ldots \forall v_{n - 1} \exists^{=1} v_n F v_0 \ldots v_n \ | \ \mbox{$F \in S^r \setminus S$ is $(n + 1)$-ary, where $n > 0$} \} \cup \cr
+\{ \exists^{=1} v_0 C v_0 \ | \ \mbox{$C \in S^r \setminus S$ is unary} \}.
+\end{array}
+\]
+That is, $\chi$ states that $F$ stands for a function if it does not appear in $S$ and its arity is at least two, and that $C$ stands for a constant if it does not appear in $S$ and its arity is one. Then we have\\
+\ \\
+\textbf{Corollary.} \hfill \emph{$\models \psi$ \ \ \ iff \ \ \ $\models (\chi \rightarrow \psi^r)$.} \hfill \phantom{Corollary.}\\
+\textit{Proof.} Suppose $\models \psi$. Then for every $S^r$-structure $\mathfrak{B}$, if $\mathfrak{B} \models \chi$, there is an $S$-structure $\mathfrak{A}$ such that $\mathfrak{A}^r = \mathfrak{B}$; more precisely,
+\begin{enumerate}[(1)]
+\item $A = B$;
+%%
+\item For all $a_1, \ldots, a_n \in A (= B)$, $R^\mathfrak{A} a_1 \ldots a_n$ iff $R^\mathfrak{B} a_1 \ldots a_n$;
+%%
+\item For all $a_0, \ldots, a_n \in A (= B)$, $f^\mathfrak{A} (a_0, \ldots, a_{n - 1}) = a_n$ iff $F^\mathfrak{B} a_0 \ldots a_n$;
+%%
+\item For all $a \in A (= B)$, $c^\mathfrak{A} = a$ iff $C^\mathfrak{B} a$.
+\end{enumerate}
+From (the specialized case of) this theorem it follows that
+\begin{center}
+$\mathfrak{A} \models \psi$ \ \ \ iff \ \ \ $\mathfrak{B} (= \mathfrak{A}^r) \models \psi^r$.
+\end{center}
+As $\psi$ is valid, however, it turns out that the righthand-side condition above holds. Hence $\models (\chi \rightarrow \psi^r)$.\\
+\ \\
+Conversely, suppose $\models (\chi \rightarrow \psi^r)$. Then from (the specialized case of) this theorem it follows that for every $S$-structure $\mathfrak{A}$,
+\begin{center}
+$\mathfrak{A} \models \psi$ \ \ \ iff \ \ \ $\mathfrak{A}^r \models (\chi \rightarrow \psi^r)$.
+\end{center}
+Symmetrically, as $(\chi \rightarrow \psi^r)$ is valid, it turns out that the lefthand-side condition above holds. Hence $\models \psi$.\nolinebreak\hfill$\talloblong$
+%
+\item \textbf{A Parallel to Corollary 1.4.} We state and prove:\medskip\\
+\begin{theorem}{Corollary}
+For two $S$-structures $\struct{A}$ and $\struct{B}$,\smallskip\\
+\centerline{$\struct{A} \iso \struct{B}$ \quad iff \quad $\relational{\struct{A}} \iso \relational{\struct{B}}$.}
+\end{theorem}
+\begin{proof}
+For constant symbol $c \in S$ and $n$-ary function symbol $f \in S$, respectively, we assign unary relation symbol $C \in \relational{S}$ and $(n + 1)$-ary relation symbol $F \in \relational{S}$.\\
+\ \\
+Assume $\pi : \struct{A} \iso \struct{B}$. Then: For $a \in A$,\smallskip\\
+\begin{tabular}[b]{lll}
+\   & $\intpted{C}{\relational{\struct{A}}} a$ & \cr
+iff & $\intpted{c}{\struct{A}} = a$ & (by definition) \cr
+iff & $\intpted{c}{\struct{B}} = \pi (a)$ & (by $\pi: \struct{A} \iso \struct{B}$) \cr
+iff & $\intpted{C}{\relational{\struct{B}}} \pi (a)$ & (by definition). \cr
+\end{tabular}\medskip\\
+For $\seq[1]{a}{n}, a \in A$,\smallskip\\
+\begin{tabular}[b]{lll}
+\   & $\intpted{F}{\relational{\struct{A}}} \enum[1]{a}{n}a$ & \cr
+iff & $\intpted{f}{\struct{A}} (\seq[1]{a}{n}) = a$ & (by definition) \cr
+iff & $\intpted{f}{\struct{B}} (\seqp{\pi(a_1)}{\pi(a_n)}) = \pi(a)$ & (by $\pi: \struct{A} \iso \struct{B}$) \cr
+iff & $\intpted{F}{\relational{\struct{B}}} \enump{\pi(a_1)}{\pi(a_n)}\pi(a)$ & (by definition). \cr
+\end{tabular}\smallskip\\
+So we have $\relational{\struct{A}} \iso \relational{\struct{B}}$.\\
+\ \\
+Conversely, suppose that $\rho: \relational{\struct{A}} \iso \relational{\struct{B}}$. Then:\smallskip\\
+\begin{tabular}[b]{llll}
+$\rho(\intpted{c}{\struct{A}})$ & $=$ & $\rho(a)$ where $a \in A$ and $\intpted{C}{\relational{\struct{A}}}a$ & (by definition) \cr
+\ & $=$ & $\rho(a)$ where $a \in A$ and $\intpted{C}{\relational{\struct{B}}}\rho(a)$ & (by $\rho: \relational{\struct{A}} \iso \relational{\struct{B}}$) \cr
+\ & $=$ & $\intpted{c}{\struct{B}}$ & (by definition).
+\end{tabular}\medskip\\
+For $\seq[1]{a}{n} \in A$, $\rho(\intpted{f}{\struct{A}}(\seq[1]{a}{n}))$\smallskip\\
+\begin{tabular}[b]{llll}
+$=$ & $\rho(a)$ where $a \in A$ and $\intpted{F}{\relational{\struct{A}}}\enum[1]{a}{n}a$ & (by definition) \cr
+$=$ & $\rho(a)$ where $a \in A$ and $\intpted{F}{\relational{\struct{B}}}\enump{\rho(a_1)}{\rho(a_n)}\rho(a)$ & (by $\rho: \relational{\struct{A}} \iso \relational{\struct{B}}$) \cr
+$=$ & $\intpted{f}{\struct{B}}(\seqp{\rho(a_1)}{\rho(a_n)})$ & (by definition).
+\end{tabular}\smallskip\\
+It follows that $\struct{A} \iso \struct{B}$.
+\end{proof}
+\end{enumerate}
+%End of Section VIII.1-----------------------------------------------------------------------------
+\
+\\
+\\
+%Section VIII.2------------------------------------------------------------------------------------
+{\large \S2. Syntactic Interpretations}
+\begin{enumerate}[1.]
+\item \textbf{Note to Paragraph E. Syntactic Interpretations on Page 120.} Note that $S$ is not necessarily included in $S^\prime$.
+%
+\item \textbf{Note to Definition 2.1.} Note that $\varphi_c(v_0) \in L^S_1$. On the other hand,
+\[
+\varphi_{S^\prime}(v_0) = v_0 \equiv v_0
+\]
+is the case in which the domain of an $S$-structure coincides with that of an induced $S^\prime$-structure.
+%
+\item \textbf{Note to the Paragraph Discussing \textit{Identity} on Page 121.} Note that only when $f \in S \cap S^\prime$ and $c \in S \cap S^\prime$ is it meaningful that we talk about the identity $I$ on them. Hence $f \in S^\prime$ and $c \in S^\prime$ should be replaced by ``$f \in S \cap S^\prime$'' and ``$c \in S \cap S^\prime$,'' respectively.
+%
+\item \textbf{Note to the Syntactic Interpretation $I$ of $S_{\mbox{\scriptsize gr}}$ in $S_{\mbox{\scriptsize ar}}$ on Page 122.} The item
+\[
+I(\circ) := x \cdot y = z
+\]
+should be replaced by
+\[
+I(\circ) := x \cdot y \equiv z.
+\]
+Moreover, the item
+\[
+I(e) := x \equiv 1
+\]
+is missing in textbook.\\
+\\
+On the other hand, $\Phi_I$ is, by definition,
+\[
+\{\exists x \varepsilon (x), \, \forall x \forall y (\varepsilon (x) \land \varepsilon (y) \rightarrow \exists^{=1} z (\varepsilon (z) \land x \cdot y \equiv z)), \, \exists^{=1} x (\varepsilon (x) \land x \equiv 1)\}.
+\]
+And it is equivalent to
+\[
+\{\exists x \varepsilon (x)\},
+\]
+provided that the underlying structure $\mathfrak{A}$ is a ring. (The other two sentences are derivable from this one, see the discussion in paragraph C.)
+%
+\item \textbf{Note to the Paragraph Discussing the Syntactic Interpretation $I$ of $S^\prime = \{<, \leq\}$ in $S = \{<\}$ on Page 122.} By definition, $\Phi_I = \{ \exists v_0 \, v_0 \equiv v_0 \}$. Hence it is equivalent to the empty set.\\
+\\On the other hand, that $\mathfrak{A} \models \Phi_{\mbox{\scriptsize ord}}$ implies $\mathfrak{A}^{-I} \models \Phi^\prime_{\mbox{\scriptsize ord}}$ arises from the definition of $\varphi_\leq$.\\
+\\
+Furthermore, $(\mathfrak{B}|_S)^{-I} \models \Phi_{\mbox{\scriptsize ord}}^\prime$ implies $\mathfrak{B}|_S \models \Phi_{\mbox{\scriptsize ord}}$. Thus there is a bijective map between $\modelclass{S^\prime}{}{\Phi^\prime_{\mbox{\scriptsize ord}}}$ and $\modelclass{S}{}{\Phi_{\mbox{\scriptsize ord}}}$.
+%
+\item \textbf{Note to the Paragraph Discussing the Syntactic Interpretation $I$ of $S_{\mbox{\scriptsize grp}}$ in $S_{\mbox{\scriptsize g}}$ in Page 122.} $\mathfrak{A} = (A, \circ^A)$ is a group means that $\mathfrak{A} \models \Phi_{\mbox{\scriptsize g}}$. Also, $\Phi_I$ is equivalent to
+\[
+\{ \forall x \forall y \exists^{=1}z \; x \circ y \equiv z, \; \exists^{=1}x \forall y \; y \circ x \equiv y \},
+\]
+which in turn is equivalent to
+\[
+\{ \exists^{=1} x \forall y \; y \circ x \equiv y \}.
+\]
+%
+\item \textbf{Note to the Proof of Theorem 2.2.} Note that for all variables $x$, $\beta (x) \in A^{-I}$.
+%
+\item \textbf{Note to the Equation (+) in Page 123.} Note that $P^A$ is a subset of $A$.
+%
+\item \textbf{Note to the First Paragraph in Page 124.} The reason for \textit{$P^A$ being $S$-closed implies that it is $S \cup \{ P \}$-closed} is that $P$ is a relation symbol and we ignore relation symbols when it comes to talking about the concept of $S$-closed.
+%
+\item \textbf{Note to Lemma 2.3.} Following the definition of the relativization $\psi^P$ of $\psi \in L^S$ to $P$ given in page 124, we give a direct proof of 2.3 here.\\
+\\
+First note that, by Theorem 1.2, it suffices to consider those term-reduced $\psi \in L^S$.
+\begin{enumerate}[1.]
+\item $\psi$ is atomic, thus $\psi^P = \psi$:
+\begin{enumerate}[(1)]
+\item $\psi = x \equiv y$:
+\[
+\begin{array}{ll}
+\    & ([P^A]^{\mathfrak{A}}, \beta) \models x \equiv y \\
+\Iff & ([P^A]^{\mathfrak{A}}, \beta)(x) = ([P^A]^{\mathfrak{A}}, \beta)(y) \\
+\Iff & \beta(x) = \beta(y) \\
+\Iff & (\mathfrak{A}, \beta)(x) = (\mathfrak{A}, \beta)(y) \\
+\Iff & (\mathfrak{A}, \beta) \models x \equiv y.
+\end{array}
+\]
+%%%
+\item $\psi = fx_1 \ldots x_n \equiv x$:
+\[
+\begin{array}{ll}
+\    & ([P^A]^{\mathfrak{A}}, \beta) \models fx_1 \ldots x_n \equiv x \\
+\Iff & f^{[P^A]^{\mathfrak{A}}}(([P^A]^{\mathfrak{A}}, \beta)(x_1), \ldots, ([P^A]^{\mathfrak{A}}, \beta)(x_n)) = ([P^A]^{\mathfrak{A}}, \beta)(x) \\
+\Iff & f^{[P^A]^{\mathfrak{A}}}(\beta(x_1), \ldots, \beta(x_n)) = \beta(x) \\
+\Iff & f^{\mathfrak{A}}(\beta(x_1), \ldots, \beta(x_n)) = \beta(x) \\
+\    & \mbox{(since $P^A$ is $S$-closed)} \\
+\Iff & f^{\mathfrak{A}}((\mathfrak{A}, \beta)(x_1), \ldots, (\mathfrak{A}, \beta)(x_n)) = (\mathfrak{A}, \beta)(x) \\
+\Iff & (\mathfrak{A}, \beta) \models fx_1 \ldots x_n \equiv x.
+\end{array}
+\]
+%%%
+\item $\psi = c \equiv x$:
+\[
+\begin{array}{ll}
+\    & ([P^A]^{\mathfrak{A}}, \beta) \models c \equiv x \\
+\Iff & c^{[P^A]^{\mathfrak{A}}} = ([P^A]^{\mathfrak{A}}, \beta)(x) \\
+\Iff & c^{[P^A]^{\mathfrak{A}}} = \beta(x) \\
+\Iff & c^{\mathfrak{A}} = \beta(x) \\
+\    & \mbox{(since $P^A$ is $S$-closed)} \\
+\Iff & c^{\mathfrak{A}} = (\mathfrak{A}, \beta)(x) \\
+\Iff & (\mathfrak{A}, \beta) \models c \equiv x.
+\end{array}
+\]
+\end{enumerate}
+%%
+\item $\psi = \neg \varphi$, thus $\psi^P = \neg \varphi^P$:
+\[
+\begin{array}{ll}
+\    & ([P^A]^{\mathfrak{A}}, \beta) \models \neg \varphi \\
+\Iff & \mbox{not $([P^A]^{\mathfrak{A}}, \beta) \models \varphi$} \\
+\Iff & \mbox{not $(\mathfrak{A}, \beta) \models \varphi^P$} \\
+\    & \mbox{(by induction hypothesis)} \\
+\Iff & (\mathfrak{A}, \beta) \models \neg \varphi^P.
+\end{array}
+\]
+%%
+\item $\psi = (\varphi_1 \lor \varphi_2)$, thus $\psi^P = (\varphi_1^P \lor \varphi_2^P)$:
+\[
+\begin{array}{ll}
+\    & ([P^A]^{\mathfrak{A}}, \beta) \models (\varphi_1 \lor \varphi_2) \\
+\Iff & \mbox{$([P^A]^{\mathfrak{A}}, \beta) \models \varphi_1$ or $([P^A]^{\mathfrak{A}}, \beta) \models \varphi_2$} \\
+\Iff & \mbox{$(\mathfrak{A}, \beta) \models \varphi_1^P$ or $(\mathfrak{A}, \beta) \models \varphi_2^P$} \\
+\    & \mbox{(by induction hypothesis)} \\
+\Iff & \mathfrak{A} \models (\varphi_1^P \lor \varphi_2^P).
+\end{array}
+\]
+%%
+\item $\psi = (\exists x \varphi)$, thus $\psi^P = \exists x (Px \land \varphi^P)$):
+\[
+\begin{array}{ll}
+\    & ([P^A]^{\mathfrak{A}}, \beta) \models \exists x \varphi \\
+\Iff & \mbox{there is some $a \in P^A$ such that $([P^A]^{\mathfrak{A}}, \beta\frac{a}{x}) \models \varphi$} \\
+\    & \mbox{(note that $([P^A]^{\mathfrak{A}}, \beta)\frac{a}{x} := ([P^A]^{\mathfrak{A}}, \beta\frac{a}{x})$)} \\
+\Iff & \mbox{there is some $a \in P^A$ such that $(\mathfrak{A}, \beta\frac{a}{x}) \models \varphi^P$} \\
+\    & \mbox{(by induction hypothesis)} \\
+\Iff & \mbox{there is some $a \in A$ such that $P^{\mathfrak{A}}a$ and $(\mathfrak{A}, \beta\frac{a}{x}) \models \varphi^P$} \\
+\Iff & \mbox{there is some $a \in A$ such that $(\mathfrak{A}, \beta\frac{a}{x}) \models Px$ and $(\mathfrak{A}, \beta\frac{a}{x}) \models \varphi^P$} \\
+\Iff & \mbox{there is some $a \in A$ such that $(\mathfrak{A}, \beta\frac{a}{x}) \models (Px \land \varphi^P)$} \\
+\Iff & (\mathfrak{A}, \beta) \models \exists x (Px \land \varphi^P).
+\end{array}
+\]
+\end{enumerate} \begin{flushright}$\talloblong$\end{flushright}
+%
+%VIII.2.4----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 2.4.} First note that the following, as a corollary to 2.3 (the Relativization Lemma), is clear:
+
+\textit{Assume the premises of 2.3, and additionally let $Q \not \in S \cup \{ P \}$ be unary such that $Q^A \subset P^A$ is $S \cup \{ P \}$-closed in $[P^A]^{\mathfrak{A}}$ (and hence in $\mathfrak{A}$). Then for all $\psi \in L^S_0$,
+\[
+\mbox{$[P^A]^{\mathfrak{A}} \models \psi^Q$ iff $\mathfrak{A} \models [\psi^P]^Q$}.
+\]
+}\\
+Therefore, we have for all $\psi \in L^S_0$,
+\[
+\begin{array}{ll}
+\    & (\mathfrak{A}, U^A, V^A) \models [\psi^V]^U \\
+\Iff & [V^A]^{(\mathfrak{A}, U^A, V^A)} \models \psi^U \\
+\    & \mbox{(since $U^A \subset V^A$ and is $S$-closed (and hence $S \cup \{ V \}$-closed) in} \\
+\    & \mbox{$[V^A]^{(\mathfrak{A}, U^A, V^A)}$, and by the discussion above)} \\
+\Iff & \mbox{$[U^A]^{(\mathfrak{A}, U^A, V^A)} \models \psi$ (by Lemma 2.3)} \\
+\Iff & \mbox{$(\mathfrak{A}, U^A, V^A) \models \psi^U$ (by Lemma 2.3)},
+\end{array}
+\]
+i.e. $(\mathfrak{A}, U^A, V^A) \models ([\psi^V]^U \leftrightarrow \psi^U)$. \begin{flushright}$\talloblong$\end{flushright}
+%End of VIII.2.4---------------------------------------------------------------------------------------------
+%
+%VIII.2.5----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 2.5.}
+\begin{enumerate}[(a)]
+\item Let $I$ be the syntactic interpretation of $\{ < \}$ in $\{ \leq \}$ such that
+\[
+\begin{array}{lll}
+\varphi_{\{ < \}} & := & v_0 \equiv v_0; \\
+\varphi_<         & := & v_0 \leq v_1.
+\end{array}
+\]
+Then $\Phi_I$ is equivalent to the empty set. Define $\psi := \varphi^I$, then it follows from Theorem 2.2 that for every $\varphi \in L_0^{\{ < \}}$ there is a $\psi \in L_0^{\{ \leq \}}$ such that
+\[
+\mbox{$(A, <^A) \models \varphi$ iff $(A, \leq^A) \models \psi$}.
+\]
+\ 
+\\
+Conversely, let $I^\prime$ be the syntactic interpretation of $\{ \leq \}$ in $\{ < \}$ such that
+\[
+\begin{array}{lll}
+\psi_{\{ \leq \}} & := & v_0 \equiv v_0; \\
+\psi_\leq         & := & v_0 < v_1.
+\end{array}
+\]
+Then $\Phi_{I^\prime}$ is equivalent to the empty set. Define $\varphi := \psi^{I^\prime}$, then it follows from Theorem 2.2 that for every $\psi \in L_0^{\{ \leq \}}$ there is a $\varphi \in L_0^{\{ < \}}$ such that
+\[
+\mbox{$(A, <^A) \models \varphi$ iff $(A, \leq^A) \models \psi$}.
+\]
+%%
+\item The set of axioms for orderings involving only $\leq$ (in the sense of ``$\leq$'') is
+\[
+\Phi^{\prime\prime}_{\mbox{\scriptsize ord}} := \left\{
+\begin{array}{l}
+\forall x \;x \leq x \\
+\forall x \forall y ((x \leq y \land y \leq x) \rightarrow x \equiv y) \\
+\forall x \forall y \forall z ((x \leq y \land y \leq z) \rightarrow x \leq z) \\
+\forall x \forall y \forall z ((x \leq y \lor y \leq x) \land (\neg x \leq y \lor \neg y \leq x))
+\end{array} \right. .
+\]
+It is not hard to verify that a $\{ \leq \}$-structure which is a model of $\Phi^{\prime\prime}_{\mbox{\scriptsize ord}}$ is an ordering.\\
+\\
+Let $I$ be the syntactic interpretation of $\{ \leq \}$ in $\{ < \}$ such that
+\[
+\begin{array}{lll}
+\psi_{\{ \leq \}} & := & v_0 \equiv v_0; \\
+\psi_\leq         & := & (v_0 < v_1 \lor v_0 \equiv v_1).
+\end{array}
+\]
+Then $\Phi_I$ is equivalent to the empty set. Define $\varphi := \psi^I$, then it follows from Theorem 2.2 that for every $\psi \in L_0^{\{ \leq \}}$ there is a $\varphi \in L_0^{\{ < \}}$ such that
+\[
+\mbox{$(A, \leq^A)$ in the sense of ``$\leq$'' $\models \psi$ iff $(A, <^A) \models \varphi$}.
+\]
+\ 
+\\
+Conversely, let $I^\prime$ be the syntactic interpretation of $\{ < \}$ in $\{ \leq \}$ such that
+\[
+\begin{array}{lll}
+\varphi_{\{ < \}} & := & v_0 \equiv v_0; \\
+\psi_<            & := & (v_0 \leq v_1 \land \neg v_0 \equiv v_1).
+\end{array}
+\]
+Then $\Phi_{I^\prime}$ is equivalent to the empty set. Define $\psi := \varphi^{I^\prime}$, then it follows from Theorem 2.2 that for every $\varphi \in L_0^{\{ < \}}$ there is a $\psi \in L_0^{\{ \leq \}}$ such that
+\[
+\mbox{$(A, \leq^A)$ in the sense of ``$\leq$'' $\models \psi$ iff $(A, <^A) \models \varphi$}.
+\]
+\end{enumerate} \begin{flushright}$\talloblong$\end{flushright}
+%End of VIII.2.5---------------------------------------------------------------------------------------------
+%
+%VIII.2.6----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 2.6.} Define $I$ to be the syntactic interpretation of $S_{\mbox{\scriptsize g}}$ in $S_{\mbox{\scriptsize grp}}$ as follows:
+\[
+\begin{array}{lll}
+\varphi_{S_{\mbox{\tiny g}}} & := & x \equiv x \\
+\varphi_\circ & := & x \circ y \equiv z.
+\end{array}
+\]
+Then $\Phi_I$ is equivalent to $\{ \forall x \forall y \exists z \; x \circ y \equiv z \}$.\\
+\\
+If an $S_{\mbox{\scriptsize grp}}$-structure $\mathfrak{A} = (A, \circ^A, ^{-1^A}, e^A)$ is a model of $\Phi_{\mbox{\scriptsize grp}}$ (i.e. a group), then it is natural that $\mathfrak{A} \models \Phi_I$. In particular,
+\[
+\mathfrak{A}^{-I} = \mathfrak{A} |_{S_{\mbox{\tiny g}}} = (A, \circ^A).
+\]
+Theorem 2.2 yields for every $\varphi \in L_0^{S_{\mbox{\tiny g}}}$,
+\[
+\mbox{$\mathfrak{A}^{-I} \models \varphi$ iff $\mathfrak{A} \models \varphi^I$}
+\]
+and $\mathfrak{A} \models \Phi_{\mbox{\scriptsize grp}}$ implies $\mathfrak{A}^{-I} \models \Phi_{\mbox{\scriptsize g}}$. (See page 118 for the definition of $\Phi_{\mbox{\scriptsize g}}$.)\\
+\\
+On the other hand, if an $S_{\mbox{\scriptsize g}}$-structure $\mathfrak{B}$ is a model of $\Phi_{\mbox{\scriptsize g}}$ (i.e. a group) with identity element $e^B$ and inverse function $^{-1^B}$, then
+\[
+\mathfrak{B} = (\mathfrak{B}, ^{-1^B}, e^B) |_{S_{\mbox{\tiny g}}} = (\mathfrak{B}, ^{-1^B}, e^B)^{-I}
+\]
+and for every $\varphi \in L_0^{S_{\mbox{\tiny g}}}$,
+\[
+\mbox{$\mathfrak{B} \models \varphi$ iff $(\mathfrak{B}, ^{-1^B}, e^B) \models \varphi^I$}.
+\]
+Therefore, $\mathfrak{B} \models \Phi_{\mbox{\scriptsize g}}$ implies $(\mathfrak{B}, ^{-1^B}, e^B) \models \Phi_{\mbox{\scriptsize grp}}$.\\
+\\
+Thus for every $\varphi \in L_0^{S_{\mbox{\tiny g}}}$,
+\[
+\mbox{$\Phi_{\mbox{\scriptsize g}} \models \varphi$ iff $\Phi_{\mbox{\scriptsize grp}} \models \varphi^I$}.
+\] \begin{flushright}$\talloblong$\end{flushright}
+%End of VIII.2.6---------------------------------------------------------------------------------------------
+%
+%VIII.2.7----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 2.7.}
+\begin{enumerate}[(a)]
+\item In the following we write $x$, $y$, \ldots for $v_0$, $v_1$, \ldots. Let $I : S_{\mbox{\scriptsize ar}} \rightarrow S_{\mbox{\scriptsize ar}}$ be the following syntactic interpretation of $S_{\mbox{\scriptsize ar}}$ in $S_{\mbox{\scriptsize ar}}$:
+\[
+\begin{array}{lll}
+\varphi_{S_{\mbox{\scriptsize ar}}} & := & \exists x_1 \exists x_2 \exists x_3 \exists x_4 \; x \equiv x_1 \cdot x_1 + x_2 \cdot x_2 + x_3 \cdot x_3 + x_4 \cdot x_4; \\
+\varphi_+ & := & x + y \equiv z; \\
+\varphi_\cdot & := & x \cdot y \equiv z; \\
+\varphi_0 & := & \forall x \; x + z \equiv x; \\
+\varphi_1 & := & \forall x \; x \cdot u \equiv x.
+\end{array}
+\]
+Then
+\[
+\begin{array}{lll}
+\Phi_I & := & \{ \exists x \varphi_{S_{\mbox{\scriptsize ar}}}, \\
+\      & \  & \phantom{\{}\forall x \forall y ((\varphi_{S_{\mbox{\scriptsize ar}}}(x) \land \varphi_{S_{\mbox{\scriptsize ar}}}(y)) \rightarrow \exists^{=1}z(\varphi_{S_{\mbox{\scriptsize ar}}}(z) \land x + y \equiv z)), \\
+\      & \  & \phantom{\{}\forall x \forall y ((\varphi_{S_{\mbox{\scriptsize ar}}}(x) \land \varphi_{S_{\mbox{\scriptsize ar}}}(y)) \rightarrow \exists^{=1}z(\varphi_{S_{\mbox{\scriptsize ar}}}(z) \land x \cdot y \equiv z)), \\
+\      & \  & \phantom{\{}\exists^{=1}z(\varphi_{S_{\mbox{\scriptsize ar}}}(z) \land \forall x \; x + z \equiv x), \\
+\      & \  & \phantom{\{}\exists^{=1}u(\varphi_{S_{\mbox{\scriptsize ar}}}(u) \land \forall x \; x \cdot u \equiv x)\}
+\end{array}
+\]
+and $(\mathbb{Z}, +, \cdot, 0, 1) \models \Phi_I$.\\
+\\
+From the hint it follows that $(\mathbb{Z}, +, \cdot, 0, 1)^{-I} = (\mathbb{N}, +, \cdot, 0, 1)$, and by the Theorem on Syntacic Interpretations we obtain for all $\varphi \in L_0^{S_{\mbox{\tiny ar}}}$,\\
+\ \\
+\phantom{a} \hfill $(\mathbb{N}, +, \cdot, 0, 1) \models \varphi$ iff $(\mathbb{Z}, +, \cdot, 0, 1) \models \varphi^I$. \hfill $\talloblong$\\
+\ \\
+\textit{Remark.} The statement in the hint, ``every natural number can be written as the sum of four squares of integers'', is known as \emph{Lagrange's Four-Square Theorem}.
+%%
+\item First note that, there is a bijection $\pi: \mathbb{N} \mapsto \mathbb{Z}$ between $\mathbb{N}$ and $\mathbb{Z}$,
+\[
+\pi(n) := \begin{cases}
+\displaystyle -\frac{n + 1}{2}, & \mbox{if \(n\) is odd};\cr
+\displaystyle \frac{n}{2}, & \mbox{if \(n\) is even},
+\end{cases}
+\]
+of which we list some initial values below:
+\[
+\begin{tabular}{c||cccccc}
+$n$ & $0$ & $1$ & $2$ & $3$ & $4$ & $\cdots$ \\ \hline
+$\pi(n)$ & $0$ & $-1$ & $1$ & $-2$ & $2$ & $\cdots$
+\end{tabular}.
+\]
+It is straightforward to define functions $+^\prime$, $\cdot^\prime$ over $\mathbb{N}$, and to assign elements in $\mathbb{N}$ to constants $0^\prime$, $1^\prime$ such that $(\mathbb{N}, +^\prime, \cdot^\prime, 0^\prime, 1^\prime)$ and $(\mathbb{Z}, +, \cdot, 0, 1)$, as two $S_{\mbox{\scriptsize ar}}$-structures, are isomorphic ($(\mathbb{N}, +^\prime, \cdot^\prime, 0^\prime, 1^\prime) \cong (\mathbb{Z}, +, \cdot, 0, 1)$), as is done below: (Note that we use superscripts to avoid ambiguities.)
+\[
+\begin{array}{lllll}
+0^\prime & := & \pi^{-1}(0^\mathbb{Z}) & = & 0^\mathbb{N}, \cr
+1^\prime & := & \pi^{-1}(1^\mathbb{Z}) & = & 2^\mathbb{N}, \cr
+\end{array}
+\]
+and for all $m, n \in \mathbb{N}$,
+\[
+\begin{array}{lll}
+m +^\prime n & := & \pi^{-1}(\pi(m) +^\mathbb{Z} \pi(n)), \cr
+m \cdot^\prime n & := & \pi^{-1}(\pi(m) \cdot^\mathbb{Z} \pi(n)).
+\end{array}
+\]
+More precisely, the ``behavior'' of $+^\prime$ and $\cdot^\prime$ are presented as follows: for all $x, y \in \mathbb{N}$,
+\[
+x +^\prime y := \begin{cases}
+x + y, & \mbox{if \(x\) and \(y\) are both even}; \cr
+x + y + 1, & \mbox{if \(x\) and \(y\) are both odd}; \cr
+y - x, & \mbox{if \(x\) is even, \(y\) is odd, and \(x < y\)}; \cr
+x - y - 1, & \mbox{if \(x\) is even, \(y\) is odd, and \(y < x\)}; \cr
+y +^\prime x, & \mbox{otherwise},
+\end{cases}
+\]
+and
+\[
+x \cdot^\prime y := \begin{cases}
+\displaystyle \frac{x \cdot y}{2}, & \mbox{if \(x\) and \(y\) are both even}; \cr
+\displaystyle \frac{(x+1) \cdot (y+1)}{2}, & \mbox{if \(x\) and \(y\) are both odd}; \cr
+\displaystyle \frac{x \cdot (y+1)}{2} - 1, & \mbox{if \(x\) is even and \(y\) is odd}; \cr
+y \cdot^\prime x, & \mbox{otherwise}.
+\end{cases}
+\]
+\\
+By the Isomorphism Lemma, it follows that for all $\varphi \in L_0^{S_{\mbox{\tiny ar}}}$,
+\[
+\mbox{$(\mathbb{Z}, +, \cdot, 0, 1) \models \varphi$ \  iff \  $(\mathbb{N}, +^\prime, \cdot^\prime, 0^\prime, 1^\prime) \models \varphi$}.
+\]
+(Note that if the assignment in $(\mathbb{N}, +^\prime, \cdot^\prime, 0^\prime, 1^\prime)$ corresponds to the one in $(\mathbb{Z}, +, \cdot, 0, 1)$ according to $\pi$, then the above statement can be generalized to all $\varphi \in L^{S_{\mbox{\tiny ar}}}$.)\\
+\\
+The proof is complete if we can provide a syntactic interpretation $I$ of $S_{\mbox{\scriptsize ar}}$ in $S_{\mbox{\scriptsize ar}}$ such that, for all $\varphi \in L_0^{S_{\mbox{\tiny ar}}}$:
+\[
+\mbox{$\;\;\;$ $(\mathbb{N}, +^\prime, \cdot^\prime, 0^\prime, 1^\prime) \models \varphi$ \  iff \  $(\mathbb{N}, +, \cdot, 0, 1) \models \varphi^I$}.
+\]
+This is not hard to achieve, as is done below:
+\\
+Consider the following syntactic interpretation $I$ of $S_{\mbox{\scriptsize ar}}$ in $S_{\mbox{\scriptsize ar}}$:
+\[
+\begin{array}{lll}
+\varphi_{S_{\mbox{\tiny ar}}}(v_0) & := & v_0 \equiv v_0, \\
+\varphi_+(v_0, v_1, v_2) & := & \phantom{\land}(((\varphi_{\mbox{\scriptsize even}}(v_0) \land \varphi_{\mbox{\scriptsize even}}(v_1)) \rightarrow v_0 + v_1 \equiv v_2) \\
+\  & \  & \land ((\varphi_{\mbox{\scriptsize odd}}(v_0) \land \varphi_{\mbox{\scriptsize odd}}(v_1)) \rightarrow (v_0 + v_1) + 1 \equiv v_2) \\
+\  & \  & \land ((\varphi_{\mbox{\scriptsize even}}(v_0) \land \varphi_{\mbox{\scriptsize odd}}(v_1) \land \varphi_< (v_0, v_1)) \\
+\  & \  & \phantom{\land(} \rightarrow v_0 + v_2 \equiv v_1) \\
+\  & \  & \land ((\varphi_{\mbox{\scriptsize even}}(v_0) \land \varphi_{\mbox{\scriptsize odd}}(v_1) \land \varphi_< (v_1, v_0)) \\
+\  & \  & \phantom{\land(} \rightarrow (v_1 + v_2) + 1 \equiv v_0) \\
+\  & \  & \land ((\varphi_{\mbox{\scriptsize odd}}(v_0) \land \varphi_{\mbox{\scriptsize even}}(v_1) \land \varphi_< (v_1, v_0)) \\
+\  & \  & \phantom{\land(} \rightarrow v_1 + v_2 \equiv v_0) \\
+\  & \  & \land ((\varphi_{\mbox{\scriptsize odd}}(v_0) \land \varphi_{\mbox{\scriptsize even}}(v_1) \land \varphi_< (v_0, v_1)) \\
+\  & \  & \phantom{\land(} \rightarrow (v_0 + v_2) + 1 \equiv v_1)), \\
+\varphi_\cdot(v_0, v_1, v_2) & := & \phantom{\land}(((\varphi_{\mbox{\scriptsize even}}(v_0) \land \varphi_{\mbox{\scriptsize even}}(v_1)) \\
+\  & \  & \phantom{\land(} \rightarrow v_0 \cdot v_1 \equiv (1 + 1) \cdot v_2) \\
+\  & \  & \land ((\varphi_{\mbox{\scriptsize odd}}(v_0) \land \varphi_{\mbox{\scriptsize odd}}(v_1)) \\
+\  & \  & \phantom{\land(} \rightarrow (v_0 + 1) \cdot (v_1 + 1) \equiv (1 + 1) \cdot v_2) \\
+\  & \  & \land ((\varphi_{\mbox{\scriptsize even}}(v_0) \land \varphi_{\mbox{\scriptsize odd}}(v_1)) \\
+\  & \  & \phantom{\land(} \rightarrow v_0 \cdot (v_1 + 1) \equiv (1 + 1) \cdot (v_2 + 1)) \\
+\  & \  & \land ((\varphi_{\mbox{\scriptsize odd}}(v_0) \land \varphi_{\mbox{\scriptsize even}}(v_1)) \\
+\  & \  & \phantom{\land(} \rightarrow (v_0 + 1) \cdot v_1 \equiv (1 + 1) \cdot (v_2 + 1)), \\
+\varphi_0(v_0) & := & 0 \equiv v_0, \\
+\varphi_1(v_0) & := & (1 + 1) \equiv v_0,
+\end{array}
+\]
+where
+\[
+\begin{array}{lll}
+\varphi_{\mbox{\scriptsize even}}(v_0) & := & \exists v_0^\prime (1 + 1) \cdot v_0^\prime \equiv v_0, \\
+\varphi_{\mbox{\scriptsize odd}}(v_0)  & := & \exists v_0^\prime ((1 + 1) \cdot v_0^\prime) + 1 \equiv v_0, \\
+\varphi_<(v_0, v_1)                    & := & \exists v_2 (\neg v_2 \equiv 0 \land v_0 + v_2 \equiv v_1).
+\end{array}
+\]
+\\
+It is easy to verify that $(\mathbb{N}, +, \cdot, 0, 1) \models \Phi_I$ and hence $(\mathbb{N}, +^\prime, \cdot^\prime, 0^\prime, 1^\prime) = (\mathbb{N}, +, \cdot, 0, 1)^{-I}$. Therefore, by the Theorem on Syntactic Interpretations, we have for all $\varphi \in L_0^{S_{\mbox{\tiny ar}}}$,
+\[
+\mbox{$\;\;\;$ $(\mathbb{N}, +^\prime, \cdot^\prime, 0^\prime, 1^\prime) \models \varphi$ \  iff \  $(\mathbb{N}, +, \cdot, 0, 1) \models \varphi^I$}.
+\]
+\end{enumerate} \begin{flushright}$\talloblong$\end{flushright}
+%End of VIII.2.7---------------------------------------------------------------------------------------------
+%
+%VIII.2.8----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 2.8.}
+\begin{enumerate}
+\item \textit{For every $\psi \in L^S$ there is $\psi^r \in L^{S^r}$ such that for all $S$-interpretation $\mathfrak{I} = (\mathfrak{A}, \beta)$,
+\[
+\mbox{$(\mathfrak{A}, \beta) \models \psi$ iff $(\mathfrak{A}^r, \beta) \models \psi^r$}.
+\]}
+\\
+\textit{Proof.} We define the syntactic interpretation $I : S \rightarrow S^r$ as follows:
+\[
+\begin{array}{llll}
+\varphi_S(v_0) & := & v_0 \equiv v_0; & \  \\
+\varphi_P(v_0, \ldots, v_{n-1}) & := & Pv_0 \ldots v_{n-1} & \mbox{for $n$-ary relation symbol $P$}; \\
+\varphi_f(v_0, \ldots, v_n) & := & Fv_0 \ldots v_n & \mbox{for $n$-ary function symbol $f$,} \\
+\                           & \  & \               & \mbox{where $F \in S^r$ is its} \\
+\                           & \  & \               & \mbox{counterpart}; \\
+\varphi_c(v_0) & := & Cv_0 & \mbox{for constant $c$, where $C \in S^r$} \\
+\                           & \  & \               & \mbox{is its counterpart}.
+\end{array}
+\]
+Then $\Phi_I$ is equivalent to
+\[
+\{ \forall v_0 \ldots \forall v_{n-1} \exists^{=1} v_n Fv_0 \ldots v_n,\; \exists^{=1}v_0Cv_0\}.
+\]
+Furthermore, for every $S$-structure $\mathfrak{A}$, its counterpart---the $S^r$-structure $\mathfrak{A}^r$---is a model of $\Phi_I$ and $(\mathfrak{A}^r)^{-I} = \mathfrak{A}$. After using Theorem 2.2, we immediately get the result.
+%%
+\item \textit{For every $\psi \in L^{S^r}$ there is $\psi^{-r} \in L^S$ such that for all $S$-interpretations $\mathfrak{I} = (\mathfrak{A}, \beta)$,
+\[
+\mbox{$(\mathfrak{A}, \beta) \models \psi^{-r}$ iff $(\mathfrak{A}^r, \beta) \models \psi$}.
+\]}
+\\
+\textit{Proof.} We define the syntactic interpretation $I : S^r \rightarrow S$ as follows:
+\[
+\begin{array}{llll}
+\varphi_{S^r} & := & v_0 \equiv v_0; & \  \\
+\varphi_P     & := & Pv_0 \ldots v_{n-1} & \mbox{for $n$-ary relation symbol $P \in S$}; \\
+\varphi_F     & := & fv_0 \ldots v_{n-1} \equiv v_n & \mbox{for $(n+1)$-ary relation symbol} \\
+\             & \  & \                              & \mbox{$F \in S^r \setminus S$, whose counterpart} \\
+\             & \  & \                              & \mbox{is $f \in S$}; \\
+\varphi_C     & := & c \equiv v_0 & \mbox{for unary relation symbol $C \in S^r \setminus S$,}\\
+\             & \  & \            & \mbox{whose counterpart is $c \in S$}.
+\end{array}
+\]
+Then $\Phi_I$ is equivalent to the empty set. Furthermore, for every $S$-structure $\mathfrak{A}$, $\mathfrak{A} \models \Phi_I$ and $\mathfrak{A}^{-I} = \mathfrak{A}^r$ (the counterpart of $\mathfrak{A}$, an $S^r$-structure). On the other hand, an assignment $\beta$ in $\mathfrak{A}$ is also one in $\mathfrak{A}^r$. After applying Theorem 2.2, we obtain the result.
+\end{enumerate} \begin{flushright}$\talloblong$\end{flushright}
+%End of VIII.2.8---------------------------------------------------------------------------------------------
+\end{enumerate}
+%End of Section VIII.2---------------------------------------------------------------------------------------
+\
+\\
+\\
+%Section VIII.3----------------------------------------------------------------------------------------------
+{\large \S3. Extensions by Definitions}
+\begin{enumerate}[1.]
+\item \textbf{Note to ``$\Phi_{\mbox{\scriptsize g}} \models \exists^{=1}x \forall y \; y \circ x \equiv y$'' in Page 125.} Here is a derivation of ``$\Phi_{\mbox{\scriptsize g}} \vdash \exists^{=1}x \forall y \; y \circ x \equiv y$,'' i.e. ``$\Phi_{\mbox{\scriptsize g}} \vdash \exists x (\forall y \; y \circ x \equiv y \land \forall u (\forall y \; y \circ u \equiv y \rightarrow x \equiv u))$.''\\
+\\
+In the following, let
+\[
+\begin{array}{lll}
+\varphi & := & (\forall x \; x \circ z \equiv x \land \forall x \exists y \; x \circ y \equiv z), \\
+\psi    & := & \forall y \; y \circ u \equiv y,
+\end{array}
+\]
+and further,
+\[
+\begin{array}{lll}
+\chi & := & \forall x \forall y \forall z (x \circ y) \circ z \equiv x \circ (y \circ z),\\
+\eta & := & \neg (\neg \varphi\frac{x}{z} \lor (\neg \psi \lor x \equiv u)),
+\end{array}
+\]
+where
+\[
+\varphi\frac{x}{z} = (\forall y \; y \circ x \equiv y \land \forall y \exists y^\prime \; y \circ y^\prime \equiv x).
+\]
+\[
+\begin{array}{lll}
+1. & \neg \varphi\frac{x}{z} & \neg \varphi\frac{x}{z} \\
+\  & \               & \mbox{(Assm)} \\
+2. & \neg \varphi\frac{x}{z} & (\neg \varphi\frac{x}{z} \lor (\neg \psi \lor x \equiv u)) \\
+\  & \               & \mbox{($\lor$S) applied to 1.} \\
+3. & \eta & \varphi\frac{x}{z} \\
+\  & \ & \mbox{(Cp) applied to 2.} \\
+4. & \eta & \forall y \; y \circ x \equiv y \\
+\  & \ & \mbox{IV.3.6(d1) applied to 3.} \\
+5. & \eta & u \circ x \equiv u \\
+\  & \ & \mbox{IV.5.5(a1) applied to 4. with $t = u$} \\
+6. & \eta \;\; u \circ u^\prime \equiv x & u \circ x \equiv u \\
+\  & \ & \mbox{(Ant) applied to 5.} \\
+7. & \eta \;\; u \circ u^\prime \equiv x & u \circ u^\prime \equiv x \\
+\  & \ & \mbox{(Assm)} \\
+8. & \eta \;\; u \circ u^\prime \equiv x & x \equiv u \circ u^\prime \\
+\  & \ & \mbox{IV.5.3(a) to 7.} \\
+9. & \eta \;\; u \circ u^\prime \equiv x \;\; x \equiv u \circ u^\prime & u \circ (u \circ u^\prime) \equiv u \\
+\  & \                                & \mbox{(Sub) applied to 6.} \\
+10. & \eta \;\; u \circ u^\prime \equiv x & u \circ (u \circ u^\prime) \equiv u \\
+\  & \                                & \mbox{(Ch) applied to 8. and 9.} \\
+11. & \chi & \chi \\
+\  & \ & \mbox{(Assm)} \\
+12. & \chi & \forall y \forall z (u \circ y) \circ z \equiv u \circ (y \circ z) \\
+\  & \ & \mbox{IV.5.5(a1) applied to 11. with} \\
+\  & \ & \mbox{$t = u$} \\
+13. & \chi & \forall z (u \circ u) \circ z \equiv u \circ (u \circ z) \\
+\  & \ & \mbox{IV.5.5(a1) applied to 12. with} \\
+\  & \ & \mbox{$t = u$} \\
+14. & \chi & (u \circ u) \circ u^\prime \equiv u \circ (u \circ u^\prime) \\
+\   & \ & \mbox{IV.5.5(a1) applied to 13. with} \\
+\   & \ & \mbox{$t = u^\prime$} \\
+15. & \chi & u \circ (u \circ u^\prime) \equiv (u \circ u) \circ u^\prime \\
+\   & \ & \mbox{IV.5.3(a) applied to 14.} \\
+16. & \chi \;\; \eta \;\; u \circ u^\prime \equiv x & u \circ (u \circ u^\prime) \equiv (u \circ u) \circ u^\prime \\
+\   & \ & \mbox{(Ant) applied to 15.} \\
+17. & \chi \;\; \eta \;\; u \circ u^\prime \equiv x & u \circ (u \circ u^\prime) \equiv u \\
+\   & \                                       & \mbox{(Ant) applied to 10.} \\
+18. & \chi \;\; \eta \;\; u \circ u^\prime \equiv x  \;\; u \circ (u \circ u^\prime) \equiv u & u \equiv (u \circ u) \circ u^\prime \\
+\   & \ & \mbox{(Sub) applied to 16.} \\
+19. & \chi \;\; \eta \;\; u \circ u^\prime \equiv x & u \equiv (u \circ u) \circ u^\prime \\
+\   & \                                       & \mbox{(Ch) applied to 17. and 18.} \\
+20. & \neg \psi & \neg \psi \\
+\   & \               & \mbox{(Assm)} \\
+21. & \neg \psi & (\neg \psi \lor x \equiv u) \\
+\   & \               & \mbox{($\lor$S) applied to 20.}
+\end{array}
+\]
+\[
+\begin{array}{lll}
+22. & \neg \psi & (\neg \varphi\frac{x}{z} \lor (\neg \psi \lor x \equiv u)) \\
+\   & \               & \mbox{($\lor$S) applied to 21.} \\
+23. & \eta & \psi \\
+\   & \ & \mbox{(Cp) applied to 22.} \\
+24. & \eta & u \circ u \equiv u \\
+\   & \ & \mbox{IV.5.5(a1) applied to 23. with} \\
+\   & \ & \mbox{$t = u$} \\
+25. & \chi \;\; \eta \;\; u \circ u^\prime \equiv x & u \circ u \equiv u \\
+\   &                                         & \mbox{(Ant) applied to 24.} \\
+26. & \chi \;\; \eta \;\; u \circ u^\prime \equiv x \;\; u \circ u \equiv u & u \equiv u \circ u^\prime \\
+\   & \                                       & \mbox{(Sub) applied to 19.} \\
+27. & \chi \;\; \eta \;\; u \circ u^\prime \equiv x & u \equiv u \circ u^\prime \\
+\   & \                                       & \mbox{(Ch) applied to 25. and 26.} \\
+28. & \chi \;\; \eta \;\; u \circ u^\prime \equiv x & u \circ u^\prime \equiv x \\
+\   & \                                       & \mbox{(Assm)} \\
+29. & \chi \;\; \eta \;\; u \circ u^\prime \equiv x \;\; u \circ u^\prime \equiv x & u \equiv x \\
+\   & \                                       & \mbox{(Sub) applied to 27.} \\
+30. & \chi \;\; \eta \;\; u \circ u^\prime \equiv x & u \equiv x \\
+\   & \                                       & \mbox{(Ch) applied to 28. and 29.} \\
+31. & \chi \;\; \eta \;\; u \circ u^\prime \equiv x & x \equiv u \\
+\   & \                                       & \mbox{IV.5.3(a) applied to 30.} \\
+32. & \chi \;\; \eta \;\; \exists y^\prime \; u \circ y^\prime \equiv x & x \equiv u \\
+\   & \                                       & \mbox{($\exists$A) applied to 31.} \\
+33. & \exists y^\prime \; u \circ y^\prime \equiv x & \exists y^\prime \; u \circ y^\prime \equiv x \\
+\   & \                                       & \mbox{(Assm)} \\
+34. & \forall y \exists y^\prime \; y \circ y^\prime \equiv x & \exists y^\prime \; u \circ y^\prime \equiv x \\
+\   & \                                       & \mbox{IV.5.5(b1) applied to 33. with $t = u$} \\
+35. & \varphi\frac{x}{z} \;\; \forall y \exists y^\prime \; y \circ y^\prime \equiv x & \exists y^\prime \; u \circ y^\prime \equiv x \\
+\   & \                                       & \mbox{(Ant) applied to 34.} \\
+36. & \varphi\frac{x}{z} & \varphi\frac{x}{z} \\
+\   & \          & \mbox{(Assm)} \\
+37. & \varphi\frac{x}{z} & \forall y \exists y^\prime \; y \circ y^\prime \equiv x \\
+\   & \          & \mbox{IV.3.6(d2) applied to 36.} \\
+38. & \varphi\frac{x}{z} & \exists y^\prime \; u \circ y^\prime \equiv x \\
+\   & \                                       & \mbox{(Ch) applied to 37. and 35.} \\
+39. & \eta \;\; \varphi\frac{x}{z} & \exists y^\prime \; u \circ y^\prime \equiv x \\
+\   & \                                       & \mbox{(Ant) applied to 38.} \\
+40. & \eta & \exists y^\prime \; u \circ y^\prime \equiv x \\
+\   & \                                       & \mbox{(Ch) applied to 3. and 39.} \\
+41. & \chi \;\; \eta & \exists y^\prime \; u \circ y^\prime \equiv x \\
+\   & \                                       & \mbox{(Ant) applied to 40.} \\
+42. & \chi \;\; \eta & x \equiv u \\
+\   & \                                       & \mbox{(Ch) applied to 41. and 32.} \\
+43. & \chi \;\; \eta & (\neg \psi \lor x \equiv u) \\
+\   & \                                       & \mbox{($\lor$S) applied to 42.} \\
+\end{array}
+\]
+\[
+\begin{array}{lll}
+44. & \chi \;\; \eta & (\neg \varphi\frac{x}{z} \lor (\neg \psi \lor x \equiv u)) \\
+\   & \                                       & \mbox{($\lor$S) applied to 43.} \\
+45. & \chi \;\; \eta & \eta \\
+\   & \                                       & \mbox{(Assm)} \\
+46. & \chi & (\neg \varphi\frac{x}{z} \lor (\neg \psi \lor x \equiv u)) \\
+\   & \                                       & \mbox{(Ctr) applied to 44. and 45.} \\
+47. & \chi \;\; \varphi\frac{x}{z} & (\neg \varphi\frac{x}{z} \lor (\psi \rightarrow x \equiv u)) \\
+\   & \                                       & \mbox{(Ant) applied to 46.} \\
+48. & \chi \;\; \varphi\frac{x}{z} & \varphi\frac{x}{z} \\
+\   & \                                       & \mbox{(Assm)} \\
+49. & \chi \;\; \varphi\frac{x}{z} & (\psi \rightarrow x \equiv u) \\
+\   & \                                       & \mbox{IV.3.5 applied to 47. and 48.} \\
+50. & \chi \;\; \varphi\frac{x}{z} & \forall u (\psi \rightarrow x \equiv u) \\
+\   & \                                       & \mbox{IV.5.5(b4) applied to 49.} \\
+51. & \chi \;\; \varphi\frac{x}{z} & \forall y \; y \circ x \equiv y \\
+\   & \                         & \mbox{IV.3.6(d1) applied to 48.} \\
+52. & \chi \;\; \varphi\frac{x}{z} & (\forall y \; y \circ x \equiv y \land \forall u (\psi \rightarrow x \equiv u)) \\
+\   & \                                       & \mbox{IV.3.6(b) applied to 51. and 50.} \\
+53. & \chi \;\; \varphi\frac{x}{z} & \exists x (\forall y \; y \circ x \equiv y \land \forall u (\psi \rightarrow x \equiv u)) \\
+\   & \                                       & \mbox{IV.5.1(a) applied to 52.} \\
+54. & \chi \;\; \exists z \varphi & \exists x (\forall y \; y \circ x \equiv y \land \forall u (\psi \rightarrow x \equiv u)) \\
+\   & \                                       & \mbox{($\exists$A) applied to 53.}
+\end{array}
+\]
+By the Adequacy Theorem V.4.2, we have $\Phi_{\mbox{\scriptsize g}} \models \exists^{=1}x \forall y \; y \circ x \equiv y$.
+%
+\item \textbf{Note to the Equivalence between the Sets $\Phi_{\mbox{\scriptsize g}} \cup \{ \delta_e \}$ and $\Phi_{\mbox{\scriptsize gr}}$ of $S_{\mbox{\scriptsize gr}}$-Sentences.} Here we shall show that
+\[
+\mbox{for every $\varphi \in \Phi_{\mbox{\scriptsize g}} \cup \{ \delta_e \}$, $\Phi_{\mbox{\scriptsize gr}} \models \varphi$,}
+\]
+and
+\[
+\mbox{for every $\varphi \in \Phi_{\mbox{\scriptsize gr}}$, $\Phi_{\mbox{\scriptsize g}} \cup \{ \delta_e \} \models \varphi$.}
+\]
+Also note that in the case of $\Phi_{\mbox{\scriptsize gr}}$, we write $x$, $y$, $z$ for $v_0$, $v_1$, $v_2$.
+\\
+\begin{enumerate}[(i)]
+\item For every $\varphi \in \Phi_{\mbox{\scriptsize g}} \cup \{ \delta_e \}$, $\Phi_{\mbox{\scriptsize gr}} \models \varphi$: Let $\Gamma$ be the sequent that consists of all three sentences from $\Phi_{\mbox{\scriptsize gr}}$.
+\begin{enumerate}
+\item $\forall x \forall y \forall z (x \circ y) \circ z \equiv x \circ (y \circ z)$:
+\[
+\begin{array}{llll}
+1. & \Gamma & \forall x \forall y \forall z (x \circ y) \circ z \equiv x \circ (y \circ z) & \mbox{(Assm)}
+\end{array}
+\]
+%%%
+\item $\exists z (\forall x \; x \circ z \equiv x \land \forall x \exists y \; x \circ y \equiv z)$:
+\[
+\begin{array}{lll}
+1. & \Gamma & \forall x \; x \circ e \equiv x \\
+\  & \      & \mbox{(Assm)} \\
+2. & \Gamma & \forall x \exists y \; x \circ y \equiv e \\
+\  & \      & \mbox{(Assm)} \\
+3. & \Gamma & (\forall x \; x \circ e \equiv x \land \forall x \exists y \; x \circ y \equiv e) \\
+\  & \      & \mbox{IV.3.6(b) applied to 1. and 2.} \\
+4. & \Gamma & \exists z (\forall x \; x \circ z \equiv x \land \forall x \exists y \; x \circ y \equiv z) \\
+\  & \      & \mbox{($\exists$S) applied to 3.}
+\end{array}
+\]
+%%%
+\item $\forall x (e \equiv x \leftrightarrow \forall y \; y \circ x \equiv y)$: In the following, let
+\[
+\varphi := \forall y \; y \circ x \equiv y,
+\]
+and
+\[
+\psi := (\varphi \land \forall u (\varphi\frac{u}{x} \rightarrow x \equiv u)).
+\]
+(We shall use $\forall y \; y \circ x \equiv y$ and $\varphi$ interchangeably.)
+\[
+\begin{array}{lll}
+1. & \Gamma & \exists x \psi \\
+\  & \      & \mbox{Since the succedent is} \\
+\  & \      & \mbox{derivable from $\Phi_{\mbox{\scriptsize g}}$} \\
+\  & \      & \mbox{(cf. the previous note),} \\
+\  & \      & \mbox{which in turn is derivable} \\
+\  & \      & \mbox{from $\Gamma$ (cf. the previous} \\
+\  & \      & \mbox{two derivations).} \\
+2. & \Gamma \;\; \neg x \equiv e \;\; \varphi & \varphi\frac{e}{x} \\
+\  & \      & \mbox{(Assm)} \\
+3. & \Gamma \;\; \neg x \equiv e \;\; \neg \varphi\frac{e}{x} & \neg \varphi \\
+\  & \      & \mbox{(Cp) applied to 2.} \\
+4. & \Gamma \;\; \neg x \equiv e \;\; \varphi & \neg x \equiv e \\
+\  & \      & \mbox{(Assm)} \\
+5. & \Gamma \;\; \neg x \equiv e \;\; x \equiv e & \neg \varphi \\
+\  & \      & \mbox{(Cp) applied to 4.} \\
+6. & \Gamma \;\; \neg x \equiv e \;\; (\neg \varphi\frac{e}{x} \lor x \equiv e) & \neg \varphi \\
+\  & \      & \mbox{($\lor$A) applied to 3. and 5.} \\
+7. & \Gamma \;\; \neg x \equiv e \;\; \varphi & \neg (\varphi\frac{e}{x} \rightarrow x \equiv e) \\
+\  & \      & \mbox{(Cp) applied to 6.} \\
+8. & \Gamma \;\; \neg x \equiv e \;\; \varphi & \exists u \neg (\varphi\frac{u}{x} \rightarrow x \equiv u) \\
+\  & \      & \mbox{($\exists$S) applied to 7.} \\
+9. & \Gamma \;\; \neg x \equiv e \;\; \varphi & \neg \forall u (\varphi\frac{u}{x} \rightarrow x \equiv u) \\
+\  & \      & \mbox{IV.3.6(a1) applied to 8.} \\
+10.& \Gamma \;\; \neg x \equiv e & (\neg \varphi \lor \neg \forall u (\varphi\frac{u}{x} \rightarrow x \equiv u)) \\
+\  & \      & \mbox{IV.3.6(c) applied to 9.} \\
+11.& \Gamma \;\; \psi & x \equiv e \\
+\  & \      & \mbox{(Cp) applied to 10.} \\
+12.& \Gamma \;\; \psi & \psi \\
+\  & \      & \mbox{(Assm)} \\
+13.& \Gamma \;\; \psi \;\; x \equiv e & (\varphi\frac{e}{x} \land \forall u (\varphi\frac{u}{x} \rightarrow e \equiv u)) \\
+\  & \      & \mbox{(Sub) applied to 12.} \\
+14.& \Gamma \;\; \psi & (\varphi\frac{e}{x} \land \forall u (\varphi\frac{u}{x} \rightarrow e \equiv u)) \\
+\  & \      & \mbox{(Ch) applied to 11. and 13.} \\
+15.& \Gamma \;\; \exists x \psi & (\varphi\frac{e}{x} \land \forall u (\varphi\frac{u}{x} \rightarrow e \equiv u)) \\
+\  & \      & \mbox{($\exists$A) applied to 14.} \\
+16.& \Gamma & (\varphi\frac{e}{x} \land \forall u (\varphi\frac{u}{x} \rightarrow e \equiv u)) \\
+\  & \      & \mbox{(Ch) applied to 1. and 15.} \\
+17.& \Gamma & \forall u (\varphi\frac{u}{x} \rightarrow e \equiv u) \\
+\  & \      & \mbox{IV.3.6(d2) applied to 16.} \\
+18.& \Gamma & (\varphi \rightarrow e \equiv x) \\
+\  & \      & \mbox{IV.5.5(a1) applied to 17. with} \\
+\  & \      & \mbox{$t = x$} \\
+19.& \Gamma & \varphi\frac{e}{x} \\
+\  & \      & \mbox{(Assm)}
+\end{array}
+\]
+\[
+\begin{array}{lll}
+20.& \Gamma \;\; e \equiv x & \varphi \\
+\  & \      & \mbox{(Sub) applied to 19. with $t = e$} \\
+\  & \      & \mbox{and $t^\prime = x$} \\
+21.& \Gamma & (e \equiv x \rightarrow \varphi) \\
+\  & \      & \mbox{IV.3.6(c) applied to 20.} \\
+22. & \Gamma \;\; \varphi & (\varphi \rightarrow e \equiv x) \\
+\  & \      & \mbox{(Ant) applied to 18.} \\
+23. & \Gamma \;\; \varphi & \varphi \\
+\  & \      & \mbox{(Assm)} \\
+24. & \Gamma \;\; \varphi & e \equiv x \\
+\  & \      & \mbox{IV.3.5 applied to 22. and 23.} \\
+25. & \Gamma \;\; \varphi & (e \equiv x \land \varphi) \\
+\  & \      & \mbox{IV.3.6(b) applied to 24. and 23.} \\
+26. & \Gamma \;\; \varphi & (\neg (e \equiv x \lor \varphi) \lor (e \equiv x \land \varphi)) \\
+\  & \      & \mbox{($\lor$S) applied to 25.} \\
+27. & \Gamma \;\; e \equiv x & (e \equiv x \rightarrow \varphi) \\
+\  & \      & \mbox{(Ant) applied to 21.} \\
+28. & \Gamma \;\; e \equiv x & e \equiv x \\
+\  & \      & \mbox{(Assm)} \\
+29.& \Gamma \;\; e \equiv x & \varphi \\
+\  & \      & \mbox{IV.3.5 applied to 27. and 28.} \\
+30.& \Gamma \;\; (e \equiv x \lor \varphi) & \varphi \\
+\  & \      & \mbox{($\lor$A) applied to 29. and 23.} \\
+31.& \Gamma \;\; \neg \varphi & \neg (e \equiv x \lor \varphi) \\
+\  & \      & \mbox{IV.3.3(a) applied to 30.} \\
+32.& \Gamma \;\; \neg \varphi & (\neg (e \equiv x \lor \varphi) \lor (e \equiv x \land \varphi)) \\
+\  & \      & \mbox{($\lor$S) applied to 31.} \\
+33.& \Gamma & (e \equiv x \leftrightarrow \varphi) \\
+\  & \      & \mbox{(PC) applied to 26. and 32.} \\
+34.& \Gamma & \forall x (e \equiv x \leftrightarrow \forall y \; y \circ x \equiv y) \\
+\  & \      & \mbox{IV.5.5(b4) applied to 33.}
+\end{array}
+\]
+\end{enumerate}
+%%
+\item For every $\varphi \in \Phi_{\mbox{\scriptsize gr}}$, $\Phi_{\mbox{\scriptsize g}} \cup \{ \delta_e \} \models \varphi$: Let $\Gamma$ be the sequent that consists of both sentences from $\Phi_{\mbox{\scriptsize g}}$ together with $\delta_e$.
+\begin{enumerate}
+\item $\forall x \forall y \forall z (x \circ y) \circ z \equiv x \circ (y \circ z)$:
+\[
+\begin{array}{llll}
+1. & \Gamma & \forall x \forall y \forall z (x \circ y) \circ z \equiv x \circ (y \circ z) & \mbox{(Assm)}
+\end{array}
+\]
+%%%
+\item $\forall x \; x \circ e \equiv x$: In the following, let
+\[
+\varphi := (\forall x \; x \circ z \equiv x \land \forall x \exists y \; x \circ y \equiv z).
+\]
+\[
+\begin{array}{lll}
+1. & \Gamma \;\; \varphi & \varphi \\
+\  & \                   & \mbox{(Assm)} \\
+2. & \Gamma \;\; \varphi & \forall x \; x \circ z \equiv x \\
+\  & \                   & \mbox{IV.3.6(d1) applied to 1.} \\
+3. & \Gamma \;\; \varphi & y \circ z \equiv y \\
+\  & \                   & \mbox{IV.5.5(a1) applied to 2. with $t = y$} \\
+4. & \Gamma \;\; \varphi & \forall y \; y \circ z \equiv y \\
+\  & \                   & \mbox{IV.5.5(b4) applied to 3.} \\
+5. & \Gamma              & \forall x (e \equiv x \leftrightarrow \forall y \; y \circ x \equiv y) \\
+\  & \                   & \mbox{(Assm)} \\
+6. & \Gamma              & (e \equiv z \leftrightarrow \forall y \; y \circ z \equiv y) \\
+\  & \                   & \mbox{IV.5.5(a1) applied to 5. with $t = z$} \\
+7. & \Gamma \;\; \forall y \; y \circ z \equiv y & (e \equiv z \leftrightarrow \forall y \; y \circ z \equiv y) \\
+\  & \                   & \mbox{(Ant) applied to 6.} \\
+8. & \Gamma \;\; \forall y \; y \circ z \equiv y & \forall y \; y \circ z \equiv y \\
+\  & \                   & \mbox{(Assm)} \\
+9. & \Gamma \;\; \forall y \; y \circ z \equiv y & (e \equiv z \lor \forall y \; y \circ z \equiv y) \\
+\  & \                   & \mbox{($\lor$S) applied to 8.} \\
+10.& \Gamma \;\; \forall y \; y \circ z \equiv y & (e \equiv z \land \forall y \; y \circ z \equiv y) \\
+\  & \                   & \mbox{IV.3.5 applied to 9. and 7.} \\
+11.& \Gamma \;\; \forall y \; y \circ z \equiv y & e \equiv z \\
+\  & \                   & \mbox{IV.3.6(d1) applied to 10.} \\
+12.& \Gamma \;\; \varphi \;\; \forall y \; y \circ z \equiv y & e \equiv z \\
+\  & \                   & \mbox{(Ant) applied to 11.} \\
+13.& \Gamma \;\; \varphi & e \equiv z \\
+\  & \                   & \mbox{(Ch) applied to 4. and 12.} \\
+14.& \Gamma \;\; \varphi & z \equiv e \\
+\  & \                   & \mbox{IV.5.3(a) applied to 13.} \\
+15.& \Gamma \;\; \varphi \;\; z \equiv e & \forall y \; y \circ e \equiv y \\
+\  & \                   & \mbox{(Sub) applied to 4. with $t = z$} \\
+\  & \                   & \mbox{and $t^\prime = e$} \\
+16.& \Gamma \;\; \varphi & \forall y \; y \circ e \equiv y \\
+\  & \                   & \mbox{(Ch) applied to 14. and 15.} \\
+17.& \Gamma \;\; \varphi & x \circ e \equiv x \\
+\  & \                   & \mbox{IV.5.5(a1) applied to 16. with $t = x$} \\
+18.& \Gamma \;\; \varphi & \forall x \; x \circ e \equiv x \\
+\  & \                   & \mbox{IV.5.5(b4) applied to 17.} \\
+19.& \Gamma \;\; \exists z \varphi & \forall x \; x \circ e \equiv x \\
+\  & \                   & \mbox{IV.5.1(b) applied to 18.} \\
+20.& \Gamma              & \forall x \; x \circ e \equiv x \\
+\  & \                   & \mbox{(Ant) applied to 19.}
+\end{array}
+\]
+%%%
+\item $\forall x \exists y \; x \circ y \equiv e$: In the following, let
+\[
+\varphi := (\forall x \; x \circ z \equiv x \land \forall x \exists y \; x \circ y \equiv z).
+\]
+\[
+\begin{array}{lll}
+1. & \Gamma \;\; \varphi & \varphi \\
+\  & \                   & \mbox{(Assm)} \\
+2. & \Gamma \;\; \varphi & \forall x \; x \circ z \equiv x \\
+\  & \                   & \mbox{IV.3.6(d1) applied to 1.} \\
+3. & \Gamma \;\; \varphi & y \circ z \equiv y \\
+\  & \                   & \mbox{IV.5.5(a1) applied to 2. with $t = y$} \\
+4. & \Gamma \;\; \varphi & \forall y \; y \circ z \equiv y \\
+\  & \                   & \mbox{IV.5.5(b4) applied to 3.} \\
+5. & \Gamma              & \forall x (e \equiv x \leftrightarrow \forall y \; y \circ x \equiv y) \\
+\  & \                   & \mbox{(Assm)} \\
+6. & \Gamma              & (e \equiv z \leftrightarrow \forall y \; y \circ z \equiv y) \\
+\  & \                   & \mbox{IV.5.5(a1) applied to 5. with $t = z$} \\
+7. & \Gamma \;\; \forall y \; y \circ z \equiv y & (e \equiv z \leftrightarrow \forall y \; y \circ z \equiv y) \\
+\  & \                   & \mbox{(Ant) applied to 6.} \\
+8. & \Gamma \;\; \forall y \; y \circ z \equiv y & \forall y \; y \circ z \equiv y \\
+\  & \                   & \mbox{(Assm)} \\
+9. & \Gamma \;\; \forall y \; y \circ z \equiv y & (e \equiv z \lor \forall y \; y \circ z \equiv y) \\
+\  & \                   & \mbox{($\lor$S) applied to 8.} \\
+10.& \Gamma \;\; \forall y \; y \circ z \equiv y & (e \equiv z \land \forall y \; y \circ z \equiv y) \\
+\  & \                   & \mbox{IV.3.5 applied to 9. and 7.} \\
+11.& \Gamma \;\; \forall y \; y \circ z \equiv y & e \equiv z \\
+\  & \                   & \mbox{IV.3.6(d1) applied to 10.} \\
+12.& \Gamma \;\; \varphi \;\; \forall y \; y \circ z \equiv y & e \equiv z \\
+\  & \                   & \mbox{(Ant) applied to 11.} \\
+13.& \Gamma \;\; \varphi & e \equiv z \\
+\  & \                   & \mbox{(Ch) applied to 4. and 12.} \\
+14.& \Gamma \;\; \varphi & z \equiv e \\
+\  & \                   & \mbox{IV.5.3(a) applied to 13.} \\
+15.& \Gamma \;\; \varphi & \forall x \exists y \; x \circ y \equiv z \\
+\  & \                   & \mbox{IV.3.6(d2) applied to 1.} \\
+16.& \Gamma \;\; \varphi \;\; z \equiv e & \forall x \exists y \; x \circ y \equiv e \\
+\  & \                   & \mbox{(Sub) applied to 15. with $t = z$} \\
+\  & \                   & \mbox{and $t^\prime = e$} \\
+17.& \Gamma \;\; \varphi & \forall x \exists y \; x \circ y \equiv e \\
+\  & \                   & \mbox{(Ch) applied to 14. and 16.} \\
+18.& \Gamma \;\; \exists z \varphi & \forall x \exists y \; x \circ y \equiv e \\
+\  & \                   & \mbox{IV.5.1(b) applied to 17.} \\
+19.& \Gamma              & \forall x \exists y \; x \circ y \equiv e \\
+\  & \                   & \mbox{(Ant) applied to 18.}
+\end{array}
+\]
+\end{enumerate}
+\end{enumerate}
+%
+%VIII.3.3----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 3.3.} Let $S_0 \neq \emptyset$ be a set of new symbols not in $S$, $\Phi_0 := \{ \delta_s | s \in S_0 \}$ the set of extensions of definitions of symbols in $S_0$ in $\Phi$, and $I$ the associated syntactic interpretation of $S \cup S_0$ in $S$. ($I$ is defined accordingly.)\\
+Then $\Phi_I$ is logically equivalent to $\{ \psi_s | s \in S_0 \}$, where
+\[
+\psi_s := \begin{cases}
+\forall v_0 \ldots \forall v_{n-1} \exists^{=1}v_n \varphi_f(v_0, \ldots, v_{n-1}, v_n), & \begin{minipage}[t]{8em}if \(s\) is an \(n\)-ary function symbol \(f\);\end{minipage} \cr
+\exists^{=1}v_0 \varphi_c(v_0), & \mbox{if \(s\) is a constant \(c\)}.
+\end{cases}
+\]
+And we have for every $S$-structure $\mathfrak{A}$ with $\mathfrak{A} \models \Phi$:
+\[
+\begin{array}{ll}
+\mbox{(+)} & \mathfrak{A} \models \Phi_I \\
+\mbox{(++)}& \mbox{For all $s^A$: $(\mathfrak{A}, s^A) \models \delta_s$ iff $\mathfrak{A}^{-I}|_{S \cup \{ s \}} = (\mathfrak{A}, s^A)$.}
+\end{array}
+\]
+\\
+Now we are ready to prove:
+\begin{enumerate}[(a)]
+\item For all $\varphi \in L^S_0$:
+\[
+\mbox{$\Phi \cup \Phi_0 \models \varphi$ iff $\Phi \models \varphi$}.
+\]
+%%
+\item For all $\chi \in L_0^{S \cup S_0}$:
+\[
+\Phi \cup \Phi_0 \models \chi \leftrightarrow \chi^I.
+\]
+%%
+\item For all $\varphi \in L_0^{S \cup S_0}$:
+\[
+\mbox{$\Phi \cup \Phi_0 \models \varphi$ iff $\Phi \models \varphi^I$}.
+\]
+\end{enumerate}
+\ 
+\\
+\textit{Proof.}
+\begin{enumerate}[(a)]
+\item For the non-trivial direction of the proof, let $\varphi \in L^S_0$ and $\mathfrak{A}$ be an $S$-structure with $\mathfrak{A} \models \Phi$. Then by (+) $\mathfrak{A}^{-I}$ is defined, let it be such that $\mathfrak{A}^{-I}|_{S \cup \{ s \}} = (\mathfrak{A}, s^A)$. By (++) it follows that $\mathfrak{A}^{-I} \models \Phi \cup \Phi_0$ since $\mathfrak{A}^{-I}|_{S \cup \{ s \}} \models \delta_s$ for every $s \in S_0$. Hence $\mathfrak{A}^{-I} \models \varphi$, and by the Coincidence Lemma we have $\mathfrak{A} \models \varphi$.
+%%
+\item Let $\chi \in L_0^{S \cup S_0}$ and let $\mathfrak{A}$ be an $(S \cup S_0)$-structure such that
+\[
+\mathfrak{A} \models \Phi \cup \Phi_0.
+\]
+Then for every $s \in S_0$, $\mathfrak{A}|_{S \cup \{ s \}} \models \delta_s$, and by (++) we have
+\[
+(\mathfrak{A}|_S)^{-I}|_{S \cup \{ s \}} = \mathfrak{A}|_{S \cup \{ s \}}.
+\]
+So $(\mathfrak{A}|_S)^{-I} = \mathfrak{A}$.
+\\
+By the Theorem on Syntactic Interpretations, the following holds for $\mathfrak{A}$ ($= (\mathfrak{A}|_S)^{-I}$):
+\[
+\begin{array}{lll}
+\mathfrak{A} \models \chi & \mbox{iff} & \mathfrak{A}|_S \models \chi^I \\
+\                         & \mbox{iff} & \mathfrak{A} \models \chi^I \mbox{ (by the Coincidence Lemma).}
+\end{array}
+\]
+%%
+\item Let $\varphi \in L_0^{S \cup S_0}$, then
+\[
+\begin{array}{lll}
+\Phi \cup \Phi_0 \models \varphi & \mbox{iff} & \mbox{$\Phi \cup \Phi_0 \models \varphi^I$ (from (b))} \\
+\                                & \mbox{iff} & \mbox{$\Phi \models \varphi^I$ (from (a))}.
+\end{array}
+\]
+\end{enumerate}
+%End of VIII.3.3---------------------------------------------------------------------------------------------
+%
+%VIII.3.4----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 3.4.} Let $S$ be a symbol set, $s_1 \neq s_2$ two new symbols not in $S$, and $\Phi$ a set of $S$-sentences.
+\\
+Define $\delta_{s_1}$ to be the $S$-definition of $s_1$ in $\Phi$, $\delta_{s_2}$ the $(S \cup \{ s_1 \})$-definition of $s_2$ in $\Phi \cup \{ \delta_{s_1} \}$, and $\delta^\prime_{s_2}$ the $S$-definition of $s_2$ in $\Phi \cup \{ \delta_{s_1} \}$.
+\ 
+\\
+\\
+We formulate the statement in this exercise as follows:
+\[
+\modelclass{(S \cup \{ s_1 \}) \cup \{ s_2 \}}{((\Phi \cup \{ \delta_{s_1} \}) \cup \{ \delta_{s_2} \})} = \modelclass{(S \cup \{ s_1 \}) \cup \{ s_2 \}}{((\Phi \cup \{ \delta_{s_1} \}) \cup \{ \delta_{s_2}^\prime \})}.
+\]
+\\
+\textit{Proof.} Let $I_0$ be the associated syntactic interpretation of $S \cup \{ s_1 \}$ in $S$. We extend $I_0$ to $I$ in such a way that
+\[
+I((S \cup \{ s_1 \}) \cup \{ s_2 \}) := v_0 \equiv v_0, \;\; I(s_2) := \mbox{the identity on $s_2$},
+\]
+and
+\[
+\mbox{$I(s) := I_0(s)$ for $s \in S \cup \{ s_1 \}$}.
+\]
+Define $\delta^\prime_{s_2}$ to be $\delta^I_{s_2}$.
+\ 
+\\
+\\
+First, by part (b) of Theorem on Definitions, it follows that
+\[
+(\Phi \cup \{ \delta_{s_1} \}) \cup \{ \delta_{s_2} \} \models \delta_{s_2} \leftrightarrow \delta^I_{s_2}.
+\]
+And obviously,
+\[
+(\Phi \cup \{ \delta_{s_1} \}) \cup \{ \delta_{s_2} \} \models \delta_{s_2}.
+\]
+Hence $(\Phi \cup \{ \delta_{s_1} \}) \cup \{ \delta_{s_2} \} \models \delta^I_{s_2}$ and
+\[
+\modelclass{(S \cup \{ s_1 \}) \cup \{ s_2 \}}{((\Phi \cup \{ \delta_{s_1} \}) \cup \{ \delta_{s_2} \})} \subset \modelclass{(S \cup \{ s_1 \}) \cup \{ s_2 \}}{((\Phi \cup \{ \delta_{s_1} \}) \cup \{ \delta_{s_2}^I \})}.
+\]
+\ 
+\\
+Next, by the same discusssion we have
+\[
+(\Phi \cup \{ \delta_{s_1} \}) \cup \{ \delta^I_{s_2} \} \models \delta_{s_2} \leftrightarrow \delta^I_{s_2}.
+\]
+and
+\[
+(\Phi \cup \{ \delta_{s_1} \}) \cup \{ \delta_{s_2} \} \models \delta^I_{s_2}.
+\]
+And we also have
+\[
+\modelclass{(S \cup \{ s_1 \}) \cup \{ s_2 \}}{((\Phi \cup \{ \delta_{s_1} \}) \cup \{ \delta^I_{s_2} \})} \subset \modelclass{(S \cup \{ s_1 \}) \cup \{ s_2 \}}{((\Phi \cup \{ \delta_{s_1} \}) \cup \{ \delta_{s_2} \})}.
+\]
+\ 
+\\
+From the above discussion, we obtain the result. \begin{flushright}$\talloblong$\end{flushright}
+%End of VIII.3.4---------------------------------------------------------------------------------------------
+%
+%VIII.3.5----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 3.5.} Assume the premise. Let $I$ be the associated syntactic interpretation of $S \cup \{ P \}$ in $S$, in which
+\[
+I(P) := \varphi_P(v_0, \ldots, v_{k - 1}).
+\]
+(The existence of such $\varphi_P$ is guaranteed by Beth's Definability Theorem. See hint.)
+\\
+\\
+Define
+\[
+\Phi := \{ \chi^I | \chi \in \Phi^\prime \}
+\]
+and
+\[
+\delta_P := \forall v_0 \ldots \forall v_{k - 1}(Pv_0 \ldots v_{k - 1} \leftrightarrow \varphi_P(v_0, \ldots, v_{k - 1})).
+\]
+\\
+In the following, we shall show that $\modelclass{S \cup \{ P \}}{}{(\Phi \cup \{ \delta_P \})} = \modelclass{S \cup \{ P \}}{}{\Phi^\prime}$.
+\begin{enumerate}[1)]
+\item $\modelclass{S \cup \{ P \}}{}{(\Phi \cup \{ \delta_P \})} \subset \modelclass{S \cup \{ P \}}{}{\Phi^\prime}$: By part (b) of the Theorem on Definitions,
+\[
+\mbox{$\Phi \cup \{ \delta_P \} \models \chi \leftrightarrow \chi^I$ for $\chi \in \Phi^\prime$}.
+\]
+And by definition,
+\[
+\mbox{$\Phi \cup \{ \delta_P \} \models \chi^I$ for $\chi \in \Phi^\prime$}.
+\]
+Therefore, $\Phi \cup \{ \delta_P \} \models \chi$ for $\chi \in \Phi^\prime$.
+%%
+\item $\modelclass{S \cup \{ P \}}{}{\Phi^\prime} \subset \modelclass{S \cup \{ P \}}{}{(\Phi \cup \{ \delta_P \})}$: We shall argue that $\Phi^\prime \models \chi \leftrightarrow \chi^\prime$ for all $\chi \in L_0^{S \cup \{ P \}}$, in particular, for all those $\chi \in \Phi^\prime$: First, $\delta_P$ is an $S$-definition of $P$ in $\emptyset$, since $\emptyset \subset L_0^S$. Next, let $I$ be the associated syntactic interpretation of $S \cup \{ P \}$ in $S$. Then the associated $\Phi_I$ is equivalent to $\emptyset$. (Note that $P$ is a relation symbol.)\\
+\\
+We have essentially for \textit{every} $S$-structure $\mathfrak{A}$ (i.e. $\mathfrak{A} \models \emptyset$):
+\begin{itemize}
+\item $\mathfrak{A} \models \Phi_I (= \emptyset)$,
+%%
+\item For all $s^A$: $(\mathfrak{A}, s^A) \models \delta_P$ iff $\mathfrak{A}^{-I} = (\mathfrak{A}, s^A)$.
+\end{itemize}
+\ 
+\\
+After arguing as in the proof of part (b) of the Theorem on Definitions, we obtain 
+\[
+\mbox{$\{ \delta_P \} (= \emptyset \cup \{ \delta_P \}) \models \chi \leftrightarrow \chi^I$ for all $\chi \in L_0^{S \cup \{ P \}}$}.
+\]
+And it is obvious that $\Phi^\prime \cup \{ \delta_P \} \models \chi \leftrightarrow \chi^I$ for all $\chi \in \Phi^\prime$, which implies that
+\[
+\mbox{$\Phi^\prime \models \chi \leftrightarrow \chi^I$ for all $\chi \in \Phi^\prime$},
+\]
+since $\Phi^\prime \models \delta_P$ by the premise.\\
+\\
+By definition, $\Phi^\prime \models \chi$ for all $\chi \in \Phi^\prime$. So
+\[
+\mbox{$\Phi^\prime \models \chi^I$ for all $\chi \in \Phi^\prime$}.
+\]
+Since $\Phi^\prime \models \delta_P$ also, it follows that
+\[
+\mbox{$\Phi^\prime \models \psi$ for all $\psi \in \Phi \cup \{ \delta_P \}$}.
+\]
+\end{enumerate} \begin{flushright}$\talloblong$\end{flushright}
+%End of VIII.3.5---------------------------------------------------------------------------------------------
+\end{enumerate}
+%End of Section VIII.3---------------------------------------------------------------------------------------
+\
+\\
+\\
+%Section VIII.4----------------------------------------------------------------------------------------------
+{\large \S4. Normal Forms}
+\begin{enumerate}[1.]
+\item \textbf{Note to $\langle \Phi \rangle$ on Page 128.} The formulas in $\langle \Phi \rangle$ are defined in a recursive way: For every $\varphi \in \langle \Phi \rangle$, either
+\[
+\varphi \in \Phi,
+\]
+or
+\[
+\mbox{$\varphi = \neg \psi$ for some $\psi \in \langle \Phi \rangle$},
+\]
+or
+\[
+\mbox{$\varphi = (\psi \lor \chi)$ for some $\psi, \chi \in \langle \Phi \rangle$}.
+\]
+%
+\item \textbf{Note to Lemma 4.1.} The converse of this lemma is trivially true since $\Phi \subset \langle \Phi \rangle$.\\
+\ \\
+As for the proof given in text, notice the set of $\varphi$ for which ($*$) holds includes $\Phi$ by the premise. And it obviously includes $\neg \psi$ and $(\psi \lor \chi)$ with $\psi$ and $\chi$ being its elements. Thus, this set must includes $\langle \Phi \rangle$ since by definition, $\langle \Phi \rangle$ is defined to be the smallest such set of formulas $\subset L^S_r$.
+%
+\item \textbf{Note to Lemma 4.2.} First note that, here and later on at the Theorem on the Disjuctive Normal Form and at Exercise 4.7, we speak of disjuctions and conjunctions in a somewhat general sense: A disjunction (or conjunction) may have only one disjuct (or conjuct, respectively).\\
+\ \\
+On the other hand, since all formulas in $\langle \Phi \rangle$ have the form presented in the lemma, they must be finite. On the other hand, all unsatisfiable formulas are logically equivalent to, say, $\neg v_0 \equiv v_0$. Therefore, there are finitely many pairwise logically nonequivalent formulas in $\langle \Phi \rangle$.\\
+\ \\
+As for the proof given in text, note the following:
+\begin{enumerate}[(1)]
+\item There might be unsatisfiable such formulas of the form $\psi_0 \land \ldots \land \psi_n$, hence the set
+\[
+\{ \psi_{(\mathfrak{A}, \stackrel{r}{a})} | \mbox{$\mathfrak{A}$ is an $S$-structure and $\stackrel{r}{a} \in A^r$} \}
+\]
+has ``at most'' instead of ``exactly'' $2^{n + 1}$ elements.
+%%
+\item For $\varphi \in \langle \Phi \rangle$, the set
+\[
+\{ \psi_{(\mathfrak{A}, \stackrel{r}{a})} | \mbox{$\mathfrak{A}$ is an $S$-structure and $\stackrel{r}{a} \in A^r$, $\mathfrak{A} \models \varphi[a_0, \ldots, a_{r - 1}]$} \}
+\]
+is a subset of
+\[
+\{ \psi_{(\mathfrak{A}, \stackrel{r}{a})} | \mbox{$\mathfrak{A}$ is an $S$-structure and $\stackrel{r}{a} \in A^r$} \}.
+\]
+\end{enumerate}
+%
+\item \textbf{Note to the Properties of Logical Equivalence Mentioned in the Proof of the Theorem on the Prenex Normal Form.} By the definition of logical equivalence, $\varphi \sim \psi$ is equivalent to say $\varphi \bimodels \psi$, which in turn is equivalent to say $\varphi \vdash \psi$ and $\psi \vdash \varphi$ (by the Adequacy Theorem V.4.2).\\
+\\
+We shall give proofs (more precisely, derivations) for each each of those properties:
+\begin{enumerate}[(1)]
+\item If $\varphi \sim \psi$, then $\neg \psi \sim \neg \varphi$.
+\[
+\begin{array}{llll}
+1. & \varphi & \psi & \mbox{premise} \\
+2. & \psi & \varphi & \mbox{premise} \\
+3. & \neg \varphi & \neg \psi & \mbox{IV.3.3(a) applied to 2.} \\
+4. & \neg \psi & \neg \varphi & \mbox{IV.3.3(a) applied to 1.}
+\end{array}
+\]
+%%
+\item If $\varphi_0 \sim \psi_0$ and $\varphi_1 \sim \psi_1$, then $(\varphi_0 \lor \varphi_1) \sim (\psi_0 \lor \psi_1)$.
+\[
+\begin{array}{llll}
+1. & \varphi_0 & \psi_0 & \mbox{premise} \\
+2. & \psi_0 & \varphi_0 & \mbox{premise} \\
+3. & \varphi_1 & \psi_1 & \mbox{premise} \\
+4. & \psi_1 & \varphi_1 & \mbox{premise} \\
+5. & \varphi_0 & (\psi_0 \lor \psi_1) & \mbox{($\lor$S) applied to 1.} \\
+6. & \varphi_1 & (\psi_0 \lor \psi_1) & \mbox{($\lor$S) applied to 3.} \\
+7. & \psi_0 & (\varphi_0 \lor \varphi_1) & \mbox{($\lor$S) applied to 2.} \\
+8. & \psi_1 & (\varphi_0 \lor \varphi_1) & \mbox{($\lor$S) applied to 4.} \\
+9. & (\varphi_0 \lor \varphi_1) & (\psi_0 \lor \psi_1) & \mbox{($\lor$A) applied to 5. and 6.} \\
+10. & (\psi_0 \lor \psi_1) & (\varphi_0 \lor \varphi_1) & \mbox{($\lor$A) applied to 7. and 8.}
+\end{array}
+\]
+%%
+\item
+\begin{itemize}
+\item If $\varphi \sim \psi$, then $\exists x \varphi \sim \exists x \psi$.
+\[
+\begin{array}{llll}
+1. & \varphi & \psi & \mbox{premise} \\
+2. & \psi & \varphi & \mbox{premise} \\
+3. & \exists x \varphi & \exists x \psi & \mbox{Exercise IV.4.5 applied to 1.} \\
+4. & \exists x \psi & \exists x \varphi & \mbox{Exercise IV.4.5 applied to 2.}
+\end{array}
+\]
+%%%
+\item If $\varphi \sim \psi$, then $\forall x \varphi \sim \forall x \psi$.
+\[
+\begin{array}{llll}
+1. & \varphi & \psi & \mbox{premise} \\
+2. & \psi & \varphi & \mbox{premise} \\
+3. & \neg \psi & \neg \varphi & \mbox{IV.3.3(a) applied to 1.} \\
+4. & \neg \varphi & \neg \psi & \mbox{Iv.3.3(a) applied to 2.} \\
+5. & \exists x \neg \psi & \exists x \neg \varphi & \mbox{Exercise IV.4.5 applied to 3.} \\
+6. & \exists x \neg \varphi & \exists x \neg \psi & \mbox{Exercise IV.4.5 applied to 4.} \\
+7. & \forall x \varphi & \forall x \psi & \mbox{IV.3.3(a) applied to 5.} \\
+8. & \forall x \psi & \forall x \varphi & \mbox{IV.3.3(a) applied to 6.}
+\end{array}
+\]
+\end{itemize}
+%%
+\item
+\begin{itemize}
+\item $\neg \exists x \varphi \sim \forall x \neg \varphi$.
+\[
+\begin{array}{llll}
+1. & \neg \neg \varphi & \neg \neg \varphi & \mbox{(Assm)} \\
+2. & \neg \neg \varphi & \varphi & \mbox{IV.3.6(a2) applied to 1.} \\
+3. & \exists x \neg \neg \varphi & \exists x \varphi & \mbox{Exercise IV.4.5 applied to 2.} \\
+4. & \varphi & \varphi & \mbox{(Assm)} \\
+5. & \varphi & \neg \neg \varphi & \mbox{IV.3.6(a1) applied to 4.} \\
+6. & \exists x \varphi & \exists x \neg \neg \varphi & \mbox{Exercise IV.4.5 applied to 5.} \\
+7. & \neg \exists x \varphi & \forall x \neg \varphi & \mbox{IV.3.3(a) applied to 3.} \\
+8. & \forall x \neg \varphi & \neg \exists x \varphi & \mbox{IV.3.3(a) applied to 6.}
+\end{array}
+\]
+%%%
+\item $\neg \forall x \varphi \sim \exists x \neg \varphi$.
+\[
+\begin{array}{llll}
+1. & \forall x \varphi & \forall x \varphi & \mbox{(Assm)} \\
+2. & \neg \forall x \varphi & \exists x \neg \varphi & \mbox{IV.3.3(c) applied to 1.} \\
+3. & \exists x \neg \varphi & \neg \forall x \varphi & \mbox{IV.3.3(d) applied to 1.}
+\end{array}
+\]
+\end{itemize}
+%%
+\item Suppose $x \not \in \free(\psi)$.
+\begin{itemize}
+\item $(\exists x \varphi \lor \psi) \sim \exists x (\varphi \lor \psi)$.
+\[
+\begin{array}{llll}
+1. & \varphi & \varphi & \mbox{(Assm)} \\
+2. & \varphi & (\varphi \lor \psi) & \mbox{($\lor$S) applied to 1.} \\
+3. & \exists x \varphi & \exists x (\varphi \lor \psi) & \mbox{Exercise IV.4.5 applied to 2.} \\
+4. & \psi & \psi & \mbox{(Assm)} \\
+5. & \psi & (\varphi \lor \psi) & \mbox{($\lor$S) applied to 4.} \\
+6. & \psi & \exists x (\varphi \lor \psi) & \mbox{IV.5.1(a) applied to 5.} \\
+7. & \varphi & \exists x \varphi & \mbox{IV.5.1(a) applied to 1.} \\
+8. & \varphi & (\exists x \varphi \lor \psi) & \mbox{($\lor$S) applied to 7.} \\
+9. & \psi & (\exists x \varphi \lor \psi) & \mbox{($\lor$S) applied to 4.} \\
+10. & (\varphi \lor \psi) & (\exists x \varphi \lor \psi) & \mbox{($\lor$A) applied to 8. and 9.} \\
+11. & (\exists x \varphi \lor \psi) & \exists x (\varphi \lor \psi) & \mbox{($\lor$A) applied to 3. and 6.} \\
+12. & \exists x (\varphi \lor \psi) & (\exists x \varphi \lor \psi) & \mbox{IV.5.1(b) applied to 10.}
+\end{array}
+\]
+%%%
+\item $(\forall x \varphi \lor \psi) \sim \forall x (\varphi \lor \psi)$.
+\[
+\begin{array}{llll}
+1. & \forall x \varphi & \forall x \varphi & \mbox{(Assm)} \\
+2. & \forall x \varphi & \varphi & \mbox{IV.5.5(a2) applied to 1.} \\
+3. & \forall x \varphi & (\varphi \lor \psi) & \mbox{($\lor$S) applied to 2.} \\
+4. & \forall x \varphi & \forall x (\varphi \lor \psi) & \mbox{IV.5.5(b4) applied to 3.} \\
+5. & \psi & \psi & \mbox{(Assm)} \\
+6. & \psi & (\varphi \lor \psi) & \mbox{($\lor$S) applied to 5.} \\
+7. & \psi & \forall x (\varphi \lor \psi) & \mbox{IV.5.5(b4) applied to 6.} \\
+8. & \forall x (\varphi \lor \psi) \;\; \psi & \psi & \mbox{(Assm)} \\
+9. & \forall x (\varphi \lor \psi) \;\; \psi & (\forall x \varphi \lor \psi) & \mbox{($\lor$S) applied to 8.} \\
+10. & (\varphi \lor \psi) & (\varphi \lor \psi) & \mbox{(Assm)} \\
+11. & \forall x (\varphi \lor \psi) & (\varphi \lor \psi) & \mbox{IV.5.5(b3) applied to 10.}\\
+12. & \forall x (\varphi \lor \psi) \;\; \neg \varphi & (\varphi \lor \psi) & \mbox{(Ant) applied to 11.} \\
+13. & \forall x (\varphi \lor \psi) \;\; \neg \varphi & \neg \varphi & \mbox{(Assm)} \\
+14. & \forall x (\varphi \lor \psi) \;\; \neg \varphi & \psi & \mbox{IV.3.4 applied to 12. and 13.} \\
+15. & \forall x (\varphi \lor \psi) \;\; \neg \psi & \varphi & \mbox{IV.3.3(c) applied to 14.} \\
+16. & \forall x (\varphi \lor \psi) \;\; \neg \psi & \forall x \varphi & \mbox{IV.5.5(b4) applied to 15.} \\
+17. & \forall x (\varphi \lor \psi) \;\; \neg \psi & (\forall x \varphi \lor \psi) & \mbox{($\lor$S) applied to 16.} \\
+18. & (\forall x \varphi \lor \psi) & \forall x (\varphi \lor \psi) & \mbox{($\lor$A) applied to 4. and 7.} \\
+19. & \forall x (\varphi \lor \psi) & (\forall x \varphi \lor \psi) & \mbox{(PC) applied to 9. and 17.}
+\end{array}
+\]
+%%%
+\item $(\psi \lor \exists x \varphi) \sim \exists x (\varphi \lor \psi)$.
+\[
+\begin{array}{llll}
+1. & \psi & \psi & \mbox{(Assm)} \\
+2. & \psi & (\varphi \lor \psi) & \mbox{($\lor$S) applied to 1.} \\
+3. & \psi & \exists x (\varphi \lor \psi) & \mbox{IV.5.1(a) applied to 2.} \\
+4. & \varphi & \varphi & \mbox{(Assm)} \\
+5. & \varphi & (\varphi \lor \psi) & \mbox{($\lor$S) applied to 4.} \\
+6. & \exists x \varphi & \exists x (\varphi \lor \psi) & \mbox{Exercise IV.4.5 applied to 5.} \\
+7. & \varphi & \exists x \varphi & \mbox{IV.5.1(a) applied to 4.} \\
+8. & \varphi & (\psi \lor \exists x \varphi) & \mbox{($\lor$S) applied to 7.} \\
+9. & \psi & (\psi \lor \exists x \varphi) & \mbox{($\lor$S) applied to 1.} \\
+10. & (\varphi \lor \psi) & (\psi \lor \exists x \varphi) & \mbox{($\lor$A) applied to 8. and 9.} \\
+11. & (\psi \lor \exists x \varphi) & \exists x (\varphi \lor \psi) & \mbox{($\lor$A) applied to 3. and 6.} \\
+12. & \exists x (\varphi \lor \psi) & (\psi \lor \exists x \varphi) & \mbox{IV.5.1(b) applied to 10.}
+\end{array}
+\]
+%%%
+\item $(\psi \lor \forall x \varphi) \sim \forall x (\varphi \lor \psi)$.
+\[
+\begin{array}{llll}
+1. & \psi & \psi & \mbox{(Assm)} \\
+2. & \psi & (\varphi \lor \psi) & \mbox{($\lor$S) applied to 2.} \\
+3. & \psi & \forall x (\varphi \lor \psi) & \mbox{IV.5.5(b4) applied to 3.} \\
+4. & \forall x \varphi & \forall x \varphi & \mbox{(Assm)} \\
+5. & \forall x \varphi & \varphi & \mbox{IV.5.5(a2) applied to 4.} \\
+6. & \forall x \varphi & (\varphi \lor \psi) & \mbox{($\lor$S) applied to 5.} \\
+7. & \forall x \varphi & \forall x (\varphi \lor \psi) & \mbox{IV.5.5(b4) applied to 6.} \\
+8. & \forall x (\varphi \lor \psi) \;\; \psi & \psi & \mbox{(Assm)} \\
+9. & \forall x (\varphi \lor \psi) \;\; \psi & (\psi \lor \forall x \varphi) & \mbox{($\lor$S) applied to 8.} \\
+10. & (\varphi \lor \psi) & (\varphi \lor \psi) & \mbox{(Assm)} \\
+11. & \forall x (\varphi \lor \psi) & (\varphi \lor \psi) & \mbox{IV.5.5(b3) applied to 10.}\\
+12. & \forall x (\varphi \lor \psi) \;\; \neg \varphi & (\varphi \lor \psi) & \mbox{(Ant) applied to 11.} \\
+13. & \forall x (\varphi \lor \psi) \;\; \neg \varphi & \neg \varphi & \mbox{(Assm)} \\
+14. & \forall x (\varphi \lor \psi) \;\; \neg \varphi & \psi & \mbox{IV.3.4 applied to 12. and 13.} \\
+15. & \forall x (\varphi \lor \psi) \;\; \neg \psi & \varphi & \mbox{IV.3.3(c) applied to 14.} \\
+16. & \forall x (\varphi \lor \psi) \;\; \neg \psi & \forall x \varphi & \mbox{IV.5.5(b4) applied to 15.} \\
+17. & \forall x (\varphi \lor \psi) \;\; \neg \psi & (\psi \lor \forall x \varphi) & \mbox{($\lor$S) applied to 16.} \\
+18. & (\psi \lor \forall x \varphi) & \forall x (\varphi \lor \psi) & \mbox{($\lor$A) applied to 3. and 7.} \\
+19. & \forall x (\varphi \lor \psi) & (\psi \lor \forall x \varphi) & \mbox{(PC) applied to 9. and 17.}
+\end{array}
+\]
+\end{itemize}
+(For a proof of semantical flavor, cf. Exercise III.4.11.)
+\end{enumerate}
+%
+\item \textbf{More on Logical Equivalence.} Note that, by definition, $\varphi \sim \varphi$ for all $\varphi$. Moreover, $\varphi \sim \neg \neg \varphi$:
+\[
+\begin{array}{llll}
+1. & \varphi & \varphi & \mbox{(Assm)} \\
+2. & \neg \neg \varphi & \neg \neg \varphi & \mbox{(Assm)} \\
+3. & \varphi & \neg \neg \varphi & \mbox{IV.3.6(a1) applied to 1.} \\
+4. & \neg \neg \varphi & \varphi & \mbox{IV.3.6(a2) applied to 2.}
+\end{array}
+\]
+\\
+On the other hand, if $y \not \in \free(\varphi)$, then $\forall x \varphi \sim \forall y \varphi \frac{y}{x}$. The following is a derivation for it:
+\[
+\begin{array}{llll}
+1. & \forall x \varphi & \forall x \varphi & \mbox{(Assm)} \\
+2. & \forall x \varphi & \varphi\frac{y}{x} & \mbox{IV.5.5(a1) applied to 1. with $t = y$} \\
+3. & \forall y \varphi\frac{y}{x} & \forall y \varphi\frac{y}{x} & \mbox{(Assm)} \\
+4. & \forall y \varphi\frac{y}{x} & \varphi\frac{y}{x} & \mbox{IV.5.5(a2) applied to 3.} \\
+5. & \forall x \varphi & \forall y \varphi\frac{y}{x} & \mbox{IV.5.5(b2) applied to 2.} \\
+6. & \forall y \varphi\frac{y}{x} & \forall x \varphi & \mbox{IV.5.5(b2) applied to 4.}
+\end{array}
+\]
+Note that if we drop the premise, then the statement above does not hold in general, as illustrated by the following counterexample:
+\[
+\forall x \neg Ryy \not \sim \forall y \neg Ryy.
+\]
+\\
+Also, that $\exists x \varphi \sim \exists y \varphi \frac{y}{x}$ for $y \not \in \free(\varphi)$ follows from the above argument: First, we have $\forall x \neg \varphi \sim \forall y \neg \varphi \frac{y}{x}$. Next, since by property (4), $\forall x \neg \varphi \sim \neg \exists x \varphi$ and $\forall y \neg \varphi\frac{y}{x} \sim \neg \exists y \varphi\frac{y}{x}$, it immediately follows that $\neg \exists x \varphi \sim \neg \exists y \varphi\frac{y}{x}$. This in turn implies that $\neg \neg \exists x \varphi \sim \neg \neg \exists y \varphi\frac{y}{x}$ (by property (1)). And finally, we arrive at $\exists x \varphi \sim \exists y \varphi\frac{y}{x}$ because $\neg \neg \exists x \varphi \sim \exists x \varphi$ and $\neg \neg \exists y \varphi\frac{y}{x} \sim \exists y \varphi\frac{y}{x}$ (by the previous argument).
+%
+\item \textbf{Note to the Main Part of the Proof of the Theorem on the Prenex Normal Form.} The induction utilized in the proof actually proceeds in two directions, one in the quantifier number, and the other the structure of a formula (encapsulated in the inductive step of the former). In fact, the base case for the direction of the latter consists of atomic formulas, which is included in both base case ($n = 0$) and inductive step ($n > 0$) in the direction of quantifier number.\\
+\\
+There is a subtlety here: According to the original statement of $(*)_n$, our goal is to prove such a ``$\psi$'' exists. However, in text this symbol is misused in the first two cases in the inductive step (see page 131), i.e. it stands for only part of the objective formula. Hence, it is reasonable to replace those $\psi$'s by an unused symbol (say, $\psi^\prime$, which is perfectly suitable here), and let $\psi$ still represent the objective formula. (We shall adopt this minor change in the argument below.)\\
+\\
+We complement the proof by appending the arguments ``$\free(\varphi) = \free(\psi)$'' to each part:
+\begin{enumerate}[(1)]
+\item Base case, $n = 0$: Since $\psi := \varphi$, obviously $\free(\varphi) = \free(\psi)$.
+%%
+\item Inductive step, $n > 0$:
+\begin{enumerate}[(i)]
+\item $\varphi = \neg \varphi^\prime$:
+\[
+\begin{array}{llll}
+\free(\varphi) & = & \free(\psi) & \mbox{(by induction hypothesis, in the} \\
+\              & \ & \           & \mbox{direction of formula structure)} \\
+\              & = & \free(Qx \chi) & \  \\
+\              & = & \free(\chi) \setminus \{ x \} & \  \\
+\              & = & \free(\psi^\prime) \setminus \{ x \} & \mbox{(by induction hypothesis, in the} \\
+\              & \ & \           & \mbox{direction of quantifier number)} \\
+\              & = & \free(Q^{-1}x \psi^\prime) \\
+\              & = & \free(\psi). & \ 
+\end{array}
+\]
+%%%
+\item $\varphi = (\varphi^\prime \lor \varphi^{\prime\prime})$:
+\[
+\begin{array}{llll}
+\free(\varphi) & = & \free(\varphi^\prime) \cup \free(\varphi^{\prime\prime}) \\
+\              & = & \free(Qx \chi) \cup \free(\varphi^{\prime\prime}) & \mbox{(by induction hypothesis,}\\
+\              & \ & \                                                 & \mbox{in the direction of} \\
+\              & \ & \                                                 & \mbox{formula structure)} \\
+\              & = & \free(Qy \chi\frac{y}{x}) \cup \free(\varphi^{\prime\prime}) & \mbox{(The reader is encouraged} \\
+\              & \ & \ & \mbox{to verify this)} \\
+\              & = & \free((\chi\frac{y}{x} \lor \varphi^{\prime\prime})) \setminus \{ y \} & \mbox{(since $y$ does not occur} \\
+\              & \ & \ & \mbox{in $\varphi^{\prime\prime}$)} \\
+\              & = & \free(\psi^\prime) \setminus \{ y \} & \mbox{(by induction hypothesis,} \\
+\              & \ & \ & \mbox{in the direction of} \\
+\              & \ & \ & \mbox{quantifier number)} \\
+\              & = & \free(Qy \psi^\prime) & \ \\
+\              & = & \free(\psi). & \ 
+\end{array}
+\]
+%%%
+\item $\varphi = \exists x \varphi^\prime$:
+\[
+\begin{array}{llll}
+\free(\varphi) & = & \free(\exists x \varphi^\prime) & \ \\
+\              & = & \free(\varphi^\prime) \setminus \{ x \} & \ \\
+\              & = & \free(\psi^\prime) \setminus \{ x \} & \mbox{(by induction hypothesis, in the} \\
+\              & \ & \ & \mbox{direction of quantifier number)} \\
+\              & = & \free(\exists x \psi^\prime) & \ \\
+\              & = & \free(\psi). & \ 
+\end{array}
+\]
+\end{enumerate}
+\end{enumerate}
+\item \textbf{Note to Equivalence for Satisfaction Mentioned in Page 131.} Let $\varphi$ and $\psi$ be two $S$-formulas such that $\psi$ is independent of $\varphi$, i.e.
+\[
+\mbox{neither $\varphi \models \psi$ nor $\varphi \models \neg \psi$}.
+\]
+Then $\varphi$ and $(\varphi \land \psi$) are obviously equivalent for satisfaction. (But note that clearly they are \emph{not} logically equivalent.)\\
+\\
+Also, if two formulas are logically equivalent, then they are equivalent for satisfaction by definition. But the converse is generally not true. (As the above argument provides a counterexample.)
+%
+\item \textbf{Note to the Paragraph in Page 131 before the Theorem on the Skolem Normal Form.} Note that $\psi \models \varphi$ implies that
+\[
+\mbox{If $\sat \psi$, then $\sat \varphi$}.
+\]
+%
+\item \textbf{Note to the Proof of the Theorem on the Skolem Normal Form.}
+\begin{enumerate}[(i)]
+\item For the formula $\psi^\prime$ discussed in this proof,
+\[
+\begin{array}{lll}
+\free(\psi^\prime) & = & \free(\varphi_1) \setminus \{x_i | 1 \leq i \leq k + 1 \} \\
+\                  & = & \free(\varphi_0) \setminus \{x_i | 1 \leq i \leq m \} \\
+\                  & = & \free(\varphi).
+\end{array}
+\]
+%%
+\item In property (2), again, $\psi^\prime \models \varphi$ implies that
+\[
+\mbox{``if $\sat \psi^\prime$, then $\sat \varphi$}.
+\]
+This, together with property (1), implies that $\varphi$ and $\psi^\prime$ are equivalent for satisfaction.
+%%
+\item In property (3), note that $\free(\psi^\prime)$ remains the same (i.e. an \emph{invariant}) after each induction step.
+%%
+\item In property (4), the previous $\psi^\prime$ is a consequence of the new $\psi^\prime$ generated in each step, i.e.
+\[
+\mbox{new } \psi^\prime \models \mbox{previous } \psi^\prime.
+\]
+%%
+\item In the part of the proof for property (1), note that $\mathfrak{I} = (\mathfrak{A}, \beta) = ((\mathfrak{A}, f^A), \beta) |_S$, so it follows that for all $a_1, \ldots a_k \in A$:
+\[
+\mathfrak{I}\displaystyle\frac{a_1 \ldots a_k f^A(a_1, \ldots, a_k)}{x_1 \ldots x_k \phantom{f^Aa_1} x_{k+1} \phantom{,a_k)}} \models \varphi_1
+\]
+iff
+\[
+((\mathfrak{A}, f^A), \beta)\displaystyle\frac{a_1 \ldots a_k f^A(a_1, \ldots, a_k)}{x_1 \ldots x_k \phantom{f^Aa_1} x_{k+1} \phantom{,a_k)}} \models \varphi_1
+\]
+(cf. the argument after Definition III.4.7 in page 38). And further, for all $a_1, \ldots, a_k \in A$,
+\[
+((\mathfrak{A}, f^A), \beta)\displaystyle\frac{a_1 \ldots a_k f^A(a_1, \ldots, a_k)}{x_1 \ldots x_k \phantom{f^Aa_1} x_{k+1} \phantom{,a_k)}} \models \varphi_1
+\]
+holds, since we already have, for all $a_1, \ldots, a_k \in A$,
+\[
+\mathfrak{I}\displaystyle\frac{a_1 \ldots a_k f^A(a_1, \ldots, a_k)}{x_1 \ldots x_k \phantom{f^Aa_1} x_{k+1} \phantom{,a_k)}} \models \varphi_1.
+\]
+Then it is straightforward to apply the Substitution Lemma to obtain the result.
+%%
+\item In the part of the proof for property (2), we provide in the following an alternative for it, i.e. a derivation of $\psi^\prime \vdash \varphi$ (hence $\psi^\prime \models \varphi$):
+\[
+\begin{array}{lll}
+1. & \varphi_1\frac{fx_1 \ldots x_k}{x_{k + 1}} & \varphi_1\frac{fx_1 \ldots x_k}{x_{k + 1}} \\
+\  & \ & \mbox{(Assm)} \\
+2. & \varphi_1\frac{fx_1 \ldots x_k}{x_{k + 1}} & \exists x_{k + 1} \varphi_1 \\
+\  & \ & \mbox{($\exists$S) applied to 1.} \\
+3. & \forall x_k \varphi_1\frac{fx_1 \ldots x_k}{x_{k + 1}} & \exists x_{k + 1} \varphi_1 \\
+\  & \ & \mbox{IV.5.5(b3) applied to 2.} \\
+4. & \forall x_k \varphi_1\frac{fx_1 \ldots x_k}{x_{k + 1}} & \forall x_k \exists x_{k + 1} \varphi_1 \\
+\  & \ & \mbox{IV.5.5(b4) applied to 3.} \\
+\multicolumn{3}{c}{\vdots} \\
+(2k + 1). & \forall x_1 \ldots \forall x_k \varphi_1\frac{fx_1 \ldots x_k}{x_{k + 1}} & \forall x_2 \ldots \forall x_k \exists x_{k + 1} \varphi_1 \\
+\  & \ & \mbox{IV.5.5(b3) applied to ($2k$).} \\
+(2k + 2). & \forall x_1 \ldots \forall x_k \varphi_1\frac{fx_1 \ldots x_k}{x_{k + 1}} & \forall x_1 \ldots \forall x_k \exists x_{k + 1} \varphi_1 \\
+\  & \ & \mbox{IV.5.5(b4) applied to ($2k + 1$).} \\
+\end{array}
+\]
+\end{enumerate}
+%
+%VIII.4.6------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 4.6.} Note that this is a special case of the proof of the Theorem on the Skolem Normal Form, for which all we have to do to complete this exercise is to modify the proof by dropping (and hence disregarding) the assignment $\beta$.\nolinebreak\hfill$\talloblong$
+%End of VIII.4.6-----------------------------------------------------------------------------------
+%
+%VIII.4.7------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 4.7.} By Exercise IV.3.6(a1) and (a2) together with the Correctness Theorem, every formula $\chi$ is logically equivalent to its double negation $\neg\neg\chi$. More generally, using III.4.12(b), for every formula $\delta$ we can replace in it all double negations $\neg\neg\chi$ by the equivalent formulas $\chi$ to obtain a formula $\delta^\prime$ logically equivalent to $\delta$, and vice versa. Below we shall use these two facts to prove the Theorem on the Conjunctive Normal Form.\\
+\ \\
+Let $\varphi$ be a quantifier-free formula, here we describe a procedure to get a formula $\varphi^\prime$ in conjunctive normal form that is logically equivalent to $\varphi$:
+\begin{enumerate}[(1)]
+\item Take its negation $\neg\varphi$, and then apply the Theorem on the Disjunctive Normal Form to get an equivalent formula $\psi$ in disjunctive normal form.
+%%
+\item Replace in $\psi$ each disjunct that is an atomic formula $\chi$ by its equivalent double negation $\neg\neg\chi$ to get an equivalent formula $\psi^\prime$.
+%%
+\item The formula $\neg\psi^\prime$ is thus a conjunction\footnote{We take $\land$ as an abbreviation, cf. the discussion at the bottom of page 35.} of disjunctions of atomic formulas or single- or double-negated atomic formulas. Note that $\neg\psi^\prime$ is logically equivalent to $\varphi$. Replace in $\neg\psi^\prime$ all double-negated atomic formulas $\neg\neg\chi$ in disjunctions by their equivalent atomic formulas $\chi$ to obtain a formula $\varphi^\prime$ in conjunctive normal form. $\varphi^\prime$ is logically equivalent to $\neg\psi^\prime$ and hence to $\varphi$.
+\end{enumerate}
+\ \\
+Here we illustrate the procedure by an example. Let $S \colonequals \{ P \}$ with unary relation symbol $P$, and let $\varphi \colonequals ((Pv_0 \rightarrow v_1 \equiv v_2) \land \neg v_0 \equiv v_1 \land Pv_2)$.\\
+\ \\
+In step (1), we apply the Theorem on the Disjunctive Normal Form to $\neg\varphi$ to obtain $\psi \colonequals ((Pv_0 \land \neg v_1 \equiv v_2) \lor v_0 \equiv v_1 \lor \neg Pv_2)$.\\
+\ \\
+Then step (2) yields $\psi^\prime \colonequals ((Pv_0 \land \neg v_1 \equiv v_2) \lor \neg\neg v_0 \equiv v_1 \lor \neg Pv_2)$ for $\psi$. Note that $\psi^\prime = (\neg (\neg Pv_0 \lor \neg\neg v_1 \equiv v_2 ) \lor \neg\neg v_0 \equiv v_1 \lor \neg Pv_2)$.\\
+\ \\
+And finally in step (3), we have $\neg\psi^\prime = \neg (\neg (\neg Pv_0 \lor \neg\neg v_1 \equiv v_2 ) \lor \neg\neg v_0 \equiv v_1 \lor \neg Pv_2) = ((\neg Pv_0 \lor \neg\neg v_1 \equiv v_2) \land \neg v_0 \equiv v_1 \land Pv_2)$, since we regard $\land$ as an abbreviation mentiond  at the bottom of page 35. By replacing in $\neg\psi^\prime$ the double negation $\neg\neg v_1 \equiv v_2$ by the equivalent $v_1 \equiv v_2$, we get $\varphi^\prime \colonequals ((\neg Pv_0 \lor v_1 \equiv v_2) \land \neg v_0 \equiv v_1 \land Pv_2)$, a formula in conjunctive normal form that is logically equivalent to $\varphi$.
+%End of VIII.4.7-----------------------------------------------------------------------------------
+%
+%VIII.4.8------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 4.8.} Let $\mathfrak{A}$ be an $S$-structure such that $\mathfrak{A} \models \varphi$. By Exercise 4.6, there is an $S^\prime$-expansion $\mathfrak{A}^\prime$ of $\mathfrak{A}$ such that $\mathfrak{A}^\prime \models \varphi^\prime$, where
+\[
+\varphi^\prime \colonequals \forall y_0 \ldots \forall y_m \psi\sbst{c_0 \ldots c_n}{x_0 \ldots x_n} \in L_0^{S^\prime}
+\]
+is universal.\\
+\\
+Let $\mathfrak{A}_0^\prime \subset \mathfrak{A}^\prime$ with $A_0^\prime = \{ c_i^{\mathfrak{A}^\prime} | 0 \leq i \leq n \}$. Note that
+\[
+| A_0^\prime | = | \{ c_i^{\mathfrak{A}^\prime} | 0 \leq i \leq n \} | \leq \sum_{0 \leq i \leq n} | \{ c_i^{\mathfrak{A}^\prime} \} | = n + 1,
+\]
+and $\mathfrak{A}_0^\prime \models \varphi^\prime$ (cf. Corollary III.5.8).\\
+\\
+Since $\varphi^\prime \models \varphi$ by the Theorem on the Skolem Normal Form, we have that $\mathfrak{A}_0^\prime \models \varphi$. By the discussion after Definition III.4.7 on page 38, it follows that $\mathfrak{A}_0^\prime |_S \models \varphi$. Also note that $\mathfrak{A}_0^\prime |_S \subset \mathfrak{A}$, thus $\mathfrak{A}_0^\prime |_S$ meets all the requirements.\\
+\\
+On the other hand, consider $S = \{ < \}$. Then $(\mathbb{N}, <^\mathbb{N}) \models \forall x \exists y \; x < y$. However, $(\mathbb{N}, <^\mathbb{N})$ contains no \emph{finite} substructure which is also a model of $\forall x \exists y \; x < y$, as in such a substructure, there is no element ``greater'' than the maximum element. Thus, in general, the sentence $\forall x \exists y Rxy$ cannot be logically equivalent to a sentence of the same shape as $\varphi$. \nolinebreak\hfill$\talloblong$\\
+\ \\
+\textit{Remark.} There is a typo in the formula
+\[
+\exists x_0 \ldots \exists x_n \forall y_0 \ldots y_m \psi
+\]
+in line 2 should be replaced by
+\[
+\exists x_0 \ldots \exists x_n \forall y_0 \ldots \forall y_m \psi,
+\]
+i.e. the `$\forall$' proceeding $y_m$ is missing.
+%End of VIII.4.8-----------------------------------------------------------------------------------
+\end{enumerate}
+%End of Section VIII.4---------------------------------------------------------------------------------------
+%End of Chapter VIII

@@ -1,0 +1,31 @@
+1. 以下常用的單字可以用 <- 之後的字代替:
+ (a) since <- as, for;
+ (b) same <- identical;
+ (c) show, prove <- verify;
+ (d) usually <- typically.
+ (e) ? <- consequently, as a consequence, as a result, as it turns out
+2. 更改字體大小、版面
+3. Solution, Proof, Theorem, Corollary後面加\talloblong作為結尾標記
+4. $\talloblong$: ch2, ch3
+5. replacing some \mbox by \mathrm
+6. 文中斜體用\emph, 標記的lable的斜體用\textit
+7. \textit{Remark.}中, .要放在}之前
+8. make clear the notion of effectiveness.
+9. extract the pairing function.
+10. 4.4 (a) -> 4.4(a) 沒有空白.
+11. References such as "Theorem III.8.5" should be in roman typeface.
+12. Replace all \cases with \begin{cases}…\end{cases}
+13. \begin{small center}…\end{small center} replaced by \centerline{...}.
+14. \mbf{}, \mbfs{}, \mbff{}, \mbft{} 改成 \bm{}
+15. for the sake of a contradiction ---> for the sake of contradiction
+16. Note "on" (instead of note "to"); annotations "to"
+17. "that" in a phrase such as "I think that" is a conj.
+18. In the discussions at the bottom of page 60 (Chapter IV), we infer that a sequent is a "finite" and nonempty sequence of formulas, though finiteness is not explicitly mentioned
+	---If we call a nonempty list (sequence) of formulas a sequent … From "II.4.3" it follows that the formulas which constitute a sequent are uniquely determined.---
+A sequent must be finite so that we can apply II.4.3 to it.
+19. "in the end" -> "at the end"
+20. "the notion of [singular form of] noun", or "the notion of a [singular form of] noun"
+21. \invrelational{\struct{A}} has not yet been defined.
+22. set the enumerate environment such that labels are right-justified.
+23. return to V-ing.
+24. misprint, typo, missing

@@ -1,0 +1,131 @@
+\item$^*$ The Function $RevTSbst (t, v_n, t^\prime)$ is defined by
+\[
+\begin{array}{lll}
+RevTSbst(0, v_n, 0) & \colonequals & v_n; \cr
+RevTSbst(0, v_n, t^\prime ) & \colonequals & 0 \ (t^\prime \neq 0);\cr
+RevTSbst(1, v_n, 1) & \colonequals & v_n; \cr
+RevTSbst(1, v_n, t^\prime ) & \colonequals & 1 \ (t^\prime \neq 1);\cr
+RevTSbst(v_m, v_n, v_m) & \colonequals & v_n; \cr
+RevTSbst(v_m, v_n, t^\prime) & \colonequals & v_m \ (t^\prime \neq v_m);\cr
+RevTSbst(t_1 + t_2, v_n, t_1 + t_2) & \colonequals & v_n; \cr
+RevTSbst(t_1 + t_2, v_n, t^\prime ) & \colonequals & RevTSbst(t_1, v_n, t^\prime ) + RevTSbst(t_2, v_n, t^\prime ) \cr
+\ & \ & \ \ \ (t^\prime \neq t_1 + t_2);\cr
+RevTSbst(t_1 \cdot t_2, v_n, t_1 \cdot t_2) & \colonequals & v_n; \cr
+RevTSbst(t_1 \cdot t_2, v_n, t^\prime ) & \colonequals & RevTSbst(t_1, v_n, t^\prime ) \cdot RevTSbst(t_2, v_n, t^\prime ) \cr
+\ & \ & \ \ \ (t^\prime \neq t_1 \cdot t_2).
+\end{array} 
+\]
+%
+\item The Function $RevFSbst(\varphi, v_n, t)$ is defined by
+\[
+\begin{array}{lll}
+EevFSbst(t_1 \equiv t_2, v_n, t) & \colonequals & RevTSbst(t_1, v_n, t) \equiv RevTSbst(t_2, v_n, t);\cr
+RevFSbst(\neg\varphi, v_n, t) & \colonequals & \neg RevFSbst(\varphi, v_n, t);\cr
+RevFSbst(\varphi \lor \psi, v_n, t) & \colonequals & RevFSbst(\varphi, v_n, t) \lor RevFSbst(\psi, v_n, t);\cr
+RevFSbst(\exists x \varphi, v_n, t) & \colonequals & \exists x RevFSbst(\varphi, v_n, t).
+\end{array}
+\]
+%
+\item$^*$ The Predicate $Free (v_0, v_1)$ states that the variable encoded by $v_0$ occurs free in the formula encoded by $v_1$.
+%
+\item$^*$ $\varphi_\pa(v_0)$.\\
+\ \\
+$v_0$ encodes a \emph{sentence} in $\Phi_\pa$.
+\[
+\begin{array}{lll}
+\varphi_\pa(v_0) & \colonequals & v_0 \equiv 13\ 488\ 861 \lor\cr
+\ & \ & v_0 \equiv 57\ 953\ 421 \lor\cr
+\ & \ & v_0 \equiv 47\ 453\ 325 \lor\cr
+\ & \ & v_0 \equiv 342\ 455\ 128\ 038\ 167\ 155\ 246\ 011\ 026\ 950\ 840\ 000\ 000\ 000\ 000 \lor\cr
+\ & \ & v_0 \equiv 8\ 778\ 938\ 053\ 451\ 149\ 489\ 820\ 942\ 200\ 159\ 700\ 000\ 000 \lor\cr
+\ & \ & v_0 \equiv 10\ 678\ 220\ 870\ 343\ 283\ 669\ 381\ 590\ 354\ 989\ 000\ 000\ 000 \lor\cr
+\ & \ & Induction
+\end{array}
+\]
+Induction: for all $x_1, \ldots, x_n, y$ and all $\varphi \in L^{S_\ar}$ such that $\free(\varphi) \subset \{ x_1, \ldots, x_n, y \}$ the sentence
+\[
+\forall x_1 \ldots \forall x_n \left( (\varphi\frac{0}{y} \land \forall y (\varphi \rightarrow \varphi\frac{y + 1}{y})) \rightarrow \forall y \varphi \right).
+\]
+\ \\
+It may be
+\[
+\exists t (\exists p < t)(\exists v_1 < v_0)(Length(t, p) > 0 \land \free (v_1) \subset Set(t, p) \land v_0 \equiv MultiQuantify(Initial(t, p), K)),
+\]
+where $K$ is the G\"{o}del number of
+\[
+(\neg \varphi\frac{0}{y} \lor \exists y \neg (\neg\varphi \lor \varphi\frac{y + 1}{y})) \lor \neg\exists y \neg\varphi.
+\]
+(INCOMPLETE.)
+%
+\item The Function $MaxFreeVar(v_0)$.\\
+\ \\
+$MaxFreeVar(v_0)$ returns the least upper bound on the indices of variables possibly ocurring in the formula (encoded by) $v_0$.\\
+\ \\
+In the enumeration of all formulas in the order of their G\"{o}del numbers, the atomic formula with the smallest G\"{o}del number comes first, and then comes the negation of it, followed by the disjuction with the atomic formula just mentioned as both disjuncts, and finally the (existential) quantification with $v_0$ as the quantified variable and the atomic formula mentioned earlier as the matrix; after that, the atomic formula with the second smallest G\"{o}del number appears, \ldots\\
+\ \\
+It is not hard to see that in this enumeration the variable $v_n$ first appears when the formula
+\[
+0 \equiv v_n
+\]
+does, the G\"{o}del number of which is $4 \cdot \pi(0, 3n + 2) = 6(3n + 2)(n + 1)$.\\
+\ \\
+Hence, given any $m \in \nat$, the value $MaxFreeVar(m) = n$ iff
+\[
+6(3n + 2)(n + 1) \leq m < 6(3n + 5)(n + 2);
+\]
+it suffices to define $MaxFreeVar(m)$ to be the smallest $n$ such that
+\[
+m < 6(3n + 5)(n + 2).
+\]
+So we have
+\[
+MaxFreeVar(v_0) \equiv v_1 \colonequals (v_0 < 6(3v_1 + 5)(v_1 + 2)) \land (\forall v_2 < v_1)\neg(v_0 < 6(3v_2 + 5)(v_2 + 2)).
+\]
+%
+\item The Predicate $\varphi_{Var}(v_0, v_1)$ states that the variable with index $v_0$ occurs in the term encoded by $v_1$. It is defined by
+\[
+\begin{array}{l}
+(3v_0 + 2 \equiv v_1) \lor\cr
+(\varphi_{Div}(3, v_1) \land 3 \leq v_1 \land (\varphi_{Var}(v_3, \pi_1 ((v_1 - 3) \div 3)) \lor \varphi_{Var}(v_3, \pi_2 ((v_1 - 3) \div 3)))) \lor\cr
+(\varphi_{Div}(3, v_1 + 2) \land 4 \leq v_1 \land (\varphi_{Var}(v_3, \pi_1 ((v_1 - 4) \div 3)) \lor \varphi_{Var}(v_3, \pi_2 ((v_1 - 4) \div 3)))).
+\end{array}
+\]
+%
+\item The Predicate $\varphi_{Set} (v_0)$ states that $v_0$ encodes a set. It is defined as
+\[
+0 < v_0 \land (\forall v_1 < v_0)((\varphi_{Div} (v_1, v_0) \land 1 < v_1)\rightarrow \neg\varphi_{Div} (v_1 \cdot v_1, v_0)).
+\]
+($v_0$ encodes a set iff $v_0 > 0$ and for every divisor $v_1 > 1$ such that $v_1 < v_0$, $v_1^2$ does not divide $v_0$.)
+%
+\item The Function $m \cup n$ returns the union of the two sets encoded by $m$ and $n$.
+\[
+m \cup n \colonequals (\mu k \leq m \cdot n)[\varphi_{Div}(m, k) \land \varphi_{Div}(n, k)].
+\]
+(Take the lowest common divisor of $m$ and $n$.)
+%
+\item The Predicate $\varphi_{Free}(v_0, v_1)$ states that the variable with index $v_0$ occurs free in the formula encoded by $v_1$. It is defined as
+\[
+\neg v_1 \equiv FSbst(v_1, v_0, 3v_0 + 5).
+\]
+($v_n$ occurs free in $\varphi$ iff $\varphi \neq \varphi\frac{v_{n + 1}}{v_n}$.)
+%
+\item The unary function $Signum(n)$ returns $0$ if $n = 0$, otherwise it returns $1$. It is $\Sigma_1$-defined by the formula
+\[
+Signum (v_0) \equiv v_1 \colonequals (v_0 \equiv 0 \land v_1 \equiv 0) \lor (\neg v_0 \equiv 0 \land v_1 \equiv 1).
+\]
+%
+\item If $f$ is a $\Sigma_1$-definable unary function, then the unary function
+\[
+\sum_{m = 0}^n f(m) \colonequals \cases{
+f(0) & if $n = 0$\cr
+f(n) + \left(\displaystyle\sum_{m = 0}^{n \stackrel{.}{-} 1}f(m)\right) & otherwise
+}
+\]
+which takes $n$ as the argument is also $\Sigma_1$-definable because
+\[
+\begin{array}{lll}
+\displaystyle\sum_{m = 0}^0 f(m) & = & f(0), \mbox{ and}\cr
+\displaystyle\sum_{m = 0}^{n + 1}f(m) & = & f(n + 1) + \left(\displaystyle\sum_{m = 0}^nf(m)\right).
+\end{array}
+\]
+%

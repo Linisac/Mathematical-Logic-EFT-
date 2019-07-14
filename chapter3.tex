@@ -1,0 +1,1184 @@
+%Chapter III-------------------------------------------------------------------------------------------------
+{\LARGE \bfseries III \\ \\ Semantics of First-Order Languages}
+\\
+\\
+\\
+%Section III.1-----------------------------------------------------------------------------------------------
+{\large \S1. Structures and Interpretations}
+\begin{enumerate}[1.]
+%III.1.4-----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 1.4.}
+\begin{enumerate}[(a)]
+\item ``There is a natural number such that the sum taken on it once equals 2.''
+%%
+\item ``There is a natural number such that the multiplication on it once equals 2.''
+%%
+\item ``There is a natural number equal to 0.''
+%%
+\item ``For any natural number there is a natural number equal to it.''
+%%
+\item ``For any pair of natural numbers there is a natural number which is greater than one and smaller than the other.''\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+%End of III.1.4----------------------------------------------------------------------------------------------
+%
+%III.1.5-----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 1.5.} Let $\mbox{card}(A)$, $\mbox{num}_r(S)$, $\mbox{num}_f(S)$, and $\mbox{num}_c(S)$ denote the cardinality of $A$, the number of relation symbols in $S$, the number of function symbols in $S$, and the number of constant symbols in $S$, respectively. \\
+\ 
+\\And let $\mbox{dim}(R_i)$ and $\mbox{dim}(f_i)$ denote the dimension of relation symbol $R_i$, and the dimension of function symbol $f_i$, respectively.\\
+\ 
+\\Then the number of structures that can be defined on domain $A$ and symbol set $S$ is
+\[
+\left( \prod\limits_{i = 1}^{ \mbox{\scriptsize num}_r(S)} 2^{ \mbox{\scriptsize card}(A)^{ \mbox{\tiny dim}(R_i)}} \right) \cdot \left( \prod\limits_{i = 1}^{ \mbox{\scriptsize num}_f(S)} \mbox{card}(A)^{ \mbox{\scriptsize card}(A)^{ \mbox{\tiny dim}(f_i) } } \right) \cdot \mbox{card}(A)^{ \mbox{ \scriptsize num}_c(S) },
+\]
+which is finite.\nolinebreak\hfill$\talloblong$
+%End of III.1.5----------------------------------------------------------------------------------------------
+%
+%III.1.6-----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 1.6.}
+We confine ourselves to the \textit{proof of} (c). It seems reasonable to assign $(0,0)$ and $(1,1)$ as the additive and multiplicative identities, respectively, since
+\[
+\forall (x_1, x_2) \in A \times B, (x_1, x_2) + (0, 0) = (x_1 + 0, x_2 + 0) = (x_1, x_2),
+\]
+and
+\[
+\forall (x_1, x_2) \in (A \times B) \setminus \{ (0,0) \}, (x_1, x_2) \cdot (1, 1) = (x_1 \cdot 1, x_2 \cdot 1) = (x_1, x_2).
+\]
+Therefore $(1,0) \not = (0,0)$ should have a multiplicative inverse element but actually it does not, since
+\[
+\forall (y_1, y_2) \in (A \times B) \setminus \{ (0,0) \}, (1,0) \cdot (y_1, y_2) = (y_1, 0) \neq (1,1).
+\]
+\begin{flushright}$\talloblong$\end{flushright}
+%End of III.1.6----------------------------------------------------------------------------------------------
+\end{enumerate}
+%End of Section III.1----------------------------------------------------------------------------------------
+\ 
+\\
+\\
+%Section III.2-----------------------------------------------------------------------------------------------
+{\large \S2. Standardization of Connectives}
+\begin{enumerate}[1.]
+%III.2.1-----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 2.1.} We restrict ourselves to the subproblem (a).
+\begin{tabular}{cc|c|c|c}
+$x$ & $y$ & $\stackrel{.}{\neg}(x)$ & $\stackrel{.}{\rightarrow}(x, y)$ & $\stackrel{.}{\lor}(\stackrel{.}{\neg}(x), y)$ \\ \hline
+$T$ & $T$ & $F$ & $T$ & $T$ \\
+$T$ & $F$ & $F$ & $F$ & $F$ \\
+$F$ & $T$ & $T$ & $T$ & $T$ \\
+$F$ & $F$ & $T$ & $T$ & $T$
+\end{tabular}
+\ 
+\\\begin{flushright}$\talloblong$\end{flushright}
+\end{enumerate}
+%End of III.2.1----------------------------------------------------------------------------------------------
+%End of Section III.2----------------------------------------------------------------------------------------
+\ 
+\\
+\\
+%Section III.3-----------------------------------------------------------------------------------------------
+{\large \S3. The Satisfaction Relation}
+\begin{enumerate}[1.]
+\item \textbf{Note to Page 33.}
+\[
+\begin{array}{ll}
+\, & \mathfrak{I} \frac{r}{v_0} \models v_0 \circ e \equiv v_0 \\
+\Iff & \mathfrak{I} \frac{r}{v_0} (v_0 \circ e) = \mathfrak{I} \frac{r}{v_0} (v_0) \\
+\Iff & +(\mathfrak{I} \frac{r}{v_0} (v_0), \mathfrak{I} \frac{r}{v_0} (e) ) = \mathfrak{I} \frac{r}{v_0} (v_0) \\
+\Iff & r + 0 = r.
+\end{array}
+\]
+%
+%III.3.3----------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 3.3.}
+\\
+\\
+\begin{tabular}{lll} \hline
+\multicolumn{1}{c}{\sc formula} & \multicolumn{2}{c}{\sc interpretation} \\ \hline
+\  & \  & \  \\
+\  & \textbf{satisfying} & \textbf{not satisfying} \\
+\  & \  & \  \\
+$\forall v_1 \, fv_0 v_1 \equiv v_0$ & $\mathfrak{I} = (\mathbb{N}, \cdot, <)$, & $\mathfrak{I} = (\mathbb{N}, +, <)$, \\
+\  & $\mathfrak{I}(v_i) = i$. & $\mathfrak{I}(v_i) = i$. \\
+$\exists v_0 \forall v_1  \, fv_0 v_1 \equiv v_1$ & $\mathfrak{I} = (\mathbb{N}, +, <)$, & $\mathfrak{I} = (\mathbb{Z}^+, +, <)$, \\
+\  & $\mathfrak{I}(v_i) = i$. & $\mathfrak{I}(v_i) = i$. \\
+$\exists v_0 (Pv_0 \land \forall v_1 \, Pfv_0 v_1)$ & $\mathfrak{I} = (\mathbb{N}, \cdot, \mbox{ is even})$, & $\mathfrak{I} = (\mathbb{Z}^+, +, \mbox{ is even})$, \\
+\  & $\mathfrak{I}(v_i) = i$. & $\mathfrak{I}(v_i) = i+1$. \\ \hline
+\end{tabular}
+\\\begin{flushright}$\talloblong$\end{flushright}
+%End of III.3.3----------------------------------------------------------------------------------------------
+%
+%III.3.4-----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 3.4.} Consider the following rules for the calculus of \textit{positive} formulas:
+\[
+\begin{array}{ll}
+\displaystyle \frac{\ }{t_1 \equiv t_2}; & \displaystyle \frac{\ }{Rt_1 \ldots t_n}; \\
+\  & \  \\
+\displaystyle \frac{ \displaystyle {\varphi, \; \psi} }{(\varphi \ast \psi)} \mbox{ for } \ast = \{ \land, \lor \}; & \  \\
+\  & \  \\
+\displaystyle \frac{\varphi}{\forall x \varphi}; & \displaystyle \frac{\varphi}{\exists x \varphi};
+\end{array}
+\]
+Let $A = \{ \alpha \}$. And let $\mathfrak{I} = (\mathfrak{A}, \beta)$, where $\mathfrak{A}$ is a structure with domain $A$ and 
+\[
+\mbox{for all terms } t, \mathfrak{I}(t) = \alpha ; 
+\]
+\[
+\mbox{for all $n$-ary relation symbols } R, R^\mathfrak{A} = \{ (\overbrace{\alpha, \ldots, \alpha}^{\mbox{\scriptsize $n$-terms}}) \}.
+\]
+We show by induction on \textit{positive} formulas that every positive $S$-formula is satisfied by $\mathfrak{I}$.\\
+\\$t_1 \equiv t_2$: $\mathfrak{I} \models t_1 \equiv t_2$ since $\mathfrak{I}(t_1) = \alpha = \mathfrak{I}(t_2)$.\\
+\\$Rt_1 \ldots t_n$: $\mathfrak{I} \models Rt_1 \ldots t_n$ since $R^\mathfrak{A} \mathfrak{I}(t_1) \ldots \mathfrak{I}(t_n)$, i.e., $R^\mathfrak{A} \overbrace{\alpha \ldots \alpha}^{\mbox{\scriptsize $n$-terms}}$.\\
+\\$(\varphi \ast \psi)$, for $\ast = \land, \lor$: Suppose $\mathfrak{I} \models \varphi$ and $\mathfrak{I} \models \psi$ by induction hypothesis, which implies that \textit{at least} $\mathfrak{I} \models \varphi$ \textit{or} $\mathfrak{I} \models \psi$. Then immediately $\mathfrak{I} \models (\varphi \ast \psi)$.\\
+\\$\forall x \varphi$: Suppose $\mathfrak{I} \models \varphi$ by induction hypothesis. Then since for all $a \in A$, $a = \alpha$, and for all variables $x$, $\mathfrak{I}(x) = \alpha$, it turns out that for all $a \in A$, $\mathfrak{I} \frac{a}{x} = \mathfrak{I} \frac{\alpha}{x} = \mathfrak{I}$, and $\mathfrak{I} \frac{a}{x} \models \varphi$. Therefore $\mathfrak{I} \models \forall x \varphi$.\\
+\\$\exists x \varphi$: Suppose $\mathfrak{I} \models \varphi$ by induction hypothesis. Then since for all variables $x$, $\mathfrak{I}(x) = \alpha$, it turns out that $\mathfrak{I} \frac{\alpha}{x} = \mathfrak{I}$, and $\mathfrak{I} \frac{\alpha}{x} \models \varphi$. Hence $\mathfrak{I} \models \exists x \varphi$.\nolinebreak\hfill$\talloblong$
+%End of III.3.4------------------------------------------------------------------------------------
+\end{enumerate}
+%End of Section III.3----------------------------------------------------------------------------------------
+\ 
+\\
+\\
+%Section III.4-----------------------------------------------------------------------------------------------
+{\large \S4. The Consequence Relation}
+\begin{enumerate}[1.]
+\item \textbf{Note to Definition of the Consequence Relation 4.1.} The reader may have noticed something interesting: In Defintion of the Satisfaction Relation 3.2, we say that an interpretation $\mathfrak{I} = (\mathfrak{A}, \beta)$ satisfies $\exists x \varphi$ iff:
+\begin{center}
+there is an $a \in A$ such that $\mathfrak{I}\frac{a}{x}$ satisfies $\varphi$.
+\end{center}
+Nevertheless, we do not know whether $\mathfrak{I}$ itself is a model of $\varphi$. The condition for $\mathfrak{I}$ to satisfy $\exists x \varphi$ is that the interpretation $\mathfrak{I}\frac{a}{x}$ (possibly different from $\mathfrak{I}$) be a model of $\varphi$!\newline
+\\
+Let us say $\Phi = \{x \equiv c, \ \neg c \equiv d \}$, $\varphi = \neg x \equiv c$, and $\mathfrak{I} = (\mathfrak{A}, \beta)$, where $A$ consists of two elements $c^A$ and $d^A$ with $c^A \neq d^A$ and $\beta(x) = c^A$.\newline
+\\
+We see that $\mathfrak{I} \models \Phi$ and $\mathfrak{I} \models \exists x \varphi$. In fact, $\Phi \models \exists x \varphi$. Let us analyze this a little more: $\mathfrak{I}$ directly satisfies $\Phi$. However, the reason for $\mathfrak{I}$ to satisfy $\exists x \varphi$ is that a different interpretation $\mathfrak{I}\frac{d^A}{x}$ be a model of $\varphi$. Does $\mathfrak{I}\frac{d^A}{x}$ satisfy $\Phi$? No.
+%
+\item \textbf{Note to the Discussions about Negations on Page 34.} Note that, in contrast, $\mathfrak{I} \models \neg \varphi$ iff not $\mathfrak{I} \models \varphi$.
+%
+\item \textbf{Note to the Remark below Definition 4.2.} We show that for every formula $\varphi$, $\emptyset \models \varphi$ if and only if every interpretation $\mathfrak{I}$ is a model of $\varphi$: Suppose $\emptyset \models \varphi$ holds. Since for every interpretation $\mathfrak{I}$, $\mathfrak{I} \models \emptyset$, by assumption we have that every interpretation $\mathfrak{I}$ is a model of $\varphi$.\\
+\ \\
+Conversely, suppose that every interpretation $\mathfrak{I}$ is a model of $\varphi$. Then obviously for every interpretation $\mathfrak{I}$, \emph{if $\mathfrak{I} \models \emptyset$ then $\mathfrak{I} \models \varphi$,} hence we have $\emptyset \models \varphi$.
+%
+\item \textbf{Note to the Proof of Lemma 4.4.} \textit{There is no interpretation which is a model of $\Phi$ but not a model of $\varphi$ iff there is no interpretation which is a model of $\Phi$ and of $\neg \varphi$ (since $\mathfrak{I} \models \neg \varphi$ iff not $\mathfrak{I} \models \varphi$) iff there is no interpretation which is a model of $\Phi \cup \{ \neg \varphi \}$ (cf. 4.1)}.
+%
+\item \textbf{Proposition}: \textit{$\forall x (\varphi \leftrightarrow \psi)$ logically implies $\exists x \varphi \leftrightarrow \exists x \psi$.}\\
+\textit{Proof.}
+\[
+\begin{array}{ll}
+\,  & \forall x (\varphi \rightarrow \psi) \rightarrow (\exists x \varphi \rightarrow \exists x \psi) \\
+= & \forall x (\varphi \rightarrow \psi) \rightarrow (\neg \forall x \neg \varphi \rightarrow \neg \forall x \neg \psi) \\
+= & \forall x (\varphi \rightarrow \psi) \rightarrow (\forall x \neg \psi \rightarrow \forall x \neg \varphi) \\
+= & (\forall x (\varphi \rightarrow \psi) \land \forall x \neg \psi) \rightarrow \forall x \neg \varphi \mbox{  (since $\varphi \rightarrow (\psi \rightarrow \chi) = (\varphi \land \psi) \rightarrow \chi$)} \\
+= & \forall x ( (\varphi \rightarrow \psi) \land \neg \psi) \rightarrow \forall x \neg \varphi \\
+= & \forall x ( \neg \varphi \land \neg \psi ) \rightarrow \forall x \neg \varphi \\
+= & ( \forall x \neg \varphi \land \forall x \neg \psi ) \rightarrow \forall x \neg \varphi \\
+= & \neg ( \forall x \neg \varphi \land \forall x \neg \psi ) \lor \forall x \neg \varphi \\
+= & (\neg \forall x \neg \varphi \lor \neg \forall x \neg \psi ) \lor \forall x \neg \varphi \\
+= & (\neg \forall x \neg \varphi \lor \forall x \neg \varphi ) \lor \neg \forall x \neg \psi \\
+= & \mbox{\bf true} \lor \neg \forall x \neg \psi \\
+= & \mbox{\bf true}.
+\end{array}
+\]
+Similarly, $\forall x (\psi \rightarrow \varphi) \rightarrow (\exists x \psi \rightarrow \exists x \varphi)$.\\
+\\Therefore,
+\[
+\begin{array}{ll}
+\,  & \forall x (\varphi \leftrightarrow \psi) \\
+=  & \forall x ( (\varphi \rightarrow \psi) \land (\psi \rightarrow \varphi) ) \\
+=  & \forall x (\varphi \rightarrow \psi) \land \forall x (\psi \rightarrow \varphi)
+\end{array}
+\]
+logically implies
+\[
+\begin{array}{ll}
+\,  & (\exists x \varphi \rightarrow \exists x \psi) \land (\exists x \psi \rightarrow \exists x \varphi) \\
+= & \exists x \varphi \leftrightarrow \exists x \psi.
+\end{array}
+\]
+(Note that $( (\varphi \rightarrow \psi) \land (\chi \rightarrow \eta) ) \rightarrow ( (\varphi \land \chi) \rightarrow (\psi \land \eta) ) = \mbox{\bf true}$.)\nolinebreak\hfill$\talloblong$
+%
+\item \textbf{Note to Lemma 4.6 (b).} In the case that $\varphi = \exists x \psi$, we have for all pairs of interpretations $\mathfrak{I}_1$ and $\mathfrak{I}_2$ that agree on the $S$-symbols and on the variables occurring free in $\psi$, $\mathfrak{I}_1 \models \psi$ iff $\mathfrak{I}_2 \models \psi$, by induction hypothesis. This implies that for all $a \in A_1 = A_2$, $\mathfrak{I}_1 \frac{a}{x} \models \psi$ iff $\mathfrak{I}_2 \frac{a}{x} \models \psi$ under the same assumption. And by the last note, this in turn implies that there is an $a \in A_1 (= A_2)$ such that $\mathfrak{I}_1 \frac{a}{x} \models \psi$ iff there is an $a \in A_2 (= A_1)$ such that $\mathfrak{I}_2 \frac{a}{x} \models \psi$, under the same assumption. Actually the assumption holds (see the explanation on page 37 in textbook), and the result follows.
+%
+%III.4.9-----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 4.9.}
+\begin{enumerate}[(a)]
+\item 
+\[
+\begin{array}{ll}
+\,  & (\varphi \lor \psi) \models \chi \\
+\Iff & \mbox{for every interpretation $\mathfrak{I}$ such that $\mathfrak{I} \models (\varphi \lor \psi)$, $\mathfrak{I} \models \chi$} \\
+\Iff & \mbox{for every interpretation $\mathfrak{I}$ such that $\mathfrak{I} \models \varphi$ or $\mathfrak{I} \models \psi$, $\mathfrak{I} \models \chi$} \\
+\Iff & \mbox{for every interpretation $\mathfrak{I}$ such that $\mathfrak{I} \models \varphi$, $\mathfrak{I} \models \chi$, and} \\
+\,  & \mbox{for every interpretation $\mathfrak{I}$ such that $\mathfrak{I} \models \psi$, $\mathfrak{I} \models \chi$} \\
+\,  & \mbox{(since $(\alpha \lor \beta) \rightarrow \gamma = (\alpha \rightarrow \gamma) \land (\beta \rightarrow \gamma)$)} \\
+\Iff & \varphi \models \chi \mbox{ and } \psi \models \chi.
+\end{array}
+\]
+%%
+\item 
+\[
+\begin{array}{ll}
+\,  & \models (\varphi \rightarrow \psi) \\
+\Iff & \mbox{for every interpretation $\mathfrak{I}$ if $\mathfrak{I} \models \varphi$ then $\mathfrak{I} \models \psi$} \\
+\Iff & \mbox{for every interpretation $\mathfrak{I}$ such that $\mathfrak{I} \models \varphi$, $\mathfrak{I} \models \psi$ } \\
+\Iff & \varphi \models \psi
+\end{array}
+\]
+\end{enumerate} \begin{flushright}$\talloblong$\end{flushright}
+%End of III.4.9----------------------------------------------------------------------------------------------
+%
+%III.4.10----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 4.10.}
+\begin{enumerate}[(a)]
+\item By 4.9 (b), it is equivalent to show that: $\models (\exists x \forall y \varphi \rightarrow \forall y \exists x \varphi)$.\\
+\ 
+\\For every interpretation $\mathfrak{I}$, \\
+\[
+\begin{array}{ll}
+\,  & \mathfrak{I} \models \exists x \forall y \varphi \\
+\Iff & \mbox{there is an $a \in \domain{\mathfrak{I}}$ such that $\mathfrak{I} \frac{a}{x} \models \forall y \varphi$} \\
+\Iff & \mbox{there is an $a \in \domain{\mathfrak{I}}$ such that} \\
+\,  & \mbox{for all $b \in \domain{\mathfrak{I}}$, $(\mathfrak{I} \frac{a}{x}) \frac{b}{y} \models \varphi$ (since $\domain{\mathfrak{I}}$} \\
+\,  & \mbox{coincides with that of $\mathfrak{I} \frac{a}{x}$)} \\
+\mbox{\it then} & \mbox{there is an $a \in \domain{\mathfrak{I}}$ such that } \\
+\,  & \mbox{for all $b \in \domain{\mathfrak{I}}$, \it there is an \rm $a \in \domain{\mathfrak{I}}$} \\
+\,  & \mbox{\it such that } ((\mathfrak{I} \frac{a}{x}) \frac{b}{y}) \frac{a}{x} \models \varphi \mbox{\ \ (since $\mathfrak{I} \models \varphi$ entails} \\
+\,  & \mbox{\it there is an \rm $a \in \domain{\mathfrak{I}}$ such that $\mathfrak{I} \frac{a}{x} \models \varphi$)} \\
+\Iff & \mbox{there is an $a \in \domain{\mathfrak{I}}$ such that } \\
+\,  & \mbox{for all $b \in \domain{\mathfrak{I}}$, there is an $a \in \domain{\mathfrak{I}}$} \\
+\,  & \mbox{such that } (\mathfrak{I} \frac{b}{y}) \frac{a}{x} \models \varphi \mbox{\ \ (since $((\mathfrak{I} \frac{a}{x}) \frac{b}{y}) \frac{a}{x} = (\mathfrak{I} \frac{b}{y}) \frac{a}{x}$)} \\
+\Iff & \mbox{there is an $a \in \domain{\mathfrak{I}}$ such that} \\
+\,  & \mbox{for all $b \in \domain{\mathfrak{I}}$, $\mathfrak{I} \frac{b}{y} \models \exists x \varphi$} \\
+\Iff & \mbox{there is an $a \in \domain{\mathfrak{I}}$ such that $\mathfrak{I} \models \forall y \exists x \varphi$} \\
+\Iff & \mathfrak{I} \models \forall y \exists x \varphi \mbox{\ \ (since the satisfaction $\mathfrak{I} \models \forall y \exists x \varphi$ has nothing to} \\
+\,  & \mbox{do with the existence of $a$)}. 
+\end{array}
+\]
+The proof is complete.
+%%
+\item Let $\varphi \in L^{S_{\mbox{\scriptsize gr}}}$, $\varphi = y \circ x \equiv e$, and let $\mathfrak{I} = (\mathfrak{A}, \beta)$ be an interpretation for $\varphi$, where $\mathfrak{A} = (\mathbb{R}, +, 0)$ and $\beta$ is arbitrarily defined.\\
+\ 
+\\If $\mathfrak{I} \models \exists x \forall y ( y \circ x \equiv e )$, i.e., there is an $a \in \domain{\mathfrak{I}}$ such that for all $b \in \domain{\mathfrak{I}}$, $( \mathfrak{I} \frac{a}{x} ) \frac{b}{y} \models y \circ x \equiv e$, or
+\[
+b + a = 0.
+\]
+Then $b = 1-a$ must also satisfy this formula, i.e.,
+\[
+(1-a)+a=1=0,
+\]
+a contradiction.\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+\ \newline
+\textit{Remark.} We provide below a matrix visualization of interpretations satisfying formulas preceded by both quantifiers $\forall$ and $\exists$. In our interpretations, the domain consists of 5 elements: 0, 1, 2, 3, 4. The variable $x$ takes values from rows, whereas $y$ from columns. A $\bullet$ (or $\circ$) positioned at row $x_0$ and column $y_0$ means that $\varphi$ holds (or does not hold, respectively) when $x$ takes value $x_0$ and $y$ takes value $y_0$.
+\begin{enumerate}
+\item $\forall x \forall y \varphi$.
+\[
+\begin{array}{cc|ccccc}
+\multicolumn{4}{c}{\ } & y & \ & \ \cr
+\multicolumn{2}{c}{\ } & 0 & 1 & 2 & 3 & 4 \cr\cline{3-7}
+\ & 0 & \bullet & \bullet & \bullet & \bullet & \bullet \cr
+\ & 1 & \bullet & \bullet & \bullet & \bullet & \bullet \cr
+x & 2 & \bullet & \bullet & \bullet & \bullet & \bullet \cr
+\ & 3 & \bullet & \bullet & \bullet & \bullet & \bullet \cr
+\ & 4 & \bullet & \bullet & \bullet & \bullet & \bullet
+\end{array}
+\]
+``there are $\bullet$ in all positions.''
+%%
+\item $\forall x \exists y \varphi$.
+\[
+\begin{array}{cc|ccccc}
+\multicolumn{4}{c}{\ } & y & \ & \ \cr
+\multicolumn{2}{c}{\ } & 0 & 1 & 2 & 3 & 4 \cr\cline{3-7}
+\ & 0 & \circ & \bullet & \circ & \circ & \circ \cr
+\ & 1 & \circ & \circ & \bullet & \circ & \circ \cr
+x & 2 & \bullet & \circ & \circ & \circ & \circ \cr
+\ & 3 & \circ & \bullet & \circ & \circ & \bullet \cr
+\ & 4 & \bullet & \circ & \circ & \circ & \circ
+\end{array}
+\]
+``there is at least one position containing a $\bullet$ in each row.''
+%%
+\item $\exists x \exists y \varphi$.
+\[
+\begin{array}{cc|ccccc}
+\multicolumn{4}{c}{\ } & y & \ & \ \cr
+\multicolumn{2}{c}{\ } & 0 & 1 & 2 & 3 & 4 \cr\cline{3-7}
+\ & 0 & \circ & \circ & \circ & \circ & \circ \cr
+\ & 1 & \circ & \circ & \bullet & \circ & \circ \cr
+x & 2 & \circ & \circ & \circ & \circ & \circ \cr
+\ & 3 & \circ & \circ & \circ & \bullet & \circ \cr
+\ & 4 & \circ & \circ & \circ & \circ & \circ
+\end{array}
+\]
+``there is at least one $\bullet$, positioned at some row and some column.''
+%%
+\item $\exists x \forall y \varphi$.
+\[
+\begin{array}{cc|ccccc}
+\multicolumn{4}{c}{\ } & y & \ & \ \cr
+\multicolumn{2}{c}{\ } & 0 & 1 & 2 & 3 & 4 \cr\cline{3-7}
+\ & 0 & \bullet & \bullet & \bullet & \bullet & \bullet \cr
+\ & 1 & \circ & \circ & \bullet & \circ & \bullet \cr
+x & 2 & \bullet & \circ & \circ & \circ & \bullet \cr
+\ & 3 & \bullet & \bullet & \bullet & \bullet & \bullet \cr
+\ & 4 & \circ & \circ & \circ & \bullet & \circ
+\end{array}
+\]
+``there is at least one row in which there are $\bullet$ in all positions.''
+\end{enumerate}
+This virtualization should make the sense more concrete.
+%End of III.4.10-----------------------------------------------------------------------------------
+%
+\item \textbf{Proposition}: \textit{For every formula $\varphi$, $\varphi \bimodels \neg \neg \varphi$.}\\
+\textit{Proof.} First note that, for every interpretation $\mathfrak{I}$ (appropriate to $\varphi$),
+\[
+\mbox{either $\mathfrak{I} \models \varphi$ or not $\mathfrak{I} \models \varphi$},
+\]
+or equivalently,
+\[
+\mbox{either $\mathfrak{I} \models \varphi$ or $\mathfrak{I} \models \neg \varphi$ \ (by definition).}
+\]
+Therefore, for every interpretation $\mathfrak{I}$,
+\[
+\begin{array}{ll}
+\,  & \mathfrak{I} \models \varphi \\
+\mbox{iff} & \mbox{not $\mathfrak{I} \models \neg \varphi$ \ (by the observation above)} \\
+\mbox{iff} & \mathfrak{I} \models \neg \neg \varphi \mbox{ \ (take $\neg \varphi$ as some $\psi$)}.
+\end{array}
+\]
+\begin{flushright}$\talloblong$\end{flushright}
+%
+\item \textbf{Proposition:} \textit{If $x \not \in \free(\varphi)$, then $\varphi \bimodels \forall x \varphi$.}
+\\
+\textit{Proof.} First note that $\forall x \varphi \models \varphi$ clearly holds. (A property that holds for all elements in the domain must also hold for some particular element.) Hence we only need to show that $\varphi \models \forall x \varphi$.\\
+\\
+For every interpretation $\mathfrak{I} = (\mathfrak{A}, \beta)$, $\mathfrak{I} \models \varphi$ implies that $\mathfrak{I} \frac{a}{x}$ for any $a \in \mathfrak{A}$ since $x \not \in \free(\varphi)$, i.e. $\mathfrak{I} \models \forall x \varphi$. The proof is complete.\nolinebreak\hfill$\talloblong$
+%
+%III.4.11----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 4.11.}
+\begin{enumerate}[(a)]
+\item \label{item_a} For every interpretation $\mathfrak{I}$,
+\[
+\begin{array}{ll}
+\,  & \mathfrak{I} \models \forall x ( \varphi \land \psi ) \\
+\Iff & \mbox{for all $a \in \domain{\mathfrak{I}}$, $\mathfrak{I} \frac{a}{x} \models \varphi \mbox{ and } \mathfrak{I} \frac{a}{x} \models \psi$} \\
+\Iff & \mbox{for all $a \in \domain{\mathfrak{I}}$, $\mathfrak{I} \frac{a}{x} \models \varphi$ and,} \\
+\Iff & \mbox{for all $a \in \domain{\mathfrak{I}}$, $\mathfrak{I} \frac{a}{x} \models \psi$} \\
+\Iff & \mathfrak{I} \models \forall x \varphi \mbox{ and } \mathfrak{I} \models \forall x \psi \\
+\Iff & \mathfrak{I} \models \forall x \varphi \land \forall x \psi.
+\end{array}
+\]
+%%
+\item Similar to (a).
+%%
+\item
+\[
+\begin{array}{ll}
+\         & \forall x (\varphi \lor \psi) \\
+\bimodels & ((\forall x (\varphi \lor \psi) \land \varphi) \lor (\forall x (\varphi \lor \psi) \land \neg \varphi)) \\
+\bimodels & ((\forall x (\varphi \lor \psi) \land \forall x \varphi) \lor (\forall x (\varphi \lor \psi) \land \forall x \neg \varphi)) \\
+\         & \mbox{\ \ \ (since $x \not \in \free(\varphi)$ and by the above conjecture)} \\
+\bimodels & (\forall x ((\varphi \lor \psi) \land \varphi) \lor \forall x ((\varphi \lor \psi) \land \neg \varphi)) \mbox{\ \ \ (by (a))} \\
+\bimodels & (\forall x \varphi \lor \forall x (\neg \varphi \land \psi)) \\
+\bimodels & (\forall x \varphi \lor (\forall x \neg \varphi \land \forall x \psi)) \mbox{\ \ \ (by (a))} \\
+\bimodels & (\varphi \lor (\neg \varphi \land \forall x \psi)) \mbox{\ \ \ (by the above conjecture)}\\
+\bimodels & ((\varphi \lor \neg \varphi) \land (\varphi \lor \forall x \psi)) \\
+\bimodels & ((\varphi \land (\varphi \lor \forall x \psi)) \lor (\neg \varphi \land (\varphi \lor \forall x \psi))) \\
+\bimodels & (\varphi \lor \forall x \psi)
+\end{array}
+\]
+%%
+\item Similar to (c).
+%%
+\item Consider the case for $S_{\mbox{\scriptsize ar}}$: Let $\varphi = x \equiv 0$ and $\varphi = \neg \psi$. Next let $\mathfrak{I} = ( \mathfrak{A}, \beta )$ where $\mathfrak{A} = ( \mathbb{N}, +, \cdot, 0, 1 )$ and $\beta$ is arbitrarily defined. It is clear that
+\[
+\forall x ( \varphi \lor \psi ) \not \models ( \forall x \varphi \lor \forall x \psi ),
+\]
+and
+\[
+( \exists x \varphi \land \exists x \psi ) \not \models \exists x ( \varphi \land \psi ).
+\]
+\end{enumerate} \begin{flushright}$\talloblong$\end{flushright}
+%End of III.4.11---------------------------------------------------------------------------------------------
+%
+\item \textbf{Note to Exercise 4.11 (e).} Actually, $( \forall x \varphi \lor \forall x \psi ) \models \forall x ( \varphi \lor \psi )$ and $\exists x ( \varphi \land \psi ) \models ( \exists x \varphi \land \exists x \psi )$, since $\models (( \forall x \varphi \lor \forall x \psi ) \rightarrow \forall x ( \varphi \lor \psi ))$ and $\models ( \exists x ( \varphi \land \psi ) \rightarrow ( \exists x \varphi \land \exists x \psi ) )$.
+%
+%III.4.12----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 4.12.}
+\begin{enumerate}[(a)]
+\item 
+\[
+\begin{array}{lll}
+\varphi^\prime & := & \psi \\
+\chi^\prime & := & \chi \mbox{ if $\chi$ is atomic and $\chi \not = \varphi$ } \\
+\chi^\prime & := & \neg \eta^\prime \mbox{ if $\chi = \neg \eta$ and $\chi \not = \varphi$} \\
+\chi^\prime & := & ( \chi_1^\prime \lor \chi_2^\prime ) \mbox{ if $\chi = ( \chi_1 \lor \chi_2 )$ and $\chi \not = \varphi$} \\
+\chi^\prime & := & \exists x \eta^\prime \mbox{ if $\chi = \exists x \eta$ and $\chi \not = \varphi$ }.
+\end{array}
+\]
+%%
+\item We show by induction on formulas:\\
+\ 
+\\If $\chi = \varphi$, then $\chi^\prime = \psi$, and $\chi \bimodels \chi^\prime$ by hypothesis; Otherwise, \\
+\ 
+\\$\chi$ is atomic: $\chi^\prime = \chi$. Clearly $\chi \bimodels \chi^\prime$.\\
+\ 
+\\$\chi = \neg \eta$: $\chi^\prime = \neg \eta^\prime$. Thus, for every interpretation $\mathfrak{I}$,
+\[
+\begin{array}{ll}
+\, & \mathfrak{I} \models \chi \\
+\Iff & \mbox{not $\mathfrak{I} \models \eta$} \\
+\Iff & \mbox{not $\mathfrak{I} \models \eta^\prime$ (by induction hypothesis)} \\
+\Iff & \mathfrak{I} \models \chi^\prime .
+\end{array}
+\]
+\ 
+\\$\chi = ( \chi_1 \lor \chi_2 )$: $\chi^\prime = ( \chi_1^\prime \lor \chi_2^\prime )$. Thus, for every interpretation $\mathfrak{I}$,
+\[
+\begin{array}{ll}
+\,  & \mathfrak{I} \models \chi \\
+\Iff & \mbox{$\mathfrak{I} \models \chi_1$ or $\mathfrak{I} \models \chi_2$} \\
+\Iff & \mbox{$\mathfrak{I} \models \chi_1^\prime$ or $\mathfrak{I} \models \chi_2^\prime$} \\
+\,  & \mbox{(by induction hypothesis)} \\
+\Iff & \mathfrak{I} \models \chi^\prime.
+\end{array}
+\]
+\ 
+\\$\chi = \exists x \eta$: $\chi^\prime = \exists x \eta^\prime$. Thus, for every interpretation $\mathfrak{I}$,
+\[
+\begin{array}{ll}
+\,  & \mathfrak{I} \models \exists x \eta \\
+\Iff & \mbox{there is an $a \in \domain{\mathfrak{I}}$ such that $\mathfrak{I} \frac{a}{x} \models \eta$} \\
+\Iff & \mbox{there is an $a \in \domain{\mathfrak{I}}$ such that $\mathfrak{I} \frac{a}{x} \models \eta^\prime$} \\
+\,  & \mbox{(by induction hypothesis)} \\
+\Iff & \mathfrak{I} \models \exists x \eta^\prime.
+\end{array}
+\]
+\end{enumerate} \begin{flushright}$\talloblong$\end{flushright}
+%End of III.4.12---------------------------------------------------------------------------------------------
+%
+%III.4.13------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 4.13.} The proof is the same as that of 4.8, except with a slight modification: In both directions, statements begin with ``For every interpretation $\mathfrak{I}$ ($\mathfrak{I}^\prime$),''.\nolinebreak\hfill$\talloblong$
+%End of III.4.13-----------------------------------------------------------------------------------
+%
+%III.4.14------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 4.14.} For every absence of formulas, we give an example as a \textit{witness} to $\Phi \setminus \{ \varphi \} \not \models \varphi$.\\
+\ 
+\\For group theory:
+\begin{enumerate}[(i)]
+\item Absence of $\forall v_0 \forall v_1 \forall v_2 ( v_0 \circ v_1 ) \circ v_2 \equiv v_0 \circ ( v_1 \circ v_2 )$: The structure $( \mathbb{N}, \dist, 0 )$, where $\dist(m, n) = |m - n|$.
+%%
+\item Absence of $\forall v_0 \, v_0 \circ e \equiv v_0$: The structure $(A, \cap, \emptyset)$, \\where $A = \{ \emptyset, \{ 0 \}, \{ 1 \}, \{ 0, 1 \} \}$.
+%%
+\item Absence of $\forall v_0 \exists v_1 \, v_0 \circ v_1 \equiv e$: The structure $(\mathbb{N}, +, 0)$.
+\end{enumerate}
+\ 
+\\For the theory of equivalence relations:
+\begin{enumerate}[(i)]
+\item Absence of $\forall v_0 \, Rv_0 v_0$: The structure $(\mathbb{N}, Z^+)$, where $Z^+(m,n)$ means that $m \cdot n \in \mathbb{Z}^+$.
+%%%
+\item Absence of $\forall v_0 \forall v_1 (Rv_0v_1 \rightarrow Rv_1v_0)$: The structure $(\mathbb{N}, \leq)$.
+%%%
+\item Absence of $\forall v_0 \forall v_1 \forall v_2 ((Rv_0v_1 \land Rv_1v_2) \rightarrow Rv_0v_2)$: \\The structure $(A, \nme)$, where $A = \{ \{ 0 \}, \{ 1 \}, \{ 0, 1 \} \}$ and $\nme(v_0, v_1)$ means that $v_0$ and $v_1$ are \textit{not mutually exclusive}, i.e., $v_0 \cap v_1 \not = \emptyset$.\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+\textit{Remark.} While we say that a set $\Phi$ of sentences is independent if there is no $\varphi \in \Phi$ such that $\Phi \setminus \{ \varphi \} \models \varphi$, we say that a formula is \emph{independent from} $\Phi$ if neither $\Phi \models \varphi$ nor $\Phi \models \neg\varphi$.\cite{Dirk_van_Dalen} Hence every valid formula is not independent from any $\Phi$; an unsatisfiable set $\Psi$ of sentences may be independent: For example, $\Psi := \{ \forall x \forall y \ x \equiv y, \ \neg\forall x \forall y \ x \equiv y \}$ is unsatisfiable and independent, while $\forall x \forall y \ x \equiv y$ (and $\neg\forall x \forall y \ x \equiv y$) is independent from $\Psi \setminus \{ \forall x \forall y \ x \equiv y \}$ (and $\Psi \setminus \{ \neg\forall x \forall y \ x \equiv y \}$, respectively).
+%End of III.4.14---------------------------------------------------------------------------------------------
+%
+%III.4.15----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 4.15.} We show by induction on terms: \\
+\ 
+\\$t = v_j$, $j \in \mathbb{N}$: $\var(t) = \{ t_j \} \subset \{ v_0, \ldots , v_j \}$. Thus,
+\[
+\begin{array}{ll}
+\,  & t^{\mathfrak{A}} [ g_0, \ldots , g_j ] \\
+= & v_j^{\mathfrak{A}} [ g_0, \ldots, g_j ] \\
+= & g_j \\
+= & \langle g_j (i) \, |\, i \in I \rangle \\
+= & \langle v_j^{\mathfrak{A}_i} [ g_0(i), \ldots , g_j(i) \, |\, i \in I \rangle \\
+= & \langle t^{\mathfrak{A}_i} [ g_0(i), \ldots , g_j(i) \, |\, i \in I \rangle .
+\end{array}
+\]
+\ 
+\\$t = c$: $\var(t) = \emptyset$. Therefore,
+\[
+\begin{array}{ll}
+\,  & t^{\mathfrak{A}} \\
+= & c^{\mathfrak{A}} \\
+= & \langle c^{\mathfrak{A}_i} \, | \, i \in I \rangle \\
+= & \langle t^{\mathfrak{A}_i} \, |\, i \in I \rangle .
+\end{array}
+\]
+\ 
+\\$t = ft_1 \ldots t_n$ ($f \in S$ is $n$-ary and $t_1, \ldots , t_n \in T^S$): Let $\var(t) \subset \{ v_0, \ldots , v_m \}$, $m \in \mathbb{N}$. Then
+\[
+\begin{array}{ll}
+\,  & t^{\mathfrak{A}} [g_0, \ldots , g_m] \\
+= & (ft_1 \ldots t_n)^{\mathfrak{A}} [g_0, \ldots , g_m] \\
+= & f^{\mathfrak{A}} ( t_1^{\mathfrak{A}} [g_0, \ldots , g_m], \ldots , t_n^{\mathfrak{A}} [g_0, \ldots , g_m] ) \\
+= & f^{\mathfrak{A}} ( \langle t_1^{\mathfrak{A}_i} [g_0(i), \ldots , g_m(i)] \, | \, i \in I \rangle , \ldots , \langle t_n^{\mathfrak{A}_i} [g_0(i), \ldots , g_m(i)] \, | \, i \in I \rangle ) \\
+\,  & \mbox{(by induction hypothesis)} \\
+= & \langle f^{\mathfrak{A}_i} ( t_1^{\mathfrak{A}_i} [g_0(i), \ldots , g_m(i)], \ldots , t_n^{\mathfrak{A}_i} [g_0(i), \ldots , g_m(i)] ) \, | \, i \in I \rangle \\
+\,  & \mbox{(regard $\langle t_j^{\mathfrak{A}_i} [g_0(i), \ldots , g_m(i)] \, | \, i \in I \rangle$, where $1 \leq j \leq n$,} \\
+\,  & \mbox{as some $g \in \prod_{i \in I} A_i$)} \\
+= & \langle (ft_1 \ldots t_n)^{\mathfrak{A}_i} [g_0(i), \ldots , g_m(i)] \, | \, i \in I \rangle \\
+= & \langle t^{\mathfrak{A}_i} [g_0(i), \ldots , g_m(i)] \, | \, i \in I \rangle .
+\end{array}
+\] \begin{flushright}$\talloblong$\end{flushright}
+%End of III.4.15---------------------------------------------------------------------------------------------
+%
+%III.4.16----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 4.16.} In general, if $\varphi$ is a Horn formula and if every $\mathfrak{I}_i$ is a model of $\varphi$ then $\prod_{i \in I} \mathfrak{A}_i \models \varphi [g_0, \ldots , g_n]$, where $\free(\varphi) \subset \{ v_0, \ldots , v_n \}$, $g_0, \ldots , g_n \in \prod_{i \in I} A_i$ and for $i \in I$ and $0 \leq j \leq n$, $\mathfrak{I}_i = (\mathfrak{A}_i, \beta_i)$ and $g_j(i) = \beta_i(v_j)$.\\
+\ 
+\\We show this by induction on formulas:\\
+\ 
+\\$\varphi = (\neg \varphi_1 \lor \ldots \lor \neg \varphi_n \lor \psi)$: Consider the following two disjoint subcases:
+\begin{enumerate}[(i)]
+\item There is a $j \in I$ such that $\mathfrak{I}_j \models \neg \varphi_m$, i.e., not $\mathfrak{I}_j \models \varphi_m$, for some $1 \leq m \leq n$: In this case, not $\prod_{i \in I} \mathfrak{A}_i \models \varphi_m [g_0, \ldots , g_n]$, since not all $\mathfrak{I}_i \models \varphi_m$, for at least $\mathfrak{I}_j \models \neg \varphi_m$. Therefore $\prod_{i \in I} \mathfrak{A}_i \models \neg \varphi_m [g_0, \ldots , g_n]$ and hence $\prod_{i \in I} \mathfrak{A}_i \models (\neg \varphi_1 \lor \ldots \lor \neg \varphi_n \lor \psi) [g_0, \ldots , g_n]$.\\
+%%
+\item For all $i \in I$ and for all $1 \leq m \leq n$, $\mathfrak{I}_i \models \varphi_m$, i.e., not $\mathfrak{I}_i \models \neg \varphi_m$: In this case, for every $\mathfrak{I}_i$, $\mathfrak{I}_i \models \psi$ since $\mathfrak{I}_i \models \varphi$ by premise. Clearly, $\prod_{i \in I} \mathfrak{A}_i \models \psi [g_0, \ldots , g_n]$ and hence $\prod_{i \in I} \mathfrak{A}_i \models (\neg \varphi_1 \lor \ldots \lor \neg \varphi_n \lor \psi) [g_0, \ldots , g_n]$.\\
+\end{enumerate}
+\ 
+\\$\varphi = (\neg \varphi_0 \lor \ldots \lor \neg \varphi_n)$: Similar to subcase (i) in the above case.\\
+\ 
+\\$\varphi = (\psi \land \chi)$: For all $i \in I$, $\mathfrak{I}_i \models (\psi \land \chi)$
+\[
+\begin{array}{ll}
+\mbox{iff} & \mbox{for all $i \in I$, $\mathfrak{I}_i \models \psi$ and for all $i \in I$, $\mathfrak{I}_i \models \chi$} \\
+\mbox{then} & \mbox{$\prod_{i \in I} \mathfrak{A}_i \models \psi [g_0, \ldots , g_n]$ and $\prod_{i \in I} \mathfrak{A}_i \models \chi [g_0, \ldots , g_n]$} \\
+\,  & \mbox{(by induction hypothesis)} \\
+\mbox{iff} & \prod_{i \in I} \mathfrak{A}_i \models (\psi \land \chi) [g_0, \ldots , g_n].
+\end{array}
+\]
+\ 
+\\$\varphi = \forall x \psi$: For all $i \in I$, $\mathfrak{I}_i \models \forall x \psi$
+\[
+\begin{array}{ll}
+\mbox{iff} & \mbox{for all $i \in I$ and for all $a \in A_i$, $\mathfrak{I}_i \frac{a}{x} \models \psi$} \\
+\mbox{iff} & \mbox{for all $g \in \prod_{i \in I} A_i$ and for all $i \in I$, $\mathfrak{I}_i \frac{g(i)}{x} \models \psi$} \\
+\mbox{then} & \mbox{for all $g \in \prod_{i \in I} A_i$, $\prod_{i \in I} \mathfrak{A}_i \models \varphi [g_0, \ldots , g_n, g]$}, \\
+\,  & \mbox{where \textit{$x$ is mapped to $g$} (By induction hypothesis; $x$ may or} \\
+\,  & \mbox{may not occur free in $\psi$. And it may or may not be among} \\
+\,  & \mbox{$v_0, \ldots , v_n$. We write ``$[g_0, \ldots , g_n, g]$'' just to emphasize that} \\
+\,  & \mbox{if $x$ occurs free in $\psi$ then it is mapped to $g$)} \\
+\mbox{iff} & \prod_{i \in I} \mathfrak{A}_i \models \forall x \psi [g_0, \ldots , g_n].
+\end{array}
+\]
+\ 
+\\$\varphi = \exists x \psi$: For all $i \in I$, $\mathfrak{I}_i \models \exists x \psi$
+\[
+\begin{array}{ll}
+\mbox{iff} & \mbox{for all $i \in I$, there is an $a \in A_i$ such that $\mathfrak{I}_i \frac{a}{x} \models \psi$} \\
+\mbox{iff} & \mbox{there is a $g \in \prod_{i \in I} A_i$ such that for all $i \in I$, $\mathfrak{I}_i \frac{g(i)}{x} \models \psi$} \\
+\mbox{then} & \mbox{there is a $g \in \prod_{i \in I} A_i$ such that $\prod_{i \in I} \mathfrak{A}_i \models \psi [g_0, \ldots , g_n, g]$,} \\
+\,  & \mbox{where \textit{$x$ is mapped to $g$} (by induction hypothesis)}\\
+\mbox{iff} & \prod_{i \in I} \mathfrak{A}_i \models \exists x \psi [g_0, \ldots , g_n].
+\end{array}
+\]
+\ 
+\\The result naturally follows from this.\nolinebreak\hfill$\talloblong$
+%End of III.4.16---------------------------------------------------------------------------------------------
+\end{enumerate}
+%End of Section III.4----------------------------------------------------------------------------------------
+\ 
+\\
+\\
+%Section III.5-----------------------------------------------------------------------------------------------
+{\large \S5. Two Lemmas on the Satisfaction Relation}
+\begin{enumerate}[1.]
+\item \textbf{Note to Lemma 5.2.} For every $S$-term $t$: $\pi(\mathfrak{I}(t)) = \mathfrak{I}^\pi(t)$.\\
+\textit{Proof.} We show this by induction on terms:\\
+\ 
+\\$t = x$: $\pi(\mathfrak{I}(t)) = \pi(\beta(x)) = (\pi \circ \beta)(x) = \beta^\pi(x) = \mathfrak{I}^\pi(t)$.\\
+\ 
+\\$t = c$: $\pi(\mathfrak{I}(t)) = \pi(c^{\mathfrak{A}}) = c^{\mathfrak{B}} = \mathfrak{I}^\pi(t)$.\\
+\ 
+\\$t = ft_1 \ldots t_n$, where $f \in S$ is $n$-ary and $t_1 , \ldots , t_n \in T^S$:
+\[
+\begin{array}{ll}
+\,  & \pi(\mathfrak{I}(t)) \\
+= & \pi(f^{\mathfrak{A}} ( \mathfrak{I}(t_1) , \ldots , \mathfrak{I}(t_n) ) ) \\
+= & f^{\mathfrak{B}}(\pi (\mathfrak{I}(t_1)) , \ldots , \pi (\mathfrak{I}(t_n)) ) \\
+= & f^{\mathfrak{B}}( \mathfrak{I}^\pi(t_1) , \ldots , \mathfrak{I}^\pi(t_n) ) \\
+\,  & \mbox{(by induction hypothesis)} \\
+= & \mathfrak{I}^\pi ( ft_1 \ldots t_n ) \\
+= & \mathfrak{I}^\pi (t) .
+\end{array}
+\] \begin{flushright}$\talloblong$\end{flushright}
+%
+\item \textbf{Note to Quantifier-Free Formulas in Page 42.} The following are the rules for the calculus of \textit{quantifier-free} formulas:
+\[
+\begin{array}{ll}
+\displaystyle \frac{\,}{t_1 \equiv t_2}; & \displaystyle \frac{\,}{Rt_1 \ldots t_n} \mbox{ if $R \in S$ is $n$-ary}; \\
+\,  & \,  \\
+\displaystyle \frac{\varphi}{\neg \varphi}; & \displaystyle \frac{\varphi , \; \psi}{( \varphi \lor \psi )};
+\end{array}
+\]
+%
+\item \textbf{Note to Lemma 5.5.} The identity mapping preserves the properties listed in Definition 5.4, and hence the proof can easily be accomplished by slightly modifying the one of 5.2 Isomorphism Lemma. However, we prove this lemma below in the style as we did for others.\\
+\ 
+\\\textit{Proof.} First we show that for every $S$-terms $t$, $( \mathfrak{A}, \beta )(t) = ( \mathfrak{B}, \beta )(t)$:
+\ 
+\\
+\\$t = x$: $( \mathfrak{A}, \beta )(t) = \beta (t) = ( \mathfrak{B}, \beta )(t)$.\\
+\ 
+\\$t = c$: $( \mathfrak{A}, \beta )(t) = c^{\mathfrak{A}} = c^{\mathfrak{B}} = ( \mathfrak{B}, \beta )(t)$ (since $\mathfrak{A} \subset \mathfrak{B}$).\\
+\ 
+\\$t = ft_1 \ldots t_n$, where $f \in S$ is $n$-ary and $t_1 \ldots t_n \in T^S$:
+\[
+\begin{array}{ll}
+\,  & ( \mathfrak{A}, \beta )(t) \\
+= & f^{\mathfrak{A}} ( ( \mathfrak{A}, \beta )(t_1), \ldots , ( \mathfrak{A}, \beta )(t_n) ) \\
+= & f^{\mathfrak{B}} ( ( \mathfrak{A}, \beta )(t_1), \ldots , ( \mathfrak{A}, \beta )(t_n) ) \mbox{ (since $\mathfrak{A} \subset \mathfrak{B}$)} \\
+= & f^{\mathfrak{B}} ( ( \mathfrak{B}, \beta )(t_1), \ldots , ( \mathfrak{B}, \beta )(t_n) ) \\
+\,  & \mbox{(by induction hypothesis)}\\
+= & ( \mathfrak{B}, \beta )(t).
+\end{array}
+\]
+\ 
+\\Next we show that for every quantier-free $S$-formula $\varphi$, $( \mathfrak{A}, \beta ) \models \varphi$ iff $( \mathfrak{B}, \beta ) \models \varphi$:\\
+\ 
+\\$\varphi = t_1 \equiv t_2$: $( \mathfrak{A}, \beta ) \models t_1 \equiv t_2$
+\[
+\begin{array}{ll}
+\mbox{iff} & ( \mathfrak{A}, \beta )(t_1) = ( \mathfrak{A}, \beta )(t_2) \\
+\mbox{iff} & ( \mathfrak{B}, \beta )(t_1) = ( \mathfrak{B}, \beta )(t_2) \mbox{ (since $( \mathfrak{A}, \beta )(t) = ( \mathfrak{B}, \beta )(t)$)} \\
+\mbox{iff} & ( \mathfrak{B}, \beta ) \models t_1 \equiv t_2 .
+\end{array}
+\]
+\ 
+\\$\varphi = Rt_1 \ldots t_n$: $( \mathfrak{A}, \beta ) \models Rt_1 \ldots t_n$
+\[
+\begin{array}{ll}
+\mbox{iff} & R^{\mathfrak{A}} ( \mathfrak{A}, \beta )(t_1) \ldots ( \mathfrak{A}, \beta )(t_n) \\
+\mbox{iff} & R^{\mathfrak{B}} ( \mathfrak{A}, \beta )(t_1) \ldots ( \mathfrak{A}, \beta )(t_n) \mbox{ (since $\mathfrak{A} \subset \mathfrak{B}$)} \\
+\mbox{iff} & R^{\mathfrak{B}} ( \mathfrak{B}, \beta )(t_1) \ldots ( \mathfrak{B}, \beta )(t_n) \mbox{ (since $( \mathfrak{A}, \beta )(t) = ( \mathfrak{B}, \beta )(t)$)} \\
+\mbox{iff} & ( \mathfrak{B}, \beta ) \models Rt_1 \ldots t_n .
+\end{array}
+\]
+\ 
+\\$\varphi = \neg \psi$: $( \mathfrak{A}, \beta ) \models \neg \psi$: $( \mathfrak{A}, \beta ) \models \neg \psi$
+\[
+\begin{array}{ll}
+\mbox{iff} & \mbox{not $( \mathfrak{A}, \beta ) \models \psi$}\\
+\mbox{iff} & \mbox{not $( \mathfrak{B}, \beta ) \models \psi$ (by induction hypothesis)} \\
+\mbox{iff} & ( \mathfrak{B}, \beta ) \models \neg \psi.
+\end{array}
+\]
+\ 
+\\$\varphi = ( \psi \lor \chi )$: $( \mathfrak{A}, \beta ) \models ( \psi \lor \chi )$
+\[
+\begin{array}{ll}
+\mbox{iff} & ( \mathfrak{A}, \beta ) \models \psi \mbox{ or } ( \mathfrak{A}, \beta ) \models \chi \\
+\mbox{iff} & ( \mathfrak{B}, \beta ) \models \psi \mbox{ or } ( \mathfrak{B}, \beta ) \models \chi \mbox{ (by induction hypothesis)}\\
+\mbox{iff} & ( \mathfrak{B}, \beta ) \models ( \psi \lor \chi ).
+\end{array}
+\] \begin{flushright}$\talloblong$\end{flushright}
+%
+\item \textbf{Note to Definition 5.6.} By \reftitle{Theorem VIII.4.3 on the Disjunctive Normal Form} (or by \reftitle{Exercise VIII.4.7}, Theorem on the Conjunctive Normal Form), every universal formula is logically equivalent to a formula derivable from the following calculus, and vice versa:\medskip\\
+\begin{tabular}{ll}
+$\calrule{}{\varphi}$ if $\varphi$ is atomic or negated atomic; & $\calrule{\varphi, \psi}{(\varphi \ast \psi)}$ for $\ast = \land, \lor$; \cr
+$\calrule{\varphi}{\forall x \varphi}$.
+\end{tabular}
+%
+%III.5.9-----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 5.9.} We prove this by giving a construction of such a sentence, $\varphi_{\mathfrak{A}}$.\\
+\ 
+\\First, observe that every structure isomorphic to $\mathfrak{A}$ must have its domain of the same size as $A$, and have its relations and functions the same as $\mathfrak{A}$, except possibly having its elements a permutation of those of $A$ or even completely different kind of elements.\\
+\ 
+\\Next, let the domain $A$ consist of $n+1$ elements, $a_0 , \ldots , a_n$, where $n \in \mathbb{N}$. Then the target sentence $\varphi_{\mathfrak{A}}$ is of the form:
+\[
+\exists v_0 \ldots \exists v_n \forall v_{n+1} \varphi .
+\]
+Intuitively, the variable $v_k$ will stand for $a_k$. We are now going to describe the size of $A$, along with the interpretation of each relation, function and constant, by giving the construction steps below.\\
+\ 
+\\Initially,
+\[
+\varphi = \left ( \left ( \bigwedge_{0 \leq i < j \leq n} \neg ( v_i \equiv v_j ) \right ) \land \left ( \bigvee_{0 \leq i \leq n} ( v_{n+1} \equiv v_i ) \right ) \right ) .
+\]
+Here we use an abbreviation for the conjunction of $n$ formulas $\varphi_0 , \ldots , \varphi_{n-1}$, which can be defined recursively as follows:
+\[
+\bigwedge_{0 \leq i < n} \varphi_i = \begin{cases}
+\varphi_0, & \mbox{if \(n = 1\)}; \cr
+\displaystyle\left(\bigwedge_{0 \leq i < n - 1} \varphi_i \land \varphi_{n - 1} \right), & \mbox{otherwise}. \cr
+\end{cases}
+\]
+[Notice that big `$\bigwedge$' has higher priority over the usual `$\land$' and hence applies only to the immediate formula that follows.] Then define
+\[
+\bigwedge_{0 \leq i < j \leq n} \varphi_{ij} = \bigwedge_{0 \leq i < n} \bigwedge_{i < j \leq n} \varphi_{ij} .
+\]
+The case for `$\bigvee$' is similar.\\
+\ 
+\\At this moment, $\varphi_{\mathfrak{A}}$ merely says that all its models have \textit{exactly} $n+1$ elements. The critical part is introduced in the following.\\
+\ 
+\\We add to $\varphi$ a formula $\psi$ \textit{in conjuction} for each relational, functional, and constant symbol according to the following cases:
+\begin{enumerate}[(i)]
+\item $c^{\mathfrak{A}} = a_k$, where $c \in S$: $\psi = v_k \equiv c$.
+%%
+\item $f^{\mathfrak{A}} (a_{i_1}, \ldots , a_{i_m}) = a_k$, where $f \in S$ is $m$-ary: $\psi = fv_{i_1} \ldots v_{i_m} \equiv v_k$.
+%%
+\item $R^{\mathfrak{A}} (a_{i_1}, \ldots , a_{i_m})$, where $R \in S$ is $m$-ary: $\psi = Rv_{i_1} \ldots v_{i_m}$.
+\end{enumerate}
+\ 
+\\Now, the construction is complete and it is clear that all models of $\varphi_{\mathfrak{A}}$ are precisely those isomorphic to $\mathfrak{A}$.\nolinebreak\hfill$\talloblong$
+%End of III.5.9----------------------------------------------------------------------------------------------
+%
+%III.5.10----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 5.10.}
+\begin{enumerate}[(a)]
+\item $\varphi = \exists v_0 \exists v_1 (v_0 + a \equiv 0 \land \neg v_1 \equiv 0 \land v_0 + b \equiv v_1 \cdot v_1 )$.
+%%
+\item Let $\pi:\mathbb{R} \to \mathbb{R}:\pi(x) = -x$ be an automorphism onto $\mathbb{R}$. If there were a formula $\varphi \in L_2^{\{+, 0\}}$ such that for all $a, b \in \mathbb{R}$, $(\mathbb{R}, +, 0) \models \varphi[a, b]$ iff $a < b$, then we would get successively:
+\[
+\begin{array}{l}
+(\mathbb{R}, +, 0) \models \varphi[0, 1] \mbox{\ (since 0 $<$ 1);} \\
+\, \\
+(\mathbb{R}, +, 0) \models \varphi[0, -1] \mbox{\ (by Corollary 5.3);} \\
+\, \\
+0 < -1 \mbox{\ (by hypothesis),}
+\end{array}
+\]
+a contradiction.\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+%End of III.5.10---------------------------------------------------------------------------------------------
+%
+%III.5.11----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 5.11.}
+\begin{enumerate}[(a)]
+\item We only show that the negation of a universal formula $\varphi$ is logically equivalent to an existential formula by induction on universal formulas, the other part is similar.\\
+\ 
+\\$\varphi$ is quantifier-free: $\neg \varphi$ is also quantifier-free and hence existential.\\
+\ 
+\\$\varphi = (\psi \ast \chi)$, where $\psi$ and $\chi$ are both universal and $\ast = \land, \lor$: We only show the case for `$\land$': $\neg ( \psi \land \chi )$ is logically equivalent to $(\neg \psi \lor \neg \chi)$, an existential formula (by induction, $\neg \psi$ and $\neg \chi$ are both existential).\\
+\ 
+\\$\varphi = \forall x \psi$, where $\psi$ is universal: $\neg \forall x \psi$ is logically equivalent to $\exists x \neg \psi$, an existential formula (by induction, $\neg \psi$ is existential).
+%%
+\item Let $\mathfrak{A} \subset \mathfrak{B}$, then by Corollary 5.8, for every universal formula $\neg \varphi$, where $\varphi$ is existential,
+\[
+\mbox{if $\mathfrak{B} \models \neg \varphi$ then $\mathfrak{A} \models \neg \varphi$.}
+\]
+By (a) we have that: For every existential formula $\varphi$,
+\[
+\mbox{if $\mathfrak{A} \models \varphi$ then $\mathfrak{B} \models \varphi$}.
+\]
+\end{enumerate} \begin{flushright}$\talloblong$\end{flushright}
+%End of III.5.11---------------------------------------------------------------------------------------------
+\end{enumerate}
+%End of Section III.5----------------------------------------------------------------------------------------
+\ 
+\\
+\\
+%Section III.6-----------------------------------------------------------------------------------------------
+{\large \S6. Some Simple Formalizations}
+\begin{enumerate}[1.]
+%III.6.7-----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 6.7.}
+\begin{enumerate}[(a)]
+\item $\forall x ( 0 < x \rightarrow \exists t ( 0 < t \land t \cdot t \equiv x ) )$.
+%%
+\item $( \forall x \forall y ( x < y \rightarrow fx < fy ) \lor \forall x \forall y ( x < y \rightarrow fy < fx ) ) \rightarrow \forall x \forall y ( fx \equiv fy \rightarrow x \equiv y)$.
+%%
+\item $\forall u ( 0 < u \rightarrow \exists v ( 0 < v \land \forall x \forall y ( dxy < v \rightarrow dfxfy < u ) ) )$.
+%%
+\item $\forall x ( \exists c \forall u ( 0 < u \rightarrow \exists v ( 0 < v \land \forall y ( ( 0 < dxy \land dxy < v ) \rightarrow d+fy \cdot cx+fx \cdot cy < \cdot udxy ) ) ) \rightarrow \forall u ( 0 < u \rightarrow \exists v ( 0 < v \land \forall y ( dxy < v \rightarrow dfxfy < u ) ) ) )$.\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+%End of III.6.7----------------------------------------------------------------------------------------------
+%
+%III.6.8----------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 6.8.}
+\begin{enumerate}[(a)]
+\item $\Phi_{\mbox{\scriptsize{eq}}} \cup \{ \exists x \exists y \neg Rxy \}$.
+%%
+\item $\Phi_{\mbox{\scriptsize{eq}}} \cup \{ \exists x \exists y ( \neg x \equiv y \land Rxy ) \}$.\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+%End of III.6.8----------------------------------------------------------------------------------------------
+%
+%III.6.9-----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 6.9.}
+\begin{enumerate}[(a)]
+\item Each formula in $\Phi_{\mbox{\scriptsize{gr}}}$ is a Horn sentence.
+%%
+\item ``$\forall x \forall y ( x < y \lor x \equiv y \lor y < x )$'' from $\Phi_{\mbox{\scriptsize{ord}}}$ and ``$\forall x ( \neg x \equiv 0 \rightarrow \exists y \, x \cdot y \equiv 1 )$'' from $\Phi_{\mbox{\scriptsize{fd}}}$ are neither Horn sentences.\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+%End of III.6.9----------------------------------------------------------------------------------------------
+%
+%End of III.6.10---------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 6.10.} (INCOMPLETE)
+\begin{enumerate}[(a)]
+\item Choose $S = \emptyset$. Let
+\[
+\psi_1 \colonequals \forall x_0 \forall x_1 \, x_0 \equal x_1,
+\]
+and for $n > 1$ let
+\[
+\psi_n \colonequals \enump{\exists x_0}{\exists x_{n - 1}} \parenadj{\parenadj{\bigwedge\limits_{0 \leq i < j \leq n - 1} \neg x_i \equal x_j} \land \forall x \bigvee\limits_{0 \leq i \leq n - 1} x \equal x_i}.
+\]
+$\psi_n$ states that ``the domain contains exactly $n$ elements''.\bigskip\\
+For finite $M \subset \setenum{1, 2, 3, \ldots}$, we take the characterizing sentence
+\[
+\varphi_1 \colonequals
+\begin{cases}
+\exists x \neg x \equal x & \mbox{if \(M = \emptyset\)} \cr
+\bigvee\limits_{n \in M} \psi_n & \mbox{otherwise.}
+\end{cases}
+\]
+%%
+\item If $m = 1$, then we choose $S = \emptyset$ and take the characterizing sentence
+\[
+\varphi_2 \colonequals \exists x \, x \equal x.
+\]
+If $m > 1$, then we choose $S = \setenum{f}$, where $f$ is a unary function symbol. And we take the characterizing sentence
+\[
+\varphi_2 \colonequals \forall x \parenadj{x \equal \underbrace{\enump{f}{f}}_{\mbox{\scriptsize\(m\)-times}} x \land \bigwedge\limits_{1 \leq i \leq m - 1} \neg x \equal \underbrace{\enump{f}{f}}_{\scriptsize\mbox{\(i\)-times}} x}.
+\]
+%%
+\item Choose $S \colonequals S_\ar^< \cup \setenum{c}$. And let $\chi$ be the conjunction of the following sentences:
+\begin{enumerate}[(1)]
+%%%
+\item The sentences in $\Phi_\ord$ \quad ($<$ is an ordering relation);
+%%%
+\item $\forall x (0 < x \lor 0 \equal x)$ \quad ($0$ is the least element);
+%%%
+\item $\forall x (x < c \lor x \equal c)$ \quad ($c$ is the greatest element);
+%%%
+\item $\forall x \, x + 0 \equal x$;
+%%%
+\item $c + 1 \equal c \land \forall x (x < c \limply (x < x + 1 \land \neg\exists y (x < y \land y < x + 1)))$ \quad (for $x < c$, $x + 1$ is the element immediately greater than $x$, whereas $c + 1$ is identical to $c$);
+%%%
+\item $\forall x \forall y \, x + (y + 1) \equal (x + y) + 1$;
+%%%
+\item $0 + 1 \equal 1$;
+%%%
+\item $\forall x \, x \mul 0 \equal 0$;
+%%%
+\item $\forall x \forall y \, x \mul (y + 1) \equal (x \mul y) + x$.
+%%%
+\end{enumerate}
+Intuitively, $\chi$ says that there are exactly $c + 1$ elements $\seqp{0}{c}$ in the domain ($c \geq 1$), where $<$ is the usual ordering relation and $+$ and $\mul$ are usual addition and multiplication, respectively, in which $c$ acts like the infinity $\infty$ in the sense that $c + x = c$ for any $x$ and $c \mul x = c$ for any $x \neq 0$.\medskip\\
+By choosing $\psi_1$ as in part (a), we take the characterizing sentence
+\[
+\varphi_3 \colonequals \psi_1 \lor (\chi \land \exists x (x + 1 < c \land x \mul (x + (1 + 1)) \equal c)).
+\]
+%%
+\item Choose $S$ and $\chi$ as in part (c), and choose $\psi_1$ as in part (a).
+Also, denote by $\theta$ the conjunction of the following sentence
+\[
+\begin{array}{l}
+\exists x \exists y (0 < x \land 0 < y \land x + 1 < c \land y + 1 < c \land x \mul (y + 1) + y \equal c).
+\end{array}
+\]
+We take the characterizing sentence
+\[
+\varphi_4 \colonequals \psi_1 \lor (\chi \land \theta).
+\]
+%%
+\item Choose $S$, $\chi$ and $\theta$ as in part (d). We take the characterizing sentence
+\[
+\varphi_5 \colonequals \chi \land \neg\theta.
+\]
+%%
+\end{enumerate}
+%End of III.6.10---------------------------------------------------------------------------------------------
+\end{enumerate}
+%End of Section III.6----------------------------------------------------------------------------------------
+\ 
+\\
+\\
+%Section III.7-----------------------------------------------------------------------------------------------
+{\large \S7. Some Remarks on Formalizability}
+\begin{enumerate}[1.]
+\item \textbf{Note to Part (2) of 7.3.} The induction axiom $(\gamma)$ basically states that every \emph{inductive set} (for the concept of inductive set, cf. Section VII.3) defined over the domain (that is, the set $\mathbb{N}$ of natural numbers) coincides with it. Hence $\mathbb{N}$ is the smallest inductive set.
+%
+\item \textbf{Note to the Proof of 7.4 Dedekind's Theorem.} Let us briefly verify the validity of the isomorphism $\pi$. We show by induction on $n$ that $\pi$ is defined for every $n \in \mathbb{N}$ according to the two defining clauses (i)$^\prime$ and (ii)$^\prime$, and hence that $\pi$ is well-defined.\\
+\\
+$n = 0$: This is trivial from (i)$^\prime$.\\
+\\
+Induction step: Suppose that $\pi$ is defined for $n$, i.e. that $\pi(n) \in A$. Then by (ii)$^\prime$ $\pi$ is also defined for $n + 1$ as $\pi(n + 1) = \mbf{\sigma}^A(\pi(n))$.   
+%III.7.5-----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 7.5.}
+\begin{enumerate}[(a)]
+\item We only show that $(A, \mbf{\sigma}^A, 0^A)$ satisfies (P1), the other two cases are similar. Since $\mathfrak{A}$ is a model of $\Pi$, $\mathfrak{A} \models \forall x \neg x + 1 \equiv 0$, i.e.,
+\[
+\mbox{for all $a \in A$, not $a +^A 1^A = 0^A$,}
+\]
+which means
+\[
+\mbox{for all $a \in A$, not $\mbf{\sigma}^A(a) = 0^A$,}
+\]
+which in definition is
+\[
+\mathfrak{A} \models \forall x \neg \mathbf{\sigma} x \equiv 0.
+\]
+%%
+\item Let $\mathfrak{A} = (A, +^A, \cdot^A, 0^A, 1^A)$ be a model of $\Pi$. From (a), there is an isomorphism $\pi : \mathfrak{N}_\sigma \cong (A, \sigma^A, 0^A)$ with
+\[
+\pi(0^\mathbb{N}) = 0^A
+\]
+and for all $n \in \mathbb{N}$,
+\[
+\pi(\sigma^\mathbb{N}(n)) = \sigma^A(\pi(n)).
+\]
+\\
+We argue that $\pi$ is also an isomorphism between $\mathfrak{N}$ and $\mathfrak{A}$ ($\pi: \mathfrak{N} \cong \mathfrak{A}$). Parts (1) - (4) in the following establish this fact:\\
+\begin{enumerate}[1)]
+\item First, we already have
+\[
+\pi(0^\mathbb{N}) = 0^A.
+\]
+%%%
+\item Next, let $X^A := \{ a \ | \ 0^A +^A a = a \}$. We shall show by induction on $a$ that $X^A = A$.\\
+\\
+$a = 0^A$: $0^A +^A 0^A = 0^A$ (cf. $\Pi$), so $0^A \in X^A$.\\
+Induction step: Suppose $a \in X^A$, i.e. $0^A +^A a = a$, then
+\[
+\begin{array}{lll}
+\ & 0^A +^A (a +^A 1^A) & \ \cr
+= & (0^A +^A a) +^A 1^A & \mbox{(cf. $\Pi$)} \cr
+= & a +^A 1^A & \mbox{(by induction hypothesis)}, \cr
+\end{array}
+\]
+i.e. $(a +^A 1^A) \in X^A$. From (the ``induction axiom'' of) $\Pi$, we have that for every element $a$ of $A$, $a \in X^A$, i.e. $A \subset X^A$.\\
+\\
+Furthermore, since $X^A \subset A$ by definition, it follows that $X^A = A$. So, $\mathfrak{A} \models \forall x \ 0 + x \equiv x$.\\
+\\
+It follows that
+\[
+\begin{array}{llll}
+\pi(1^\mathbb{N}) & = & \pi(\sigma^\mathbb{N}(0^\mathbb{N})) & \mbox{(by definition of $\sigma^\mathbb{N}$)} \cr
+\ & = & \sigma^A(\pi(0^\mathbb{N})) & \mbox{(cf. $\pi: \mathfrak{N}_\sigma \cong (A, \sigma^A, 0^A)$)} \cr
+\ & = & \sigma^A(0^A) & \mbox{(cf. $\pi: \mathfrak{N}_\sigma \cong (A, \sigma^A, 0^A)$)} \cr
+\ & = & 0^A +^A 1^A & \mbox{(by definition of $\sigma^A$)} \cr
+\ & = & 1^A.
+\end{array}
+\]
+%%%
+\item Then, let $m$ be an arbitrary but fixed integer, and let $Y^\mathbb{N} := \{ n \ |$\\$\pi(m +^\mathbb{N} n) = \pi(m) +^A \pi(n) \}$. We shall show by induction on $n$ that $Y^\mathbb{N} = \mathbb{N}$.\\
+\\
+$n = 0^\mathbb{N}$:
+\[
+\begin{array}{llll}
+\pi(m +^\mathbb{N} 0^\mathbb{N}) & = & \pi(m) & \mbox{(cf. $\Pi$)} \cr
+\ & = & \pi(m) +^A 0^A & \mbox{(cf. $\Pi$)} \cr
+\ & = & \pi(m) +^A \pi(0^\mathbb{N}) & \mbox{(cf. $\pi: \mathfrak{N}_\sigma \cong (A, \sigma^A, 0^A)$)}.
+\end{array}
+\]
+Induction step: Suppose $n \in Y^\mathbb{N}$, i.e. $\pi(m +^\mathbb{N} n) = \pi(m) +^A \pi(n)$, then
+\[
+\begin{array}{lll}
+\ & \pi(m +^\mathbb{N} (n +^\mathbb{N} 1^\mathbb{N})) & \ \cr
+= & \pi((m +^\mathbb{N} n) +^\mathbb{N} 1^\mathbb{N}) & \mbox{(cf. $\Pi$)} \cr
+= & \pi(\sigma^\mathbb{N}(m +^\mathbb{N} n)) & \mbox{(by definition of $\sigma^\mathbb{N}$)} \cr
+= & \sigma^A(\pi(m +^\mathbb{N} n)) & \mbox{(cf. $\pi: \mathfrak{N}_\sigma \cong (A, \sigma^A, 0^A)$)} \cr
+= & \pi(m +^\mathbb{N} n) +^A 1^A & \mbox{(by definition of $\sigma^A$)} \cr
+= & (\pi(m) +^A \pi(n)) +^A 1^A & \mbox{(by induction hypothesis)} \cr
+= & \pi(m) +^A (\pi(n) +^A 1^A) & \mbox{(cf. $\Pi$)} \cr
+= & \pi(m) +^A \sigma^A(\pi(n)) & \mbox{(by definition of $\sigma^A$)} \cr
+= & \pi(m) +^A \pi(\sigma^\mathbb{N}(n)) & \mbox{(cf. $\pi: \mathfrak{N}_\sigma \cong (A, \sigma^A, 0^A)$)} \cr
+= & \pi(m) +^A \pi(n +^\mathbb{N} 1^\mathbb{N}) & \mbox{(by definition of $\sigma^\mathbb{N}$)},
+\end{array}
+\]
+i.e. $(n +^\mathbb{N} 1^\mathbb{N}) \in Y^\mathbb{N}$. From (the ``induction axiom'' of) $\Pi$, we have that for every integer $n$ of $\mathbb{N}$, $n \in Y^\mathbb{N}$, i.e. $\mathbb{N} \subset Y^\mathbb{N}$.\\
+\\
+Furthermore, since $Y^\mathbb{N} \subset \mathbb{N}$ by definition, it follows that $Y^\mathbb{N} = \mathbb{N}$. Also note that the above argument applies to all arbitrarily chosen integer $m$, hence we have that
+\[
+\mbox{for all $m$, $n \in \mathbb{N}$, $\pi(m +^\mathbb{N} n) = \pi(m) +^A \pi(n)$}.
+\]
+%%%
+\item Finally, let $m$ be an arbitrary but fixed integer, and let $Z^\mathbb{N} := \{ n \ |$\\$\pi(m \cdot^\mathbb{N} n) = \pi(m) \cdot^A \pi(n) \}$. We shall show by induction on $n$ that $Z^\mathbb{N} = \mathbb{N}$.\\
+\\
+$n = 0^\mathbb{N}$:
+\[
+\begin{array}{llll}
+\pi(m \cdot^\mathbb{N} 0^\mathbb{N}) & = & \pi(0^\mathbb{N}) & \mbox{(cf. $\Pi$)} \cr
+\ & = & 0^A & \mbox{(cf. $\pi: \mathfrak{N}_\sigma \cong (A, \sigma^A, 0^A)$)} \cr
+\ & = & \pi(m) \cdot^A 0^A & \mbox{(cf. $\Pi$)} \cr
+\ & = & \pi(m) \cdot^A \pi(0^\mathbb{N}) & \mbox{(cf. $\pi: \mathfrak{N}_\sigma \cong (A, \sigma^A, 0^A)$)}.
+\end{array}
+\]
+Induction step: Suppose $n \in Z^\mathbb{N}$, i.e. $\pi(m \cdot^\mathbb{N} n) = \pi(m) \cdot^A \pi(n)$, then
+\[
+\begin{array}{lll}
+\ & \pi(m \cdot^\mathbb{N} (n +^\mathbb{N} 1^\mathbb{N})) & \ \cr
+= & \pi((m \cdot^\mathbb{N} n) +^\mathbb{N} m) & \mbox{(cf. $\Pi$)} \cr
+= & \pi(m \cdot^\mathbb{N} n) +^A \pi(m) & \mbox{(by (3))} \cr
+= & (\pi(m) \cdot^A \pi(n)) +^A \pi(m) & \mbox{(by induction hypothesis)} \cr
+= & \pi(m) \cdot^A (\pi(n) +^A 1^A) & \mbox{(cf. $\Pi$)} \cr
+= & \pi(m) \cdot^A \sigma^A(\pi(n)) & \mbox{(by definition of $\sigma^A$)} \cr
+= & \pi(m) \cdot^A \pi(\sigma^\mathbb{N}(n)) & \mbox{(cf. $\pi: \mathfrak{N}_\sigma \cong (A, \sigma^A, 0^A)$)} \cr
+= & \pi(m) \cdot^A \pi(n +^\mathbb{N} 1^\mathbb{N}) & \mbox{(by definition of $\sigma^\mathbb{N}$)},
+\end{array}
+\]
+i.e. $(n +^\mathbb{N} 1^\mathbb{N}) \in Z^\mathbb{N}$. From (the ``induction axiom'' of) $\Pi$, we have that for every integer $n$ of $\mathbb{N}$, $n \in Z^\mathbb{N}$, i.e. $\mathbb{N} \subset Z^\mathbb{N}$.\\
+\\
+Furthermore, since $Z^\mathbb{N} \subset \mathbb{N}$ by definition, it follows that $Z^\mathbb{N} = \mathbb{N}$. Also note that the above argument applies to all arbitrarily chosen integer $m$, hence we have that
+\[
+\mbox{for all $m$, $n \in \mathbb{N}$, $\pi(m \cdot^\mathbb{N} n) = \pi(m) \cdot^A \pi(n)$}.
+\]
+\end{enumerate}
+\end{enumerate} \begin{flushright}$\talloblong$\end{flushright}
+%End of III.7.5----------------------------------------------------------------------------------------------
+\end{enumerate}
+%End of Section III.7----------------------------------------------------------------------------------------
+\ 
+\\
+\\
+%Section III.8-----------------------------------------------------------------------------------------------
+{\large \S8. Substitution}
+\begin{enumerate}[1.]
+\item \textbf{Note to 8.3 Substitution Lemma.} Often in mathematical arguments that the whole problem can be divided into several \emph{symmetric} cases we found the phrase ``without loss of generality'' or equivalently the phrase ``with no loss of generality'' that accompanies certain presumptions. As is clear, the validity of such arguments is based on the Substitution Lemma.\\
+\\
+More precisely, in this kind of situation, we restrict ourselves to a certain case. And when we finish this case, we are able to claim that we have settled other cases as well because, they can be reduced to this case by means of the Substitution Lemma.
+%
+\item \textbf{Proposition}: \textit{$\mathfrak{I} \frac{ab}{xy} \models \varphi \frac{y}{x}$ iff $\mathfrak{I} \frac{b}{y} \models \varphi \frac{y}{x}$.}\\
+\textit{Proof.} If $x$ does not appear in $\varphi$, then the statement is vacuously true. Suppose $x$ appears in $\varphi$, if it occurs free, then it disappears in $\varphi \frac{y}{x}$, the statement is true; otherwise it is a bound variable, and the mapping of $x$ becomes irrelevant in both interpretations, thus the statement is still true.\nolinebreak\hfill$\talloblong$
+%
+\item \textbf{Proposition}: \textit{Let $\varphi$ be a formula, $x$ a variable, and $y$ the first variable which is different from $x$ and does not occur free in $\varphi$. Then
+\[
+\mathfrak{I} \models \exists^{=1} x \varphi \mbox{ iff there is exactly one $a \in A$ such that $\mathfrak{I} \frac{a}{x} \models \varphi$}.
+\]
+}
+\textit{Proof.}
+\[
+\begin{array}{ll}
+\, & \mathfrak{I} \models \exists^{=1} x \varphi \\
+\mbox{iff} & \mbox{there is an $a \in A$ such that $\mathfrak{I} \frac{a}{x} \models ( \varphi \land \forall y ( \varphi \frac{y}{x} \rightarrow x \equiv y ) )$} \\
+\mbox{iff} & \mbox{there is an $a \in A$ such that} \\
+\, & \mbox{( $\mathfrak{I} \frac{a}{x} \models \varphi$ and for all $b \in A$, $\mathfrak{I} \frac{ab}{xy} \models ( \varphi \frac{y}{x} \rightarrow x \equiv y )$ )} \\
+\mbox{iff} & \mbox{there is an $a \in A$ such that ( $\mathfrak{I} \frac{a}{x} \models \varphi$ and} \\
+\, & \mbox{for all $b \in A$, if $\mathfrak{I} \frac{b}{y} \models \varphi \frac{y}{x}$ then $a = b$ ) \,\, (by the conjecture above)} \\
+\mbox{iff} & \mbox{there is an $a \in A$ such that ( $\mathfrak{I} \frac{a}{x} \models \varphi$ and for all $b \in A$,} \\
+\, & \mbox{if $(\mathfrak{I} \frac{b}{y}) \frac{\mathfrak{I} \frac{b}{y} (y) }{x} \models \varphi$ then $a = b$ ) \,\, (by substitution lemma)} \\
+\mbox{iff} & \mbox{there is an $a \in A$ such that ( $\mathfrak{I} \frac{a}{x} \models \varphi$ and} \\
+\, & \mbox{for all $b \in A$, if $\mathfrak{I} \frac{b}{x} \models \varphi$ then $a = b$ ) \,\, (since by premise $y$ does not} \\
+\, & \mbox{occur free in $\varphi$, see the proof of the above conjecture)} \\
+\mbox{iff} & \mbox{there is an $a \in A$ such that ( $\mathfrak{I} \frac{a}{x} \models \varphi$ and for all $b \in A \setminus \{ a \}$,} \\
+\, & \mbox{not $\mathfrak{I} \frac{b}{x} \models \varphi$ )} \\
+\mbox{iff} & \mbox{there is exactly one $a \in A$ such that $\mathfrak{I} \frac{a}{x} \models \varphi$.}
+\end{array}
+\] \begin{flushright}$\talloblong$\end{flushright}
+%
+%III.8.8-----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 8.8.}
+\begin{itemize}
+\item ``there exist at most $n$'': $\displaystyle \exists^{\leq n} x \varphi := \exists v_0 \ldots \exists v_{n-1}(\bigwedge_{0 \leq i < j \leq n - 1} \neg v_i \equiv v_j \land \forall v_n (\varphi \frac{v_n}{x} \rightarrow \bigvee_{0 \leq i \leq n - 1} x \equiv v_i))$.
+%%
+\item ``there exist exactly $n$'': $\displaystyle \exists^{=n} x \varphi := \exists^{\leq n } x \varphi \land \neg \exists^{\leq n - 1} x \varphi$.\nolinebreak\hfill$\talloblong$
+\end{itemize}
+%End of III.8.8------------------------------------------------------------------------------------
+%
+%III.8.9-----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 8.9.}
+\begin{enumerate}[(a)]
+\item
+\[
+\begin{array}{ll}
+\, & [ \exists x \exists y ( Pxu \land Pyu ) ] \frac{uuu}{xyv} \\
+= & \exists x [ \exists y ( Pxu \land Pyv ) \frac{ux}{vx} ] \\
+= & \exists x \exists y [ ( Pxu \land Pyv ) \frac{uy}{vy} ] \\
+= & \exists x \exists y ( Pxu \frac{u}{v} \land Pyv \frac{u}{v} ) \\
+= & \exists x \exists y ( Pxu \land Pyu )
+\end{array}
+\]
+%%
+\item
+\[
+\begin{array}{ll}
+\, & [ \exists x \exists y ( Pxu \land Pyv ) ] \frac{v\,fuv}{u\,\phantom{f}v\phantom{u}} \\
+= & \exists x [ \exists y ( Pxu \land Pyv ) \frac{v\,fuv\,x}{u\,\phantom{f}v\phantom{u}\,x} ] \\
+= & \exists x \exists y [ ( Pxu \land Pyv ) \frac{v\,fuv\,y}{u\,\phantom{f}v\phantom{u}\,y} ] \\
+= & \exists x \exists y ( Pxu \frac{v\,fuv}{u\,\phantom{f}v\phantom{u}} \land Pyv \frac{v\,fuv}{u\,\phantom{f}v\phantom{u}} ) \\
+= & \exists x \exists y ( Pxv \land Pyfuv )
+\end{array}
+\]
+%%
+\item
+\[
+\begin{array}{ll}
+\, & [ \exists x \exists y ( Pxu \land Pyv ) ] \frac{u\,x\,fuv}{x\,u\,\phantom{f}v\phantom{u}} \\
+= & \exists w [ \exists y ( Pxu \land Pyv ) \frac{x\,fuv\,w}{u\,\phantom{f}v\phantom{u}\,x} ] \\
+= & \exists w \exists y [ ( Pxu \land Pyv ) \frac{x\,fuv\,w\,y}{u\,\phantom{f}v\phantom{u}\,x\,y} ] \\
+= & \exists w \exists y ( Pxu \frac{x\,fuv\,w}{u\,\phantom{f}v\phantom{u}\,x} \land Pyv \frac{x\,fuv\,w}{u\,\phantom{f}v\phantom{u}\,x} ) \\
+= & \exists w \exists y ( Pwx \land Pyfuv )
+\end{array}
+\]
+%%
+\item
+\[
+\begin{array}{ll}
+\, & [ \forall x \exists y ( Pxy \land Pxu ) \lor \exists u \, fuu \equiv x ] \frac{x\,fxy}{x\,\phantom{f}u\phantom{y}} \\
+= & [ \forall x \exists y ( Pxy \land Pxu ) ] \frac{x\,fxy}{x\,\phantom{f}u\phantom{y}} \lor [ \exists u \, fuu \equiv x ] \frac{x\,fxy}{x\,\phantom{f}u\phantom{y}} \\
+= & \forall v [ \exists y ( Pxy \land Pxu ) \frac{fxy\,v}{\phantom{f}u\phantom{y}\,x} ] \lor \exists u \, fuu \equiv x \\
+= & \forall v \exists w [ ( Pxy \land Pxu ) \frac{fxy\,v\,w}{\phantom{f}u\phantom{y}\,x\,y} ] \lor \exists u \, fuu \equiv x \\
+= & \forall v \exists w ( Pxy \frac{fxy\,v\,w}{\phantom{f}u\phantom{y}\,x\,y} \land Pxu \frac{fxy\,v\,w}{\phantom{f}u\phantom{y}\,x\,y} ) \lor \exists u \, fuu \equiv x \\
+= & \forall v \exists w ( Pvw \land Pvfxy ) \lor \exists u \, fuu \equiv x.
+\end{array}
+\]
+\end{enumerate} \begin{flushright}$\talloblong$\end{flushright}
+%End of III.8.9----------------------------------------------------------------------------------------------
+%
+%III.8.10----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 8.10.} For every interpretation $\mathfrak{I}$,
+\[
+\begin{array}{ll}
+\, & \mathfrak{I} \models \varphi \frac{t_0 \ldots t_r}{x_0 \ldots x_r} \\
+\mbox{iff} & \mbox{for all $a_0 \in A$, \ldots , for all $a_r \in A$, $\mathfrak{I} \frac{a_0 \ldots a_r}{x_0 \ldots x_r} \models \varphi \frac{t_0 \ldots t_r}{x_0 \ldots x_r}$ \,\, (since by} \\
+\, & \mbox{premise that $x_0, \ldots , x_r \not \in \var(t_0) \cup \ldots \cup \var(t_r)$, $\mathfrak{I} \frac{a_0 \ldots a_r}{x_0 \ldots x_r} (t_0) = \mathfrak{I} (t_0)$,} \\
+\, & \mbox{i.e. the mapping of $x_0, \ldots , x_r$ is irrelevant to the satisfiability and,} \\
+\, & \mbox{in addition, the appearances of $x_0, \ldots , x_r$ are gone in the resulting} \\
+\, & \mbox{formula $\varphi \frac{t_0 \ldots t_r}{x_0 \ldots x_r}$ after the substitution in $\varphi$} \\
+\mbox{iff} & \mbox{for all $a_0 \in A$, \ldots , for all $a_r \in A$, $(\mathfrak{I} \frac{a_0 \ldots a_r}{x_0 \ldots x_r}) \frac{\mathfrak{I}(t_0) \ldots \mathfrak{I}(t_r)}{x_0 \ldots x_r} \models \varphi$ \,\, (by} \\
+\, & \mbox{Substitution Lemma and $\mathfrak{I} \frac{a_0 \ldots a_r}{x_0 \ldots x_r} (t_0) = \mathfrak{I} (t_0)$, for the same reason} \\
+\, & \mbox{explained above)} \\
+\mbox{iff} & \mbox{for all $a_0 \in A$, \ldots , for all $a_r \in A$, if $\mathfrak{I} \frac{a_0 \ldots a_r}{x_0 \ldots x_r}(x_0) = \mathfrak{I}(t_0)$, \ldots , and} \\
+\, & \mbox{$\mathfrak{I} \frac{a_0 \ldots a_r}{x_0 \ldots x_r}(x_r) = \mathfrak{I}(t_r)$, then $\mathfrak{I} \frac{a_0 \ldots a_r}{x_0 \ldots x_r} \models \varphi$} \\
+\mbox{iff} & \mbox{for all $a_0 \in A$, \ldots , for all $a_r \in A$,} \\
+\, & \mbox{$\mathfrak{I} \frac{a_0 \ldots a_r}{x_0 \ldots x_r} \models ((x_0 \equiv t_0 \land \ldots \land x_r \equiv t_r) \rightarrow \varphi)$ \,\, (since} \\
+\, & \mbox{$\mathfrak{I} \frac{a_0 \ldots a_r}{x_0 \ldots x_r}(t_0) = \mathfrak{I}(t_0)$, \ldots , $\mathfrak{I} \frac{a_0 \ldots a_r}{x_0 \ldots x_r}(t_r) = \mathfrak{I}(t_r)$)} \\
+\mbox{iff} & \mathfrak{I} \models \forall x_0 \ldots \forall x_r (( x_0 \equiv t_0 \land \ldots \land x_r \equiv t_r ) \rightarrow \varphi )
+\end{array}
+\]
+%End of III.8.10---------------------------------------------------------------------------------------------
+%
+%III.8.11----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 8.11.}
+\[
+\begin{array}{l}
+\displaystyle \frac{\,}{x \;\;\; x_0 \ldots x_r \;\;\; t_0 \ldots t_r \;\;\; x} \mbox{ if $x \neq x_0, \ldots , x \neq x_r$}; \\
+\, \\
+\displaystyle \frac{\,}{x \;\;\; x_0 \ldots x_r \;\;\; t_0 \ldots t_r \;\;\; t_i} \mbox{ if $x = x_i$}; \\
+\, \\
+\displaystyle \frac{\,}{c \;\;\; x_0 \ldots x_r \;\;\; t_0 \ldots t_r \;\;\; c}; \\
+\, \\
+\displaystyle \frac{{{\displaystyle  t_1^\prime \;\;\; x_0 \ldots x_r \;\;\; t_0 \ldots t_r \;\;\; s_1^\prime 
+\atop 
+\displaystyle  \;\; \vdots  \;\;\;\;\;  \vdots  \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  \vdots  \;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \;\;\;\; } 
+\atop 
+\displaystyle  t_1^\prime \;\;\; x_0 \ldots x_r \;\;\; t_0 \ldots t_r \;\;\; s_1^\prime}}{ft_1^\prime \ldots t_n^\prime \;\;\; x_0 \ldots x_r \;\;\; t_0 \ldots t_r \;\;\; fs_1^\prime \ldots s_n^\prime} \mbox{ if $f \in S$ and $f$ is $n$-ary}; \\
+\, \\
+\, \\
+\, \\
+\displaystyle \frac{ {\displaystyle t_1^\prime \;\;\; x_0 \ldots x_r \;\;\; t_0 \ldots t_r \;\;\; s_1^\prime \atop 
+\displaystyle t_2^\prime \;\;\; x_0 \ldots x_r \;\;\; t_0 \ldots t_r \;\;\; s_2^\prime} }{t_1^\prime \equiv t_2^\prime \;\;\; x_0 \ldots x_r \;\;\; t_0 \ldots t_r \;\;\; s_1^\prime \equiv s_2^\prime} \mbox{ if $t_1^\prime , t_2^\prime \in T^S$}; \\
+\, \\
+\displaystyle \frac{{{\displaystyle  t_1^\prime \;\;\; x_0 \ldots x_r \;\;\; t_0 \ldots t_r \;\;\; s_1^\prime 
+\atop 
+\displaystyle  \;\; \vdots  \;\;\;\;\;  \vdots  \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;  \vdots  \;\;\;\;\;\;\;\;\;\;\;\;\; \vdots \;\;\;\; } 
+\atop 
+\displaystyle  t_1^\prime \;\;\; x_0 \ldots x_r \;\;\; t_0 \ldots t_r \;\;\; s_1^\prime}}{Rt_1^\prime \ldots t_n^\prime \;\;\; x_0 \ldots x_r \;\;\; t_0 \ldots t_r \;\;\; Rs_1^\prime \ldots s_n^\prime} \mbox{ if $R \in S$ is $n$-ary and } \\
+\phantom{Rt_1^\prime \ldots t_n^\prime \;\;\; x_0 \ldots x_r \;\;\; t_0 \ldots t_r \;\;\; Rs_1^\prime \ldots s_n^\prime} \;\;\; t_1^\prime, \ldots, t_n^\prime \in T^S; \\
+\, \\
+\displaystyle \frac{ \phantom{\neg} \varphi \;\;\; x_0 \ldots x_r \;\;\; t_0 \ldots t_r \;\;\; \phantom{\neg} \varphi \frac{t_0 \ldots t_r}{x_0 \ldots x_r} }{\neg \varphi \;\;\; x_0 \ldots x_r \;\;\; t_0 \ldots t_r \;\;\; \neg \varphi \frac{t_0 \ldots t_r}{x_0 \ldots x_r} } \mbox{ if $\varphi \in L^S$}; \\
+\, \\
+\displaystyle \frac{ \displaystyle { 
+\phantom{( \lor \psi)} \varphi \;\;\; x_0 \ldots x_r \;\;\; t_0 \ldots t_r \;\;\; \varphi \frac{t_0 \ldots t_r}{x_0 \ldots x_r} \phantom{( \lor \psi \frac{t_0 \ldots t_r}{x_0 \ldots x_r} )}
+\atop
+\phantom{( \lor \varphi)} \psi \;\;\; x_0 \ldots x_r \;\;\; t_0 \ldots t_r \;\;\;  \psi \frac{t_0 \ldots t_r}{x_0 \ldots x_r} \phantom{( \lor \varphi \frac{t_0 \ldots t_r}{x_0 \ldots x_r} )}
+ } }
+{(\varphi \lor \psi) \;\;\; x_0 \ldots x_r \;\;\; t_0 \ldots t_r \;\;\; (\varphi \frac{t_0 \ldots t_r}{x_0 \ldots x_r} \lor \psi \frac{t_0 \ldots t_r}{x_0 \ldots x_r} )} 
+\mbox{ if $\varphi, \psi \in L^S$}; \\
+\, \\
+\displaystyle 
+\frac{\phantom{\exists x} \varphi \;\;\; x_{i_1} \ldots x_{i_s} \  x \;\;\; t_{i_1} \ldots t_{i_s} \  u \;\;\; \phantom{\exists u} \varphi \frac{t_{i_1} \ldots t_{i_s} \  u }{ x_{i_q} \ldots x_{i_s} \  x }}{\exists x \varphi \;\;\; x_0 \ldots x_r \phantom{\;\;\; x} \;\;\; t_0 \ldots t_r \phantom{\;\;\; u} \;\;\; \exists u \varphi \frac{t_{i_1} \ldots t_{i_s} \  u }{ x_{i_1} \ldots x_{i_s} \  x }} \mbox{ if $\varphi \in L^S$ and}
+\end{array}
+\]
+$x_{i_1} , \ldots , x_{i_s} \; (i_1 < \ldots < i_s)$ are those $x_i$ among $x_0 , \ldots , x_r$ such that $x_i \in \free (\exists x \varphi)$ and $x_i \neq t_i$. And $u$ is the variable $x$ if $x$ does not occur in $t_{i_1}, \ldots , t_{i_s}$, otherwise it is the first variable in the list $v_0 , v_1 , v_2 , \ldots$ which does not occur in $\varphi , t_{i_1} , \ldots , t_{i_s}$.\nolinebreak\hfill$\talloblong$
+%End of III.8.11-----------------------------------------------------------------------------------
+\end{enumerate}
+%End of Section III.8----------------------------------------------------------------------------------------
+%End of Chapter III------------------------------------------------------------------------------------------

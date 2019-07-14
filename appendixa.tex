@@ -1,0 +1,254 @@
+%Appendix A---------------------------------------------------------------------------
+\chapter{On Two Properties of First-Order Peano Axioms}
+%Section A.1--------------------------------------------------------------------------
+This appendix is aimed at giving complete proofs of two properties of first-order Peano axioms $\Phi_\pa$: One is \reftitle{Theorem X.7.3}, the other is ($\ast\ast\ast$) on page 185.
+\section{Formal Arithmetic}
+Recall that $\Phi_\pa$ consists of the following axioms:
+\begin{enumerate}[({PA}1)]
+%
+\item $\forall x \neg x + 1 \equal 0$
+%
+\item $\forall x \forall y (x + 1 \equal y + 1 \limply x \equal y)$
+%
+\item $\forall x \ x + 0 \equal x$
+%
+\item $\forall x \forall y \ x + (y + 1) \equal (x + y) + 1$
+%
+\item $\forall x \ x \mul 0 \equal 0$
+%
+\item $\forall x \forall y \ x \mul (y + 1) \equal x \mul y + x$
+%
+\item (\emph{Axiom scheme}) for all $\seq[1]{x}{n}, y$ and all $\varphi \in \fstordlang{S_\ar}$ such that $\free{\varphi} \subset \setenum{\seq[1]{x}{n}, y}$ the sentence\\$\enump{\forall x_1}{\forall x_n} \parenadj{(\varphi\sbst{0}{y} \land \forall y (\varphi \limply \varphi\sbst{y + 1}{y})) \limply \forall y \varphi}$.
+%
+\end{enumerate}\ \smallskip\\
+We shall prove some basic facts about arithmetic derivable from $\Phi_\pa$ in this section, which will be used several times throughout this appendix.\bigskip\\
+\begin{theorem}{Proposition \thesection.1}
+The following are derivable from $\Phi_\pa$:
+\begin{enumerate}[\rm(a)]
+%
+\item\label{FA1} $\forall x \ 0 + x \equal x$
+%
+\item\label{FA2} $\forall x \ 1 + x \equal x + 1$
+%
+\item\label{FA3} $\forall x \ 0 \mul x \equal 0$
+%
+\item\label{FA4} $\forall x \ 1 \mul x \equal x$.
+%
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{inparaenum}[(a)]
+%
+\item First, we have $\Phi_\pa \derives 0 + 0 \equal 0$ by (PA3). Next, we obtain $\Phi_\pa \setsum \setenum{0 + x \equal x} \derives 0 + (x + 1) \equal x + 1$ by (PA4), and hence $\Phi_\pa \derives \forall x (0 + x \equal x \limply 0 + (x + 1) \equal x + 1)$. The claim follows by (PA7).\medskip\\
+%
+\item First, we have $\Phi_\pa \derives 1 + 0 \equal 0 + 1$ by (PA3) and (\ref{FA1}). Next, we obtain $\Phi_\pa \setsum \setenum{1 + x \equal x + 1} \derives 1 + (x + 1) \equal (x + 1) + 1$ by (PA4), and hence $\Phi_\pa \derives \forall x (1 + x \equal x + 1 \limply 1 + (x + 1) \equal (x + 1) + 1)$. The claim follows by (PA7).\medskip\\
+%
+\item First, we have $\Phi_\pa \derives 0 \mul 0 \equal 0$ by (PA5). Next, we have $\Phi_\pa \setsum \setenum{0 \mul x \equal 0} \derives 0 \mul (x + 1) \equal 0$ by (PA6) and (PA3), so $\Phi_\pa \derives \forall x (0 \mul x \equal 0 \limply 0 \mul (x + 1) \equal 0)$. The claim follows by (PA7).\medskip\\
+%
+\item First, we have $\Phi_\pa \derives 1 \mul 0 \equal 0$ by (PA5). Next, we have $\Phi_\pa \setsum \setenum{1 \mul x \equal x} \derives 1 \mul (x + 1) \equal x + 1$ by (PA6), so $\Phi_\pa \derives \forall x (1 \mul x \equal x \limply 1 \mul (x + 1) \equal x + 1)$. The claim follows by (PA7).
+%
+\end{inparaenum}
+\end{proof}\ \medskip\\
+\begin{theorem}{Lemma on the Associativity of Addition \thesection.2} The sentence
+\[
+\forall x \forall y \forall z \ x + (y + z) \equal (x + y) + z.
+\]
+is derivable from $\Phi_\pa$.
+\end{theorem}
+\begin{proof}
+First, $\Phi_\pa \derives x + (y + 0) \equal (x + y) + 0$ by (PA3), and it follows that $\Phi_\pa \derives \forall x \forall y \ x + (y + 0) \equal (x + y) + 0$. Next, $\Phi_\pa \setsum \setenum{x + (y + z) \equal (x + y) + z} \derives x + (y + (z + 1)) \equal (x + y) + (z + 1)$ by (PA4), so we have $\Phi_\pa \derives \forall x \forall y \forall z \ (x + (y + z) \equal (x + y) + z \limply x + (y + (z + 1)) \equal (x + y) + (z + 1))$. The claim follows by (PA7).
+\end{proof}\ \medskip\\
+By the above lemma, the parentheses in $(x + y) + z$ or $x + (y + z)$ are superfluous. Thus, we shall write $x + y + z$ from now on for brevity.\bigskip\\
+\begin{theorem}{Lemma on the Commutativity of Addition \thesection.3} The sentence
+\[
+\forall x \forall y \ x + y \equal y + x
+\]
+is derivable from $\Phi_\pa$.
+\end{theorem}
+\begin{proof}
+First, $\Phi_\pa \derives x + 0 \equal 0 + x$ by (PA3) and \reftitle{Proposition \thesection.1(\ref{FA1})}, and it follows that $\Phi_\pa \derives \forall x \ x + 0 \equal 0 + x$. Next, $\Phi_\pa \setsum \setenum{x + y \equal y + x} \derives x + (y + 1) \equal (y + 1) + x$ by (PA4), \reftitle{Proposition \thesection.1(\ref{FA2})} and \reftitle{Lemma \thesection.2}, so we have $\Phi_\pa \derives \forall x \forall y (x + y \equal y + x \limply x + (y + 1) \equal (y + 1) + x)$. The claim follows by (PA7).
+\end{proof}\ \medskip\\
+\begin{theorem}{Lemma on the Distribution Laws \thesection.4} The following sentences are derivable from $\Phi_\pa$:
+\begin{enumerate}[\rm(a)]
+%
+\item\label{DLR} $\forall x \forall y \forall z \ x \mul (y + z) \equal x \mul y + x \mul z$
+%
+\item\label{DLL} $\forall x \forall y \forall z \ (x + y) \mul z \equal x \mul z + y \mul z$.
+%
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{inparaenum}[(a)]
+%
+\item First, $\Phi_\pa \derives x \mul (y + 0) \equal x \mul y + x \mul 0$ by (PA3) and (PA5), and it follows that $\Phi_\pa \derives \forall x \forall y \ x \mul (y + 0) \equal x \mul y + x \mul 0$. Next, $\Phi_\pa \setsum \setenum{x \mul (y + z) \equal x \mul y + x \mul z} \derives x \mul (y + (z + 1)) \equal x \mul y + x \mul (z + 1)$ by (PA4), (PA6) and \reftitle{Lemma \thesection.2}, so we have $\Phi_\pa \derives \forall x \forall y \forall z (x \mul (y + z) \equal x \mul y + x \mul z \limply x \mul (y + (z + 1)) \equal x \mul y + x \mul (z + 1))$. The claim follows by (PA7).\medskip\\
+%
+\item First, $\Phi_\pa \derives (x + y) \mul 0 \equal x \mul 0 + y \mul 0$ by (PA3) and (PA5), and it follows that $\Phi_\pa \derives \forall x \forall y \ (x + y) \mul 0 \equal x \mul 0 + y \mul 0$. Next, $\Phi_\pa \setsum \setenum{(x + y) \mul z \equal x \mul z + y \mul z} \derives (x + y) \mul (z + 1) \equal x \mul (z + 1) + y \mul (z + 1)$ by (PA6), \reftitle{Lemmas \thesection.2} and \reftitle{\thesection.3}, so we have $\Phi_\pa \derives \forall x \forall y \forall z ((x + y) \mul z \equal x \mul z + y \mul z \limply (x + y) \mul (z + 1) \equal x \mul (z + 1) + y \mul (z + 1))$. The claim follows by (PA7).
+\end{inparaenum}
+\end{proof}\ \medskip\\
+\begin{theorem}{Lemma on the Associativity of Multiplication \thesection.5} The sentence
+\[
+\forall x \forall y \forall z \ x \mul (y \mul z) \equal (x \mul y) \mul z
+\]
+is derivable from $\Phi_\pa$.
+\end{theorem}
+\begin{proof}
+First, $\Phi_\pa \derives x \mul (y \mul 0) \equal (x \mul y) \mul 0$ by (PA5), and it follows that $\Phi_\pa \derives \forall x \forall y \ x \mul (y \mul 0) \equal (x \mul y) \mul 0$. Next, $\Phi_\pa \setsum \setenum{x \mul (y \mul z) \equal (x \mul y) \mul z)} \derives x \mul (y \mul (z + 1)) \equal (x \mul y) \mul (z + 1)$ by (PA6) and \reftitle{Lemma \thesection.4(\ref{DLR})}, so we have $\Phi_\pa \derives \forall x \forall y \forall z (x \mul (y \mul z) \equal (x \mul y) \mul z \limply x \mul (y \mul (z + 1)) \equal (x \mul y) \mul (z + 1))$. The claim follows by (PA7).
+\end{proof}\ \medskip\\
+By the above lemma, the parentheses in $(x \mul y) \mul z$ or $x \mul (y \mul z)$ are superfluous. Thus, we shall write $x \mul y \mul z$ from now on for brevity.\bigskip\\
+\begin{theorem}{Lemma on the Commutativity of Multiplication \thesection.6} The sentence
+\[
+\forall x \forall y \ x \mul y \equal y \mul x
+\]
+is derivable from $\Phi_\pa$.
+\end{theorem}
+\begin{proof}
+First, $\Phi_\pa \derives x \mul 0 \equal 0 \mul x$ by (PA5) and \reftitle{Proposition \thesection.1(\ref{FA3})}. Next, $\Phi_\pa \setsum \setenum{x \mul y \equal y \mul x} \derives x \mul (y + 1) \equal (y + 1) \mul x$ by (PA6), \reftitle{Proposition \thesection.1(\ref{FA4})} and \reftitle{Lemma \thesection.4(\ref{DLL})}, so we have $\Phi_\pa \derives \forall x \forall y (x \mul y \equal y \mul x \limply x \mul (y + 1) \equal (y + 1) \mul x)$. The claim follows by (PA7).
+\end{proof}\ \medskip\\
+\begin{theorem}{Proposition \thesection.7}
+The sentence\\
+\centerline{$\forall x (\neg x \equal 0 \liff \exists y \ x \equal y + 1)$}\\
+is derivable from $\Phi_\pa$.
+\end{theorem}
+\begin{proof}
+According to (PA1), it suffices to show $\forall x (\neg x \equal 0 \limply \exists y \ x \equal y + 1)$.\medskip\\
+First, it is trivially true that $\Phi_\pa \derives (\neg 0 \equal 0 \limply \exists y \ 0 \equal y + 1)$. Next, the formula $\exists y \ x + 1 \equal y + 1$ is trivially derivable from $\Phi_\pa$, so are the formulas $\neg x + 1 \equal 0 \limply \exists y \ x + 1 \equal y + 1$ and $(\neg x \equal 0 \limply \exists y \ x \equal y + 1) \limply (\neg x + 1 \equal 0 \limply \exists y \ x + 1 \equal y + 1)$. The claim follows by (PA7).
+\end{proof}\ \medskip\\
+\begin{theorem}{Lemma on Cancellation Laws \thesection.8}
+The following sentences are derivable from $\Phi_\pa$:
+\begin{enumerate}[\rm(a)]
+%
+\item $\forall x \forall y \forall z (x + z \equal y + z \limply x \equal y)$
+%
+\item $\forall x \forall y \forall z ((\neg z \equal 0 \land x \mul z \equal y \mul z) \limply x \equal y)$.\\
+%
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{inparaenum}[(a)]
+%
+\item First, $\Phi_\pa \derives \forall x \forall y (x + 0 \equal y + 0 \limply x \equal y)$ by (PA3). Next, $\Phi_\pa \setsum \setenum{\forall x \forall y (x + z \equal y + z \limply x \equal y)} \derives \forall x \forall y (x + (z + 1) \equal y + (z + 1) \limply x \equal y)$ by (PA4), so we have $\Phi_\pa \derives \forall z (\forall x \forall y (x + z \equal y + z \limply x + y) \limply \forall x \forall y (x + (z + 1) \equal y + (z + 1) \limply x \equal y))$. The claim follows by (PA7).\medskip\\
+%
+\item According to \thesection.7, it suffices to show $\forall x \forall y \forall z (x \mul (z + 1) \equal y \mul (z + 1) \limply x \equal y)$.\medskip\\
+First, $\Phi_\pa \derives \forall x \forall y (x \mul (0 + 1) \equal y \mul (0 + 1) \limply x \equal y)$ by (PA5), (PA6) and \reftitle{Proposition \thesection.1(\ref{FA1}). Next, 
+%
+\end{inparaenum}
+\end{proof}\ \medskip\\
+For convenience, we shall write $\numl{n}$ for $\underbrace{1 \enump{+}{+} 1}_{\mbox{\scriptsize\(n\)-times}}$. In particular, $\numl{0}$ will stand for $0$.\bigskip\\
+\begin{theorem}{Proposition \thesection.9}
+\begin{enumerate}[\rm(a)]
+%
+\item\label{OPADD} $\Phi_\pa \derives \numl{m} + \numl{n} \equal \numl{m + n}$
+%
+\item\label{OPMUL} $\Phi_\pa \derives \numl{m} \mul \numl{n}  \equal \numl{m \mul n}$
+%
+\end{enumerate}
+\end{theorem}
+\begin{proof} We use induction on $n$ in both cases.\medskip\\
+\begin{inparaenum}[(a)]
+%
+\item The base case $n = 0$ is trivial by (PA3). For the induction step $n = k + 1$, assume that $\Phi_\pa \derives \numl{m} + \numl{k} \equal \numl{m + k}$. Then $\Phi_\pa \derives \numl{m} + \numl{k + 1} \equal \numl{m + (k + 1)}$ by induction hypothesis and \reftitle{Lemma \thesection.2}.\medskip\\
+%
+\item The base case $n = 0$ is trivial by (PA5). For the induction step $n = k + 1$, assume that $\Phi_\pa \derives \numl{m} \mul \numl{k} \equal \numl{m \mul k}$. Then $\Phi_\pa \derives \numl{m} \mul \numl{k + 1} \equal \numl{m \mul (k + 1)}$ by induction hypothesis, (PA6) and part (\ref{OPADD}).
+%
+\end{inparaenum}
+\end{proof}\ \medskip\\
+We say that $t \in \term{S_\ar}$ is \emph{variable-free} if there is no variable in it. For example, $\numl{2} \mul \numl{3} + \numl{1}$ and $(\numl{0} + \numl{2}) \mul \numl{1}$ are variable-free terms. Note that if $t$ is variable-free, then there is an $n \in \nat$ such that $\natstr \models t \equal \numl{n}$.\bigskip\\
+Using the above proposition, we immediately obtain:\medskip\\
+\begin{theorem}{Lemma \thesection.10}
+Let $t \in \term{S_\ar}$ be variable-free. Then $\Phi_\pa \derives t \equal \numl{n}$ provided that $\natstr \models t \equal \numl{n}$.\qed
+\end{theorem}\medskip\\
+\begin{theorem}{Lemma \thesection.11}
+If $m \neq n$, then $\Phi_\pa \derives \neg \numl{m} \equal \numl{n}$.
+\end{theorem}
+\begin{proof}
+We only prove the case in which $n < m$, the case $m < n$ can be addressed similarly: We have $\numl{m - n} = \numl{m - n - 1} + 1$, so $\Phi_\pa \derives \neg \numl{0} \equal \numl{m - n}$ by (PA1); repeatedly applying (PA2) $n$ times, we obtain $\Phi_\pa \derives \neg \numl{m} \equal \numl{n}$.
+\end{proof}\ \medskip\\
+By the above two lemmas, we immediately obtain:\medskip\\
+\begin{theorem}{Lemma \thesection.12}
+Let $t_1, t_2 \in \term{S_\ar}$ be variable-free. Then either $\Phi_\pa \derives t_1 \equal t_2$ or $\Phi_\pa \derives \neg t_1 \equal t_2$. Moreover, $\natstr \models t_1 \equal t_2$ \quad iff \quad $\Phi_\pa \derives t_1 \equal t_2$.\qed
+\end{theorem}\ \bigskip\\
+For the goal of this appendix, we shall discover a special set of $S_\ar$-formulas, the so-called \emph{$\Sigma_1$-formulas}. Before that, we introduce the following abbreviations:\medskip\\
+\begin{definition}{Abbreviations}
+From now on, we use $t_1 \leq t_2$ to abbreviate\\
+\centerline{$\exists x \ t_1 + x \equal t_2$,}\\
+where $x \not\in \var{t_1} \setsum \var{t_2}$. Also,\\
+\centerline{$t_1 \leq t_2 \land \neg t_1 \equal t_2$ }\\
+is abbreviated by $t_1 < t_2$.
+\end{definition}\bigskip\\
+\begin{definition}{Abbreviations}
+We write $(\exists x \leq t) \varphi$ and $(\exists x < t) \varphi$ for\\
+\centerline{$\exists x (x \leq t \land \varphi)$}\\
+and\\
+\centerline{$\exists x (x < t \land \varphi)$,}\\
+respectively. Also, $(\forall x \leq t) \varphi$ will stand for $\neg(\exists x \leq t) \neg\varphi$ and $(\forall x < t) \varphi$ for $\neg(\exists x < t) \neg\varphi$.
+\end{definition}\bigskip\\
+\begin{theorem}{Propositions (That Has Not Yet Been Proven)}
+The following are derivable from $\Phi_\pa$:
+\begin{enumerate}[\rm(1)]
+%
+\item $0 \leq x$
+%
+\item $(x < y \land y < z) \limply x < z$
+%
+\item $\neg x < x$
+%
+\item $(x \leq y \land y \leq x) \limply x \equal y$
+%
+\item $x < y \limply x + 1 < y + 1$
+%
+\item $x < y \liff x + 1 \leq y$
+%
+\item $x < y \lor x \equal y \lor y < x$
+%
+\item $x < y \limply x + z < y + z$
+%
+\item $x + z < y + z \limply x < y$
+%
+\item $0 < z \limply x + 1 \leq x + z$
+%
+\item $(0 < z \land x < y) \limply x \mul z < y \mul z$
+%
+\item $(0 < z \land x \mul z \equal y \mul z) \limply x \equal y$
+%
+\item $(x < y \land z < w) \limply x + z < y + w$
+%
+\item $(x < y \land z < w) \limply x \mul z < y \mul w$
+%
+\end{enumerate}
+\end{theorem}\ \medskip\\
+The following proposition, which can be proven easily, will turn out to be useful and will be referred to throughout this appendix.\bigskip\\
+\begin{theorem}{Proposition}
+The following are derivable from $\Phi_\pa$:
+\begin{enumerate}[\rm(a)]
+%
+\item\label{OR4} $\forall x \forall y (x + y \equal x \limply y \equal 0)$.
+%
+\item\label{OR5} $\forall x \forall y (x < y \limply \neg x \equal y)$.
+%
+\item\label{OR6} $(\forall x \leq \numl{n}) \blor\limits^n_{i = 0} x \equal \numl{i}$.
+%
+\item $\forall x (\neg x \equiv 0 \rightarrow \exists y \ x \equiv y + 1)$.
+%
+\item $\forall x (1 + x \equiv x + 1)$.
+%
+\item $\forall x (x \equiv 0 \lor 0 < x)$.
+%
+\item $\forall x \forall y (\neg x \equiv y \rightarrow (x < y \lor y < x))$.
+%
+\item $\forall x (\neg x \equiv \mbf{n} \rightarrow (x < \mbf{n} \lor \mbf{n} < x))$, for $n \in \nat$.
+%
+\item $\forall x \forall y (x < y \rightarrow \neg(x \equiv y \lor y < x))$.
+%
+\item $\forall x \forall y \forall z (x + z \equiv y + z \rightarrow x \equiv y)$.
+%
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{inparaenum}[(a)]
+%
+\item Immediately follows from definition.\medskip\\
+%
+\item Obviously $\Phi_\pa \vdash 0 < \mbf{n + 1} \rightarrow \bigvee\limits^n_{i = 0} 0 \equiv \mbf{n}$. Next, by definition $\Phi_\pa \cup \{ x + 1 < \mbf{n + 1} \} \vdash \exists y (\neg y \equiv 0 \land (x + 1) + y \equiv \mbf{n + 1})$, with (c) and other axioms we have $\Phi_\pa \cup \{ x + 1 < \mbf{n + 1} \} \vdash x < \mbf{n + 1}$. This together with (e) entails $\Phi_\pa \cup \{ x < \mbf{n + 1} \rightarrow \bigvee\limits^n_{i = 0} x \equiv \mbf{i} \} \vdash x + 1 < \mbf{n + 1} \rightarrow \bigvee\limits^n_{i = 0} x + 1 \equiv \mbf{i}$. Induction schema yields the result.
+%
+\end{inparaenum}
+\end{proof}

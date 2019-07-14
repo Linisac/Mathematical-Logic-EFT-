@@ -1,0 +1,151 @@
+\textbf{\Large Predicates}
+\begin{enumerate}[1.]
+%
+\item (INCOMPLETE) The binary relation $P_\in(x, y)$ states that the number $x$ is a member of the set coded by $y$.
+%
+\item The unary relation $P_\assm(x)$ states that the sequent coded by $x$ results from applying the rule $\assm$:
+\[
+P_\in(\pi_2(x), \pi_1(x)).
+\]
+%
+\item The unary relation $P_{=\emptyset}(x)$ states that the set coded by $x$ is empty:
+\[
+x \equal 0.
+\]
+%
+\item The unary relation $P_\eq(x)$ states that the sequent coded by $x$ results from applying the rule $\eq$:
+\[
+\begin{array}{l}
+P_{=\emptyset}(\pi_1(x)) \land \cr
+(\exists y < x + 1)(\pi_2(x) \equal 4 \mul y \land \pi_1(y) \equal \pi_2(y))
+\end{array}
+\]
+%
+\item (INCOMPLETE) The binary relation $P_\subset(x, y)$ states that the set coded by $x$ is a subset of the set coded by $y$.
+%
+\item The binary relation $P_\ant(x, y)$ states that the sequent coded by $y$ results from applying the rule $\ant$ to the sequent coded by $x$:
+\[
+P_\subset (\pi_1 (x), \pi_1 (y)) \land \pi_2 (x) \equiv \pi_2 (y).
+\]
+%
+\item The ternary relation $P_\pc(x, y, z)$ states that the sequent coded by $z$ results from applying the rule $\pc$ to the sequents coded by $x$ and $y$:
+\[
+\begin{array}{l}
+(\exists u < \pi_1(x))(\exists v < \pi_1(x)) \cr
+(\pi_1(x) \equal union(u, sing(v)) \land \cr
+\pi_1(y) \equal union(u, sing(4 \mul v + 1)) \land \cr
+\pi_2(x) \equal \pi_2(y) \land \cr
+\pi_1(z) \equal u \land \cr
+\pi_2(z) \equal \pi_2(x)).
+\end{array}
+\]
+%
+\item The ternary relation $P_\ctr(x, y, z)$ states that the sequent coded by $z$ results from applying the rule $\ctr$ to the sequents coded by $x$ and $y$:
+\[
+\begin{array}{l}
+(\exists u < \pi_1(x))(\exists v < \pi_1(x)) \cr
+(\pi_1(x) \equal union(u, sing(4 \mul v + 1)) \land \cr
+\pi_1(y) \equal union(u, sing(4 \mul v + 1)) \land \cr
+\pi_2(y) \equal 4 \mul \pi_2(x) + 1 \land \cr
+\pi_1(z) \equal u \land \cr
+\pi_2(z) \equal v).
+\end{array}
+\]
+%
+\item The ternary relation $P_\ora(x, y, z)$ states that the sequent coded by $z$ results from applying the rule $\ora$ to the sequents coded by $x$ and $y$:
+\[
+\begin{array}{l}
+(\exists u < \pi_1(x))(\exists v < \pi_1(x))(\exists t < \pi_1(y)) \cr
+(\pi_1(x) \equal union(u, sing(v)) \land \cr
+\pi_1(y) \equal union(u, sing(t)) \land \cr
+\pi_1(z) \equal union(u, sing(4 \mul \pi(v, t) + 2)) \land \cr
+\pi_2(x) \equal \pi_2(y) \land \cr
+\pi_2(y) \equal \pi_2(z)).
+\end{array}
+\]
+%
+\item The binary relation $P_\ors(x, y)$ states that the sequent coded by $y$ results from applying the rule $\ors$ to the sequent coded by $x$:
+\[
+\begin{array}{l}
+(\exists z < y + 1) \cr
+(\pi_1(x) \equal \pi_1(y) \land \cr
+\ (\pi_2(y) \equal 4 \mul \pi(\pi_2(x), z) + 2 \lor \pi_2(y) \equal 4 \mul \pi(z, \pi_2(x)) + 2)).
+\end{array}
+\]
+($z$ codes $\psi$).
+%
+\item The binary relation $P_\ea(x, y)$ states that the sequent coded by $y$ results from applying the rule $\ea$ to the sequent coded by $x$:
+\[
+\begin{array}{l}
+(\exists z < x + y + 1)(\exists t < x + y + 1)(\exists u < x + y + 1)(\exists v < x + y + 1) \cr
+(\pi_1(x) \equal union(z, sing(fsub(t, u, 3v))) \land \cr
+\ \pi_1(y) \equal union(z, sing(4\pi(u, t) + 3)) \land \cr
+\ (\forall w < z)(P_\in(w, z) \limply \neg P_\in(v, free(w))) \land \cr
+\ \neg P_\in(v, free(4\pi(u, t) + 3)) \land \cr
+\ \neg P_\in(v, \pi_2(x)) \land \cr
+\ \pi_2(x) \equal \pi_2(y)).
+\end{array}
+\]
+($z$ codes $\Gamma$, $t$ codes $\varphi$, $u$ codes $x$, $v$ codes $y$.)
+%
+\item The binary relation $P_\es(x, y)$ states that the sequent coded by $y$ results from applying the rule $\es$ to the sequent coded by $x$:
+\[
+\begin{array}{l}
+(\exists z < x + y + 1)(\exists t < x + y + 1)(\exists u < x + y + 1)(\exists v < x + y + 1) \cr
+(\pi_1(x) \equal z \land \cr
+\ \pi_1(y) \equal z \land \cr
+\ \pi_2(x) \equal fsub(t, u, v) \land \cr
+\ \pi_2(y) \equal 4\pi(u, t) + 3).
+\end{array}
+\]
+($z$ codes $\Gamma$, $t$ codes $\varphi$, $u$ codes $x$, $v$ codes $t$.)
+%
+\item The binary relation $P_\sub(x, y)$ states that the sequent coded by $y$ results from applying the rule $\sub$ to the sequent coded by $x$:
+\[
+\begin{array}{l}
+(\exists z < x + y + 1)(\exists t < x + y + 1)(\exists u < x + y + 1)(\exists v < x + y + 1) \cr
+(\pi_1(y) \equal union(\pi_1(x), sing(4\pi(u, v))) \land \cr
+\ \pi_2(x) \equal fsub(z, t, u) \land \cr
+\ \pi_2(y) \equal fsub(z, t, v)).
+\end{array}
+\]
+($z$ codes $\varphi$, $t$ codes $x$, $u$ codes $t_1$, $v$ codes $t_2$.)
+%
+\item The ternary relation $\varphi_{mp}(x, y, z)$ states that the sequent coded by $z$ is obtained by applying \emph{modus ponens} to the sequents coded by $x$ and $y$:
+\[
+ant(x) \equal ant(y) \land ant(y) \equal ant(z) \land suc(x) \equal imp(suc(y), suc(z)).
+\]
+(We introduce this relation for significantly reducing the complexity of the main lemma.)
+%
+\item The unary relation $\varphi_{dvn}(x)$ which states that $x$ codes a derivation:
+\[
+\begin{array}{l}
+(P_\assm(index(x, 0)) \lor P_\eq(index(x, 0))) \land \cr
+\ \cr
+(1 < leng(x) \limply \cr
+\ (P_\assm(index(x, 1)) \lor \cr
+\ P_\ant(index(x, 0), index(x, 1)) \lor \cr
+\ P_\ors(index(x, 0), index(x, 1)) \lor \cr
+\ P_\ea(index(x, 0), index(x, 1)) \lor \cr
+\ P_\es(index(x, 0), index(x, 1)) \lor \cr
+\ P_\eq(index(x, 1)) \lor \cr
+\ P_\sub(index(x, 0), index(x, 1)))) \land \cr
+\ \cr
+(\forall n < leng(x)) \cr
+(2 < n + 1 \limply (\mbox{all rules including mp})).
+\end{array}
+\]
+%
+\item The unary relation $\varphi_{dvn\Phi}(x)$ states that $x$ codes a derivation in $\Phi$:
+\[
+\varphi_{dvn}(x) \land (\forall y < x)(\varphi_\in(y, ant(last(x))) \limply \varphi_\Phi(y)).
+\]
+($\varphi_\Phi(x)$ states that $x$ is an axiom from $\Phi$; we shall require it be $\Sigma_1$.)
+%
+\item For the formula $\varphi_H(x, y)$ the following is chosen
+\[
+\varphi_{dvn\Phi}(y) \land suc(last(y)) \equal x.
+\]
+%
+\end{enumerate}
+\ \\

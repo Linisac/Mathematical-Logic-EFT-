@@ -1,0 +1,434 @@
+%Chapter VI--------------------------------------------------------------------------------------------------
+{\LARGE \bfseries VI \\ \\ The L\"{o}wenheim-Skolem Theorem\\ \\and the Compactness Theorem}
+\\
+\\
+\\
+%Section VI.1--------------------------------------------------------------------------------------
+{\large \S1. The L\"{o}wenheim-Skolem Theorem}
+\begin{enumerate}[1.]
+\item \textbf{Note to the Proof of L\"{o}wenheim-Skolem Theorem.} The proof is divided into cases concerning whether $\Phi$ contains formulas other than sentences: it is done so in order to apply the results in V.1 and V.2 directly.\newline
+\\
+Notice that in the second case, the term interpretation $\mathfrak{I}^{\Phi^\prime}$ (the one also discussed in V.2.4) only applies to set $\Phi^\prime$ of \textit{sentences}. However, it is easy to settle this problem (by the Coincidence Lemma): just define $\beta$ accordingly as in the proof of V.2.4, then it implies from the Substitution Lemma that $\mathfrak{I}^{\Phi^\prime} \models \Phi$.
+%
+\item \textbf{Note to the ``Downward'' L\"{o}wenheim-Skolem Theorem.} The proof for this theorem follows from (part of) the discussion in \textbf{Note to the Proof of Lemma 3.1} in the annotations to Chapter V, and additionally from the fact: The domain $A$ of the interpretation constructed out of the proofs in V.1 and V.3 consists of classes $\overline{t}$ of terms, where $t$ ranges over $T^{S^\prime}$. Since $T^{S^\prime}$ is of the same size as $L^S$ (cf. the note mentioned above), it follows that the cardinality of $A$ is not greater than that of $L^S$.\newline
+\ 
+\\Recall that this is all concerned with Henkin's \emph{constructive} method, which we applied to prove the Completeness Theorem in Chapter V. A \emph{by-product} for this method is the Downward L\"{o}wenheim-Skolem Theorem. In other words, this method proves the \emph{combination} of them:
+\begin{quote}
+\emph{If $\Phi \subset L^S$ is consistent, then it is satisfiable over a domain of cardinality not greater than the cardinality of $L^S$.}
+\end{quote}
+This can be illustrated by
+\begin{quote}
+Henkin's method $\Rightarrow$ the Completeness Theorem $+$ the Downward L\"{o}wenheim-Skolem Theorem.
+\end{quote}
+From this point it is clear that the (Downward) L\"{o}wenheim-Skolem Theorem itself has nothing to do with the Completeness Theorem. It will be manifested when we encounter extensions of first-order logic in Chapter IX.
+%
+\item \textbf{Note to the Paragraph after the ``Downward'' L\"{o}wenheim-Skolem Theorem in Page 88.} Similar to $\mathfrak{R}^<$, the field $\mathfrak{R}$ of real numbers cannot be characterized by a set $\Phi$ of $S_{\mbox{\scriptsize ar}}$-sentences.
+%
+\item \textbf{Solution to Exercise 1.3.} Let $\Phi$ be an at most countable set of formulas which is satisfiable over an infinite domain $A$. Let
+\[
+\Psi := \Phi \cup \{ \varphi_{\geq n} | 2 \leq n \}.
+\]
+Then $\sat \Psi$ (the infinite model $(\mathfrak{A}, \beta)$ of $\Phi$ described earlier is also a model of $\Psi$). By 1.2, $\Psi$ is satisfiable over an at most countable domain. But since $\Psi$ is only satisfiable over infinite models, the at most countable domain must be countable. Let $\mathfrak{I}$ be a model of $\Psi$ with this countable domain, then $\mathfrak{I} \models \Phi$. \begin{flushright}$\talloblong$\end{flushright}
+\end{enumerate}
+%End of Section VI.1-------------------------------------------------------------------------------
+\ 
+\\
+\\
+%VI.2----------------------------------------------------------------------------------------------
+{\large \S2. The Compactness Theorem}
+\begin{enumerate}[1.]
+\item \textbf{Note to the Compactness Theorem.} In all situations, it is a direct consequence of the Completeness Theorem together with the Correctness Theorem (or equivalently the Adequacy Theorem). Furthermore, recall that in \textbf{Note to the Correctness (Theorem), the Completeness (Theorem), and the Adequacy (Theorem) of a Sequent Calculus} in the annotations to Chapter V, there we stated that the Correctness Theorem is usually insignificant. Thus whenever the Completeness Theorem holds for a sequent calculus for a logical system, the Compactness Theorem holds as well.\footnote{This fact is often useful when proving the Completeness Theorem does \emph{not} hold, by showing the Compactness Theorem does not hold, cf. Chapter IX.} In this sense, therefore, the Completeness Theorem is logically equivalent to the conjunction of the Compactness Theorem and the \emph{completeness}, which might be described by an ``equation'' of mathematical flavor:
+\begin{center}
+Completeness Theorem $=$ Compactness Theorem $+$ completeness.
+\end{center}
+To verify the above statement holds, we need only to check the right implies the the left, as follows: For all $\Phi$ and $\varphi$,\\
+\begin{tabular}{ll}
+if   & $\Phi \models \varphi$ \cr
+then & there is a finite $\Phi_0 \subset \Phi$ such that $\Phi_0 \models \varphi$ \cr
+\    & (by the Compactness Theorem) \cr
+iff  & there is a finite $\Phi_0 \subset \Phi$ such that $\Gamma \models \varphi$, where $\Gamma$ is a sequent \cr
+\    & that consists of the formulas in $\Phi_0$ \cr
+then & there is a finite $\Phi_0 \subset \Phi$ such that $\Gamma \vdash \varphi$, where $\Gamma$ is a sequent \cr
+\    & that consists of the formulas in $\Phi_0$ (by the completeness) \cr
+iff  & there is a finite $\Phi_0 \subset \Phi$ such that $\Phi_0 \vdash \varphi$ \cr
+then & $\Phi \vdash \varphi$.
+\end{tabular}
+%
+\item \textbf{Note to Theorem 2.2.} A direct consequence of it is:
+\begin{quote}
+\emph{There is no set of first-order formulas $\Phi$ that characterizes interpretations of finite domain, i.e.\ there is no $\Phi$ such that for all interpretations $\intp = \intpp{\struct{A}}{\beta}$, ($\intp \models \Phi$ \quad iff \quad $A$ is finite).}
+\end{quote}
+\begin{proof}
+If $\Phi$ were such a set, then by 2.2 it would have an \emph{infinite} model $\intp$, a contradiction.
+\end{proof}
+%
+\item \textbf{Note to the Theorem of L\"{o}wenheim, Skolem and Tarski 2.4.} An immediate consequence of this theorem is that \emph{any negation complete set of formulas does not characterize a structure up to isomorphism}.
+%
+\item \textbf{Solution to Exercise 2.5.} Let
+\[
+\begin{array}{ll}
+\mathcal{T} := \{T \subset \Sigma | &\mbox{there is a set $\Phi_{\Sigma \setminus T} \subset L_0^S$}\\
+\  &\mbox{\ \ \ such that } \Sigma \setminus T = \{ \mathfrak{A} \in \Sigma | \mathfrak{A} \models \Phi_{\Sigma \setminus T} \} \}.
+\end{array}
+\]
+We verify that $\mathcal{T}$ is a topology on $\Sigma$ as follows:
+\begin{enumerate}[(1)]
+\item $\emptyset \in \mathcal{T}$: Let $\Phi_{\Sigma \setminus \emptyset} := \emptyset$ since $\Sigma \setminus \emptyset = \Sigma$ and for every $\mathfrak{A} \in \Sigma$, $\mathfrak{A} \models \emptyset$.\\
+$\Sigma \in \mathcal{T}$: Let $\Phi_{\Sigma \setminus \Sigma} := \{\exists x \neg x \equiv x \}$ since $\Sigma \setminus \Sigma = \emptyset$ and for every $\mathfrak{A} \in \Sigma$, not $\mathfrak{A} \models \exists x \neg x \equiv x$.
+%%
+\item Suppose that $T_1$ and $T_2$ are members of $\mathcal{T}$. Then $T_1 \cap T_2$ is also a member of $\mathcal{T}$: Let $\Phi_{\Sigma \setminus (T_1 \cap T_2)} := \{ (\varphi_1 \lor \varphi_2 | \varphi_1 \in \Phi_{\Sigma \setminus T_1}, \varphi_2 \in \Phi_{\Sigma \setminus T_2} \}$.
+%%
+\item Suppose that $\{ T_i | i \in I \}$ is a family of members of $\mathcal{T}$. Then $\bigcup_{i \in I} T_i$ is also a member of $\mathcal{T}$: Let $\Phi_{\Sigma \setminus \bigcup_{i \in I} T_i} := \bigcup_{i \in I} \Phi_{\Sigma \setminus T_i}$ (since $\Sigma \setminus \bigcup_{i \in I} T_i = \bigcap_{i \in I} (\Sigma \setminus T_i)$).
+\end{enumerate}
+\ 
+\\
+\begin{enumerate}[(a)]
+\item Let $T \in \mathcal{T}$. Then there is a set $\Phi_{\Sigma \setminus T}$ of $S$-sentences such that
+\[
+\Sigma \setminus T = \{ \mathfrak{A} \in \Sigma | \mathfrak{A} \models \Phi_{\Sigma \setminus T} \}.
+\]
+Therefore, $\Sigma \setminus T = \bigcap_{\varphi \in \Phi_{\Sigma \setminus T}} X_\varphi$. And we have that
+\[
+\begin{array}{lll}
+T & = & \Sigma \setminus \bigcap_{\varphi \in \Phi_{\Sigma \setminus T}} X_\varphi \\
+\ & = & \bigcup_{\varphi \in \Phi_{\Sigma \setminus T}} (\Sigma \setminus X_\varphi) \\
+\ & = & \bigcup_{\varphi \in \Phi_{\Sigma \setminus T}} X_{\neg \varphi} .
+\end{array}
+\]
+(Note that
+\[
+\begin{array}{lll}
+\Sigma \setminus X_\varphi & = & \Sigma \setminus \{\mathfrak{A} \in \Sigma | \mathfrak{A} \models \varphi \} \\
+\ & = & \{\mathfrak{A} \in \Sigma | \mbox{ not $\mathfrak{A} \models \varphi$}\} \\
+\ & = & \{\mathfrak{A} \in \Sigma | \mathfrak{A} \models \neg \varphi \} \\
+\ & = & X_{\neg \varphi} \mbox{\ \ .)}
+\end{array}
+\]
+Hence $\{ X_\varphi | \varphi \in L_0^S \}$ is a basis for $\mathcal{T}$.
+%%
+\item Since $\Sigma \setminus X_\varphi = X_{\neg \varphi}$ (see above) is a member of $\mathcal{T}$ (actually both $X_\varphi$ and $X_{\neg \varphi}$ are members of $\mathcal{T}$), i.e. $\Sigma \setminus X_\varphi$ is open, $X_\varphi$ is closed.
+%%
+\item Let $\{T_i \in \mathcal{T} | i \in I \}$ be an open covering of $\Sigma$, i.e. $\Sigma \subset \bigcup_{i \in I} T_i$. From the fact that $\mathcal{T}$ is a topology we have that $\bigcup_{i \in I} T_i \in \mathcal{T}$. Therefore $\bigcup_{i \in I} T_i \subset \Sigma$. Hence
+\[
+\bigcup_{i \in I} T_i = \Sigma,
+\]
+and we have that
+\[
+\bigcap_{i \in I} (\Sigma \setminus T_i) = \emptyset,
+\]
+i.e. $\bigcup_{i \in I} \Phi_{\Sigma \setminus T_i}$ is inconsistent.\\
+\\
+From IV.7.2(b), there is a $\varphi \in L_0^S$ such that $\bigcup_{i \in I} \Phi_{\Sigma \setminus T_i} \vdash (\varphi \land \neg \varphi)$, or equivalently $\bigcup_{i \in I} \Phi_{\Sigma \setminus T_i} \models (\varphi \land \neg \varphi)$ (by the Adequacy Theorem V.4.2). From the Compactness Theorem (VI.2.1(a)), there is a finite subset $\Phi_0$ of $\bigcup_{i \in I} \Phi_{\Sigma \setminus T_i}$ such that $\Phi_0 \models (\varphi \land \neg \varphi)$. Clearly there is a finite subset $I_0$ of $I$ such that
+\[
+\Phi_0 \subset \bigcup_{i \in I_0} \Phi_{\Sigma \setminus T_i},
+\]
+and hence $\bigcup_{i \in I_0} \Phi_{\Sigma \setminus T_i} \models (\varphi \land \neg \varphi)$, or equivalently
+\[
+\bigcap_{i \in I_0} (\Sigma \setminus T_i) = \emptyset,
+\]
+i.e. $\bigcup_{i \in I_0} T_i = \Sigma$. Then $\{ T_i \in \mathcal{T} | i \in I_0 \}$ is a finite subcovering, i.e. $\Sigma$ is (quasi-)compact. \begin{flushright}$\talloblong$\end{flushright}
+\end{enumerate}
+%End of VI.2.5-----------------------------------------------------------------------------------------------
+\end{enumerate}
+%End of Section VI.2-----------------------------------------------------------------------------------------
+\ 
+\\
+\\
+%Section VI.3------------------------------------------------------------------------------------------------
+{\large \S3. Elementary Classes}
+\begin{enumerate}[1.]
+%VI.3.7------------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 3.7.} Let $\mathfrak{K} := \modelclass{S}{\Phi}$. Then $\mathfrak{K}^\infty := \modelclass{S}{(\Phi \cup \{\varphi_{\geq n} | 2 \leq n \})}$. \begin{flushright}$\talloblong$\end{flushright}
+%End of VI.3.7-----------------------------------------------------------------------------------------------
+%
+%VI.3.8------------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 3.8.}
+\begin{enumerate}[(a)]
+\item Suppose $\mathfrak{K}$ is elementary. Let $\mathfrak{K} := \modelclass{S}{\varphi}$. Then take $\Phi := \{ \varphi \}$. Conversely, suppose $\mathfrak{K} := \modelclass{S}{\Phi}$ where $\Phi$ is finite. Let $\Phi := \{ \varphi_n | n \leq n_0 \}$ for some $n_0 \in \mathbb{N}$. Then $\Phi \models \bigwedge_{n \leq n_0} \varphi_n$ and $\bigwedge_{n \leq n_0} \varphi_n \models \varphi_n$ for all $n \leq n_0$. Therefore $\mathfrak{K} = \modelclass{S}{\bigwedge_{n \leq n_0} \varphi_n}$.
+%%
+\item If $\Phi$ is finite, then the proof is complete from (a). So let us assume that $\Phi$ is infinite. Since $\mathfrak{K}$ is elementary, $\mathfrak{K} = \modelclass{S}{\varphi}$ for some sentence $\varphi$. Therefore $\Phi \models \varphi$ and $\varphi \models \varphi^\prime$ for all $\varphi^\prime \in \Phi$.\\
+On the one hand, since $\Phi \models \varphi$, there is a finite subset $\Phi_0 \subset \Phi$ such that $\Phi_0 \models \varphi$ by the Compactness Theorem. Hence $\modelclass{S}{\Phi_0} \subset \modelclass{S}{\varphi}$.\\
+On the other hand, since $\varphi \models \varphi^\prime$ for all $\varphi^\prime \in \Phi$, $\varphi \models \varphi^\prime$ for all $\varphi^\prime \in \Phi_0$ (note that $\Phi_0 \subset \Phi$). Hence $\modelclass{S}{\varphi} \subset \modelclass{S}{\Phi_0}$.\\
+We have that $\modelclass{S}{\varphi} = \modelclass{S}{\Phi_0}$, i.e. $\mathfrak{K} = \modelclass{S}{\Phi_0}$.
+\end{enumerate} \begin{flushright}$\talloblong$\end{flushright}
+%End of VI.3.8-----------------------------------------------------------------------------------------------
+%
+%VI.3.9------------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 3.9.} Let $\mathfrak{K} := \modelclass{S}{\varphi_0}$ and $\mathfrak{K}_1 := \modelclass{S}{\Phi_1}$.
+\begin{enumerate}[(a)]
+\item \textit{If $\mathfrak{K}_1$ is elementary then $\mathfrak{K}_2$ is elementary}: Let $\mathfrak{K}_1 := \modelclass{S}{\varphi_1}$, then $\mathfrak{K}_2 = \modelclass{S}{\varphi_0 \land \neg\varphi_1}$.\\
+\\
+\textit{If $\mathfrak{K}_2$ is elementary then $\mathfrak{K}_2$ is $\Delta$-elementary}: By definition 3.1. (See the discusssion below it.)\\
+\\
+\textit{If $\mathfrak{K}_2$ is $\Delta$-elementary then $\mathfrak{K}_1$ is elementary}: If $\mathfrak{K}_1 = \emptyset$ or $\mathfrak{K}_2 = \emptyset$, then $\mathfrak{K}_1$ and $\mathfrak{K}_2$ are trivially elementary. For example, if $\mathfrak{K}_1 = \emptyset$, then  $\mathfrak{K}_1 = \modelclass{S}{(\varphi \land \neg \varphi)}$ for arbitrary $\varphi$, and $\mathfrak{K}_2 = \modelclass{S}{\varphi_0}$. The case that $\mathfrak{K}_2 = \emptyset$ is similar.\\
+\\
+Suppose that $\mathfrak{K}_1 \not = \emptyset$ and $\mathfrak{K}_2 \not = \emptyset$. Let $\mathfrak{K}_2 := \modelclass{S}{\Phi_2}$. Since $\modelclass{S}{(\Phi_1 \cup \Phi_2)} = \mathfrak{K}_1 \cap \mathfrak{K}_2 = \emptyset$, i.e. $\Phi_1 \cup \Phi_2$ is not satisfiable, there is a finite subset $\Phi_0 \subset \Phi_1 \cup \Phi_2$ such that $\Phi_0$ is not satisfiable, by the Compactness Theorem, 2.1(b).\\
+\\
+Moreover, $\Phi_0 \cap \Phi_1 \not = \emptyset$ and $\Phi_0 \cap \Phi_2 \not = \emptyset$. Because if $\Phi_0 \cap \Phi_1 = \emptyset$ then $\Phi_0 \subset \Phi_2$, which implies that $\Phi_2$ is not satisfiable (since $\Phi_0$ is not satisfiable), which in turn implies that $\mathfrak{K}_2 = \emptyset$, contrary to the assumption. The argument for $\Phi_0 \cap \Phi_2 \not = \emptyset$ is similar.\\
+\\
+\setcounter{equation}{0}
+Hence, let $\Phi_1^\prime := \Phi_0 \cap \Phi_1$, $\Phi_2^\prime := \Phi_0 \cap \Phi_2$. Then
+\begin{equation}
+(\modelclass{S}{\Phi_1^\prime}) \cap \mathfrak{K}_2 = \emptyset \label{eq1}
+\end{equation}
+(otherwise it would be that $\Phi_1^\prime \cup \Phi_2$ is satisfiable, which implies that $\Phi_1^\prime \cup \Phi_2^\prime = \Phi_0$ is also satisfiable, contrary to the previous result) and $(\modelclass{S}{\Phi_2^\prime}) \cap \mathfrak{K}_1 = \emptyset$ (the argument is similar).\\
+\\
+It is clear that
+\begin{equation}
+\modelclass{S}{\Phi_1} \subset \modelclass{S}{\Phi_1^\prime}. \label{eq2}
+\end{equation}\\
+\\
+From (\ref{eq1}) and (\ref{eq2}) we have that
+\[
+\mathfrak{K}_1 = \modelclass{S}{(\Phi_1^\prime \cup \{ \varphi_0 \})}.
+\]
+Since $\Phi_1^\prime$ is finite (note that $\Phi_0 \supset \Phi_1^\prime$ is finite), $\Phi_1^\prime \cup \{ \varphi_0 \}$ is also finite. As it turns out, $\mathfrak{K}_1$ is elementary by Exercise 3.8(a). Similarly, $\mathfrak{K}_2$ is elementary.
+%%
+\item The class of fields is elementary by 3.2; the class of fields of characteristic $0$ is $\Delta$-elementary but not elementary from the discussions below 3.3 and below 3.4. From (a) we conclude that the class of fields whose characteristic is a prime is not $\Delta$-elementary.
+\end{enumerate} \begin{flushright}$\talloblong$\end{flushright}
+%End of VI.3.9-----------------------------------------------------------------------------------------------
+%
+%VI.3.10-----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 3.10.}
+\begin{enumerate}[(a)]
+\item Let $\Phi := \{ \varphi_0, \ldots, \varphi_{n-1} \}$, $n \in \mathbb{N}$. Next, let $\Phi_n := \Phi$, and for each $0 \leq i < n$,
+\[
+\Phi_i := \begin{cases} \Phi_{i+1} \setminus \{ \varphi_i \}, & \mbox{if \(\Phi_{i+1} \setminus \{ \varphi_i \} \models \varphi_i\);} \cr
+\Phi_{i+1}, & \mbox{otherwise.}
+\end{cases}
+\]
+Then for $0 \leq i \leq n$, $\Phi_i \subset \Phi$ and $\modelclass{S}{\Phi_i} = \modelclass{S}{\Phi}$. In particular, $\Phi_0$ is independent.
+%%
+\item Since $S$ is at most countable, $L^S$ is countable (cf. II.3.3). Let $\mathfrak{K} := \modelclass{S}{\Psi}$ be a $\Delta$-elementary class of $S$-structures, where
+\[
+\Psi = \{ \psi_n | n \in \mathbb{N} \} \subset L^S
+\]
+is a system of axioms for $\mathfrak{K}$. (If originally $\Psi$ was finite, i.e. it had maximally indexed sentence $\psi_{n_0}$, then let $\psi_n := (\forall v_n \, v_n \equiv v_n \lor \neg \forall v_n \, v_n \equiv v_n)$ for $n > n_0$.)\\
+\\
+Then for each $n \in \mathbb{N}$ let
+\[
+\varphi_n := \begin{cases}
+\psi_0, & \mbox{if \(n = 0\);} \cr
+(\varphi_{n-1} \land \psi_n), & \mbox{otherwise.} \cr
+\end{cases}
+\]
+Obviously $\models \varphi_{i+1} \rightarrow \varphi_i$ for $i \in \mathbb{N}$.\\
+\\
+Next let $\varphi_0^\prime := \varphi_0$, and for $n \geq 1$ let
+\[
+\varphi_n^\prime := \begin{cases}
+\varphi_{n-1}^\prime, & \mbox{if \(\models \varphi_{n-1} \rightarrow \varphi_n\);} \cr
+(\varphi_{n-1} \rightarrow \varphi_n), & \mbox{otherwise.}
+\end{cases}
+\]
+Denote
+\[
+\Phi := \{ \varphi_n^\prime | n \in \mathbb{N} \}
+\]
+and $\Phi_n := \{ \varphi_i^\prime | i \leq n \}$ for $n \in \mathbb{N}$. (Notice that if $\varphi_i^\prime = \varphi_j^\prime$ for some $i < j < n$, then $\Phi_n$ contains exactly one of them, since there is no repetition of an element in a set.) $\Phi_n$'s have the following remarkable properties:
+\begin{enumerate}[(1)]
+\item $\modelclass{S}{\Phi_n} = \modelclass{S}{\{ \psi_i | i \leq n \}}$ for $n \in \mathbb{N}$.
+%%
+\item $\Phi_n$ is independent for $n \in \mathbb{N}$.
+\end{enumerate}
+Property (1) immediately follows from the definitions of $\varphi_n$ and $\varphi_n^\prime$. As to property (2), $\Phi_0$ is obviously independent; the other cases can be easily shown by using mathematical induction.\\
+\\
+We can apply these two properties to show that $\Phi$ is independent by investigating the classes of $S$-structures $\modelclass{S}{\varphi_n^\prime}$ and $\modelclass{S}{(\Phi \setminus \{\varphi_n^\prime\})}$ (it must be the case that neither $(\modelclass{S}{(\Phi \setminus \{\varphi_n^\prime\})}) \subset \modelclass{S}{\varphi_n^\prime}$ nor $(\modelclass{S}{\varphi_n^\prime})$ $\subset \modelclass{S}{(\Phi \setminus \{\varphi_n^\prime\})}$, except the case that $\Phi = \Phi_0$, in which $\Phi$ is automatically independent) for each $n \in \mathbb{N}$. (Though we do not commit ourselves to do this since it is a tedious work \ldots ) Finally, it is clear that $\modelclass{S}{\Phi} = \modelclass{S}{\Psi}$. Hence $\Phi$ is an independent system of axioms for $\mathfrak{K}$.
+\end{enumerate} \begin{flushright}$\talloblong$\end{flushright}
+%End of VI.3.10----------------------------------------------------------------------------------------------
+%
+%VI.3.11-----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 3.11.}
+\begin{enumerate}[(a)]
+\item Let $n \in \mathbb{Z}^+$ and
+\[
+\begin{array}{ll}
+\varphi_n := & \phantom{\land} \exists v_0 \ldots \exists v_{n-1}(Vv_0 \land \ldots \land Vv_{n-1} \cr
+\ & \land \forall u(Vu \rightarrow \exists^{=1}c_0 \ldots \exists^{=1}c_{n-1}(Fc_0 \land \ldots \land Fc_{n-1} \cr
+\ & \land u \equiv ( \underbrace{(\ldots (}_{\mbox{\scriptsize $(n-2)$ times}} (c_0 * v_0) \underbrace{\circ \_\,\_\,\_ ) \ldots  \circ \_\,\_\,\_ )}_{\mbox{\scriptsize $(n-2)$ terms}} \circ (c_{n-1} * v_{n-1})) ))),
+\end{array}
+\]
+where $\_\,\_\,\_$ stands for $(c_i * v_i)$ for $0 < i < n-1$. ($\exists^{=1}$ was introduced in III.8, see the paragraph under III.8.7.) Then $\modelclass{S}{(\Phi \cup \{ \varphi_n \})}$ is the class of $n$-dimensional vector spaces.
+%%
+\item The class of infinite-dimensional vector spaces is $\modelclass{S}{(\Phi \cup \{ \neg \varphi_n | n \in \mathbb{Z}^+ \})}$ hence is $\Delta$-elementary.
+%%
+\item Let $\varphi$ be an $S$-sentence which is valid in all infinite-dimensional vector spaces, i.e.
+\[
+\Phi \cup \{ \neg \varphi_n | n \in \mathbb{Z}^+ \} \models \varphi.
+\]\ 
+\\
+By the Compactness Theorem there is an $n_0 \in \mathbb{N}$ (depending on $\varphi$) such that
+\[
+\Phi \cup \{ \neg \varphi_n | n < n_0 \} \models \varphi.
+\]
+Hence $\varphi$ is valid in all vector spaces of dimension $\geq n_0$.\\
+\\
+Thus there is no $S$-sentence $\varphi$ such that $\modelclass{S}{(\Phi \cup \{ \varphi \})}$ is the class of all infinite-dimensional vector spaces, i.e. it is not elementary (cf. Exercise 3.8(a)). As it turns out, the class of finite-dimensional vector spaces is not $\Delta$-elementary (cf. Exercise 3.9(a)).
+\end{enumerate} \begin{flushright}$\talloblong$\end{flushright}
+%End of VI.3.11----------------------------------------------------------------------------------------------
+\end{enumerate}
+%End of Section VI.3-----------------------------------------------------------------------------------------
+\ 
+\\
+\\
+%Section VI.4------------------------------------------------------------------------------------------------
+{\large \S4. Elementarily Equivalent Structures}
+\begin{enumerate}[1.]
+\item \textbf{Note on Definition 4.1 and Lemma 4.2.} For part (a) of Definition 4.1, by definition the statement $\struct{A} \equiv \struct{B}$ is equivalent to\smallskip\\
+\begin{quoteno}{($\ast$)}
+for every $S$-sentence, if $\struct{A} \models \varphi$ then $\struct{B} \models \varphi$.
+\end{quoteno}\smallskip\\
+We verify this: It suffices to show\\
+\centerline{for every $S$-sentence, if not $\struct{A} \models \varphi$ then not $\struct{B} \models \varphi$}
+provided that ($\ast$) holds: Let $\varphi$ be an $S$-sentence, suppose $\struct{A}$ does not satisfy $\varphi$, i.e. $\struct{A} \models \neg\varphi$, then by ($\ast$) we have $\struct{B} \models \neg\varphi$, namely $\varphi$ does not hold in $\struct{B}$.\\
+\ \\
+Note that $\equiv$ is obviously an equivalence relation. Furthermore, if we define a binary relation $\sim$ over $S$-structures in such a way that $\struct{A} \sim \struct{B}$ if $\struct{A} \in \theoarg{\struct{B}}$, then by Lemma 4.2 $\sim$ is also an equivalence relation.
+%
+\item \textbf{Note to Corollary 4.4 in Page 95.} In III.7 we mentioned that there is no set of first-order $\{ \mbf{\sigma}, 0 \}$-sentences has (up to isomorphism) just $\mathfrak{N}_\sigma$ as a model (cf. the first paragraph in page 51). Now it is an obvious result of corollary 4.4.
+%
+\item \textbf{Note to the Paragraph Discussing the System of Axioms $\Pi$ That Characterizes $\mathfrak{N}$ Up to Isomorphism in Page 96.} From the discussion in textbook, we know that the induction axiom, which is the only second-order axiom of $\Pi$, cannot be formulated as a first-order formula or as a set of first-order formulas.\\
+\\
+The reason for this should be clear: The second-order variable $X$ in this axiom is a unary relation variable (cf. IX.1.1), which is interpreted as a \textit{subset} of the domain of an interpretation. The only alternative for the induction axiom by a set of first-order formulas is the axiom of induction schema for subsets of $\mathbb{N}$, i.e. an induction axiom for each subset of $\mathbb{N}$. However, the set of all subsets of $\mathbb{N}$ is uncountable (cf. Cantor's theorem), while there is only a coutable supply of induction axioms since $L^{S_{\mbox{\tiny ar}}}$ is countable (cf. II.1.2). Therefore the alternative is infeasible and hence the induction axiom can only be formulated in second-order logic.
+%
+\item \label{VI_4_1} \textbf{Note to the Nonstandard Model $\mathfrak{A}$ of $\thr{\mathfrak{N}^<)}$.} First, in $\mathfrak{N}^<$ the sentences
+\[
+\forall x \forall y ( x \equiv y \lor ( x < y \lor y < x ) )
+\]
+and for all $\mbf{n}^{\mathbb{N}} = n \in \mathbb{Z}^+$,
+\[
+\forall x ( x < \mbf{n} \leftrightarrow ( x \equiv \mbf{0} \lor ( \ldots \lor x \equiv \mbf{n-1}) ) )
+\]
+hold. It then follows that $\mbf{n}^A <^A a$ for $\mbf{n}^{\mathbb{N}} = n \in \mathbb{N}$ where $a$ is a ``further element.''\\
+\\
+Next, for all $\mbf{m}^{\mathbb{N}} = m, \mbf{n}^{\mathbb{N}} = n \in \mathbb{N}$, the sentences
+\[
+\forall x ( x + \mbf{m} \equiv \mbf{n} \leftrightarrow x \equiv \mbf{n-m})
+\]
+where $m \leq n$,
+\[
+\forall x \neg ( x + \mbf{n} \equiv \mbf{m})
+\]
+where $m < n$,
+\[
+\forall x ( x + \mbf{m} < \mbf{n} \leftrightarrow x < \mbf{n-m} )
+\]
+where $m < n$, and
+\[
+\forall x \neg ( x + \mbf{n} < \mbf{m} )
+\]
+where $m \leq n$ all hold. As it turns out, $\mbf{n}^A <^A a +^A \mbf{m}^A$ for all $\mbf{m}^{\mathbb{N}} = m, \mbf{n}^{\mathbb{N}} = n \in \mathbb{N}$, since otherwise it would be that $a$ is an element of $\mathbb{N}$. Similarly, $a +^A \mbf{n}^A <^A a +^A a +^A \mbf{m}^A$ for all $\mbf{m}^{\mathbb{N}} = m, \mbf{n}^{\mathbb{N}} = n \in \mathbb{N}$.\\
+\\
+On the other hand, $A$ has infinitely many ``further elements'' such as $a$. Further, the sentence
+\[
+\forall x \exists^{=1} y ( ( x \equiv \mbf{2} \cdot y \lor x \equiv ( \mbf{2} \cdot y ) + \mbf{1} ) \land (\neg x \equiv \mbf{2} \cdot y \lor \neg x \equiv ( \mbf{2} \cdot y ) + \mbf{1} ) )
+\]
+is in $\thr{\mathfrak{N}^<}$, i.e. parity is well-defined. As a consequence, for all pairs of ``further elements'' $a, b \in A$ such that $a <^A b$,
+\[
+c := \begin{cases}
+\displaystyle\frac{a +^A b}{\mbf{2}^A} & \mbox{if \(a +^A b\) is even;} \cr
+\displaystyle\frac{a +^A b +^A 1}{\mbf{2}^A} & \mbox{otherwise}
+\end{cases}
+\]
+(where by $\displaystyle\frac{d}{\mbf{2}^A}$ we mean the element $e$ such that $d = \mbf{2}^A \cdot^A e$) is also a ``further element'' and $a <^A c <^A b$, $a +^A \mbf{n}^A <^A c +^A \mbf{m}^A$, and $c +^A \mbf{n}^A <^A b +^A \mbf{m}^A$. (The argument is similar.)
+%
+%VI.4.8------------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 4.8.} First note that for any ordered field $\struct{A}$, it contains an infinite ascending chain\\
+\begin{quoteno}{($\ast$)}
+$\intpted{0}{A} \mathrel{\intpted{<}{A}} \intpted{1}{A} \mathrel{\intpted{<}{A}} \intpted{1}{A} \mathbin{\intpted{+}{A}} \intpted{1}{A} \mathrel{\intpted{<}{A}} \ldots$
+\end{quoteno}\\
+because $\formal{n} < \formal{n} + 1$ is valid for $n \in \nat$, where $\formal{n}$ denotes $\underbrace{1 + \cdots + 1}_{\scripttext{\begin{math}n\end{math}-times}}$ if $n > 0$ and $0$ otherwise.\\
+\ \\
+Let $S \defas \symbarord \union \setenum{c}$ and $\Phi \defas \axiomsofd \union \setm{\formal{n} < c}{n \in \nat}$. Then for any $\symbarord$-structure $\struct{A}$, $\struct{A}$ is a non-archimedian ordered fields if and only if there is an $S$-expansion $\pair{\struct{A}}{\intpted{c}{A}}$ that is a model of $\Phi$. In other words, the class of non-archimedian ordered fields is exactly the class of the $\symbarord$-reducts of the structures in $\modelclass{S}{\Phi}$. Obviously, structures in $\modelclass{S}{\Phi}$ are themselves non-archimedian ordered fields.\\
+\ \\
+Therefore, if $\varphi \in \fstordlang[0]{\symbarord}$ is valid in all non-archimedian ordered fields then $\Phi \consq \varphi$. By the Compactness Theorem, there is a finite subset $\Phi_0$ of $\Phi$ such that $\Phi_0 \consq \varphi$; without loss of generality we assume $\axiomsofd \subset \Phi_0$. Let $n_0$ be the largest among the numbers $n \in \nat$ such that the sentences $\formal{n} < c$ occur in $\Phi_0$ (note that $\Phi_0$ is finite), $n_0 = 0$ if $\Phi_0$ contains no such sentence.\\
+\ \\
+Clearly, for any $\symbarord$-structure $\struct{A}$, if $\struct{A} \satis \axiomsofd$ then, by suitably choosing $\intpted{c}{A}$ according to ($\ast$) the $S$-expansion $\pair{\struct{A}}{\intpted{c}{A}}$ is a model of $\Phi_0$, and $\pair{\struct{A}}{\intpted{c}{A}} \satis \varphi$ because $\Phi_0 \consq \varphi$, which yields $\struct{A} \satis \varphi$ by the Coincidence Lemma. We thus conclude that $\varphi$ is valid for all non-archimedian ordered fields.
+%End of VI.4.8--------------------------------------------------------------------------------
+%
+%VI.4.9------------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 4.9.} Let $\varphi := \forall x \forall y (x < y \liff (\neg x \equal y \land \exists z \, x + z \equal y))$. In fact, $\varphi$ is an extension by definitions for the new binary relation symbol $<$ in terms of the symbols in $\arsymb$ (cf.\ VIII.3).\\
+\ \\
+To each $\chi \in \fstordlang{\symbarord}$ we associate an $\arsymb$-formula $\chi^\prime$ that is obtained by replacing in it all subformulas of the form $t_1 < t_2$ (if any), where $t_1, t_2 \in \term{\arsymb}$, with $(\neg t_1 \equal t_2 \land \exists z \, t_1 + z \equal t_2)$. Then it can easily be verified that for every $\symbarord$-structure $\struct{B}$ that satisfies $\varphi$, every assignment $\beta$ in $\struct{B}$, and every $\chi \in \fstordlang{\symbarord}$,
+\begin{medcenter}
+$\intparg{\struct{B}}{\beta} \satis \chi$ \ \ \ iff \ \ \ $\intparg{\reduct{\struct{B}}{\arsymb}}{\beta} \satis \chi^\prime$.
+\end{medcenter}
+In particular, if $\chi$ is an $\symbarord$-sentence then by the Coincidence Lemma we have\\
+\begin{quoteno}{($\ast$)}
+$\pair{\struct{A}}{\intpted{<}{A}} \satis \chi$ \ \ \ iff \ \ \ $\struct{A} \satis \chi^\prime$
+\end{quoteno}\\
+and\\
+\begin{quoteno}{($\ast\ast$)}
+$\natstrord \satis \chi$ \ \ \ iff \ \ \ $\natstr \satis \chi^\prime$
+\end{quoteno}\\
+because $\pair{\struct{A}}{\intpted{<}{A}}$ and $\natstrord$ are both models of $\varphi$.\\
+\ \\
+Therefore we have, using Lemma 4.2 in text, that for every $\symbarord$-sentence $\chi$,
+\begin{medcenter}
+\begin{tabular}{lll}
+\   & $\pair{\struct{A}}{\intpted{<}{A}} \satis \chi$ & \ \cr
+iff & $\struct{A} \satis \chi^\prime$ & (by ($\ast$)) \cr
+iff & $\natstr \satis \chi^\prime$ & (by premise that $\struct{A} \satis \theoarg{\natstr}$) \cr
+iff & $\natstrord \satis \chi$ & (by ($\ast\ast$))
+\end{tabular}
+\end{medcenter}
+i.e.\ $\pair{\struct{A}}{\intpted{<}{A}} \equiv \natstrord$ and thus $\pair{\struct{A}}{\intpted{<}{A}}$ is a model of $\theoarg{\natstrord}$.
+%End of VI.4.9--------------------------------------------------------------------------------
+%
+%VI.4.10-----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 4.10.} For brevity $\formal{n}$ denotes $\underbrace{1 + \ldots + 1}_{\scripttext{\begin{math}n\end{math}-times}}$ for $n \in \nat$ below.\\
+\ \\
+Let $S \defas \arsymb \union \setenum{k}$, $\Phi^+ \defas \setm{(\exists x \, \formal{p} \cdot x \equal k \land \forall x \neg (\formal{p} \cdot \formal{p}) \cdot x \equal k)}{p \in Q}$, $\Phi^- \defas \setm{\forall x \neg\formal{p} \cdot x \equal k}{p \not\in Q}$, and let $\Phi \defas \theoarg{\natstr} \union \setenum{\neg k \equal 0} \union \Phi^+ \union \Phi^-$.\\
+\ \\
+Then every finite subset $\Phi_0$ of $\Phi$ is satisfiable: $\Phi_0$ is a subset of $\Psi \defas \theoarg{\natstr} \union \setenum{\neg k \equal 0} \union (\Phi^+ \intsec \Phi_0) \union \Phi^-$, and $\pair{\natstr}{\intpted{k}{\nat}}$ is a model of $\Psi$ where $\intpted{k}{\nat}$ is the product of primes $p$ such that the formulas $(\exists x \, \formal{p} \cdot x \equal k \land \forall x \neg (\formal{p} \cdot \formal{p}) \cdot x \equal k)$ occur in $\Phi^+ \intsec \Phi_0$ if $\Phi^+ \intsec \Phi_0$ is nonempty and $\intpted{k}{\nat} = 1$ otherwise. Thus, from the Compactness Theorem it follows that $\Phi$ is satisfiable, i.e.\ there is an $S$-structure $\struct{A}$ that is a model of arithmetic that contains an element ($\intpted{k}{A}$ here) whose prime divisors are just the members of $Q$; in fact, $\intpted{k}{A}$ contains these prime divisors without multiplicity.\\
+\ \\
+There are as many different sets $Q$ as there are subsets of $\nat$ (which is uncountable), and so are there different sets $\Phi$. Each $\Phi$ is countable and thus has a countable model by the L\"{o}wenheim-Skolem Theorem (a model of $\Phi$ must be infinite). It follows that there are at least as many pairwise nonisomorphic countable models of arithmetic as there are subsets of $\nat$.
+%End of VI.4.10-------------------------------------------------------------------------------
+%
+%VI.4.11-----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 4.11.}
+\begin{enumerate}[(a)]
+\item Since $\pair{\nat}{\intpted{<}{\nat}}$ is a (total) ordering, $\field{\nat} = \nat$. For $n \in \nat$, there are only finitely many numbers $n - 1, \ldots, 0$ that are smaller (in the sense $\intpted{<}{\nat}$) than $0$, so there is no infinite descending chain.\\
+\ \\
+Now let the $\symbarord$-structure $\struct{A}$ be a model of $\theoarg{\natstrord}$, then $\struct{A}$ is an ordering because $\forall x \forall y (x < y \lor x \equal y \lor y < x) \in \theoarg{\natstrord}$, therefore $\field{A} = A$. If $\pair{A}{\intpted{<}{A}}$ contains no infinite descending chain, then every nonempty subset of $A$ has a $\intpted{<}{A}$-minimum; in other words, $\pair{\struct{A}}{\intpted{<}{A}}$ and hence $\struct{A}$ satisfy the so-called \emph{well-ordering principle}, which is equivalent to (strong) induction principle that can be formulated (since $\struct{A} \satis \theoarg{\natstrord}$) as the second-order $\arsymb$-sentence
+\[
+\forall X ((X0 \land \forall x (Xx \limply Xx + 1)) \limply \forall y Xy).
+\]
+Therefore, $\reduct{\struct{A}}{\arsymb}$ is a model $\sndordpeanoarith$ and hence is isomorphic to $\natstr$ (cf.\ part (b) of Exercise III.7.5).\\
+\ \\
+We shall conclude that also $\struct{A}$ is isomorphic to $\natstrord$ and as a result is a standard model of $\theoarg{\natstrord}$. For this purpose, let $\pi : \reduct{\struct{A}}{\arsymb} \iso \natstr$. It remains to show: for $a, b \in A$,
+\begin{medcenter}
+$a \mathrel{\intpted{<}{A}} b$ \ \ \ iff \ \ \ $\pi(a) \mathrel{\intpted{<}{\nat}} \pi(b)$.
+\end{medcenter}
+Using the fact that $\forall v_0 \forall v_1 (v_0 < v_1 \liff (\neg v_0 \equal v_1 \land \exists v_2 \, v_0 + v_2 \equal v_1)) \in \theoarg{\natstrord}$, the equivalence is proved below: for $a, b \in A$,\\
+\begin{tabular}{ll}
+\   & $a \mathrel{\intpted{<}{A}} b$ \cr
+iff & $\struct{A} \satis v_0 < v_1 [a, b]$ \cr
+iff & $\struct{A} \satis (\neg v_0 \equal v_1 \land \exists v_2 \, v_0 + v_2 \equal v_1)[a, b]$ \; (since $\struct{A} \satis \theoarg{\natstrord}$)\cr
+iff & $\reduct{\struct{A}}{\arsymb} \satis (\neg v_0 \equal v_1 \land \exists v_2 \, v_0 + v_2 \equal v_1)[a, b]$ \cr
+\   & \multicolumn{1}{r}{(by the Coincidence Lemma)} \cr
+iff & $\natstr \satis (\neg v_0 \equal v_1 \land \exists v_2 \, v_0 + v_2 \equal v_1)[\pi(a), \pi(b)]$ \cr
+\   & \multicolumn{1}{r}{(since $\pi : \reduct{\struct{A}}{\arsymb} \iso \natstr$)} \cr
+iff & $\natstrord \satis (\neg v_0 \equal v_1 \land \exists v_2 \, v_0 + v_2 \equal v_1)[\pi(a), \pi(b)]$ \cr
+\   & \multicolumn{1}{r}{(by the Coincidence Lemma)} \cr
+iff & $\natstrord \satis v_0 < v_1 [\pi(a), \pi(b)]$ \cr
+iff & $\pi(a) \mathrel{\intpted{<}{\nat}} \pi(b)$. \cr
+\end{tabular}
+%%
+\item Let $S^\prime \defas S \union \setm{c_n}{n \in \nat}$ (assuming $c_n \not\in S$) and for $m \geq 2$ let $\Psi_m \defas \Phi \union \axiomspord \union \setm{c_n < c_{n - 1}}{0 < n < m}$ (cf.\ III.6.4 for the definition of $\axiomspord$).\\
+\ \\
+It follows that, for $m \geq 2$, $\Psi_m$ has an $S^\prime$-structure as a model: By premise there is an $S$-structure $\struct{A}$ satisfying $\Phi \union \axiomspord$ where $\field{A}$ (a linear ordering) contains at least $m$ elements $\seq{a}{m - 1}$ with
+\[
+a_{m - 1} \intpted{<}{A} \ldots \intpted{<}{A} a_0.
+\]
+By setting $\intpted{c_n}{A} \defas a_n$ for $n < m$, we have $\tuple{\struct{A}, \seq{c}{m - 1}} \models \Psi_m$; by the Coincidence Lemma, any $S^\prime$-expansion of $\tuple{\struct{A}, \seq{c}{m - 1}}$ is a model of $\Psi_m$.\\
+\ \\
+Now set $\Psi \defas \bunion_{m \geq 2} \Psi_m$. Then every finite subset of $\Psi$ is also a subset of $\Psi_m$ for a suitable $m$ and hence is satisfiable (in the sense of $S^\prime$). By the Compactness Theorem $\Psi$ itself has an $S^\prime$-structure $\struct{B}^\prime$ as a model, where in particular
+\[
+\ldots \mathrel{\intpted{<}{B}} \intpted{c_2}{B} \mathrel{\intpted{<}{B}} \intpted{c_1}{B} \mathrel{\intpted{<}{B}} \intpted{c_0}{B}.
+\]
+Taking $\struct{B} \defas \reduct{\struct{B}^\prime}{S}$, then, again, by the Coincidence Lemma $\struct{B}$ is a model of $\Phi$ such that $\pair{B}{\intpted{<}{B}}$ is a partially defined ordering containing an infinite descending chain.
+\end{enumerate}
+%End of VI.4.11----------------------------------------------------------------------------------------------
+\end{enumerate}
+%End of Section VI.4-----------------------------------------------------------------------------------------
+%End of Chapter VI-------------------------------------------------------------------------------------------

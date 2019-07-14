@@ -1,0 +1,401 @@
+%Author: Wei-Lin (Linisac) Wu
+\documentclass[11pt, leqno]{report}
+
+
+%Packages
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{stmaryrd}
+\usepackage{colonequals}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{amscd}
+\usepackage{paralist}
+\usepackage{bm}
+\usepackage{titlesec}
+\usepackage[margin=2cm]{geometry}
+
+%New Commands for Abbreviations
+%%General
+\newcommand{\mathmode}[1]{\begin{math}#1\end{math}}
+\newcommand{\defas}{\colonequals}
+\newcommand{\setenum}[1]{\{#1\}} %the set of which the elements are enumerated by #1
+\newcommand{\setsum}{\cup} %`A \setsum B' stands for the union of sets A and B
+\newcommand{\union}{\cup}
+\newcommand{\setprod}{\cap} %`A \setprod B' stands for the intersection of sets A and B
+\newcommand{\intsec}{\cap} %intersection
+\newcommand{\bsetsum}{\bigcup} %big operator of union
+\newcommand{\bunion}{\bigcup}
+\newcommand{\bsetprod}{\bigcap} %big operator of intersection
+\newcommand{\bintsec}{\bigcap}
+\newcommand{\nat}{\mathbb{N}} %the set of natural numbers
+\newcommand{\zah}{\mathbb{Z}} %the set of integers
+\newcommand{\rat}{\mathbb{Q}} %the set of rational numbers
+\newcommand{\real}{\mathbb{R}} %the set of real numbers
+\newcommand{\cplx}{\mathbb{C}} %the set of complex numbers
+\newcommand{\powerset}[1]{{\mathcal{P}\left(#1\right)}} %the power set of #1
+\newcommand{\absval}[1]{{\left| #1 \right|}} %the absolute value of #1
+\newcommand{\card}[1]{\absval{#1}} %the cardinality of the set #1
+\newcommand{\limply}{\mathbin{\rightarrow}} %logical connective imply
+\newcommand{\liff}{\mathbin{\leftrightarrow}} %logical connective if and only if
+\newcommand{\blor}{\bigvee} %big operator or
+\newcommand{\bland}{\bigwedge} %big operator and
+\newcommand{\Iff}{\mbox{iff}} %!!
+\newcommand{\scripttext}[1]{{\mbox{\scriptsize#1}}} %text of script size in math mode
+\newcommand{\mbf}[1]{{\mbox{\boldmath\begin{math}#1\end{math}}}} %bold face in math mode
+\newcommand{\mbfs}[1]{{\mbox{\scriptsize\boldmath\begin{math}\mathrm{#1}\end{math}}}} %bold face of script size in math mode
+\newcommand{\mbff}[1]{{\mbox{\footnotesize\boldmath\begin{math}\mathrm{#1}\end{math}}}} %bold face of footnote size in math mode
+\newcommand{\mbft}[1]{{\mbox{\tiny\boldmath\begin{math}\mathrm{#1}\end{math}}}} %bold face of tiny size in math mode
+\newcommand{\formal}[1]{\bm{#1}} %formal version of the symbol #1
+\newcommand{\reftitle}[1]{{\rm #1}} %reference title
+\newcommand{\parenadj}[1]{\left(#1\right)} %adjustable parentheses
+\newcommand{\brackadj}[1]{\left[#1\right]} %adjustable (square) brackets
+\newcommand{\braceadj}[1]{\left\lbrace #1\right\rbrace} %adjustable (curly) braces
+\newcommand{\angleadj}[1]{\left\langle #1 \right\rangle} %adjustable angular brackets
+\newcommand{\opintv}[2]{\parenadj{#1, #2}} %the open interval (#1, #2)
+\newcommand{\clintv}[2]{\brackadj{#1, #2}} %the closed interval [#1, #2]
+\newcommand{\olintv}[2]{\left(#1, #2\right]} %the left-open right-closed interval (#1, #2]
+\newcommand{\cpintv}[2]{\left[#1, #2\right)} %the left-closed right-open interval [#1, #2)
+\newcommand{\pair}[2]{(#1, #2)} %the pair of #1 and #2
+\newcommand{\tuple}[1]{(#1)} %tuple of #1; often used with \seq
+\newcommand{\pairadj}[2]{\parenadj{#1, #2}} %the pair of #1 and #2 with adjustable parentheses
+\newcommand{\tupleadj}[1]{\parenadj{#1}} %tuple of #1 with adjustable parentheses; often used with \seq
+\newcommand{\seq}[3][0]{{#2}_{#1}, \ldots, {#2}_{#3}} %sequence; \seq[1]{a}{n} means the sequence a_1, \ldots, a_n
+%\newcommand{\seqv}[2]{#1, \ldots, #2} %already abolished
+\newcommand{\seqp}[2]{{#1}, \ldots, {#2}} %sequence with additional parameters; \seqv{a_1}{a_n} means the sequence a_1, \ldots, a_n
+\newcommand{\seqi}[2]{(#1)_{#2}} %sequence #1 indexed by the set #2
+\newcommand{\enum}[3][0]{{{#2}_{#1} \ldots {#2}_{#3}}} %enumeration; \enum[1]{t}{n} means the enumeration t_1 \ldots t_n
+%\newcommand{\enumv}[2]{#1 \ldots #2} %already abolished
+\newcommand{\enump}[2]{{{#1} \ldots {#2}}} %enumeration with parameter(s); \enump{a_1}{a_n} means the enumeration a_ \ldots a_n
+\newcommand{\enumpop}[3]{#1 #2 \ldots #2 #3} %enumeration with operators; \enumpop{a}{op}{b} means repeated applications of the operator op to the sequence a, \ldots, b. For example, \enumpop{a}{+}{b} is a + ... + b.
+%\newcommand{\enumprel}[3]{#1 #2 \cdots #2 #3} %??
+\newcommand{\setm}[2]{\{ #1 \mid #2 \}} %set with description in math mode; \setm{a}{b} means the set \{ a \mid b \}
+\newcommand{\sett}[2]{{\{ #1 \mid \mbox{#2} \}}} %set with description in text mode; \sett{a}{b} means the set \{ a \mid b \} with b a text
+\newcommand{\restrict}[2]{{#1|_{#2}}} %the restriction of the function #1 to the domain #2
+%%Chapter 2
+\newcommand{\alphabet}{\mathcal{A}} %the general alphabet
+\newcommand{\kleene}[1]{{#1}^\ast} %Kleene star operator
+\newcommand{\nullstring}{\Box} %null, or empty, string
+%\newcommand{\symbolset}{\mathit{S}} %a symbol set
+\newcommand{\equal}{\equiv} %equal sign in object languages
+\newcommand{\absymb}[1]{\alphabet_{#1}} %the alphabet for the first-order language determined by the symbol set #1 (see Section II.2)
+\newcommand{\gr}{\mathrm{gr}} %an abbreviation for group theory
+\newcommand{\eqr}{\mathrm{eq}} %an abbreviation for equivalence relation theory
+\newcommand{\univsymb}{S_\infty} %the universal symbol set (see Section II.2)
+\newcommand{\termbase}{\mathit{T}} %the base symbol for sets of terms
+\newcommand{\term}[2][]{{\termbase_{#1}^{#2}}} %the set of terms
+\newcommand{\languagebase}{\mathit{L}} %the base symbol for a (especially first-order) language
+\newcommand{\fstordlang}[2][]{{\languagebase_{#1}^{#2}}} %first-order language
+\newcommand{\fstordfmla}[2][0]{{\languagebase_{#1}^{#2}}} %!!
+\newcommand{\calrule}[2]{{\displaystyle\frac{\;#1\;}{\;#2\;}}} %calculus rule in schema form
+%%Chapter 3
+\newcommand{\mul}{\cdot} %the multiplication operator used in arithemtics
+\newcommand{\ar}{\mathrm{ar}} %the abbreviation for arithmetics
+\newcommand{\arsymb}{S_\ar} %the symbol set for arithmetics
+\newcommand{\symbarord}{S^<_\ar} %the symbol set for arithmetics and <
+\newcommand{\grp}{\mathrm{grp}} %an abbreviation for group theory
+\newcommand{\natstr}{\mathfrak{N}} %the structure (\nat, +, \cdot, 0, 1)
+\newcommand{\zahstr}{\mathfrak{Z}} %the structure (\zah, +, \cdot, 0, 1)
+\newcommand{\realstr}{\mathfrak{R}} %the structure (\real, +, \cdot, 0, 1)
+\newcommand{\natstrord}{{\natstr^<}} %the ordered arithmetic structure (\nat, +, \cdot, 0, 1, <)
+\newcommand{\negfunc}{\mathord{\overset{.}{\neg}}} %the negation function in the metalanguage
+\newcommand{\dsjfunc}{\mathbin{\overset{.}{\lor}}} %the disjunction function in the metalanguage
+\newcommand{\cnjfunc}{\mathbin{\overset{.}{\land}}} %the conjunction function in the metalanguage
+\newcommand{\impfunc}{\mathbin{\overset{.}{\rightarrow}}} %the implication function in the metalanguage
+\newcommand{\bimfunc}{\mathbin{\overset{.}{\leftrightarrow}}} %the bi-implication function in the metalanguage
+\newcommand{\sat}{\mathrel{\mathrm{Sat}}} %the relation satisfiable
+\newcommand{\satis}{\models}
+\newcommand{\consq}{\models}
+\newcommand{\modeled}{\ \mathrm{\reflectbox{$\models$}}} %!!
+\newcommand{\bimodels}{\mathrel{\mathord{\reflectbox{$\models$}}\mathord{\models}}} %to be \logequiv
+\newcommand{\logequiv}{\mathrel{\mathord{\reflectbox{$\models$}}\mathord{\models}}} %the relation logically equivalent
+%\newcommand{\STR}[1]{\mathfrak{#1}} %already abolished
+\newcommand{\struct}[1]{\mathfrak{#1}} %the structure of #1
+\newcommand{\intpted}[2]{#1^{#2}} %function, constant or relation symbol #1 interpreted as such in the domain of structure #2
+\newcommand{\reduct}[2]{{#1|_{#2}}} %the #2-reduct of (the structure) #1
+\newcommand{\assgn}{\beta} %a (first-order) assignment
+\newcommand{\INT}{\mathfrak{I}} %to be \intp
+\newcommand{\intp}{\mathfrak{I}} %an interpretation
+\newcommand{\INTP}[2]{(#1, #2)} %to be \intparg
+\newcommand{\intpp}[2]{(#1, #2)} %to be \intparg
+\newcommand{\intparg}[2]{\pair{#1}{#2}} %the interpretation of (#1, #2), where the arguements #1 and #2 are a structure and an assignment in #1, respectively
+\newcommand{\substr}[2]{{[#1]^{#2}}} %substructure generated by #1 in #2
+\newcommand{\iso}{\cong} %isomorphic; DEPENDENCY: \finiso, \partiso
+\newcommand{\ord}{\mathrm{ord}} %abbreviation for ordering
+\newcommand{\axiomsord}{\Phi_{\mathrm{ord}}} %system of axioms for ordering
+\newcommand{\axiomspord}{\Phi_{\mathrm{pord}}} %system of axioms for partially defined ordering
+\newcommand{\axiomsfd}{\Phi_{\mathrm{fd}}} %system of axioms for field
+\newcommand{\axiomsofd}{\Phi_{\mathrm{ofd}}} %system of axioms for ordered field
+\newcommand{\field}[1]{\mathop{\mathrm{field}} \intpted{<}{#1}} %the field of < in the structure #1
+\newcommand{\pord}{\mathrm{pord}} %abbreviation for partially defined ordering
+\newcommand{\suc}{\sigma} %the successor function over \nat
+\newcommand{\natsuc}{{\natstr_\suc}} %the structure (\nat, successor, 0)
+\newcommand{\sndordpeanoarith}{\Pi} %second-order Peano arithmetics
+\newcommand{\df}[2]{\displaystyle\frac{#1}{#2}} %fraction in displaystyle
+\newcommand{\varbase}{\mathrm{var}} %the base symbol for the function var; DEPENDENCY: \var
+\newcommand{\var}[1]{{\varbase(#1)}} %the set of variables occurring in the term #1
+\newcommand{\freebase}{\mathrm{free}} %the base symbol for the function free; DEPENDENCY: \free
+\newcommand{\free}[1]{{\freebase(#1)}} %the set of free variables occurring in the formula #1
+\newcommand{\SF}[1]{\mathop{\mathrm{SF}}(#1)} %to be \sbfmla
+\newcommand{\sbfmlabase}{\mathrm{SF}} %the base symbol for the function sbfmla; DEPENDENCY: \sbfmla
+\newcommand{\sbfmla}[1]{{\sbfmlabase(#1)}} %the set of subformulas of the formula #1
+\newcommand{\sbst}[2]{{\scriptstyle\frac{\displaystyle #1}{\displaystyle #2}}} %the substitution operation
+\newcommand{\scriptsbst}[2]{{\scriptscriptstyle\frac{\scriptstyle #1}{\scriptstyle #2}}} %the substitution used in script style
+\newcommand{\exactly}[1]{\exists^{\mathrel{=} #1}} %there are exactly #1 element(s) such that
+\newcommand{\exuni}{\exists^{=1}} %there is a unique element such that
+\newcommand{\atmost}[1]{\exists^{\mathrel{\leq} #1}} %there are at most #1 element(s) such that
+\newcommand{\atleast}[1]{\exists^{\mathrel{\geq} #1}} %there are at least #1 element(s) such that
+%%Chapter 4
+\newcommand{\derives}{\vdash} %the relation formally derives
+\newcommand{\derive}{\ | \hspace{-.4em} -} %an alternative symbol for \vdash
+\newcommand{\assm}{{(\mathrm{Assm})}} %the sequent rule (Assm)
+\newcommand{\ant}{{(\mathrm{Ant})}} %the sequent rule (Ant)
+\newcommand{\pc}{{(\mathrm{PC})}} %the sequent rule (PC)
+\newcommand{\ctr}{{(\mathrm{Ctr})}} %the sequent rule (Ctr)
+\newcommand{\ora}{{(\lor\mathrm{A})}} %the sequent rule (\lor A)
+\newcommand{\ors}{{(\lor\mathrm{S})}} %the sequent rule (\lor S)
+\newcommand{\ea}{{(\exists\mathrm{A})}} %the sequent rule (\exists A)
+\newcommand{\es}{{(\exists\mathrm{S})}} %the sequent rule (\exists S)
+\newcommand{\eq}{{(\equiv)}} %the sequent rule (\equal)
+\newcommand{\sub}{{(\mathrm{Sub})}} %the sequent rule (Sub)
+\newcommand{\seqcal}{{\mathfrak{S}}} %the sequent calculus \mathfrak{S}
+\newcommand{\con}{\mathrel{\mathrm{Con}}} %the relation consistent
+\newcommand{\inc}{\mathrel{\mathrm{Inc}}} %the relation inconsistent
+%%Chapter 6
+\newcommand{\modelclassbase}{\mathrm{Mod}} %the base symbol for \modelclass and \modelclassarg; DEPENDENCY: \modelclass, \modelclassarg
+\newcommand{\modelclass}[2]{{\mathop{\modelclassbase^{#1}} #2}} %the set of #1-structures that are models of the #1-formula #2
+\newcommand{\thr}[1]{\mathop{\mathrm{Th}}(#1)} %to be \theoarg
+\newcommand{\Th}{\mathop{\mathrm{Th}}} %!!
+\newcommand{\theorybase}{\mathrm{Th}} %the base symbol for a theory
+\newcommand{\theoarg}[1]{{\theorybase(#1)}} %the theory of #1, which takes argument(s), such as Th(\mathfrak{A})
+\newcommand{\divides}{\mathbin{|}}
+%%Chapter 7
+\newcommand{\zfc}{\mathrm{ZFC}} %the abbreviation for Zermelo-Fraenkel set theory with the axiom of choice
+%%Chapter 8
+\newcommand{\relational}[1]{#1^\mathit{r}} %the relational symbol set corresponding to #1
+\newcommand{\invrelational}[1]{#1^{-\mathit{r}}} %the inverse operation of \relational to #1
+\newcommand{\relativize}[2]{#1^{#2}} %the relativization of #1 to #2
+%%Chapter 9
+\newcommand{\logicalsystembase}{\mathcal{L}} %the base symbol for logical systems
+\newcommand{\firstorder}{{\mathrm{I}}} %the abbreviation for first-order
+\newcommand{\secondorder}{{\mathrm{II}}} %the abbreviation for second-order
+\newcommand{\sndordassgn}{\gamma} %a second-order assignment
+\newcommand{\freeII}{\free_\mathrm{II}} %to be replaced by \sndordfree
+\newcommand{\sndordfree}[1]{{\freebase_\secondorder(#1)}} %the set of free relation variables occurring in the formula #1
+\newcommand{\FOL}{\mathcal{L}_\mathrm{I}} %to be \fstordlog
+\newcommand{\fstordlog}{{\logicalsystembase_\firstorder}} %the logical system first-order logic
+\newcommand{\SOL}{\mathcal{L}_\mathrm{II}} %to be \sndordlog
+\newcommand{\sndordlog}{{\logicalsystembase_\secondorder}} %the logical system second-order logic
+\newcommand{\LII}{L_\mathrm{II}} %to be \sndordlang
+\newcommand{\sndordlang}[1]{{\languagebase_\secondorder^{#1}}} %the second-order language with symbol set #1
+\newcommand{\weak}{{\mathit{w}}}
+\newcommand{\weaksndordlog}{{\logicalsystembase^\weak_\secondorder}} %weak second-order logic
+\newcommand{\weaksndordlang}[1]{{\languagebase^{\weak, #1}_\secondorder}} %the weak second-order language with symbol set #1
+\newcommand{\INFL}{\mathcal{L}_{\omega_1\omega}} %to be \infinlog
+\newcommand{\infinlog}{{\logicalsystembase_{\omega_1\omega}}} %the logical system infinitary logic \omega_1\omega
+\newcommand{\LINF}{L_{\omega_1\omega}} %to be replaced by \infinlang
+\newcommand{\infin}{{\omega_1\omega}} %the modifier infinitary \omega_1 \omega
+\newcommand{\infinlang}[1]{{\languagebase_\infin^{#1}}} %the infinitary language \omega_1\omega with symbol set #1
+\newcommand{\qexist}{\mathit{Q}} %the Q quantifier in Q system
+\newcommand{\QL}{\mathcal{L}_Q} %to be replaced by \qlog
+\newcommand{\qlog}{{\logicalsystembase_\qexist}} %the logical system Q logic
+\newcommand{\LQ}{L_Q} %to be replaced by \qlang
+\newcommand{\qlang}[1]{{\languagebase_\qexist^{#1}}} %the Q language with symbol set #1
+\newcommand{\varqlog}{{\logicalsystembase^\circ_\qexist}} %the variant of Q logic with Q quantifier interpreted as ``there are infinitarily many''
+\newcommand{\domain}[1]{\mbox{the domain of } #1} %!!
+\newcommand{\dist}{\mathrm{dist}} %!!
+\newcommand{\nme}{\mathrm{NME}} %!!
+\newcommand{\indexed}{\mathrm{index}} %!!
+\newcommand{\fld}{\mathrm{field}} %!!
+\newcommand{\abs}{\mathrm{abs}} %!!
+%%Chapter 10
+\newcommand{\procp}[1]{\mathfrak{#1}} %procedure that takes an argument
+\newcommand{\proc}{\procp{P}} %a common procedure symbol
+\newcommand{\R}{\mathrm{R}} %to be \REG
+\newcommand{\REG}[1]{\mathrm{R}_{#1}} %register
+\newcommand{\LET}{\mathrm{LET}}
+\newcommand{\IF}{\mathrm{IF}}
+\newcommand{\THEN}{\mathrm{THEN}}
+\newcommand{\ELSE}{\mathrm{ELSE}}
+\newcommand{\OR}{\mathrm{OR}}
+\newcommand{\PRINT}{\mathrm{PRINT}}
+\newcommand{\HALT}{\mathrm{HALT}}
+\newcommand{\GOTO}{\mathrm{GOTO}}
+\newcommand{\p}{\mathrm{P}} %to be \prog
+\newcommand{\prog}{\mathrm{P}} %a (register) program
+\newcommand{\halt}{\mathrm{halt}} %the abbreviation for halt
+\newcommand{\length}{\mathit{l}}
+\newcommand{\PA}[2]{\LET \ \R_{#1} = \R_{#1} + #2}
+\newcommand{\PS}[2]{\LET \ \R_{#1} = \R_{#1} - #2}
+\newcommand{\PI}[4]{\IF \ \R_{#1} = \Box \ \THEN \ #2 \ \ELSE \ #3 \ldots \ \OR \ #4}
+\newcommand{\PII}[5]{\IF \ \R_{#1} = \Box \ \THEN \ #2 \ \ELSE \ #3 \ \OR \ldots \ #4 \ldots \ \OR \ #5}
+\newcommand{\consqn}[1]{#1^{\models}} %consequence closure
+\newcommand{\regdec}{R-decidable} %register-decidable
+\newcommand{\regund}{R-undecidable} %register-undecidable
+\newcommand{\regenum}{R-enumerable} %register-enumerable
+\newcommand{\regcomp}{R-computable} %register-computable
+\newcommand{\regaxm}{R-axiomatizable} %register-axiomatizable
+\newcommand{\finsat}{fin-satisfiable} %satisfiable by a finite structure
+\newcommand{\finval}{fin-valid} %satisfied by every finite structure
+\newcommand{\theosub}[1]{\mathop{\mathrm{Th}}(#1)} %!!
+\newcommand{\pa}{{\mathrm{PA}}} %the abbreviation of Peano
+\newcommand{\peanotheory}{\theorybase_\pa} %the (first-order) Peano theory
+\newcommand{\zfctheory}{\theorybase_\zfc} %the ZFC theory
+\newcommand{\are}{{\ar^\prime}} %extended arithmetics
+\newcommand{\goedel}[1]{n^{#1}} %the Goedel number of #1
+
+\newcommand{\Der}[1]{\mathrm{Der}_{#1}}
+\newcommand{\atm}{\mathrm{atm}}
+\newcommand{\ngt}{\mathrm{ngt}}
+\newcommand{\dsj}{\mathrm{dsj}}
+\newcommand{\ext}{\mathrm{ext}}
+\newcommand{\sbt}{\mathrm{sbt}}
+\newcommand{\sbf}{\mathrm{sbf}}
+\newcommand{\drn}{\mathrm{drn}}
+\newcommand{\consis}[1]{\mathrm{Consis}_{#1}}
+\newcommand{\der}[1]{\mathrm{der}(\underline{n^{#1}})}
+\newcommand{\fvar}[1]{\mathop{\mathrm{fvar}(#1)}}
+\newcommand{\rpl}{\mathop{\mathrm{rpl}}}
+\newcommand{\sft}{\mathop{\mathrm{sft}}}
+%%Chapter 11
+\newcommand{\vect}[2]{{\overset{#2}{#1}}} %vector, \vect{a}{n} stands for the sequence a_1, \ldots, a_n
+\newcommand{\pvarbase}{\mathrm{pvar}} %the base symbol for the function pvar; DEPENDENCY: \pvar
+\newcommand{\pvar}[1]{{\pvarbase(#1)}} %the set of propositional variables occurring in the (propositional) formula #1
+\newcommand{\pf}{\mathit{PF}} %to be \propfmla
+\newcommand{\propfmla}{\mathit{PF}} %the set of propositional formulas
+\newcommand{\clauses}{\mathfrak{K}} %a set of clauses
+\newcommand{\pclauses}{\mathfrak{P}} %a set of positive clauses
+\newcommand{\scls}[1]{{\mathfrak{K}(#1)}} %to be \setofclauses
+\newcommand{\setofclauses}[1]{{\mathfrak{K}(#1)}} %the set of clauses associated to #1
+\newcommand{\resolutionbase}{\mathrm{Res}} %the base symbol for the function Res; DEPENDENCY: \res, \resi
+\newcommand{\res}[1]{{\resolutionbase(#1)}} %the resolution of #1
+\newcommand{\resi}[2]{{\resolutionbase_{#1}(#2)}} %the resolution of #2 in at most #1 steps
+\newcommand{\hornresolutionbase}{\mathrm{HRes}} %the base symbol for the function HRes; DEPENDENCY: \hres, \hresi
+\newcommand{\hres}[1]{{\hornresolutionbase(#1)}} %the Horn-resolution of #1
+\newcommand{\hresi}[2]{{\hornresolutionbase_{#1}(#2)}} %the Horn-resolution of #2 in at most #1 steps
+\newcommand{\grndinstbase}{\mathrm{GI}} %the base symbol for the function GI; DEPENDENCY: \gi
+\newcommand{\gi}[1]{{\grndinstbase(#1)}} %the set of ground instances of #1
+\newcommand{\unifiedresolutionbase}{\mathrm{URes}} %the base symbol for the function URes; DEPENDENCY: \ures, \uresi
+\newcommand{\ures}[1]{{\unifiedresolutionbase(#1)}} %the set of unified resolution of #1
+\newcommand{\uresi}[2]{{\unifiedresolutionbase_{#1}(#2)}} %the set of unified resolution of #2 in at most #1 steps
+\newcommand{\unifiedhornresolutionbase}{\mathrm{UHRes}} %the base symbol for the function UHRes; DEPENDENCY: \uhres, \uhresi
+\newcommand{\uhres}[1]{{\unifiedhornresolutionbase(#1)}} %the set of unified Horn-resolution of #1
+\newcommand{\uhresi}[2]{{\unifiedhornresolutionbase_{#1}(#2)}} %the set of unified Horn-resolution of #2 in at most #1 steps
+%%Chapter 12
+\newcommand{\funbyvect}[2]{#1 \mapsto #2}
+\newcommand{\partismbase}{\mathrm{Part}} %the base symbol for the function Part; DEPENDENCY: \partism
+\newcommand{\partism}[2]{{\partismbase(#1, #2)}} %partial isomorphism from #1 to #2
+\newcommand{\domainbase}{\mathrm{dom}} %the base symbol for the function dom; DEPENDENCY: \dom
+\newcommand{\dom}[1]{{\domainbase(#1)}} %domain of the map #1
+\newcommand{\rangebase}{\mathrm{rg}} %the base symbol for the function rg; DEPENDENCY: \rg
+\newcommand{\rg}[1]{{\rangebase(#1)}} %range of the map #1
+\newcommand{\isop}[1]{\iso_{#1}} %!!
+\newcommand{\finiso}{\iso_\mathit{f}} %finitely isomorphic
+\newcommand{\partiso}{\iso_\mathit{p}} %partially isomorphic
+%HERE
+\newcommand{\emb}{\rightarrow} %the relation embeddable; DEPENDENCY: \finemb, \partemb.
+\newcommand{\finemb}{\mathrel{\emb_\mathit{f}}} %finitely embeddable
+\newcommand{\partemb}{\mathrel{\emb_\mathit{p}}} %partially embeddable
+\newcommand{\qrbase}{\mathrm{qr}} %the symbol for the function qr; DEPENDENCY: \qr
+\newcommand{\qr}[1]{{\qrbase(#1)}} %quantifier rank
+\newcommand{\mrkbase}{\mathrm{mrk}} %the symbol for the function mrk; DEPENDENCY: \mrk
+\newcommand{\mrk}[1]{{\mrkbase(#1)}} %modified quantifier rank
+\newcommand{\ehrenfeuchtgamebase}{\mathrm{G}} %the base symbol for the function G; DEPENDENCY: \egame, \egamep
+\newcommand{\egame}[2]{{\ehrenfeuchtgamebase(#1, #2)}} %ordinary Ehrenfeucht game
+\newcommand{\egamep}[3][]{{\ehrenfeuchtgamebase_{#1}(#2, #3)}} %Ehrenfeucht game with parameter(s)
+%%Chapter 13
+\newcommand{\logsys}{\logicalsystembase} %logical system
+\newcommand{\modelclassarg}[3][]{{\modelclassbase^{#1}_{#2}(#3)}} %the class of #1-structures that are models of #3 with respect to the logical system #2
+\newcommand{\boole}[1]{\mathrm{Boole}(#1)} %the logical system #1 satisfies the condition Boole
+\newcommand{\rel}[1]{\mathrm{Rel}(#1)} %the logical system #1 satisfies the condition Rel
+\newcommand{\repl}[1]{\mathrm{Repl}(#1)} %the logical system #1 satisfies the condition Repl
+\newcommand{\losko}[1]{\mathrm{L\ddot{o}Sko}(#1)} %the logical system #1 satisfies the condition LoeSko
+\newcommand{\comp}[1]{\mathrm{Comp}(#1)} %the logical system #1 satisfies the condition Comp
+\newcommand{\weakereq}{\leq} %A \weakereq B: the logical system B is at least as strong as A (A is weaker than or equally strong as B)
+\newcommand{\eqstrong}{\sim} %A is equally strong as B
+\newcommand{\eff}{\mathrm{eff}} %the modifier eff
+\newcommand{\effwkereq}{\mathrel{\weakereq_\eff}} %A \effwkereq B: B is at least as effectively strong as A
+\newcommand{\effeqstrng}{\mathrel{\eqstrong_\eff}} %A \effeqstrng B: A is effectively equally strong as B
+
+%New commands for Appendix A
+\newcommand{\numl}[1]{\underline{#1}} %the numeral corresponding to #1 in underline
+\newcommand{\numb}[1]{\mbf{#1}} %the numeral corresponding to #1 in boldface
+
+%Redefining Commands
+\renewcommand{\qedsymbol}{$\talloblong$}
+\renewcommand{\thechapter}{\Roman{chapter}}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\theequation}{\arabic{equation}}
+
+%New Lengths
+\newlength{\DefaultQuoteLength}
+\settowidth{\DefaultQuoteLength}{note that the terms here are only slightly different from those in}
+\newlength{\DefaultTabularizedArgumentLength}
+\settowidth{\DefaultTabularizedArgumentLength}{note that the terms here are only slightly different from aaaa}
+\newlength{\DefaultDefinitionItemLength}
+\settowidth{\DefaultDefinitionItemLength}{note that the terms here are only slightly from}
+
+%New Environments
+%%General
+\newenvironment{definition}[1]{\textbf{#1.}\ }{}
+\newenvironment{theorem}[1]{\textbf{#1.}\ \begin{em}}{\end{em}}
+%\newenvironment{smallcenter}{\smallskip\\\phantom{.}\hfill}{\hfill\phantom{.}\smallskip\\}
+\newenvironment{medcenter}{ \medskip\\ \phantom{(} \hfill }{ \hfill \phantom{)} \medskip\\}
+\newenvironment{quoteno}[1]{#1\hfill}{\hfill\phantom{(+)}}
+\newenvironment{bquoteno}[2]{#2\hfill\begin{minipage}[c]{#1}}{\end{minipage}}
+%%Chapter 4
+\newenvironment{seqrule}{\begin{array}}{\end{array}}
+\newenvironment{derivation}{\begin{tabular}{llll}}{\end{tabular}}
+%%Chapter 10
+\newenvironment{program}{\begin{array}{rl}}{\end{array}}
+
+\newtheorem*{claim}{Claim}
+
+\renewcommand{\qedsymbol}{$\talloblong$}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+%if resetting of equation counter is required, use the instruction below:
+%\setcounter{equation}{0}
+
+
+\begin{document}
+\begin{titlepage}
+\noindent\textsc{\Huge Annotations to the Book\medskip\\``Mathematical Logic''\bigskip\\by H.-D.\ Ebbinghaus, J.\ Flum\smallskip\\and W.\ Thomas\bigskip\\\large with Solutions Manual}
+\end{titlepage}
+\titleformat{\chapter}[display]{\huge\bfseries}{\thechapter}{.5em}{}
+\titleformat{\section}[hang]{\Large\rm}{\S\thesection.}{.5em}{}
+%\input{chapter1}
+%\input{chapter2}
+%\input{chapter3}
+%\input{chapter4}
+%\input{chapter5}
+%\input{chapter6}
+%\input{chapter7}
+%\input{chapter8}
+%\input{chapter9}
+%\input{chapter10}
+%\input{chapter11}
+\input{chapter12}
+%\input{chapter13}
+\appendix
+%\input{appendixa}
+\begin{thebibliography}{10}
+\bibitem{Thomas_Jech} Thomas Jech \textsl{Set Theory} the third millennium edition, revised and expanded, Springer, 2000.
+%
+\bibitem{Kenneth_Kunen} Kenneth Kunen \textsl{Set Theory: An Introduction to Independence Proofs}, Springer, 1980.
+%
+\bibitem{Edmund_Landau} Edmund Landau \textsl{Foundations of Analysis}, Columbia University, 1951.
+%
+\bibitem{Dirk_van_Dalen} Dirk van Dalen \textsl{Logic and Structure}, 4th edition, Springer, 2008.
+%
+\bibitem{Wolfgang_Rautenberg} Wolfgang Rautenberg \textsl{A Concise Introduction to Mathematical Logic}, 3rd edition, Springer, 2011.
+%
+\bibitem{Christos_Papadimitriou} Christos H. Papadimitriou \textsl{Computational Complexity}, Addison Wesley, 1993.
+%
+\bibitem{Heinz_Dieter_Ebbinghaus_and_Jorg_Flum} Heinz-Dieter Ebbinghaus and J\"{o}rg Flum \textsl{Finite Model Theory}, 2nd edition, Springer, 2002.
+\end{thebibliography}
+\end{document}

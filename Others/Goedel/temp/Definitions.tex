@@ -1,0 +1,269 @@
+%Editor: Wei-Lin (Linisac) Wu
+\documentclass[leqno]{report}
+
+%External libraries
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{stmaryrd}
+\usepackage{colonequals}
+%\usepackage{amsmath}
+
+%New commands for abbreviations
+\newcommand{\nat}{\mathbb{N}}
+\newcommand{\zah}{\mathbb{Z}}
+\newcommand{\rat}{\mathbb{Q}}
+\newcommand{\real}{\mathbb{R}}
+\newcommand{\cplx}{\mathbb{C}}
+\newcommand{\powerset}[1]{\mathcal{P}(#1)}
+\newcommand{\alphabet}{\mathcal{A}}
+\newcommand{\ar}{\mathrm{ar}}
+\newcommand{\derive}{\ | \hspace{-.4em} -}
+\newcommand{\modeled}{\ \mathrm{\reflectbox{$\models$}}}
+\newcommand{\bimodels}{\modeled \models}
+\newcommand{\STR}[1]{\mathfrak{#1}}
+\newcommand{\INT}{\mathfrak{I}}
+\newcommand{\df}[2]{\displaystyle\frac{#1}{#2}}
+\newcommand{\var}{\mathrm{var}}
+\newcommand{\free}{\mathrm{free}}
+\newcommand{\SF}{\mathrm{SF}}
+%%chapter 4
+\newcommand{\assm}{{(\mathrm{Assm})}}
+\newcommand{\ant}{{(\mathrm{Ant})}}
+\newcommand{\pc}{{(\mathrm{PC})}}
+\newcommand{\ctr}{{(\mathrm{Ctr})}}
+\newcommand{\ora}{{(\lor\mathrm{A})}}
+\newcommand{\ors}{{(\lor\mathrm{S})}}
+\newcommand{\ea}{{(\exists\mathrm{A})}}
+\newcommand{\es}{{(\exists\mathrm{S})}}
+\newcommand{\eq}{{(\equiv)}}
+\newcommand{\sub}{{(\mathrm{Sub})}}
+%%chapter 9
+\newcommand{\freeII}{\free_\mathrm{II}}
+\newcommand{\FOL}{\mathcal{L}_\mathrm{I}}
+\newcommand{\SOL}{\mathcal{L}_\mathrm{II}}
+\newcommand{\LII}{L_\mathrm{II}}
+\newcommand{\INFL}{\mathcal{L}_{\omega_1\omega}}
+\newcommand{\LINF}{L_{\omega_1\omega}}
+\newcommand{\QL}{\mathcal{L}_Q}
+\newcommand{\LQ}{L_Q}
+\newcommand{\domain}[1]{\mbox{the domain of } #1} %!!
+\newcommand{\Iff}{\mbox{iff}} %!!
+\newcommand{\dist}{\mathrm{dist}} %!!
+\newcommand{\nme}{\mathrm{NME}} %!!
+\newcommand{\indexed}{\mathrm{index}} %!!
+\newcommand{\natstr}{\mathfrak{N}} %the structure (\nat, +, \cdot, 0, 1)
+\newcommand{\zahstr}{\mathfrak{Z}} %the structure (\zah, +, \cdot, 0, 1)
+\newcommand{\realstr}{\mathfrak{R}} %the structure (\real, +, \cdot, 0, 1)
+\newcommand{\sat}{\mathrm{Sat} \,} %!!
+\newcommand{\con}{\mathrm{Con} \,} %!!
+\newcommand{\inc}{\mathrm{Inc} \,} %!!
+\newcommand{\mod}[1]{\mathrm{Mod}^{#1}}
+\newcommand{\thr}[1]{\mathrm{Th}(#1)}
+\newcommand{\Th}{\mathrm{Th}}
+\newcommand{\fld}{\mathrm{field}} %!!
+\newcommand{\abs}{\mathrm{abs}} %!!
+%%chapter 10
+\newcommand{\R}{\mathrm{R}}
+\newcommand{\LET}{\mathrm{LET}}
+\newcommand{\IF}{\mathrm{IF}}
+\newcommand{\THEN}{\mathrm{THEN}}
+\newcommand{\ELSE}{\mathrm{ELSE}}
+\newcommand{\OR}{\mathrm{OR}}
+\newcommand{\PRINT}{\mathrm{PRINT}}
+\newcommand{\HALT}{\mathrm{HALT}}
+\newcommand{\GOTO}{\mathrm{GOTO}}
+\newcommand{\p}{\mathrm{P}}
+\newcommand{\halt}{\mathrm{halt}}
+\newcommand{\length}{l}
+\newcommand{\PA}[2]{\LET \ \R_{#1} = \R_{#1} + #2}
+\newcommand{\PS}[2]{\LET \ \R_{#1} = \R_{#1} - #2}
+\newcommand{\PI}[4]{\IF \ \R_{#1} = \Box \ \THEN \ #2 \ \ELSE \ #3 \ldots \ \OR \ #4}
+\newcommand{\PII}[5]{\IF \ \R_{#1} = \Box \ \THEN \ #2 \ \ELSE \ #3 \ \OR \ldots \ #4 \ldots \ \OR \ #5}
+\newcommand{\pa}{\mathrm{PA}}
+\newcommand{\zfc}{\mathrm{ZFC}}
+\newcommand{\Der}[1]{\mathrm{Der}_{#1}}
+\newcommand{\atm}{\mathrm{atm}}
+\newcommand{\ngt}{\mathrm{ngt}}
+\newcommand{\dsj}{\mathrm{dsj}}
+\newcommand{\ext}{\mathrm{ext}}
+\newcommand{\sbt}{\mathrm{sbt}}
+\newcommand{\sbf}{\mathrm{sbf}}
+\newcommand{\drn}{\mathrm{drn}}
+\newcommand{\consis}[1]{\mathrm{Consis}_{#1}}
+\newcommand{\der}[1]{\mathrm{der}(\underline{n^{#1}})}
+
+%New commands for font sizes and styles
+\newcommand{\scripttext}[1]{{\mbox{\scriptsize#1}}}
+\newcommand{\mbf}[1]{{\mbox{\boldmath\begin{math}#1\end{math}}}}
+\newcommand{\mbfs}[1]{{\mbox{\scriptsize\boldmath\begin{math}#1\end{math}}}}
+\newcommand{\mbff}[1]{{\mbox{\footnotesize\boldmath\begin{math}#1\end{math}}}}
+\newcommand{\mbft}[1]{{\mbox{\tiny\boldmath\begin{math}#1\end{math}}}}
+\newcommand{\sbst}[2]{{\textstyle \frac{\displaystyle #1}{\displaystyle #2}}}
+
+\begin{document}
+\noindent
+\textsc{\huge G\"{o}del's Second Incompleteness \hfill\\Theorem.}\\
+\\
+\\
+\\
+{\large \textbf{Sequent Calculus $\mathfrak{S}$}}
+\begin{center}
+\begin{tabular}{ll}
+$\assm$ $\begin{array}{ll}\ & \ \cr\hline \Gamma & \varphi\end{array}$ \ if $\varphi \in \Gamma$ & $\ant$ $\begin{array}{ll}\Gamma & \varphi \cr\hline \Gamma^\prime & \varphi\end{array}$ \ if $\Gamma \subset \Gamma^\prime$ \cr
+$\pc$ $\begin{array}{lll}\Gamma & \psi & \varphi \cr \Gamma & \neg\psi & \varphi \cr\hline \Gamma & \ & \varphi \cr \ & \ \end{array}$ & $\ctr$ $\begin{array}{lll} \Gamma & \neg\varphi & \psi \cr \Gamma & \neg\varphi & \neg\psi \cr\hline \Gamma & \ & \varphi \cr \ & \ & \ \end{array}$ \cr
+$\ora$ $\begin{array}{lll}\Gamma & \varphi & \chi \cr \Gamma & \psi & \chi \cr\hline \Gamma & (\varphi \lor \psi) & \chi \cr \ & \ & \ \end{array}$ & $\ors$ $\begin{array}{ll}\Gamma & \varphi \cr\hline \Gamma & (\varphi \lor \psi)\end{array}$, \ $\begin{array}{ll}\Gamma & \varphi \cr\hline \Gamma & (\psi \lor \varphi)\end{array}$ \cr
+\multicolumn{2}{l}{$\ea$ $\begin{array}{lll}\Gamma & \varphi\sbst{y}{x} & \psi \cr\hline \Gamma & \exists x \varphi & \psi\end{array}$ \ if $y$ is not free in $\Gamma \ \exists x \varphi \ \psi$} \cr
+$\es$ $\begin{array}{ll}\Gamma & \varphi\sbst{t}{x} \cr\hline \Gamma & \exists x \varphi\end{array}$ & \ \cr
+$\eq$ $\begin{array}{l}\ \cr\hline t \equiv t\end{array}$ & $\sub$ $\begin{array}{lll}\Gamma & \ & \varphi\sbst{t}{x} \cr\hline \Gamma & t \equiv t^\prime & \varphi\sbst{t^\prime}{x}\end{array}$
+\end{tabular}
+\end{center}
+\ \\
+\ \\
+{\large \textbf{The Peano Arithmetics $\Phi_\pa$.}}
+\[
+\begin{array}{ll}
+\forall x \neg x + 1 \equiv 0 & \forall x \forall y (x + 1 \equiv y + 1 \rightarrow x \equiv y) \cr
+\forall x \, x + 0 \equiv x & \forall x \forall y \, x + (y + 1) \equiv (x + y) + 1 \cr
+\forall x \, x \cdot 0 \equiv 0 & \forall x \forall y \, x \cdot (y + 1) \equiv x \cdot y + x \cr
+\ & \ \cr
+\multicolumn{2}{l}{\mbox{for all $x_1, \ldots, x_n, y$ and all $\varphi \in L^{S_\ar}$ such that}}\cr
+\multicolumn{2}{l}{\mbox{$\free(\varphi) \subset \{ x_1, \ldots, x_n, y \}$ the sentence}}\cr
+\multicolumn{2}{l}{\forall x_1 \ldots \forall x_n \left( (\varphi\sbst{0}{y} \land \forall y (\varphi \rightarrow \varphi\sbst{y + 1}{y})) \rightarrow \forall y \varphi \right).}
+\end{array}
+\]
+{\large \textbf{Encoding Finite Sequences over $\nat$}}\\
+\ \\
+Given a sequence $(a_0, \ldots, a_r)$, let $p$ be a prime larger than $a_0, \ldots, a_r, r + 1$, and let\\
+\ \\
+$(*)$ \hfill 
+\begin{math}
+\begin{array}{lrl}
+t & \colonequals & 1 + a_0p + 2p^2 + a_1p^3 + 3p^4 + \ldots + (r + 1)p^{2r} + a_rp^{2r + 1} \cr
+\ & = & \displaystyle\sum^r_{i = 0} [(i + 1)p^{2i} + a_ip^{2i + 1}].
+\end{array}
+\end{math} 
+\hfill \phantom{$(*)$}\\
+\ \\
+By choice of $p$ the right-hand side is the $p$-adic representation of $t$.\\
+\ \\
+First, we show that for all $i$, $0 \leq i \leq r$,\\
+\ \\
+$(**)$ \hfill
+\begin{tabular}{lll}
+$a = a_i$ & iff & there are $b_0$, $b_1$, $b_2$ such that \cr
+\ & \ & (i) $t = b_0 + b_1((i + 1) + ap + b_2p^2)$, \cr
+\ & \ & (ii) $a < p$, \cr
+\ & \ & (iii) $b_0 < b_1$, \cr
+\ & \ & (iv) $b_1 = p^{2m}$ for a suitable $m$.
+\end{tabular} \hfill \phantom{$(**)$}\\
+The implication from left to right follows immediately from $(*)$ with
+\[
+\begin{array}{lll}
+b_0 & \colonequals & 1 \cdot p^0 + \ldots + a_{i - 1}p^{2i - 1}, \cr
+b_1 & \colonequals & p^{2i}, \cr
+b_2 & \colonequals & (i + 2) + a_{i + 1}p + \ldots + a_rp^{2(r - i) - 1}.
+\end{array}
+\]
+Conversely, suppose (i) - (iv) hold for $b_0$, $b_1$, $b_2$ and let $b_1 = p^{2m}$. From (i) we obtain
+\[
+t = b_0 + (i + 1)p^{2m} + ap^{2m + 1} + b_2p^{2m + 2}.
+\]
+Since $b_0 < p^{2m}$, $a < p$, and $i + 1 < p$, and since the $p$-adic representation of $t$ is unique, a comparison with $(*)$ yields $m = i$ and $a = a_i$.\\
+\ \\
+Obviously, (iv) from $(**)$ is equivalent to\\
+\ \\
+(iv)$^\prime$ \hfill $b_1$ is a square and for all $d \neq 1$ with $d | b_1$ we have $p | d$. \hfill \phantom{(iv)$^\prime$}\\
+\ \\
+We define $\beta(t, p, i)$ to be the uniquely determined (and hence the smallest) $a$ for which the right-hand side of $(**)$ (with (iv)$^\prime$ instead of (iv)) holds. We extend this definition to arbitrary triples of natural numbers by specifying:\\
+\ \\
+Let $\beta(u, q, j)$ be the smallest $a$ such that there are $b_0$, $b_1$, $b_2$ with\\
+\ \\
+\begin{tabular}{rl}
+(i) & $u = b_0 + b_1((j + 1) + aq + b_2q^2)$, \cr
+(ii) & $a < q$, \cr
+(iii) & $b_0 < b_1$, \cr
+(iv)$^\prime$ & $b_1$ is a square, and for all $d \neq 1$ with $d | b_1$ we have $q | d$.
+\end{tabular}\\
+\ \\
+If no such $a$ exists let $\beta(u, q, j) = 0$.\\
+\ \\
+{\large \textbf{G\"{o}del's Second Incompleteness Theorem}}\\
+\ \\
+In the follwing let $\Phi \subset L_0^{S_\ar}$ be decidable and allow representations.\\
+\par We choose an effective enumeration of all derivations in the sequent calculus associated with $S_\ar$ and define a relation $H$ by
+\begin{center}
+\begin{tabular}{lll}
+$Hnm$ & iff & the $m$th derivation ends with a sequent of the form \cr
+\ & \ & $\psi_0 \ldots \psi_{k - 1} \ \varphi$, where $\psi_0, \ldots, \psi_{k - 1} \in \Phi$ and $n = n^\varphi$.
+\end{tabular}
+\end{center}
+Since $\Phi$ is decidable, so is $H$, and clearly
+\begin{center}
+\begin{tabular}{lll}
+$\Phi \vdash \varphi$ & iff & there is $m \in \nat$ such that $Hn^\varphi m$.
+\end{tabular}
+\end{center}
+Since $\Phi$ allows representations, $H$ can be represented in $\Phi$ by a suitable formula $\varphi_H(v_0, v_1) \in L_2^{S_\ar}$. Again we write $x, y$ for $v_0, v_1$ and set
+\[
+\Der{\Phi}(x) \colonequals \exists y \varphi_H(x, y).
+\]
+For $\psi = \neg\Der{\Phi}(x)$ we choose with 7.5 a fixed point $\varphi \in L_0^{S_\ar}$, i.e. an $S_\ar$-sentence $\varphi$ with
+\begin{center}
+$(*)$ \hfill $\Phi \vdash \varphi \leftrightarrow \neg\Der{\Phi}(\mbf{n}^\varphi).$ \hfill \phantom{(*)}
+\end{center}
+$\varphi$ says intuitively ``I am not provable from $\Phi$''.\\
+\\
+\textbf{7.9 Lemma.} \emph{If $\con \Phi$ then not $\Phi \vdash \varphi$.}\\
+\ \\
+\textit{Proof.} Suppose $\Phi \vdash \varphi$ holds. Choose $m$ such that $Hn^\varphi m$. Then $\Phi \vdash \varphi_H(\mbf{n}^\varphi, \mbf{m})$, and so $\Phi \vdash \Der{\Phi}(\mbf{n}^\varphi)$. From $(*)$ we have $\Phi \vdash \neg\varphi$, and hence $\inc \Phi$.\nolinebreak\hfill$\talloblong$\\
+\ \\
+Since $\Phi \vdash 0 \equiv 0$, we have
+\begin{center}
+$\con \Phi$ \ \ \ iff \ \ \ not $\Phi \vdash \neg 0 \equiv 0$.
+\end{center}
+The $S_\ar$-sentence
+\[
+\consis{\Phi} \colonequals \neg\Der{\Phi}(\mbf{n}^{\neg 0 \equiv 0})
+\]
+thus expresses the consistency of $\Phi$. Lemma 7.9 may then be formalized as
+\begin{center}
+$(**)$ \hfill $\consis{\Phi} \rightarrow \neg\Der{\Phi}(\mbf{n}^\varphi)$. \hfill \phantom{(**)}
+\end{center}
+An argument which is in principle simple, though technically rather tedious, could now be used to show that for $(**)$ the proof of 7.9 can be carried out on the basis of $\Phi$, i.e., one can show that
+\begin{center}
+$(***)$ \hfill $\Phi \vdash \consis{\Phi} \rightarrow \neg\Der{\Phi}(\mbf{n}^\varphi)$, \hfill \phantom{(***)}
+\end{center}
+in case $\Phi \supset \Phi_\pa$ (and if a sufficiently simple formula $\varphi_H(x, y)$ to be used in $\Der{\Phi}$ has been chosen; cf. Exercise 7.12). Thus we obtain:\\
+\ \\
+\textbf{7.10 G\"{o}del's Second Incompleteness Theorem.} \emph{Let $\Phi$ be consistent and R-decidable with $\Phi \supset \Phi_\pa$. Then
+\begin{center}
+not $\Phi \vdash \consis{\Phi}$.
+\end{center}}
+\ \\
+\textit{Proof.} If $\Phi \vdash \consis{\Phi}$ then by $(***)$ $\Phi \vdash \neg\Der{\Phi}(\mbf{n}^\varphi)$. Since $\Phi \vdash \varphi \leftrightarrow \neg\Der{\Phi}(\mbf{n}^\varphi)$ (cf. $(*)$) it would follow that $\Phi \vdash \varphi$, in contradiction to 7.9.\nolinebreak\hfill$\talloblong$
+\ \\
+For $\Phi = \Phi_\pa$, G\"{o}del's Second Incompleteness Theorem says intuitively that the consistency of $\Phi_\pa$ cannot be proved on the basis of $\Phi_\pa$. This result shows that Hilbert's program cannot be carried out in its original form. In particular, this program aimed at a consistency proof for $\Phi_\pa$ with elementary, so-called \emph{finitistic} means. The concept ``finitistic'', though not defined precisely, was taken in a very narrow sense; in particular it was meant that finitistic proof methods be carried out on the basis of $\Phi_\pa$.\\
+\ \\
+The above argument can be transferred to other systems where there is a substitute for the natural numbers and where R-decidable relations and R-computable functions are representable. In particular, it applies to systems of axioms for set theory such as $\zfc$. One uses the natural numbers as defined in $\zfc$ (cf. VII.7). Then one can define an $\{ \mbf{\in} \}$-sentence $\consis{\zfc}$, which expresses the consistency of $\zfc$, to obtain:\\
+\ \\
+\textbf{7.11 Theorem.} \emph{If $\con \zfc$ then not $\zfc \vdash \consis{\zfc}$.}\nolinebreak\hfill$\talloblong$\\
+\ \\
+Since contemporary mathematics can be based on the $\zfc$ axioms, and since ``not $\zfc \vdash \consis{\zfc}$'' says that the consistency of $\zfc$ cannot be proved using only means available within $\zfc$, we can formulate 7.11 as follows: If mathematics is consistent, we cannot prove its consistency by mathematical means.\\
+\ \\
+In a similar way also Tarski's Theorem and G\"{o}del's First Incompleteness Theorem can be transferred to axiom systems for set theory. For example, 7.8 would then assert that for every decidable and consistent system $\Phi$ of axioms for set theory which contains $\zfc$, there is an $\{ \mbf{\in} \}$-sentence $\varphi$ such that neither $\Phi \vdash \varphi$ nor $\Phi \vdash \neg\varphi$. Intuitively this means that there is no decidable consistent system of axioms for mathematics which, for every mathematical statement, allows us to either prove or disprove it. In this fact an inherent limitation of the axiomatic method is manifested.\\
+\ \\
+With the results of Matijasevi$\check{\rm c}$ mentioned at the end of Section 6 we can formulate 7.11 in the following form which is easy to remember: One can write down a polynomial $p$ in finitely many indeterminates with integer coefficients for which the following holds: Mathematics is consistent if and only if $p$ has no (integer) root. By 7.11 we have therefore: If $p$ has no root, then mathematics cannot prove it.\\
+\ \\
+\textbf{7.12 Exercise.} For the (effectively given) symbol set $S$, fix a G\"{o}del numbering of the $S$-formulas; let $n^\varphi$ be the G\"{o}del number of $\varphi$. Furthermore, for $n \in \nat$, let $\underline{n}$ be a variable free $S$-term.\\
+\ \\
+For $\Phi \subset L^S_0$ let the $S$-formula $\mathrm{der}(v_0)$ (``$v_0$ is derivable from $\Phi$'') satisfy the so-called \emph{L\"{o}b axioms}, i.e. for arbitrary $\varphi, \psi \in L^S$,
+\begin{enumerate}[(L1)]
+\item If $\Phi \vdash \varphi$ then $\Phi \vdash \der{\varphi}$;
+%
+\item $\Phi \vdash (\der{\varphi} \land \der{(\varphi \rightarrow \psi)} \rightarrow \der{\psi})$;
+%
+\item $\Phi \vdash (\der{\varphi} \rightarrow \der{\der{\varphi}})$.
+\end{enumerate}
+Show: If $\Phi$ is consistent and if there is an $S$-sentence $\varphi_0$ such that $\Phi \vdash (\varphi_0 \leftrightarrow \neg\der{\varphi_0})$, then not $\Phi \vdash \neg\der{\neg 0 \equiv 0}$. (Hint: Show that, if (L1), (L2), (L3) hold for all $\varphi, \psi \in L^S$, then also $\Phi \vdash (\der{\varphi} \land \der{\psi} \rightarrow \der{(\varphi \land \psi)})$ and $\Phi \vdash (\der{\varphi_0} \rightarrow \der{\neg\varphi_0})$.)
+\end{document}

@@ -1,0 +1,37 @@
+\par This article is based on the material given in Rautenberg (2010).\\
+\par With the binary relation $H$ defined on page 185, every natural number uniquely represents a derivation in the sequent calculus associated with $S_\ar$. In this context, however, only a specific portion of $\nat$ instead is used to represent derivations, for the sake of effectively coding derivations and reflecting their very nature.\\
+\par Accordingly, we shall redefine $H$ by
+\begin{center}
+$Hnm$ \quad iff \quad
+\begin{minipage}[t]{54ex}
+$m$ codes a derivation that ends with a sequent of the form $\enum{\psi}{k - 1}\ \varphi$, where $\seq{\psi}{k - 1} \in \Phi$ and $n = \goedel{\varphi}$.
+\end{minipage}
+\end{center}
+\par We shall have two types of coding schemes of (finite) sequences, one for the lower level G\"{o}del's $\beta$-function, and the other for the upper level.\\
+\par For the upper level coding scheme, we assign
+\[
+p_0^{a_0} \cdots p_n^{a_n + 1} - 2
+\]
+to the sequence $(\seq{a}{n})$.\\
+\par We shall regard a derivation as a finite sequence $(\seq{\sigma}{n})$ of sequents $\sigma_i$, where $\sigma_i$ is coded by a pair $\pair{a_i}{s_i}$, in which $a_i$ is the antecedent (taken as a \emph{set} instead of a \emph{sequence}) and $s_i$ is the succedent; derivations satisfy the construction rules given in $\seqcal$.\\
+\par We shall code finite sets $\setenum{\seq{a}{n}}$ by
+\[
+\sum^n_{k = 0} 2^{a_k}
+\]
+and $\emptyset$ by $0$.\\
+\par Finally, we shall code a term $t$ by $T(t)$ according to the following table:\\
+\ \\
+\begin{tabular}{c||c|c|c|c|c}
+$t$ & $v_n$ & $0$ & $1$ & $t_1 + t_2$ & $t_1 \mul t_2$ \cr\hline
+$T(t)$ & $3n$ & $1$ & $2$ & $3\pi(T(t_1), T(t_2)) + 4$ & $3\pi(T(t_1), T(t_2)) + 5$
+\end{tabular}\\
+\ \\
+And we shall code a formula $\varphi$ by $F(\varphi)$ according to the following table:\\
+\ \\
+\begin{tabular}{c||c|c|c|c}
+$\varphi$ & $t_1 \equal t_2$ & $\neg\psi$ & $\psi \lor \chi$ & $\exists v_n \psi$ \cr\hline
+$F(\varphi)$ & $4\pi(T(t_1), T(t_2))$ & $4F(\psi) + 1$ & $4\pi(F(\psi), F(\chi)) + 2$ & $4\pi(n, F(\psi)) + 3$
+\end{tabular}\\
+\par We use $t_0 \leq t_1$ as an abbreviation for $\exists x \ t_0 + x \equal t_1$; we also use $t_0 < t_1$ as an abbreviation for $t_0 \leq t_1 \land \neg t_0 \equal t_1$.
+\ \\
+\ \\

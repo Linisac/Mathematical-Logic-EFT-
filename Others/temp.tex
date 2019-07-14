@@ -1,0 +1,406 @@
+\textbf{Some $S_\ar$-Sentences Derivable from $\Phi_\pa$.} In our investigations later we will often implicitly refer to the following sentences derivable from $\Phi_\pa$ which will turn out to be useful.
+\textit{Proof.}
+(g) Obviously $\Phi_\pa \vdash (\neg 0 \equiv 0 \rightarrow \exists y \ 0 \equiv y + 1)$. And it is trivial that $\Phi_\pa \vdash (\neg x \equiv 0 \rightarrow \exists y \ x \equiv y + 1) \rightarrow (\neg x + 1 \equiv 0 \rightarrow \exists y \ x + 1 \equiv y + 1)$. Induction schema yields the result.\\
+\ \\
+(h) From (b), it follows that $\Phi_\pa \vdash 1 + 0 \equiv 1 \land 1 \equiv 0 + 1$. Next,
+\[
+\Phi_\pa \cup \{ 1 + x \equiv x + 1 \} \vdash 1 + (x + 1) \equiv (x + 1) + 1
+\]
+because $1 + (x + 1) \equiv (1 + x) + 1$ is derivable from $\Phi_\pa$. Induction schema yields the result.\\
+\ \\
+(i) From (g), we have $\Phi_\pa \cup \{ \neg x \equiv 0 \} \vdash \{ \exists y \, x \equiv y + 1 \}$, and also $\{ \exists y \, x \equiv y + 1 \} \vdash 0 < x$.\\
+\ \\
+(j) (Under Construction.)\\
+\ \\
+(k) This is done by (meta) induction on $n$. If $n = 0$, then trivially
+\[
+\begin{array}{ll}
+\ & \mbf{m} + 0 \cr
+= & \mbf{m}\cr
+= & \mbf{(m + 0)}.
+\end{array}
+\]
+On the other hand,
+\[
+\begin{array}{lll}
+\ & \mbf{m} + \mbf{(n + 1)} & \ \cr
+= & \mbf{m} + (\mbf{n} + 1) & \ \cr
+= & (\mbf{m} + \mbf{n}) + 1 & \ \cr
+= & \mbf{(m + n)} + 1 & \mbox{(induction hypothesis)}\cr
+= & \mbf{((m + n) + 1)} & \ \cr
+= & \mbf{(m + (n + 1))} & \ 
+\end{array}
+\]
+(l) This is done by (meta) induction on $n$. If $n = 0$, then trivially
+\[
+\begin{array}{ll}
+\ & \mbf{m} \cdot 0 \cr
+= & 0 \cr
+= & \mbf{(m \cdot 0)}.
+\end{array}
+\]
+On the other hand,
+\[
+\begin{array}{lll}
+\ & \mbf{m} \cdot \mbf{(n + 1)} & \ \cr
+= & \mbf{m} \cdot (\mbf{n} + 1) & \ \cr
+= & \mbf{m} \cdot \mbf{n} + \mbf{m} & \ \cr
+= & \mbf{(m \cdot n)} + \mbf{m} & \mbox{(induction hypothesis)} \cr
+= & \mbf{((m \cdot n) + m)} & \mbox{(from (k))} \cr
+= & \mbf{(m \cdot (n + 1))}. & \ 
+\end{array}
+\]
+(m) The cases in which $n = 0$ or $n = 1$ are trivial: If $n = 0$, then $\Phi_\pa \cup \{ \neg x \equiv 0 \} \vdash 0 < x$ because $\Phi_\pa \cup \{ \neg x \equiv 0 \} \vdash \neg x \equiv 0 \land 0 + x \equiv x$ (cf. (b)). If $n = 1$, then $\Phi_\pa \cup \{ \neg x \equiv 1, x \equiv 0 \} \vdash x < 1$ is trivial; $\Phi_\pa \cup \{ \neg x \equiv 1, \neg x \equiv 0 \} \vdash 1 < x$ because from (b), (g) and (h) it follows that $\Phi_\pa \cup \{ \neg x \equiv 1, \neg x \equiv 0 \} \vdash \exists y (x \equiv 1 + (y + 1))$; thus we have (cf. $\ors$ and $\pc$) $\Phi_\pa \cup \{ \neg x \equiv 1 \} \vdash (x < 1 \lor 1 < x)$.\\
+\ \\
+So let us assume $n = m + 1$ for some $m > 0$. First, from (b) it follows that
+\[
+\Phi_\pa \vdash \neg 0 \equiv \mbf{m + 1} \rightarrow (0 < \mbf{m + 1} \lor \mbf{m + 1} < 0).
+\]
+Next, we have
+\[
+\Phi_\pa \cup \{ x \equiv \mbf{m + 1} \} \vdash \mbf{m + 1} < x + 1,
+\]
+which implies\\
+(1)\hfill $\begin{array}{l}
+\Phi_\pa \cup \{ x \equiv \mbf{m + 1} \} \vdash (\neg x \equiv \mbf{m + 1} \rightarrow (x < \mbf{m + 1} \lor \mbf{m + 1} < x)) \rightarrow \cr
+\multicolumn{1}{r}{(\neg x + 1 \equiv \mbf{m + 1} \rightarrow (x + 1 < \mbf{m + 1} \lor \mbf{m + 1} < x + 1)).}\end{array}$\\
+\ \\
+On the other hand, (f) yields
+\[
+\Phi_\pa \cup \{ x < \mbf{m + 1} \} \vdash \textstyle\bigvee\limits^m_{i = 0} x \equiv \mbf{i}
+\]
+and hence
+\[
+\Phi_\pa \cup \{ x < \mbf{m + 1} \} \vdash \neg x + 1 \equiv \mbf{m + 1} \rightarrow \textstyle\bigvee\limits^m_{i = 1} x + 1 \equiv \mbf{i},
+\]
+which implies
+\[
+\Phi_\pa \cup \{ x < \mbf{m + 1} \} \vdash \neg x + 1 \equiv \mbf{m + 1} \rightarrow x + 1 < \mbf{m + 1}
+\]
+and hence\\
+(2)\hfill $\begin{array}{l}
+\Phi_\pa \cup \{ x < \mbf{m + 1} \} \vdash \neg x + 1 \equiv \mbf{m + 1} \rightarrow \ \ \ \ \ \ \ \ \ \cr
+\multicolumn{1}{r}{(x + 1 < \mbf{m + 1} \lor \mbf{m + 1} < x + 1);}\end{array}$ \hfill \phantom{(2)}\\
+also, it is trivial that
+\[
+\Phi_\pa \cup \{ \mbf{m + 1} < x \} \vdash \mbf{m + 1} < x + 1
+\]
+and hence that\\
+(3)\hfill $\begin{array}{l}
+\Phi_\pa \cup \{ \mbf{m + 1} < x \} \vdash \neg x + 1 \equiv \mbf{m + 1} \rightarrow \ \ \ \ \ \ \ \ \ \cr
+\multicolumn{1}{r}{(x + 1 < \mbf{m + 1} \lor \mbf{m + 1} < x + 1).}\end{array}$ \hfill \phantom{(3)}\\
+\ \\
+From (2) and (3), we immediately have (cf. $\ora$)\\
+(4)\hfill $\begin{array}{l}
+\Phi_\pa \cup \{ x < \mbf{m + 1} \lor \mbf{m + 1} < x \} \vdash \neg x + 1 \equiv \mbf{m + 1} \rightarrow \ \ \ \ \ \ \ \ \ \cr
+\multicolumn{1}{r}{(x + 1 < \mbf{m + 1} \lor \mbf{m + 1} < x + 1).}\end{array}$ \hfill \phantom{(4)}\\
+This, together with
+\[
+\begin{array}{l}
+\Phi_\pa \cup \{ \neg x \equiv \mbf{m + 1}, \neg x \equiv \mbf{m + 1} \rightarrow (x < \mbf{m + 1} \lor \mbf{m + 1} < x) \} \vdash \cr
+\multicolumn{1}{r}{(x < \mbf{m + 1} \lor \mbf{m + 1} < x),}
+\end{array}
+\]
+yields
+\[
+\begin{array}{l}
+\Phi_\pa \cup \{ \neg x \equiv \mbf{m + 1}, \neg x \equiv \mbf{m + 1} \rightarrow (x < \mbf{m + 1} \lor \mbf{m + 1} < x) \} \vdash \cr
+\multicolumn{1}{r}{\neg x + 1 \equiv \mbf{m + 1} \rightarrow (x + 1 < \mbf{m + 1} \lor \mbf{m + 1} < x + 1)}
+\end{array}
+\]
+or\\
+(5)\hfill $\begin{array}{l}
+\Phi_\pa \cup \{ \neg x \equiv \mbf{m + 1} \} \vdash (\neg x \equiv \mbf{m + 1} \rightarrow (x < \mbf{m + 1} \lor \mbf{m + 1} < x)) \cr
+\multicolumn{1}{r}{\rightarrow (\neg x + 1 \equiv \mbf{m + 1} \rightarrow (x + 1 < \mbf{m + 1} \lor \mbf{m + 1} < x + 1)).}\end{array}$\\
+\ \\
+From (1) and (5) we have
+\[
+\begin{array}{l}
+\Phi_\pa \vdash (\neg x \equiv \mbf{m + 1} \rightarrow (x < \mbf{m + 1} \lor \mbf{m + 1} < x)) \rightarrow \ \ \ \ \ \ \ \ \ \cr
+\multicolumn{1}{r}{(\neg x + 1 \equiv \mbf{m + 1} \rightarrow (x + 1 < \mbf{m + 1} \lor \mbf{m + 1} < x + 1)).}
+\end{array}
+\]
+Induction schema yields the result.\nolinebreak\hfill$\talloblong$\\
+\ \\
+Because $\natstr$ is a model of $\Phi_\pa$, it is clear that for every $S_\ar$-formula $\varphi$,
+\begin{center}
+if $\Phi_\pa \vdash \varphi$ then $\natstr \models \varphi$.
+\end{center}
+In general, the converse does not hold, as 6.10 suggested. However, there is a certain subset of $L^{S_\ar}$, which we call $\Delta_0$ (cf. \cite{Dirk_van_Dalen} or \cite{Wolfgang_Rautenberg}), such that every \emph{sentence} in it is derivable from $\Phi_\pa$ provided that $\natstr$ satisfies it, i.e.
+\begin{center}
+$(+)$ \hfill \emph{for every sentence $\varphi \in \Delta_0$, $\Phi_\pa \vdash \varphi$ iff $\natstr \models \varphi$.} \hfill \phantom{$(*)$}
+\end{center}
+The calculus $(\Delta_0)$ below gives rise to the set $\Delta_0$:
+\begin{center}
+$(\Delta_0)$ \hfill 
+\begin{math}\begin{array}{ll}
+\df{\ }{\ t_1 \equiv t_2\ }, \ \mbox{$t_1$ and $t_2$ are $S_\ar$-terms}; & \df{\varphi}{\ \neg\varphi\ }; \cr
+\ & \ \cr
+\df{\varphi, \psi\ }{\ (\varphi \lor \psi)\ }; & \df{\varphi}{\ (\exists x < t) \varphi\ }
+\end{array}\end{math} \hfill \phantom{($\Delta_0$)}
+\end{center}
+We call an $S_\ar$-formula (or an $S_\ar$-sentence) a \emph{$\Delta_0$-formula} (or a \emph{$\Delta_0$-sentence}, respectively) if it is in $\Delta_0$. For $(+)$ it suffices to show:\\
+\ \\
+\textbf{Lemma.} \emph{For every $\Delta_0$-sentence $\varphi$, either $\Phi_\pa \vdash \varphi$ or $\Phi_\pa \vdash \neg\varphi$.}\\
+\ \\
+\textit{Proof.} This is done by induction on $\varphi$.\\
+(Should be modified) $\varphi$ is atomic: Then $\varphi$ is of the form $\mbf{m} \equiv \mbf{n}$ for some $m, n \in \nat$. If $m = n$, then obviously $\Phi_\pa \vdash \mbf{m} \equiv \mbf{n}$. If $m \neq n$, then we already have $\Phi_\pa \vdash \neg \mbf{m} \equiv \mbf{n}$. (cf. the derivable sentences (a).)\\
+\ \\
+$\varphi = \neg\psi$: By induction hypothesis, either $\Phi_\pa \vdash \psi$ or $\Phi_\pa \vdash \neg\psi$. If $\Phi_\pa \vdash \psi$, then $\Phi_\pa \vdash \neg\neg\psi$ (cf. Exercise IV.3.6(a1)), i.e. $\Phi_\pa \vdash \neg\varphi$. If $\Phi_\pa \vdash \neg\psi$, then we already have $\Phi_\pa \vdash \varphi$.\\
+\ \\
+$\varphi = (\psi \lor \chi)$: By induction hypothesis, we have either $\Phi_\pa \vdash \psi$ or $\Phi_\pa \vdash \neg\psi$, and either $\Phi_\pa \vdash \chi$ or $\Phi_\pa \vdash \neg\chi$. If one of $\Phi_\pa \vdash \psi$ and $\Phi_\pa \vdash \chi$ is the case, then we have $\Phi_\pa \vdash (\psi \lor \chi)$ (cf. the sequent rule ($\lor$S)). Otherwise, it is the case $\Phi_\pa \vdash \neg\psi$ and $\Phi_\pa \vdash \neg\chi$, then we have $\Phi_\pa \vdash (\neg\psi \land \neg\psi)$ (cf. Exercise 3.6(b)), i.e. $\Phi_\pa \vdash \neg(\psi \lor \chi)$.\\
+\ \\
+$\varphi = (\exists x < t)\psi$: Since $\varphi$ is a sentence, $\free(\psi) \subset \{ x \}$ and $\var(t) = \emptyset$. If $t = 0$ then obviously $\Phi_\pa \vdash (\forall x < 0)\neg\psi$, as $\Phi_\pa \vdash \forall x \neg x < 0$. So let us assume that $t = \mbf{n}$ for some $n > 0$. By induction hypothesis, we have in particular that either $\psi(\mbf{i})$ or $\neg\psi(\mbf{i})$ for $0 \leq i < n$.
+\begin{enumerate}[(1)]
+\item If $\Phi_\pa \vdash \psi(\mbf{i})$ for some $0 \leq i < n$, then $\Phi_\pa \vdash (\mbf{i} < \mbf{n} \land \psi(\mbf{i}))$ and then $\Phi_\pa \vdash (\exists x < \mbf{n}) \psi$ (cf. the sequent rule ($\exists$S)).
+\item If $\Phi_\pa \vdash \neg\psi(\mbf{i})$ for all $0 \leq i < n$, then for $0 \leq i < n$ we have $\Phi \cup \{ x \equiv \mbf{i} \} \vdash \neg\psi$, and hence $\Phi_\pa \cup \{ \textstyle\bigvee\limits^{n - 1}_{i = 0} x \equiv \mbf{i}\} \vdash \neg\psi$ (cf. the sequent rule $\ora$). This, together with a result implied by (f), yields $\Phi_\pa \cup \{ x < \mbf{n} \} \vdash \neg\psi$ and hence $\Phi_\pa \vdash (\forall x < \mbf{n}) \neg\psi$.\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+\ \\
+Now let us turn to our representability problem. In the following we will restrict ourselves to showing all R-computable functions are representable in $\Phi_\pa$: If $\mathfrak{Q} \subset \nat^r$ is R-decidable, then one can take the function $F : \nat^r \to \nat$ such that for $n_0, \ldots, n_{r - 1} \in \nat$,
+\[
+F(n_0, \ldots, n_{r - 1}) \colonequals \begin{cases}
+1 & \mbox{if \(\mathfrak{Q}\) holds for \(n_0, \ldots, n_{r - 1}\)}, \cr
+0 & \mbox{otherwise},
+\end{cases}
+\]
+which is obviously R-computable.\footnote{$F$ is the so-called \emph{characteristic function} of $\mathfrak{Q}$, cf. \cite{Dirk_van_Dalen} or \cite{Wolfgang_Rautenberg}.} Thus in $\Phi_\pa$, if $\varphi_F(v_0, \ldots, v_{r - 1}, v_r)$ represents $F$, then $\mathfrak{Q}$ is represented by $\varphi_F(v_0, \ldots, v_{r - 1}, 1)$.\\
+\ \\
+Before we proceed, there is one thing worth noting: When it comes to proving a formula $\varphi(v_0, \ldots, v_{r - 1}, v_r)$ that is to represent a function $F : \nat^r \to \nat$ satisfies the second and the third requirement mentioned in 7.1(b), a useful technique is to show that for $n_0, \ldots, n_{r - 1} \in \nat$,
+\begin{center}
+$(*)$ \hfill $\Phi_\pa \vdash \varphi(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, v_r) \rightarrow v_r \equiv \mbf{F(n_0, \ldots, n_{r - 1})}.$ \hfill \phantom{$(*)$}
+\end{center}
+Thus, the second requirement is satisfied since for any $m \neq F(n_0, \ldots, n_{r - 1})$, $\Phi_\pa \vdash \neg \mbf{m} \equiv \mbf{F(n_0, \ldots, n_{r - 1})}$ and $(*)$ yields
+\[
+\Phi_\pa \vdash \neg\varphi(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, \mbf{m});
+\]
+the third is implied by $(*)$ provided that the first has been proven.\\
+\ \\
+Let the function $F : \nat^r \to \nat$ be computed by the register program $\p$, in which all registers used are among $\R_0, \ldots, \R_n$ where $n \geq r - 1$. Then it will be nice if the formulation
+\[
+\exists v_{n + 3} \ldots \exists v_{2n + 2} \textstyle\bigvee\limits^m_{i = 0} \chi_\p (v_0, \ldots, v_{r - 1}, 0, \ldots, 0, \mbf{L_i}, v_r, v_{n + 3}, \ldots, v_{2n + 2})
+\]
+that we derived in the proof of 6.12 is equivalent to a $\Delta_0$-formula; in such a case, it satisfies the first two requirements mentioned in 7.1(b). Unfortunately, this is not (or at least not obviously) so. Even worse, there is no evidence showing that it satisfies the third requirement.\\
+\ \\
+Thus, for our purpose to obtain the result of 7.4, we need to reformulate the considerations in the proof of 6.12 so as to satisfy all three requirements. This indeed can be done in several steps, as we show now:
+\begin{enumerate}[(1)]
+\item \emph{Reformulate $\varphi_\beta$ in $\Delta_0$.} Observe that, for the righthand-side of the condition $(**)$ in the proof of 6.11, the following hold:
+\begin{enumerate}[(a)]
+\item $b_1 < t$;
+%%%
+\item $b_2 < t$;
+%%%
+\item $e_1 := p - a < p + 1$;
+%%%
+\item For $b_1 = e_2^2$, we have $e_2 < b_1$; if $d \neq 1$ and $d \cdot e_3 = b_1$, then $d < b_1$ and $e_3 < b_1$; also, if $p \cdot e_4 = d$ then $e_4 < d$.
+\end{enumerate}
+Then we embed these additional considerations into the definition of $\beta(u, q, j) = a$ and hence obtain the formulation of $\varphi_\beta(u, q, j, a)$ in $\Delta_0$:
+\[
+\begin{array}{lll}
+\varphi_\beta (u, q, j, a) & := & (\chi (u, q, j, a) \land (\forall e < a) \neg\chi (u, q, j, e)) \lor \cr
+\ & \ & ((\forall e < q) \neg\chi (u, q, j, e) \land a \equiv 0),
+\end{array}
+\]
+where
+\[
+\begin{array}{lll}
+\chi (u, q, j, a) & := & (\exists b_1 < u)(\exists b_2 < u)(\exists b_0 < b_1) \cr
+\ & \ & (u \equiv b_0 + b_1 \cdot ((j + 1) + a \cdot q + b_2 \cdot q \cdot q) \land \cr
+\ & \ & \phantom{(}(\exists e_1 < q + 1)(\neg e_1 \equiv 0 \land a + e_1 \equiv q) \land \cr
+\ & \ & \phantom{)}(\exists e_2 < b_1)e_2 \cdot e_2 \equiv b_1 \land \cr
+\ & \ & \phantom{(}(\forall d < b_1)(\neg d \equiv 1 \land (\exists e_3 < b_1) d \cdot e_3 \equiv b_1 \rightarrow \cr
+\ & \ & \phantom{(\forall d < b_1)()}(\exists e_4 < d) q \cdot e_4 \equiv d \cr
+\ & \ & \phantom{(\forall d < b_1))}) \cr
+\ & \ & )
+\end{array}
+\]
+is in $\Delta_0$, formulating
+\begin{center}
+``The conditions (i) - (iv)$^\prime$ (cf. the proof of 6.11) hold for $u$, $q$, $j$ and $a$.''
+\end{center}
+%%
+\item \emph{Reformulate $\chi_\p$.} Let us take a closer look at the proof of 6.8, where we derived the formulation of $\chi_\p$. There we indeed formulated the statement
+\begin{quote}
+``There is $s \in \nat$ such that, $\p$ beginning with the configuration $(0, x_0, \ldots, x_n)$ reaches the configuration $(z, y_0, \ldots, y_n)$ after $s$ steps.''
+\end{quote}
+As has been noted in the proof of 4.1, the program $\p$ increases the content of each register by at most $1$ at each instruction. Thus, when reaching the configuration $(z, y_0, \ldots, y_n)$, $\p$ increases the content of each register by at most $s$. Also, given the length of $\p$ is $k + 1$, we have that all labels are no more than $k$. Thus we obtain the new formulation of $\chi_\p(x_0, \ldots, x_n, z, y_0, \ldots, y_n)$ by rewriting the part
+\[
+\begin{array}{l}
+\forall u \forall u_0 \ldots \forall u_n \forall u^\prime \forall u_0^\prime \ldots \forall u_n^\prime \cr
+[\varphi_\beta( t, p, i \cdot (\mbf{n + 2}), u) \land \ldots \land \cr
+\phantom{[}\varphi_\beta( t, p, i \cdot (\mbf{n + 2}) + (\mbf{n + 1}), u_n) \land \cr
+\phantom{[}\varphi_\beta( t, p, (i + 1) \cdot (\mbf{n + 2}), u^\prime) \land \ldots \land \cr
+\phantom{[}\varphi_\beta( t, p, (i + 1) \cdot (\mbf{n + 2}) + (\mbf{n + 1}), u_n^\prime) \cr
+\phantom{[}\rightarrow \mbox{``$(u, u_0, \ldots, u_n) \begin{array}{l} \ \cr \rightarrow \cr \p \end{array} (u^\prime, u_0^\prime, \ldots, u_n^\prime)$''} \cr
+]
+\end{array}
+\]
+as
+\[
+\begin{array}{l}
+(\forall u < \mbf{k})(\forall u_0 < x_0 + s) \ldots (\forall u_n < x_n + s) \cr
+(\forall u^\prime < \mbf{k + 1})(\forall u_0^\prime < x_0 + s + 1) \ldots (\forall u_n^\prime < x_n + s + 1) \cr
+[\varphi_\beta( t, p, i \cdot (\mbf{n + 2}), u) \land \ldots \land \cr
+\phantom{[}\varphi_\beta( t, p, i \cdot (\mbf{n + 2}) + (\mbf{n + 1}), u_n) \land \cr
+\phantom{[}\varphi_\beta( t, p, (i + 1) \cdot (\mbf{n + 2}), u^\prime) \land \ldots \land \cr
+\phantom{[}\varphi_\beta( t, p, (i + 1) \cdot (\mbf{n + 2}) + (\mbf{n + 1}), u_n^\prime) \cr
+\phantom{[}\rightarrow \mbox{``$(u, u_0, \ldots, u_n) \begin{array}{l} \ \cr \rightarrow \cr \p \end{array} (u^\prime, u_0^\prime, \ldots, u_n^\prime)$''} \cr
+].
+\end{array}
+\]
+\ \\
+Let $\chi_\p^\prime$ be the $S_\ar$-formula such that
+\[
+\chi_\p (x_0, \ldots, x_n, z, y_0, \ldots, y_n) = \exists s \exists p \exists t \chi_\p^\prime(x_0, \ldots, x_n, z, y_0, \ldots, y_n, s, p, t).
+\]
+It can be easily seen that $\chi_\p^\prime \in \Delta_0$.
+%%
+\item \emph{Encode a sequence of given length with the pairing function.} G\"{o}del's $\beta$- function is good for encoding a finite sequence of arbitrary length; as for encoding one of given length, however, a more efficient method is by the \emph{pairing function} $P : \nat^2 \to \nat$,
+\[
+P(m, n) := \left(\sum^{m + n}_{k = 1} k \right) + m = \frac{1}{2}(m + n)(m + n + 1) + m.
+\]
+$P$ enumerates pairs over $\nat$ in this fashion:
+\[
+(0, 0), \, (0, 1), (1, 0), \,(0, 2), (1, 1), (2, 0), \, (0, 3), (1, 2), (2, 1), (3, 0), \ldots
+\]
+that is, $P(0, 0) = 0$, $P(0, 1) = 1$, $P(1, 0) = 2$, and so on. It can be easily verified that $P$ is bijective.\\
+\ \\
+For a sequence $(a_0, \ldots, a_n)$, we encode it as $\underbrace{P(a_0, \ldots P(a_{n - 1},}_{\mbox{\scriptsize\begin{math}n\end{math}-times}} a_n \underbrace{) \ldots )}_{\mbox{\scriptsize\begin{math}n\end{math}-times}}$. For example, we encode $(0, 1, 2, 3)$ as
+\[
+\begin{array}{lll}
+P(0, P(1, P(2, 3))) & = & P(0, P(1, 17)) \cr
+\ & = & P(0, 171) \cr
+\ & = & 14706.
+\end{array}
+\]
+\ \\
+With the bijectivity of $P$, every element of a sequence can be computed from the given encoding of that sequence. For example, if $c$ is the encoding of a sequence $(a_0, \ldots, a_n)$ where $n \geq 1$, then we have for any $a \in \nat$,
+\begin{center}
+$a = a_0$ iff $a \leq c$ and there is $b \leq c$ with $c = \displaystyle\frac{1}{2}(a + b)(a + b + 1) + a$.
+\end{center}
+($b$ is the encoding of $(a_1, \ldots, a_n)$.) Other elements can likewise be computed. From this it is not hard to see that for $0 \leq i \leq n$,
+\begin{center}
+``$a$ is the $(i + 1)$st element of the sequence encoded by $c$''
+\end{center}
+can be formulated in $\Delta_0$.\\
+\ \\
+We can even formulate the above to obtain a $\Delta_0$-formula \emph{representing} in $\Phi_\pa$ the mapping from the given encoding to a certain element of the encoded sequence. For example, if $c$ encodes $(a_0, \ldots, a_n)$ where $n \geq 1$, then for every $a \in \nat$,
+\begin{quote}
+$a = a_0$ iff $a$ is the smallest $a^\prime$ such that $a^\prime \leq c$ and there is $b \leq c$ with $c = \displaystyle\frac{1}{2}(a^\prime + b)(a^\prime + b + 1) + a^\prime$.
+\end{quote}
+%%
+\item \emph{Formulate the behavior of $\p$ on the configuration $(0, x_0, \ldots, x_n)$.} Consider the function $\hat{F}: \nat^r \to \nat$ such that for all $n_0, \ldots, n_{r - 1}, n_r \in \nat$, $\hat{F} (n_0, \ldots, n_{r - 1}) = n_r$ :iff $n_r$ is the encoding of $(a_0, \ldots, a_n, b_0, b_1, b_2)$ with\\
+$(\star)$ \hfill $\natstr \models \bigvee\limits^m_{i = 0} \chi_\p^\prime(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, 0, \ldots, 0, \mbf{L_i}, \mbf{a_0}, \ldots, \mbf{a_n}, \mbf{b_0}, \mbf{b_1}, \mbf{b_2})$, \hfill \phantom{$(\star)$}\\
+in which $b_1$ and $b_2$ are the smallest among all possible values and $\chi_\p^\prime$ is the $S_\ar$-formula mentioned earlier in (2). $n_r$ thus is the smallest encoding among all those of possible sequences such that $(\star)$ holds.\\
+\ \\
+Let
+\[
+\begin{array}{ll}
+\psi(x_0, \ldots, x_n, e) := & (\exists y_0 < e)\ldots(\exists y_n < e)(\exists s < e)(\exists p < e)(\exists t < e) \cr
+\ & (\delta (y_0, \ldots, y_n, s, p, t, e) \land \cr
+\ & \phantom{(}\textstyle\bigvee\limits^m_{i = 0} \chi_\p^\prime(x_0, \ldots, x_n, \mbf{L_i}, y_0, \ldots, y_n, s, p, t) \cr
+\ & ),
+\end{array}
+\]
+where $\delta (y_0, \ldots, y_n, s, p, t, e)$ is atomic, formulating
+\begin{center}
+``the sequence $(y_0, \ldots, y_n, s, p, t)$ is encoded by $e$''.
+\end{center}
+Note that $\psi \in \Delta_0$.\\
+\ \\
+Then $\hat{F}$ can be formulated in $\Delta_0$ as
+\[
+\psi_{\hat{F}}(x_0, \ldots, x_n, e) := \psi(x_0, \ldots, x_n, e) \land (\forall e^\prime < e)\neg\psi(x_0, \ldots, x_n, e^\prime),
+\]
+that is, for all $n_0, \ldots, n_{r - 1}, n_r \in \nat$,
+\begin{center}
+$\hat{F}(n_0, \ldots, n_{r - 1}) = n_r$ \ \ \ iff \ \ \ $\natstr \models \psi_{\hat{F}}(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, 0, \ldots, 0, \mbf{n_r})$.
+\end{center}
+\ \\
+Moreover, $\psi_{\hat{F}}$ represents $\hat{F}$ in $\Phi_\pa$:
+\begin{enumerate}[(a)]
+\item Since $\psi_{\hat{F}}(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, 0, \ldots, 0, \mbf{\hat{F}(n_0, \ldots, n_{r - 1})}) \in \Delta_0$ is satisfied by $\natstr$, it is derivable from $\Phi_\pa$, and the first requirement is satisfied.
+%%%
+\item Similarly, $(\exists e^\prime < e) \psi(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, 0, \ldots, 0, e^\prime)$ and hence 
+\[
+\neg\psi(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, 0, \ldots, 0, e) \lor (\exists e^\prime < e) \psi(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, 0, \ldots, 0, e^\prime)
+\]
+are derivable from $\Phi_\pa \cup \{ \mbf{\hat{F}(n_0, \ldots, n_{r - 1})} < e \}$.\\
+\ \\
+On the other hand, for $0 \leq i < \hat{F}(n_0, \ldots, n_{r - 1})$,
+\[
+\neg\psi(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, 0, \ldots, 0, \mbf{i}) \in \Delta_0
+\]
+is derivable from $\Phi_\pa$ because it is satisfied by $\natstr$. So
+\[
+\Phi_\pa \cup \{ e < \mbf{\hat{F}(\mbf{n_0}, \ldots, \mbf{n_{r - 1}})} \} \vdash \textstyle\bigvee\limits_{i = 0}^{\hat{F}(n_0, \ldots, n_{r - 1}) - 1} e \equiv \mbf{i},
+\]
+yields
+\[
+\Phi_\pa \cup \{ e < \mbf{\hat{F}(\mbf{n_0}, \ldots, \mbf{n_{r - 1}})} \} \vdash \neg\psi(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, 0, \ldots, 0, e).
+\]
+Therefore
+\[
+\neg\psi(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, 0, \ldots, 0, e) \lor (\exists e^\prime < e) \psi(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, 0, \ldots, 0, e^\prime)
+\]
+is derivable from $\Phi_\pa \cup \{ e < \mbf{\hat{F}(\mbf{n_0}, \ldots, \mbf{n_{r - 1}})} \}$.\\
+\ \\
+In summary, we have
+\[
+\neg\psi(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, 0, \ldots, 0, e) \lor (\exists e^\prime < e) \psi(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, 0, \ldots, 0, e^\prime)
+\]
+(that is, $\neg\psi_{\hat{F}}(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, 0, \ldots, 0, e)$) is derivable from
+\[
+\Phi_\pa \cup \{ e < \mbf{\hat{F}(n_0, \ldots, n_{r - 1})} \lor \mbf{\hat{F}(n_0, \ldots, n_{r - 1})} < e \}
+\]
+(cf. ($\lor$A)). In other words,
+\[
+\neg e < \mbf{\hat{F}(n_0, \ldots, n_{r - 1})} \land \neg\mbf{\hat{F}(n_0, \ldots, n_{r - 1})} < e
+\]
+is derivable from
+\[
+\Phi_\pa \cup \{ \psi_{\hat{F}}(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, 0, \ldots, 0, e) \}.
+\]
+So we have
+\[
+\Phi_\pa \vdash \psi_{\hat{F}}(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, 0, \ldots, 0, e) \rightarrow e \equiv \mbf{\hat{F}(n_0, \ldots, n_{r - 1})}.
+\]
+%%%
+\end{enumerate}
+%%
+\item \emph{Formulate $F$.} We will soon reach our goal. The formulation of $F$ is
+\[
+\varphi_F(v_0, \ldots, v_{r - 1}, v) := \exists e (\psi_{\hat{F}}(v_0, \ldots, v_{r - 1}, 0, \ldots, 0, e) \land \psi_f(e, v)),
+\]
+where $\psi_f(e, v) \in \Delta_0$ represents the mapping from the encoding $e$ of a sequence of length at least 2 to the first element $v$.\\
+\ \\
+It remains to be shown that $\varphi_F$ represents $F$:
+\begin{enumerate}[(a)]
+\item The first requirement is satisfied. Observe that for $n_0, \ldots, n_{r - 1} \in \nat$, the $\Delta_0$-sentence
+\[
+\begin{array}{l}
+\psi_{\hat{F}}(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, 0, \ldots, 0, \mbf{\hat{F}(n_0, \ldots, n_{r - 1})}) \land \cr
+\psi_f(\mbf{\hat{F}(n_0, \ldots, n_{r - 1})}, \mbf{F(n_0, \ldots, n_{r - 1})})
+\end{array}
+\]
+is satisfied by $\natstr$ and hence is derivable from $\Phi_\pa$, therefore
+\[
+\Phi_\pa \vdash \exists e (\psi_{\hat{F}}(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, 0, \ldots, 0, e) \land \psi_f(e, \mbf{F(n_0, \ldots, n_{r - 1})})).
+\]
+%%%
+\item As for the second and the third, we show that for $n_0, \ldots, n_{r - 1} \in \nat$,
+\[
+\begin{array}{l}
+\Phi_\pa \vdash \exists e (\psi_{\hat{F}}(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, 0, \ldots, 0, e) \land \psi_f(e, v)) \rightarrow \ \ \ \ \ \ \cr
+\multicolumn{1}{r}{v \equiv \mbf{F(n_0, \ldots, n_{r - 1})}.}
+\end{array}
+\]
+Since $\psi_{\hat{F}}$ represents $\hat{F}$ and $\psi_f$ represents the mapping from the encoding of a sequence of length at least 2 to its first element, we have
+\[
+\begin{array}{l}
+\Phi_\pa \cup \{ \psi_{\hat{F}}(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, 0, \ldots, 0, e) \land \psi_f(e, v) \} \vdash \ \ \ \ \ \ \ \ \ \cr
+\multicolumn{1}{r}{v \equiv \mbf{F(n_0, \ldots, n_{r - 1})},}
+\end{array}
+\]
+which yields the desired result (cf. $\ea$ and Exercise IV.3.6(c)).\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+\end{enumerate}

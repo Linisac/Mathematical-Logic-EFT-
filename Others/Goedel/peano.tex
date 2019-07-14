@@ -1,0 +1,21 @@
+\textbf{\Large Peano's Axioms}
+\begin{enumerate}[1.]
+%
+\item $\forall x \neg x + 1 \equal 0$
+%
+\item $\forall x \ x + 0 \equal x$
+%
+\item $\forall x \ x \mul 0 \equal 0$
+%
+\item $\forall x \forall y (x + 1 \equal y + 1 \limply x \equal y)$
+%
+\item $\forall x \forall y \ x + (y + 1) \equal (x + y) + 1$
+%
+\item $\forall x \forall y \ x \mul (y + 1) \equal x \mul y + x$
+%
+\item for all $\seq[1]{x}{n}, y$ and all $\varphi \in \fstordlang{S_\ar}$ such that $\free{\varphi} \subset \setenum{\seq[1]{x}{n}, y}$ the sentence
+\[
+\enump{\forall x_1}{\forall x_n}\parenadj{(\varphi\sbst{0}{y} \land \forall y (\varphi \limply \varphi\sbst{y + 1}{y})) \limply \forall y \varphi}
+\]
+%
+\end{enumerate}

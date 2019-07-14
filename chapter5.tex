@@ -1,0 +1,285 @@
+%Chapter V---------------------------------------------------------------------------------------------------
+{\LARGE \bfseries V \\ \\ The Completeness Theorem}
+\\
+\\
+\\
+%Section V.0-------------------------------------------------------------------------------------------------
+{\large \S \ Prolog}
+\begin{enumerate}[1.]
+\item \textbf{Note to the Prolog of Chapter V in Page 75.} An alternative \emph{proof} for that $(*)$ follows from $(**)$ in page 75 is provided here: Assuming $(**)$. If $\Phi \models \varphi$, then $\Phi \cup \{ \neg \varphi \}$ is not satisfiable by III.4.4. Thus by hypothesis we have that $\Phi \cup \{ \neg \varphi \}$ is inconsistent, i.e. $\Phi \vdash \varphi$ from IV.7.6(a). \begin{flushright}$\talloblong$\end{flushright}
+%
+\item \textbf{Proposition:} \textit{$(**)$ also follows from $(*)$.}\\
+\emph{Proof.} Assuming $(*)$. If $\Phi$ is not satisfiable, then clearly $\Phi \models \varphi$ for all $\varphi$ since it has \emph{no} models. It follows from the hypothesis that $\Phi \vdash \varphi$ for all $\varphi$, i.e. $\Phi$ is inconsistent. \begin{flushright}$\talloblong$\end{flushright}
+\end{enumerate}
+%End of Section V.0------------------------------------------------------------------------------------------
+\ 
+\\
+\\
+%Section V.1-------------------------------------------------------------------------------------------------
+{\large \S1. Henkin's Theorem}
+\begin{enumerate}[1.]
+\item \textbf{Note to the Proof of Lemma 1.7.} The third sufficient and necessary condition (``iff'') in (b) follows from the property of equivalence relation. In case (ii) of (c),
+\[
+\forall x_1 \ldots \forall x_n \varphi
+\]
+can be regarded as
+\[
+\neg \exists x_1 \ldots \exists x_n \neg \varphi
+\]
+(cf. III.4) and hence the result immediately follows from (i).
+%
+\item \textbf{Note to the Discussion before Definition 1.8 in Page 78.} Note that $S = \{ R \}$ contains neither function symbols nor constant symbols, so there are only variables $\in \mathcal{A}$ in the domain $T^{\Phi}$ of $\mathfrak{I}^{\Phi}$.
+%
+\item \textbf{Proof to Corollary 1.11.} Apply Henkin's Theorem 1.10 to formulas in $\Phi$ and its term interpretation $\mathfrak{I}^\Phi$ (notice that $\Phi \models \varphi$ for all $\varphi \in \Phi$). \begin{flushright}$\talloblong$\end{flushright}
+%
+%V.1.12---------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 1.12.}
+\begin{enumerate}[(a)]
+\item
+\begin{enumerate}[(i)]
+\item Let $\mathfrak{I} = (\mathfrak{A}, \beta)$ be an interpretation of $\Phi$ such that $A = \{ a_0, a_1 \}$, and for all $x \in \mathcal{A}$,
+\[
+\beta(x) := a_1,
+\]
+and
+\[
+\mbox{$R^{\mathfrak{A}}a_0$ and not $R^{\mathfrak{A}}a_1$}.
+\]
+It is easy to see that $\mathfrak{I} \models \Phi$ and hence $\Phi$ is satisfiable.\\
+\ 
+\\As it turns out, $\Phi$ is also consistent, for otherwise there would be a formula $\varphi$ such that $\Phi \vdash \varphi$ and $\Phi \vdash \neg \varphi$ (by IV.7.1(b)), which by IV.6.2 implies that $\Phi \models \varphi$ and $\Phi \models \neg \varphi$, contrary to the result that $\Phi$ is satisfiable.
+%%%
+\item $T^S$ contains only variables because there are no function symbols and constant symbols in $S$.\\
+Since $\Phi$ is consistent from (i), and $\Phi \vdash \neg Ry$ for all variables $y$ by definition, there are no \textit{terms} $t \in T^S$ (more precisely, \textit{variables}, in this case) such that $\Phi \vdash Rt$.
+%%%
+\item If $\mathfrak{I} \models \Phi$, then $\mathfrak{I} \models \exists x Rx$, i.e. there is an $a \in A$ such that $\mathfrak{I} \frac{a}{x} \models Rx$. Furthermore, $a \not \in \{ \mathfrak{I}(t) | t \in T^S \}$, since otherwise it would be the case that $\mathfrak{I} \frac{\mathfrak{I}(t)}{x} \models Rx$, where $\mathfrak{I}(t) = a$ for some $t \in T^S$, which by the Substitution Lemma implies that $\mathfrak{I} \models Rt$, or $\mathfrak{I} \models Ry$ for some variable $y$ in this case.
+\end{enumerate}
+%%
+\item
+\begin{enumerate}[(i)]
+\item Let $\mathfrak{I} = (\mathfrak{A}, \beta)$ be an interpretation of $\Phi$ with $R^\mathfrak{A} \beta(y)$. Then $\mathfrak{I} \models Ry$ and furthermore $\mathfrak{I} \models (Rx \lor Ry)$, i.e. $\mathfrak{I}$ is a model of $\Phi$, whether $R^\mathfrak{A} \beta(x)$ or not. Therefore, neither $Rx$ nor $\neg Rx$ is a consequence of $\Phi$, i.e. not $\Phi \models Rx$ and not $\Phi \models \neg Rx$, which implies that not $\Phi \vdash Rx$ and not $\Phi \vdash \neg Rx$ by the correctness of $\mathfrak{S}$ (cf. IV.6.2).
+%%%
+\item From (i) we have not $\Phi \vdash Rx$ and not $\Phi \vdash Ry$. From this and 1.7(b) we successively get:
+\[
+\begin{array}{l}
+\mbox{not $\mathfrak{I}^{\Phi} \models Rx$ and not $\mathfrak{I}^{\Phi} \models Ry$}, \cr 
+\mbox{$\mathfrak{I}^{\Phi} \models \neg Rx$ and $\mathfrak{I}^{\Phi} \models \neg Ry$}, \cr
+\mathfrak{I}^{\Phi} \models (\neg Rx \land \neg Ry), \cr
+\mbox{$\mathfrak{I}^{\Phi} \models \neg (Rx \lor Ry)$ (cf. III.4)}, \cr
+\mbox{not $\mathfrak{I}^{\Phi} \models (Rx \lor Ry)$}.
+\end{array}
+\]
+\end{enumerate}
+\end{enumerate} \begin{flushright}$\talloblong$\end{flushright}
+%End of V.1.12-----------------------------------------------------------------------------------------------
+%
+%V.1.13---------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 1.13.}
+Let $\Phi$ be inconsistent. Then for all $\varphi \in L^S$, $\Phi \vdash \varphi$. In particular, for all terms $t_1, t_2 \in T^S$,
+\[
+\Phi \vdash t_1 \equiv t_2
+\]
+and for all $n$-ary relation symbols $R$ and for all terms $t_1, \ldots, t_n \in T^S$,
+\[
+\Phi \vdash Rt_1 \ldots t_n.
+\]
+Hence by 1.7(b), for $\mathfrak{I}^{\Phi}$ we have: for all terms $t_1, t_2 \in T^S$,
+\[
+\overline{t_1} = \overline{t_2},
+\]
+and for all terms $t_1, \ldots, t_n \in T^S$,
+\[
+R^{\mathfrak{T}^{\Phi}} \overline{t_1} \ldots \overline{t_n}.
+\]
+Finally, for all variables $x$,
+\[
+\beta^{\Phi}(x) := \overline{x}.
+\]
+From this we perceive that $\mathfrak{I}^{\Phi}$ is independent of the inconsistent set $\Phi$. \begin{flushright}$\talloblong$\end{flushright}
+%End of V.1.13-----------------------------------------------------------------------------------------------
+%End of Section V.1------------------------------------------------------------------------------------------
+\end{enumerate}
+\ 
+\\
+\\
+%Section V.2-------------------------------------------------------------------------------------------------
+{\large \S2. Satisfiability of Consistent Sets of Formulas (the Countable Case)}
+\begin{enumerate}[1.]
+\item \textbf{Note to the Proof of Lemma 2.1.} In the hypothesis of this theorem, we assume that $\free(\Phi)$ is finite, so as to guarantee an infinite supply of free variables for witnesses. The reader may be tempted to drop this assumption without much care, as he may think that even though all variables appear free in $\Phi$, he can renumber them so that only, say, odd-numbered variables appear in $\Phi$, thus preserving all even-numbered variables for witnesses. This strategy, however, is not always feasible, as illustrated by Exercise 2.5.\newline
+\\
+On the other hand, a derivation of $\vdash \, \Gamma \, \varphi_n \frac{y_n}{x_n} \, \varphi$ missing in textbook is provided here:
+\[
+\begin{array}{lllll}
+(m+4). & \Gamma & \varphi_n \frac{y_n}{x_n} & \varphi_n \frac{y_n}{x_n} & \mbox{(Assm)} \cr
+(m+5). & \Gamma & \varphi_n \frac{y_n}{x_n} & (\neg \exists x_n \varphi_n \lor \varphi_n \frac{y_n}{x_n}) & \mbox{($\lor$S) applied to $(m+4).$} \cr
+(m+6). & \Gamma & \varphi_n \frac{y_n}{x_n} & \varphi & \mbox{(Ch) applied to $(m+5).$} \cr
+\ & \ & \ & \ & \mbox{and $m.$ (with (Ant))}
+\end{array}
+\]
+where we set $l = m+6$.
+%
+\item \textbf{Note to the Proof of Lemma 2.2.} An alternative definition for $\Theta_{n + 1}$ is:
+\[
+\Theta_{n + 1} := \begin{cases}
+\Theta_n \cup \{ \varphi_n \} & \mbox{if \(\con \Theta_n \cup \{ \varphi_n \}\)}; \cr
+\Theta_n \cup \{ \neg\varphi_n \} & \mbox{otherwise}.
+\end{cases}
+\]
+By IV.7.6 (c), it is obvious that $\con \Theta_n$ for all $n \in \mathbb{N}$. 
+%
+\item \textbf{Note to the Proof of Theorem 2.4.}
+\begin{enumerate}[(1)]
+\item The term interpretation $\mathfrak{I}^{\Phi^\prime}$ of $\Phi^\prime$ is an $S^\prime$-expansion (cf. III.4.7) of the term interpretation $\mathfrak{I}^\Phi$ of $\Phi$.
+%%
+\item By the Coincidence Lemma, it is no harm to choose such $\beta^\prime$, since each variable $v_n$ is bound.
+%%
+\item By IV.7.7, every finite subset $\Phi_0^\prime$ of $\Phi^\prime$ is consistent (with respect to $S^\prime$) implies that $\Phi^\prime$ is consistent (with respect to $S^\prime$).
+\end{enumerate}
+%
+%V.2.5-------------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 2.5.} First we show that $\sat \Phi$ by giving a model $\mathfrak{I} = (\mathfrak{A}, \beta)$, hence $\con \Phi$ by IV.7.5: Let $A := \{ a_0, a_1 \}$ (where $a_0 \neq a_1$), and
+\[
+\begin{array}{rl}
+\beta(v_i) := a_0 & \mbox{for all $i \in \mathbb{N}$,} \cr
+c^\mathfrak{A} := a_0 & \mbox{for all constant $c$, and} \cr
+f^\mathfrak{A}(u_0, \ldots, u_{n - 1}) := a_0 & \mbox{for all $n$-ary function symbol $f$ and for all} \cr
+\  & \mbox{arguments $u_0, \ldots, u_{n - 1} \in A$.}
+\end{array}
+\]
+Thus we have that $\mathfrak{I}(t) = a_0$ for all terms $t \in T^S$. It immediately follows that $\mathfrak{I} \models \Phi$.\\
+\\
+Next we show that there is no consistent set in $L^S$ which includes $\Phi$ and contains witnesses: Suppose for the sake of contradiction that $\Phi \subset \Psi \subset L^S$, where $\Psi$ is consistent and \emph{contains witnesses}. Therefore there exist $t_0, t_1 \in T^S$ and $\Gamma_0, \Gamma_1 \subset \Psi$ such that the derivations\\ \ \\ \phantom{an}
+\begin{math}
+\begin{array}{c}
+\vdots \cr
+\Gamma_0 \  (\exists v_0 \exists v_1 \neg v_0 \equiv v_1 \rightarrow \exists v_1 \neg t_0 \equiv v_1)
+\end{array}
+\end{math}
+\\ \ \\and\\ \ \\ \phantom{an}
+\begin{math}
+\begin{array}{c}
+\mbox{\rotatebox{90}{$\shortmid\,\shortmid\,\shortmid$}} \cr
+\Gamma_1 \  (\exists v_1 \neg t_0 \equiv v_1 \rightarrow \neg t_0 \equiv t_1)
+\end{array}
+\end{math}
+\\ \ \\can be carried out. Then let us consider the two derivations below:\\ \ \\ \phantom{an}
+\begin{math}
+\begin{array}{lllll}
+\multicolumn{5}{c}{\vdots} \cr
+m. & \Gamma_0 & \ & \ & (\exists v_0 \exists v_1 \neg v_0 \equiv v_1 \rightarrow \exists v_1 \neg t_0 \equiv v_1) \cr
+\multicolumn{5}{c}{\mbox{\rotatebox{90}{$\shortmid\,\shortmid\,\shortmid$}}} \cr
+n. & \Gamma_1 & \ & \ & (\exists v_1 \neg t_0 \equiv v_1 \rightarrow \neg t_0 \equiv t_1) \cr
+(n+1). & \Gamma_0 & \Gamma_1 & \exists v_0 \exists v_1 \neg v_0 \equiv v_1 & (\exists v_0 \exists v_1 \neg v_0 \equiv v_1 \rightarrow \exists v_1 \neg t_0 \equiv v_1) \cr
+\ & \ & \ & \ & \mbox{(Ant) applied to $m$.} \cr
+(n+2). & \Gamma_0 & \Gamma_1 & \exists v_0 \exists v_1 \neg v_0 \equiv v_1 & (\exists v_1 \neg t_0 \equiv v_1 \rightarrow \neg t_0 \equiv t_1) \cr
+\ & \ & \ & \ & \mbox{(Ant) applied to $n$.} \cr
+(n+3). & \Gamma_0 & \Gamma_1 & \exists v_0 \exists v_1 \neg v_0 \equiv v_1 & \exists v_0 \exists v_1 \neg v_0 \equiv v_1 \cr
+\ & \ & \ & \ & \mbox{(Assm)} \cr
+(n+4). & \Gamma_0 & \Gamma_1 & \exists v_0 \exists v_1 \neg v_0 \equiv v_1 & \exists v_1 \neg t_0 \equiv v_1 \cr
+\ & \ & \ & \ & \mbox{IV.3.5 applied to $(n+1).$ and} \cr
+\ & \ & \ & \ & (n+3). \cr
+(n+5). & \Gamma_0 & \Gamma_1 & \exists v_0 \exists v_1 \neg v_0 \equiv v_1 & \neg t_0 \equiv t_1 \cr
+\ & \ & \ & \ & \mbox{IV.3.5 applied to $(n+2).$ and} \cr
+\ & \ & \ & \ & (n+4).
+\end{array}
+\end{math}
+\\ \ \\and\\ \ \\ \phantom{an}
+\begin{math}
+\begin{array}{lllll}
+1. & v_0 \equiv t_0 & v_0 \equiv t_1 & v_0 \equiv t_0 & \mbox{(Assm)} \cr
+2. & v_0 \equiv t_0 & v_0 \equiv t_1 & t_0 \equiv v_0 & \mbox{IV.5.3(a) applied to 1.} \cr
+3. & v_0 \equiv t_0 & v_0 \equiv t_1 & v_0 \equiv t_1 & \mbox{(Assm)} \cr
+4. & v_0 \equiv t_0 & v_0 \equiv t_1 & t_0 \equiv t_1 & \mbox{IV.5.3(b) applied to 2. and 3.}
+\end{array}
+\end{math}
+\\ \ \\which reveal that $\Psi \vdash \neg t_0 \equiv t_1$ and $\Psi \vdash t_0 \equiv t_1$, respectively, and hence contradictory to the consistency of $\Psi$.\begin{flushright}$\talloblong$\end{flushright}
+%End of V.2.5--------------------------------------------------------------------------------------
+%End of Section V.2--------------------------------------------------------------------------------
+\end{enumerate}
+\ 
+\\
+\\
+%Section V.3---------------------------------------------------------------------------------------
+{\large \S3. Satisfiability of Consistent Sets of Formulas (the General Case)}
+\begin{enumerate}[1.]
+\item \textbf{Note to the Prolog of \S3. in Page 82.} The cardinality of the symbol set $S$ is equal to the cardinality of the set of $S$-formulas $L^S$ for infinite $S$. (See Set Theory \cite{Thomas_Jech}).
+%
+\item \textbf{Note to Corollary 3.3.} From 3.1 and 3.2, we \emph{only} have\\
+\ \\
+If $\Phi \subset L^S$ and $\con_S \, \Phi$, then there is an $S^\prime \supset S$ and a set $\Phi^\prime$ such that $\Phi \subset \Phi^\prime \subset L^{S^\prime}$ and $\con_{S^\prime} \, \Phi^\prime$, and $\Phi^\prime$ contains witnesses and is negation complete with respect to $S^\prime$.\\
+\ \\
+And then, from 1.11 we get\\
+\ \\
+If $\Phi \subset L^S$ and $\con_S \, \Phi$, then there is an $S^\prime \supset S$ and a set $\Phi^\prime$ such that $\Phi \subset \Phi^\prime \subset L^{S^\prime}$ and $\sat \, \Phi^\prime$.\\
+\ \\
+Finally, by Coincidence Lemma we obtain\\
+\ \\
+If $\Phi \subset L^S$ and $\con_S \, \Phi$, then $\sat \, \Phi$.\\
+\ \\
+That is, the result stated in 3.3; let $(\mathfrak{A}, \beta)$ be a model of $\Phi^\prime$, then $(\mathfrak{A}|_S, \beta) \models \Phi$. (For example, $(\mathfrak{T}^{\Phi^\prime}|_S, \beta^{\Phi^\prime}) \models \Phi$, where $\mathfrak{I}^{\Phi^\prime} = (\mathfrak{T}^{\Phi^\prime}, \beta^{\Phi^\prime})$ is the term interpretation associated with $\Phi^\prime$.)\\
+The term interpretation $\mathfrak{I}^\Theta$ associated with $\Theta$ which is a model of $\Theta$ is also a model of $\Phi$.
+%
+\item \textbf{Note to the Proof of 3.4.} Since $\Phi_0$ is a \textit{finite} subset of $\Phi_0^\ast$, $\free(\Phi_0)$ is finite.
+%
+\item \textbf{Note to the Proof of Lemma 3.1.}
+\begin{enumerate}[(1)]
+\item Actually, $W(S_n) \subset L^{S_{n+1}}$ for $n \in \mathbb{N}$.
+%%
+\item By definition, $S^\ast$ and $W(S)$ have the common cardinality, i.e. that of $L^S$.  (Notice that the size of $S$ is no greater than that of $L^S$.) Furthermore, since $S^\ast$ is infinite, $L^{S^\ast}$ has the same cardinality as $S^\ast$ (cf. \cite{Thomas_Jech, Kenneth_Kunen}) and hence as $L^S$; likewise, this is also true for $W(S^\ast)$.\newline
+\ 
+\\In light of this, one can show by induction on $n$ that, if $n > 0$, then $S_n$ and $\Phi_n$\footnote{Note that the size of $\Phi_0 = \Phi$ is no greater than that of $L^S$.} are of the same size as $L^S$. As a result, $S^\prime = \bigcup_{n \in \mathbb{N}} S_n$ and $\Psi = \bigcup_{n \in \mathbb{N}} \Phi_n$ are of the same size as $L^S$.\newline
+\ 
+\\Moreover, the set $T^{S^\prime}$ of $S^\prime$-terms has the same cardinality as $S^\prime$ and hence as $L^S$.
+%%
+\item \textit{$\con_{S_n} \Phi_n$ for $n \in \mathbb{N}$.}\\
+\textit{Proof.} $\con_{S_0} \Phi_0$ holds by hypothesis. For the inductive step suppose $\con_{S_n} \Phi_n$, then by 3.4 $\con_{S_{n+1}} \Phi_{n+1}$ holds. \begin{flushright}$\talloblong$\end{flushright}
+\end{enumerate}
+%
+\item \textbf{Note to the Proof of Lemma 3.2.}
+\begin{enumerate}[(1)]
+\item It is without loss of generality to assume that $\Phi_1 \subset \Phi_2 \subset \ldots \subset \Phi_n$, since the indices on $\varphi_i$'s is irrelevant.
+%%
+\item From the observation that $\con_S \, \Theta_0$ for every finite subset $\Theta_0$ of $\Theta_1$ and IV.7.4, we conclude that $\con_S \, \Theta_1$. Note that here it may be temptating to apply IV.7.7 to $\Theta_1$ and therefore conclude that $\con_S \, \Theta_1$, as $\mathfrak{V}$ is a chain in $\mathfrak{U}$ and $\Theta_1 := \bigcup_{\Phi \in \mathfrak{V}} \Phi$; but we do not because $\mathfrak{V}$ is \emph{not} necessarily countable.
+\end{enumerate}
+\end{enumerate}
+%End of Section V.3--------------------------------------------------------------------------------
+\ 
+\\
+\\
+\newpage\noindent
+%Section V.4---------------------------------------------------------------------------------------
+{\large \S4. The Completeness Theorem}
+\begin{enumerate}[1.]
+\item \textbf{Note to the Correctness (Theorem), the Completeness (Theorem), and the Adequacy (Theorem) of a Sequent Calculus.} One may be confused with these terms, so let us clarify these notions. Let $S$ be fixed. Given a \emph{logical system}\footnote{This term will first appear in IX.1, and will be defined formally in XIII.1.} $\mathcal{L}$, we say that a sequent calculus $\mathfrak{S}_\mathcal{L}$ for it is \emph{correct} iff every derivable sequent $\Gamma\varphi$ is correct (cf. IV.1):
+\begin{quote}
+\emph{For all $\Gamma$ and $\varphi$, if $\Gamma \vdash \varphi$ then $\Gamma \models \varphi$.}\footnote{Recall that $\Gamma$ is required to be \emph{finite}, cf. IV.1}
+\end{quote}
+As a basic requirement, $\mathfrak{S}_\mathcal{L}$ must be correct, as is obvious that an incorrect sequent calculus (one that derives incorrect sequents) is worthless, since its \emph{raison d'\^{e}tre} is its being correct.\newline
+\ 
+\\Suppose $\mathfrak{S}_\mathcal{L}$ is correct. And let $\Phi$ be a (possibly infinite) set of formulas, and $\varphi$ a formula. Since by definition $\Phi \vdash \varphi$ means that there exists some (finite) $\Gamma \subset \Phi$ such that $\Gamma \vdash \varphi$, which by the correctness entails that $\Gamma \models \varphi$ and further that $\Phi \models \varphi$, we directly obtain the \emph{Correctness Theorem}:
+\begin{quote}
+\emph{For all $\Phi$ and $\varphi$, if $\Phi \vdash \varphi$ then $\Phi \models \varphi$.}
+\end{quote}
+Thus, what we proved essentially in IV.6.2 is indeed the correctness, instead of the Correctness Theorem. But the gap between them can be ignored as they can be bridged readily (the transition from $\Gamma \models \varphi$ to $\Phi \models \varphi$ is trivial).\newline
+\ 
+\\Worth noting is that, as we have just explained, the correctness is supposed to hold. So it is almost insignificant to refer to the correctness as well as the Correctness Theorem, when it comes to analyzing a sequent calculus for a logical system, in contrast to the completeness/Completeness Theorem, which we now discuss.\newline
+\ 
+\\We say that $\mathfrak{S}_\mathcal{L}$ is \emph{complete} iff every correct sequent $\Gamma\varphi$ is derivable:
+\begin{quote}
+\emph{For all $\Gamma$ and $\varphi$, if $\Gamma \models \varphi$ then $\Gamma \vdash \varphi$.}
+\end{quote}
+One can see that it is the converse of correctness.\newline
+\ 
+\\In this chapter, we are aimed at proving the \emph{Completeness Theorem}:
+\begin{quote}
+\emph{For all $\Phi$ and $\varphi$, if $\Phi \models \varphi$ then $\Phi \vdash \varphi$.}
+\end{quote}
+Likewise, it is the converse of the Correctness Theorem. Notably, however, the relation between the correctness and the Correctness Theorem is reversed for this situation: The Comleteness Theorem entails the completeness. This fact can be easily verified by taking of $\Gamma$ as some finite $\Phi$.\newline
+\ 
+\\Finally, we say that $\mathfrak{S}_\mathcal{L}$ is \emph{adequate} iff it is both correct and complete, i.e. iff it derives exactly the correct sequents. On the other hand, the \emph{Adequacy Theorem} is taken to be the conjunction of the Correctness Theorem and the Completeness Theorem.\newline
+\ 
+\\
+\textit{Remark.} In some other textbooks, the Adequacy Theorem here is termed the Completeness Theorem, of which the Correctness Theorem and the Completeness Theorem (here), respectively, are in turn referred to as the \emph{trivial} and \emph{nontrivial} parts.
+\end{enumerate}
+%End of Section V.4--------------------------------------------------------------------------------
+%End of Chapter V----------------------------------------------------------------------------------

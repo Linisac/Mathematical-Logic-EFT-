@@ -1,0 +1,1 @@
+\neg \exists v_0 \neg [(v_0 + 0) \equiv v_0]

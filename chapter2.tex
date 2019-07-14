@@ -1,0 +1,315 @@
+%Chapter II--------------------------------------------------------------------------
+\chapter{Syntax of First-Order Languages}
+%Section II.1------------------------------------------------------------------------
+\section{Alphabets}
+\begin{enumerate}[1.]
+%
+\item \textbf{Note on the Discussion about Countability below the Proof of Lemma~1.1 on Page~12.} First, we verify that every subset $M_0$ of an at most countable set $M$ is at most countable: Clearly $M_0$ is at most countable if it is empty, by definition. So, let us suppose that $M_0$ is nonempty. By \reftitle{Lemma~1.1}, there is an injective map $\beta: M \to \nat$. The map $\restrict{\beta}{M_0}$ (the restriction of $\beta$ to $M_0$) is injective as well, ensuring that $M_0$ is at most countable by \reftitle{Lemma~1.1}.\par
+Next, we verify that $M_1 \setsum M_2$ is at most countable provided that both $M_1$ and $M_2$ are at most countable: If $M_1$ is a subset of $M_2$ ($M_1 \setminus M_2 = \emptyset$) or $M_2$ is a subset of $M_1$ ($M_2 \setminus M_1 = \emptyset$), then $M_1 \setsum M_2 = M_2$ or $M_1 \setsum M_2 = M_1$, respectively; in each case, $M_1 \setsum M_2$ is at most countable by hypothesis.\par
+So let us assume that both $M_1 \setminus M_2$ and $M_2 \setminus M_1$ are nonempty. Without loss of generality, we assume additionally that $M_1$ and $M_2$ are disjoint; if $M_1 \setprod M_2$ is nonempty, then take the two disjoint sets $M_1' \colonequals M_1$ and $M_2' \colonequals M_2 \setminus M_1$ ($M_2' \subset M_2$ is at most countable by the above result) and discuss similarly.\par
+By \reftitle{Lemma~1.1}, there are injective maps $\beta_1: M_1 \to \nat$ and $\beta_2: M_2 \to \nat$. It is easy to check that the map $\beta: (M_1 \setsum M_2) \to \nat$, where
+\[
+\beta(a) \colonequals
+\begin{cases}
+2\beta_1(a) + 1 & \mbox{if \(a \in M_1\)}, \cr
+2\beta_2(a)     & \mbox{if \(a \in M_2\)},
+\end{cases}
+\]
+is injective, ensuring that $M_1 \setsum M_2$ is at most countable by \reftitle{Lemma~1.1}.
+%
+\item \textbf{Solution to Exercise~1.3.} Given $a, b \in \real$ with $a < b$, let $I \colonequals \clintv{a}{b}$. We define a sequence $\seqi{I_n}{n \in \nat}$ of closed intervals inductively as follows (we write $l_n$ and $u_n$ for the left and the right endpoints of $I_n$, namely $I_n = \clintv{l_n}{u_n}$):
+\[
+I_0 \colonequals I
+\]
+and for $n \geq 0$,
+\[
+I_{n + 1} \colonequals
+\begin{cases}
+\clintv{l_n}{\displaystyle\frac{l_n + \alpha(n)}{2}} & \mbox{if \(\alpha(n) = u_n\)}, \cr
+\clintv{\displaystyle\frac{\alpha(n) + u_n}{2}}{u_n} & \mbox{if \(l_n \leq \alpha(n) < u_n\)}, \cr
+I_n & \mbox{otherwise}.
+\end{cases}
+\]
+A simple induction on $n$ yields $l_n \leq l_{n + 1} < u_{n + 1} \leq u_n$; hence, $I_n \supset I_{n + 1}$ (so $I_0 \supset I_1 \supset \ldots$) and $I_n \neq \emptyset$. By the choice of $\seqi{I_n}{n \in \nat}$, we have $\alpha(n) \not\in I_{n + 1}$.\par
+We argue that
+\[
+\bigcap\limits_{n \in \mathbb{N}} I_n \not = \emptyset.
+\]
+By the completeness\footnote{Also known as the \emph{least-upper-bound property}: Every nonempty set which is bounded above has a supremum, i.e.\ a least upper bound. In fact, this supremum, if exists, is unique. A direct consequence of this property is, symmetrically: Every nonempty set which is bounded below has a (unique) infimum.} of $\realstr^<$ (the ordered field of $\real$, cf.\ \reftitle{Section~III.1}), we have:
+\begin{itemize}
+%%
+\item The supremum $l$ of the set $\setm{l_n}{n \in \nat}$ exists because this set is bounded above by any $u_n$. Hence, $l_n \leq l \leq u_n$ for $n \in \nat$.
+%%
+\item The infimum $u$ of the set $\setm{u_n}{n \in \nat}$ exists because this set is bounded below by $l$. Hence, $l \leq u \leq u_n$ for $n \in \nat$.
+%%
+\end{itemize}
+Therefore, $l_n \leq l \leq u \leq u_n$ for $n \in \nat$. Let
+\[
+c \defas \frac{l + u}{2}.
+\]
+It follows that
+\[
+l_n \leq l \leq c \leq u \leq u_n
+\]
+and so $c \in I_n$ for $n \in \nat$. In other words, our claim that $\bsetprod_{n \in \nat} I_n \neq \emptyset$ is true because $c \in \bsetprod_{n \in \nat} I_n$.
+\medskip\\
+More specifically, $c \in I$ and $c \not\in \setm{\alpha(n)}{n \in \nat}$. We conclude that $I$, and hence $\real$ also, are uncountable.
+%
+\item \textbf{Solution to Exercise~1.4.} (INCOMPLETE, RESOLVE THE REFERENCE)
+\begin{asparaenum}[(a)]
+\item \label{chiisec1.4a}
+Let $M_0, M_1, \ldots$ be at most countable sets. Then there are injective maps $\beta_0: M_0 \to \nat, \beta_1: M_1 \to \nat, \ldots$ (cf.\ \reftitle{Lemma~1.1(c)}).\par
+Let $p_n$ be the $n$th prime: $p_0 = 2, p_1 = 3, p_2 = 5$, and so on. We choose the map $\beta: \bsetsum_{n \in \nat} M_n \to \nat$ in which
+\[
+\beta(a) \colonequals p_k \mul p_{k + \beta_k(a) + 1},
+\]
+where $k = \min \setm{n \in \nat}{a \in M_n}$. It is easy to see that $\beta$ is injective.
+%%
+\item Let $\alphabet_n$ denote the set of strings over $\alphabet$ of length $n$ in which all characters are indexed $\leq n$, namely $\alphabet_n \colonequals \setm{\enum[i_1]{a}{i_n}}{\seq[1]{i}{n} \leq n}$ (note that $\alphabet_0 = \setenum{\nullstring}$). Clearly, $\mathcal{A}_n$ is finite and hence at most countable, and
+\[
+\kleene{\alphabet} = \bsetsum_{n \in \nat} \alphabet_n.
+\]
+By \ref{chiisec1.4a}, $\kleene{\alphabet}$ is at most countable. Also, $a_0, a_0a_0, a_0a_0a_0, \ldots$ are all in $\kleene{\alphabet}$, so $\kleene{\alphabet}$ is infinite. Therefore, $\kleene{\alphabet}$ is countable.
+\end{asparaenum}
+%
+\item \textbf{Solution to Exercise~1.5.} The claim is trivial for the case $M = \emptyset$, so we shall assume that $M$ is nonempty below.\par
+As suggested in hint, consider an arbitrary map $\alpha: M \to \powerset{M}$. We shall show that the set $C \colonequals \setm{a \in M}{a \not\in \alpha(a)}$ (a subset of $M$) is not in the range of $\alpha$, and conclude from this that there is no surjective (and hence no bijective) map from $M$ onto the power set $\powerset{M}$ of $M$.\par
+For the sake of contradiction, we assume $\alpha(a) = C$ for some $a \in M$. We have either $a \in C$ or $a \not\in C$. If $a \in C$, then by the definition of $C$ we have that $a \not\in C$, as $\alpha(a) = C$. If $a \not\in C$, namely $a \not\in \alpha(a)$, then by the definition of $C$ we have that $a \in C$. Either way we get a contradicting statement. So there is no $a \in M$ with $\alpha(a) = C$, and the claim is proved.\par
+\textit{Remark.} This is Cantor's famous \emph{diagonalization argument}.
+%
+\end{enumerate}
+%End of Section II.1-----------------------------------------------------------------
+%
+%Section II.2------------------------------------------------------------------------
+\section{The Alphabet of a First-Order Language}
+\begin{enumerate}[1.]
+%
+\item \textbf{Note on Alphabets of First-Order Languages.} (INCOMPLETE) The set of variables $\{ v_0, v_1, \ldots \}$ is \emph{countable}.\par
+In the literature, $v_0, v_1, \ldots$ are sometimes referred to as \emph{formal variables}, while $x, y, f, g, R, Q, \ldots$ as \emph{metavariables} (which serve as placeholders): Certainly $v_0 \neq v_1$, but it is possible that $x = y$; $x = y$ means that $x$ and $y$ \emph{denote} the same formal variable, say $v_{32}$. Likewise, $f = g$ and $R = Q$ mean, respectively, that $f$ and $g$ denote the same function symbol and that $R$ and $Q$ denote the same relation symbol. (HERE)
+%
+\end{enumerate}
+%End of Section II.2-----------------------------------------------------------------
+\ 
+\\
+\\
+%Section II.3------------------------------------------------------------------------
+\section{Terms and Formulas in First-Order Languages}
+%{\large \S3. Terms and Formulas in First-Order Languages}
+\begin{enumerate}[1.]
+%
+\item \textbf{Note on the Concept of Calculus.} For any set of objects defined by means of a system of \emph{rules} (or more formally, a \emph{calculus}, which will be introduced later in \reftitle{Section 4}) such as the set $\term{S}$ of $S$-terms (cf. \reftitle{Definition 3.1}), its' objects are constructed by \emph{finite} applications of these rules.\newline
+\\
+On the other hand, the calculus defining a set $A$ always follows the pattern:
+\begin{enumerate}[(i)]
+\item \textit{Base rules.} Enumerate some elements in $A$ (without premises).
+%%
+\item \textit{Inductive rules.} If an element $a$ in $A$ satisfies the premise, then $f(a)$ is also an element in $A$ ($f$ denotes some string operation here).
+\end{enumerate}
+In fact, when we define a set by means of a calculus, we mean that \emph{all} elements in it are constructed by applying the rules of that calculus: Every element in that set has a derivation. Put in another way, the set defined by the calculus is the \emph{smallest} set satisfying the calculus, where by the smallest set we mean the intersection of all sets satisfying the calculus.\footnote{Actually, some textbooks do use the term \emph{the smallest set}, cf. \cite{Dirk_van_Dalen}.}\newline
+\\
+Here we show that these two notions are equivalent, by proving that the set $A$ in which every element in it has a derivation is the smallest set satisfying the calculus. We first prove that $A$ satisfies the calculus, by induction on the \emph{length} (or the \emph{number of steps}) $n$ of a derivation of an element:
+\begin{enumerate}[(1)]
+\item $n = 1$. This corresponds to elements constructed by base rules.
+%%
+\item $n > 1$. Let $a \in A$ be an element with a derivation of length $n - 1$, then $f(a)$ is obtained by applying some inductive rule to $a$ and thus has a derivation of length $n$. We have that $f(a) \in A$.
+\end{enumerate}
+Secondly, we prove that every element $a \in A$ is also an element in every set $B$ satisfying the calculus, again by induction on the length $n$ of a derivation of $a$:
+\begin{enumerate}[(1)]
+\item $n = 1$. Every element $a$ constructed in this case clearly belongs to $B$.
+%%
+\item $n > 1$. Let $a \in A$ be an element with a derivation of length $n - 1$. By induction, $a \in B$. Furthermore, $f(a)$ is an element in $A$ with a derivation of length $n$. Since $B$ satisfies the calculus, we have $f(a) \in B$.
+\end{enumerate}
+%
+\item \textbf{Note to the Paragraph after Lemma 3.3.} In fact, most mathematics textbooks use the symbols $\Rightarrow$ and $\Leftrightarrow$ to denote implication (if \ldots then) and bi-implication (if and only if), respectively, besides using $\forall$ and $\exists$. Note that these are usage in metalanguage. (In contrast, $\rightarrow$, $\leftrightarrow$, etc. are usage in object language.) Throughout this text we state them verbally, for example, using \emph{if \ldots then} instead of $\Rightarrow$.
+\end{enumerate}
+%End of Section II.3-------------------------------------------------------------------------------
+\ 
+\\
+\\
+%Section II.4------------------------------------------------------------------------------------------------
+{\large \S4. Induction in the Calculus of Terms and in the Calculus of Formulas}
+\begin{enumerate}[1.]
+\item \textbf{Note to the Calculus of Formulas Mentioned in Page 19.} The following are the rules for the calculus of formulas:
+\[
+\begin{array}{ll}
+\mbox{(F1) }\displaystyle \frac{\,}{t_1 \equiv t_2}; & \mbox{(F2) }\displaystyle \frac{\,}{Rt_1 \ldots t_n} \mbox{ if $R \in S$ is $n$-ary}; \\
+\, & \, \\
+\mbox{(F3) }\displaystyle \frac{\varphi}{\neg \varphi}; & \mbox{(F4) }\displaystyle \frac{\displaystyle {\varphi, \; \psi}}{(\varphi \ast \psi)} \mbox{ for $\ast = \land, \lor, \rightarrow, \leftrightarrow$}; \\
+\, & \, \\
+\mbox{(F5) }\displaystyle \frac{\varphi}{\forall x \varphi}, \;\; \displaystyle \frac{\varphi}{\exists x \varphi}. & \ 
+\end{array}
+\]
+%
+\item \textbf{Proof of 4.1 (a) for the Case of $S$-Formula.} Let $P$ be the same property on $\mathcal{A}_S^*$ as in 4.1 (a). \\
+\\
+(F1)$^\prime$, (F2)$^\prime$: Formulas of the form $t_1 \equiv t_2$ or $Rt_1 \ldots t_2$ are nonempty. \\
+\\
+(F3)$^\prime$, (F4)$^\prime$, (F5)$^\prime$: Every formula formed according to these three rules must contain $\neg, \land, \lor, \rightarrow, \leftrightarrow, \forall x,$ or $\exists x$, for some variable $x$, and hence is nonempty.\nolinebreak\hfill$\talloblong$
+%
+\item \textbf{Proof of 4.1 (b) (1).} Let $P$ be the property on $\mathcal{A}_S^*$ which holds for a string $\zeta$ iff $\zeta$ is distinct from $\circ$. We show by induction on terms that every $S_{\mathrm{gr}}$-term possesses this property. \\
+\\
+$t=x$, $t=e$: $t$ is distinct from $\circ$. \\
+\\
+$t=\circ t_1 t_2$: From (a) we know $t_1$ and $t_2$ are not empty. Therefore $t$ is distinct from $\circ$.\nolinebreak\hfill$\talloblong$
+%
+\item \textbf{Note to 4.1 (c).} \textit{No $S$-term contains a left or right parenthesis.} \\
+\textit{Proof.} (T1)$^\prime$, (T2)$^\prime$: Terms of the form $x$ or $c$ (with $c \in S$) contain no left or right parenthesis. \\
+\\
+(T3)$^\prime$: $t = f t_1 \ldots t_n$ for some $n$-ary function symbol $f$ and $t_1$, \ldots, $t_n$ are terms. By induction hypothesis each of $t_1$, \ldots, $t_n$ contains no left or right parenthesis. At the same time, $f$ is distinct from left parenthesis ( and right parenthesis ). It turns out that $t$ contains no left or right parenthesis.\nolinebreak\hfill$\talloblong$
+%
+\item \textbf{Note to 4.2 (a).} \textit{For all variables $x$, $x$ is the only term which begins with the variable $x$}.\\
+\\
+\textit{Proof.} Let $P$ be the property on $\mathcal{A}_S^*$ which holds for a string $\zeta$ iff
+\[
+\mbox{if } \zeta \mbox{ begins with } x \mbox{, then } \zeta = x.
+\]
+(T1)$^\prime$: For the term (more precisely, variable) $x$, clearly the property holds; other terms are distinct from $x$ and do not begin with $x$, and still the property holds.\\
+\\
+(T2)$^\prime$: The argument is similar.\\
+\\
+(T3)$^\prime$: In this case every term begins with a function symbol, and hence the property holds.\nolinebreak\hfill$\talloblong$
+%
+\item \textbf{Proof of Lemma 4.3.}
+\begin{enumerate}[(a)]
+\item Immediately follows from the proof of 4.2 (a).
+%%
+\item We show $\varphi_1 = \varphi_1^\prime$ by considering the structure of $\varphi_1$: \\
+\ 
+\\ $\varphi_1 = t_1 \equiv t_2$: $\varphi_1^\prime$ must begin with a term (since otherwise contrary to the premise), and this term is $t_1$ by 4.2 (a). Following $t_1$ are the symbol $\equiv$ and the term $t_2$ by the similar argument. Therefore $\varphi_1 = \varphi_1^\prime$. \\
+\ 
+\\ $\varphi_1 = Rt_1 \ldots t_n$: $\varphi_1^\prime$ must begin with $R$ by the premise. Following $R$ is the string $t_1^\prime \ldots t_n^\prime$ (since $R$ is $n$-ary), and we can conclude that $t_i = t_i^\prime$ for $1 \leq i \leq n$ by 4.2 (a). Therefore $\varphi_1 = \varphi_1^\prime$. \\
+\ 
+\\ $\varphi_1 = \neg \varphi$: $\varphi_1^\prime$ must begin with $\neg$ by the premise. Following $\neg$ is the formula $\varphi^\prime$, and $\varphi = \varphi^\prime$ by 4.2 (b). Therefore $\varphi_1 = \varphi_1^\prime$. \\
+\ 
+\\ $\varphi_1 = (\varphi \ast \psi)$ or $Q\varphi$, where $\ast = \land, \lor, \rightarrow, \leftrightarrow$, and $Q = \forall x, \exists x$: Similar to the above case. \\
+\ 
+\\From the argument above, we obtain
+\[
+\varphi_2 \ldots \varphi_n = \varphi_2^\prime \ldots \varphi_n^\prime.
+\]
+After repeatedly applying this argument the proof is complete.\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+%
+\item \textbf{Proof of Theorem 4.4 (a).} The first statement is trivial by the calculus of terms. For the second statement, suppose there is a term $f^\prime t_1^\prime \ldots t_m^\prime$ (this is the only form of the term for the following equality to hold) such that
+\[
+f t_1 \ldots t_n = f^\prime t_1^\prime \ldots t_m^\prime.
+\]
+Then $f = f^\prime$ since both are function symbols and otherwise contrary to the above equality. From this we conclude that
+\[
+f t_1 \ldots t_n = f t_1^\prime \ldots t_m^\prime.
+\]
+Cancelling the symbol $f$ from both sides of the above equality sign, we obtain
+\[
+t_1 \ldots t_n = t_1^\prime \ldots t_m^\prime ,
+\]
+and by 4.3 (a) the conclusion follows.\nolinebreak\hfill$\talloblong$
+%
+%II.4.6------------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 4.6.}
+\begin{enumerate}[(a)]
+\item Let $P$ be the property on $T^S$ which holds for a term $t$ iff
+\[
+\mbox{for all variables } x, xt \mbox{ is derivable iff } x \in \var (t).
+\]
+\ 
+\\
+(T1)$^\prime$: For all variables $x$, the property holds for the term (more precisely, variable) $x$ since $xx$ is derivable and $x \in \var(x):=\{x\}$; for other terms $y$ distinct from $x$, $xy$ is not derivable and $x \not \in \var(y):=\{y\}$.\\
+\\
+(T2)$^\prime$: For all variables $x$, the property holds for the term $c$ (a constant in $S$) since neither $xc$ is derivable nor $x \in \var(c):=\emptyset$.\\
+\\
+(T3)$^\prime$: Without loss of generality, consider the term $ft_1 \ldots t_2$, where $f$ is a function symbol in $S$ and $t_1$, \ldots, $t_n$ are terms from $T^S$. Assume that $P$ holds for $t_i$, $1 \leq i \leq n$. Then for all variables $x$, \\
+\[
+\begin{array}{ll}
+\, & xft_1 \ldots t_2 \mbox{ is derivable} \\
+\Iff & xt_i \mbox{ is derivable for some } i \mbox{    (since this is the only way $xft_1 \ldots t_2$} \\
+\, & \mbox{can be derived in $\mathfrak{C}_v$)} \\
+\Iff & x \in \var(t_i) \mbox{ for some } i \mbox{    (by induction hypothesis)} \\
+\Iff & x \in \var(ft_1 \ldots t_n).
+\end{array}
+\]
+%%
+\item Let the calculus $\mathfrak{C}_{sf}$ consist of the following rules:
+\[
+\begin{array}{l}
+\displaystyle \frac{ \, }{\varphi \;\;\; \varphi}; \;\;\;\; \frac{\varphi \;\;\; \psi}{\varphi \;\;\; \neg \psi}; \\
+\, \\
+\displaystyle \frac{\varphi \;\;\; \psi_i}{\varphi \;\;\; (\psi_1 \ast \psi_2)} \mbox{ for } \ast = \land, \lor, \rightarrow, \leftrightarrow \mbox{ and } i \in \{1, 2\}; \\
+\, \\
+\displaystyle \frac{\varphi \;\;\; \psi}{\varphi \;\;\; \forall x \psi}; \;\;\;\; \displaystyle \frac{\varphi \;\;\; \psi}{\varphi \;\;\; \exists x \psi};
+\end{array}
+\]
+For all $S$-formulas $\varphi$ and $\psi$, $\varphi\psi$ is derivable in $\mathfrak{C}_{sf}$ iff $\varphi \in \mathrm{SF}(\psi)$.\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+%End of II.4.6-----------------------------------------------------------------------------------------------
+%
+%II.4.7------------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 4.7.} Consider the formula $\varphi \land \psi \lor \eta$: It can be interpreted as both
+\begin{enumerate}[(1)]
+\item $\varphi$ in conjunction ($\land$) with $\psi \lor \eta$, or
+%%
+\item $\varphi \land \psi$ in disjunction ($\lor$) with $\eta$,
+\end{enumerate}
+and hence is not well defined.\nolinebreak\hfill$\talloblong$
+%End of II.4.7-----------------------------------------------------------------------------------------------
+%
+%II.4.8------------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 4.8.} We only show the analog of 4.3 (b). The proof is similar to that of 4.3 (b), except that the case $\varphi_1 = \ast \varphi \psi$ where $\ast = \land, \lor, \rightarrow, \leftrightarrow$ is confirmed by this: \\
+\ 
+\\$\varphi_1^\prime$ must begin with $\ast$ by the premise. Following $\ast$ are the formulas $\varphi^\prime$ and $\psi^\prime$, and $\varphi = \varphi^\prime$ and $\psi = \psi^\prime$ by 4.2 (b). Therefore $\varphi_1 = \varphi_1^\prime$.\nolinebreak\hfill$\talloblong$
+%End of II.4.8-----------------------------------------------------------------------------------------------
+%
+%II.4.9------------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 4.9.} Notice that the first symbol of the string $\zeta$ which is a postfix of $t_1 \ldots t_n$ that begins from the $(i+1)$st symbol must lie somewhere in a term $t_j$ for some $1 \leq j \leq n$, i.e., $t_1 \ldots t_n = \xi \zeta$ and $\zeta = \varsigma t_{j+1} \ldots t_n$, where $\varsigma$ is a postfix of $t_j$. \\
+\ 
+\\It remains to show that for any term $t$ and $0 \leq k < \mbox{ length of } t$, there are uniquely determined $\xi^\prime$ and $\eta^\prime$ $\in \mathcal{A}_S^*$ and $t^\prime \in T^S$ such that $t = \xi^\prime t^\prime \eta^\prime$, where the length of $\xi^\prime = k$. \\
+\ 
+\\We show this by induction on terms: \\
+\ 
+\\$t = x$, $t = c$: It must be the case that $k = 0$, $\xi^\prime = \eta^\prime = \boxempty$, and $t^\prime = t$.\\
+\ 
+\\$t = ft_1 \ldots t_n$:
+\begin{enumerate}[(i)]
+\item $k = 0$ ($\xi^\prime = \boxempty$): Let $t^\prime = t$, and $\eta^\prime = \boxempty$.
+%%
+\item $k > 0$: Let $t = \xi^\prime \zeta^\prime$. Then the first symbol of $\zeta^\prime$ must lie somewhere in $t_j$ for some $1 \leq j \leq n$. By induction bypothesis, there are strings $\xi^{\prime \prime}$ and $\eta^{\prime \prime}$ $\in \mathcal{A}_S^*$ and $t^{\prime \prime} \in T^S$ such that $t_j = \xi^{\prime \prime} t^{\prime \prime} \eta^{\prime \prime}$. Specifically, $\xi^{\prime \prime}$ is a postfix of $\xi^\prime$ and $\eta^{\prime \prime}$ is a prefix of $\eta^\prime$ and, at the same time, $t^{\prime \prime} = t^\prime$.\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+\end{enumerate}
+%End of II.4.9-----------------------------------------------------------------------------------------------
+%End of II.4-------------------------------------------------------------------------------------------------
+\ 
+\\
+\\
+%Section II.5------------------------------------------------------------------------------------------------
+{\large \S5. Free Variables and Sentences}
+\begin{enumerate}[1.]
+%II.5.2------------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 5.2.} By observation we know that $\mathfrak{C}_{nf}$ permits to derive precisely those strings of the form $x \varphi$ for which $\varphi \in L^S$. Therefore, it remains to show that they are precisely those strings for which $x$ does not occur free in $\varphi$. \\
+\ 
+\\Let $P$ be the property on $L^S$ which holds for a formula $\varphi$ iff
+\[
+\mbox{for all variables $x$, } x \varphi \mbox{ is derivable in } \mathfrak{C}_{nf} \mbox{ iff } x \varphi \mbox{ does not occur free in } \varphi.
+\]
+We show by induction on formulas that every formula possesses this property:\\
+\ 
+\\$\varphi = t_1 \equiv t_2$: If $x \not \in \free(t_1) \cup \free(t_2)$ then $x \varphi$ is derivable; otherwise it isn't.\\
+\ 
+\\$\varphi = Rt_1 \ldots t_n$: Similar.\\
+\ 
+\\$\varphi = \forall x \psi, \varphi = \exists x \psi$: $x \not \in \free(\varphi) = \free(\psi) \setminus \{ x \}$ and $x \varphi$ is derivable.\\
+\ 
+\\$\varphi = \neg \psi$: $x \varphi$ is derivable iff $x \psi$ is derivable (since this is the only way $x \varphi$ can be derived)
+\\iff $x \not \in \free(\psi)$ (by induction hypothesis)
+\\iff $x \not \in \free(\varphi)$ (since $\free(\varphi) = \free(\neg \psi) = \free(\psi)$). \\
+\ 
+\\$\varphi = (\psi \ast \chi)$ for $\ast = \land, \lor, \rightarrow, \leftrightarrow$: $x \varphi$ is derivable iff $x \psi$ and $x \chi$ are both derivable (since this is the only way $x \varphi$ can be derived)
+\\iff $x \not \in \free(\psi)$ and $x \not \in \free(\chi)$ (by induction hypothesis)
+\\iff $x \not \in \free(\psi) \cup \free(\chi)$
+\\iff $x \not \in \free((\psi \ast \chi)) = \free(\varphi)$. \\
+\ 
+\\$\varphi = \forall y \psi, \varphi = \exists y \psi$: $x \varphi$ is derivable iff $x \psi$ is derivable (since this is the only way $x \varphi$ can be derived)
+\\iff $x \not \in \free(\psi)$ (by induction hypothesis)
+\\iff $x \not \in \free(\psi) \setminus \{ y \} = \free(\varphi)$.\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+%End of II.5.2-----------------------------------------------------------------------------------------------
+%End of Section II.5-----------------------------------------------------------------------------------------
+%End of Chapter II-------------------------------------------------------------------------------------------

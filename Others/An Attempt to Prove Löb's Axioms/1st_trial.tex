@@ -1,0 +1,64 @@
+%Editor: Wei-Lin (Linisac) Wu
+\documentclass[leqno]{report}
+
+%External libraries
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{stmaryrd}
+\usepackage{colonequals}
+
+%New commands for abbreviations
+\newcommand{\natstr}{\mathfrak{N}}
+\newcommand{\limply}{\mathbin{\rightarrow}} %logical connective imply
+\newcommand{\derives}{\mathbin{\vdash}}
+\newcommand{\satisfies}{\mathbin{\models}}
+\newcommand{\formulacode}[1]{n^{#1}}
+\newcommand{\pa}{\mathrm{PA}}
+\newcommand{\formal}[1]{\underline{#1}} %translate a meta natural number into a formal natural number
+\newcommand{\proves}[2]{\mathop{\mathrm{prvs}}(#1, #2)} %#1 is a formal proof of #2
+\newcommand{\der}[1]{\mathop{\mathrm{der}}(\formal{\formulacode{#1}})}
+
+%New commands for font sizes and styles
+\newcommand{\scripttext}[1]{{\mbox{\scriptsize#1}}}
+\newcommand{\mbf}[1]{{\mbox{\boldmath\begin{math}#1\end{math}}}}
+\newcommand{\mbfs}[1]{{\mbox{\scriptsize\boldmath\begin{math}#1\end{math}}}}
+\newcommand{\mbff}[1]{{\mbox{\footnotesize\boldmath\begin{math}#1\end{math}}}}
+\newcommand{\mbft}[1]{{\mbox{\tiny\boldmath\begin{math}#1\end{math}}}}
+\newcommand{\sbst}[2]{{\textstyle\frac{\displaystyle #1}{\displaystyle #2}}}
+
+\begin{document}
+\begin{enumerate}
+%
+\item (Definition) Initial functions: zero function (constant), successor function, projection functions.
+%
+\item (Definition) primitive recursion.
+%
+\item (Definition) A primitive function is either an initial function or obtained by applying composition or primitive recursion to primitive functions.
+%
+\item (Theorem) Every primitive function is provably recursive, i.e.\ there is a $\Sigma_1$-formula $\varphi(v^n, u)$ such that $\Phi_\pa \derives \varphi(\formal{a}^n, \formal{f(a^n)})$ and $\Phi_\pa \derives \forall v^n \exists^{=1}u \varphi(v^n, u)$.
+%
+\item (Theorem) $\Sigma_1$-completeness: For any $\Sigma_1$-formula $\varphi$, if $\natstr \satisfies \varphi$ then $\Phi_\pa \derives \varphi$.
+%
+\item (Theorem) Formalized $\Sigma_1$-completeness: For any $\Sigma_1$-formula $\varphi$, $\Phi_\pa \derives (\varphi \limply \der{\varphi})$.\\
+\ \\
+Proof. Use induction to show
+\[
+\Phi_\pa \derives \forall v (\varphi \limply \der{subst(\formulacode{\varphi}, f(v))}),
+\]
+where $subst$ is a function that takes codes of $\varphi$ and of the term represented by $v$ and returns the code of formula that is $\varphi$ with its $v$ substituted by the term represented by $v$; $f$ takes a variable-free term and returns its code.
+%
+\item (L1) If $\Phi \derives \varphi$ then $\Phi \derives \der{\varphi}$.
+%
+\item (L2) $\Phi \derives (\der{\varphi} \land \der{(\varphi \limply \psi)} \limply \der{\psi})$.
+%
+\item (L3) $\Phi \derives (\der{\varphi} \limply \der{\der{\varphi}})$.
+%
+\item $\Phi_\pa$ satisfies (L1): Suppose $\Phi_\pa \derives \varphi$. Then there is a derivation for this. Encode this derivation with a number $p$. Then $\natstr \satisfies \proves{\formal{p}}{\formal{\formulacode{\varphi}}}$. By $\Sigma_1$-completeness, it follows that $\Phi_\pa \derives \proves{\formal{p}}{\formal{\formulacode{\varphi}}}$.\\
+\ \\
+Alternatively, one could obtain this fact by this line of reasoning: $\Phi_\pa \derives \varphi$ $\Rightarrow$ $\natstr \satisfies \der{\varphi}$ $\Rightarrow$ $\Phi_\pa \derives \der{\varphi}$ (by $\Sigma_1$-completeness) $\Rightarrow$ $\Phi_\pa \derives \der{\der{\varphi}}$ (by L3) $\Rightarrow$ $\natstr \satisfies \der{\der{\varphi}}$ $\Rightarrow$ $\Phi_\pa \derives \der{\varphi}$.
+%
+\item $\Phi_\pa$ satisfies (L3) since it is a special case of Formalized $\Sigma_1$-completeness.
+%
+\end{enumerate}
+\end{document}

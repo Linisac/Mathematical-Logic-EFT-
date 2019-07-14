@@ -1,0 +1,203 @@
+\noindent
+\begin{definition}{Abbreviation}
+We use $\mu x [\varphi(x)]$ to abbreviate
+\[
+\varphi(x) \land (\forall x' < x)\neg\varphi(x').
+\]
+\end{definition}\ \\
+\begin{theorem}{Lemma on Primitive Recursive Functions}
+Every primitive recursive function is $\Sigma_1$-definable. Moreover, if $f$ is defined by primitive recursion on $g$ and $h$, then the recursion equations are provable.
+\end{theorem}\\
+\ \\
+\begin{theorem}{Lemma on Course-of-Values Induction}
+For any formula $\varphi$, the following is derivable in $\Phi_\pa$:
+\[
+\forall x((\forall y < x)\varphi\sbst{y}{x} \limply \varphi) \limply \forall x \varphi.
+\]
+\end{theorem}\ \\
+\begin{theorem}{Lemma on the Least Principle}
+For any formula $\varphi$, the following is derivable in $\Phi_\pa$:
+\[
+\exists x \varphi \limply \exists x (\varphi \land (\forall y < x)\neg\varphi\sbst{y}{x}).
+\]
+\end{theorem}
+\begin{proof}
+(INCOMPLETE) Immediately follows from the above lemma.
+\end{proof}
+\begin{theorem}{Proposition}
+\[
+\Phi_\pa \derives \exists z (x \equal y + z \lor x < y).
+\]
+\end{theorem}\ \\
+Thus, it is valid to introduce the following function:\\
+\ \\
+\begin{definition}{Definition}
+The binary function $sub(m, n)$ returns the value $m - n$ if $m \geq n$ and $0$ otherwise; it is the least $d$ such that ($m = n + d$ or $m < n$).\\
+\ \\
+It is represented by $sub(x, y) \equal z$:
+\[
+\mu z [x \equal y + z \lor x < y].
+\]
+\end{definition}\ \\
+\begin{theorem}{Proposition}
+The following are derivable from $\Phi_\pa$:
+\begin{enumerate}[\rm(a)]
+%
+\item $x < y \limply sub(x, y) \equal 0$
+%
+\item $x \geq y \limply x \equal y + sub(x, y)$
+%
+\item $z \mul sub(x, y) \equal sub(z \mul x, z \mul y)$
+%
+\end{enumerate}
+\end{theorem}\ \\
+\begin{theorem}{Proposition}
+\[
+\Phi_\pa \derives \exists u \exists z \ x \equal y \mul z + u.
+\]
+\end{theorem}\ \\
+This proposition triggers the following definition:\\
+\ \\
+\begin{definition}{Definition}
+The binary function $rem(m, n)$ returns the remainder of $m$ divided by $n$ if $n > 0$ and $m$ otherwise; it is the least $r$ such that there is a $q$ with $m = n \mul q + r$.\\
+\ \\
+It is represented by $rem(x, y) \equal z$:
+\[
+\mu z [\exists u \ x \equal y \mul u + z].
+\]
+\end{definition}\ \\
+\begin{definition}{Definition}
+The binary function $div(m, n)$ returns the quotient of $m$ divided by $n$ if $n > 0$ and $0$ otherwise; it is the least $q$ such that $m = n \mul q + rem(m, n)$.\\
+\ \\
+It is represented by $div(x, y) \equal z$:
+\[
+\mu z [x \equal y \mul z + rem(x, y)].
+\]
+\end{definition}\ \\
+\begin{definition}{Abbreviation}
+The formula $\varphi_{div}(x, y)$ states that $x$ divides $y$:
+\[
+rem(x, y) \equal 0.
+\]
+\end{definition}\ \\
+\begin{theorem}{Proposition}
+\[
+\Phi_\pa \derives \varphi_{div}(y, cut(x, rem(x, y))).
+\]
+\end{theorem}\ \\
+\begin{theorem}{Proposition}
+\[
+\Phi_\pa \derives \varphi_{div}(x, y) \limply \exists z \ x \mul z \equal x.
+\]
+\end{theorem}\ \\
+\begin{theorem}{Proposition}
+\[
+\Phi_\pa \derives (0 < x \land \varphi_{div}(y, x)) \limply y \leq x.
+\]
+\end{theorem}\ \\
+\begin{definition}{Definition} The unary function $exp(m, n)$ returns the $n$th power $m^n$ of $m$ (where $m^0 \colonequals 1$ for any $m$).\\
+\ \\
+The formula $exp(x, y) \equal z$ is represented by
+\[
+\begin{array}{l}
+\exists t (\exists p < t) \cr
+(\beta(t, p, 0) \equal 1 \land \cr
+\ (\forall u < y) \beta(t, p, u + 1) \equal \beta(t, p, u) \mul x \land \cr
+\ \beta(t, p, y) \equal z).
+\end{array}
+\]
+\end{definition}\ \\
+\begin{definition}{Definition} The unary function $fact(n)$ returns $n$ factorial.\\
+\ \\
+The formula $fact(x) \equal y$ is represented by
+\[
+\begin{array}{l}
+\exists t(\exists p < t) \cr
+(\beta(t, p, 0) \equal 1 \land \cr
+\ (\forall u < x)\beta(t, p, u + 1) \equal \beta(t, p, u) \mul (u + 1) \land \cr
+\ \beta(t, p, x) \equal y).
+\end{array}
+\]
+\end{definition}\ \\
+\begin{theorem}{Proposition}
+\[
+\Phi_\pa \derives \varphi_{div}(fact(x), fact(x + y)).
+\]
+\end{theorem}
+\begin{proof}
+First, it is clear that
+\[
+\Phi_\pa \derives \varphi_{div}(fact(x), fact(x + 0))
+\]
+since $\Phi_\pa \derives x + 0 \equal x$.\\
+\ \\
+Next, assume
+\[
+\Phi_\pa \derives \varphi_{div}(fact(x), fact(x + y)).
+\]
+Then
+\[
+\Phi_\pa \derives \exists z \ fact(x) \mul z \equal fact(x + y).
+\]
+Since
+\[
+\Phi_\pa \derives fact(x + (y + 1)) \equal (x + (y + 1)) \mul fact(x + y),
+\]
+it follows that
+\[
+\Phi_\pa \derives \exists u \ fact(x) \mul u \equal fact(x + (y + 1)),
+\]
+namely
+\[
+\Phi_\pa \derives \varphi_{div}(fact(x), fact(x + (y + 1))).
+\]
+The proposition holds by induction scheme.
+\end{proof}\ \\
+\begin{theorem}{Proposition}
+\[
+\Phi_\pa \derives 0 < x \limply (\forall y \leq x)(0 < y \limply \varphi_{div}(y, fact(x))).
+\]
+\end{theorem}\ \\
+\begin{definition}{Abbreviation}
+Let $\varphi_{prm}(x)$ abbreviate
+\[
+1 < x \land (\forall y \leq x)((1 < y \land \varphi_{div}(y, x)) \limply y \equal x).
+\]
+\end{definition}\ \\
+\begin{theorem}{Proposition}
+\[
+\Phi_\pa \derives (\varphi_{prm}(x) \land \varphi_{prm}(y) \land \varphi_{div}(y, fact(x) + 1)) \limply x < y.
+\]
+\end{theorem}\ \\
+\begin{theorem}{Proposition}
+\[
+\Phi_\pa \derives 1 < x \limply (\exists y \leq x)(\varphi_{prm}(y) \land \varphi_{div}(y, x)).
+\]
+\end{theorem}\ \\
+\begin{theorem}{Proposition}
+\[
+\Phi_\pa \derives \varphi_{prm}(x) \limply (\exists y \leq fact(x) + 1)(\varphi_{prm}(y) \land x < y).
+\]
+\end{theorem}\ \\
+\begin{definition}{Definition}
+Let the unary function $prime(n)$ be defined by the following primitive recursion equation:
+\[
+\begin{array}{lll}
+prime(0) & \colonequals & 2 \cr
+prime(n + 1) & \colonequals & \mu q \leq fact(prime(n)) + 1 [\varphi_{prm}(q) \land prime(n) < q].
+\end{array}
+\]
+The formula $prime(x) \equal y$ is represented by
+\[
+\begin{array}{lll}
+\exists t (\exists p < t) \cr
+(\beta(t, p, 0) \equal 2 \land\cr
+\ (\forall u < x) \beta(t, p, u + 1) \equal f(\beta(t, p, u)) \land\cr
+\ \beta(t, p, x) \equal y),
+\end{array}
+\]
+where $f(x) \equal y$ is represented by
+\[
+\mu y \leq fact(x) + 1 [\varphi_{prm}(y) \land x < y].
+\]
+\end{definition}\ \\

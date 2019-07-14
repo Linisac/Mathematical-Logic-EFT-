@@ -1,0 +1,1385 @@
+%Editor: Wei-Lin (Linisac) Wu
+\documentclass[leqno]{report}
+
+%External libraries
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{stmaryrd}
+\usepackage{colonequals}
+%\usepackage{amsmath}
+
+%New commands for abbreviations
+\newcommand{\nat}{\mathbb{N}}
+\newcommand{\zah}{\mathbb{Z}}
+\newcommand{\rat}{\mathbb{Q}}
+\newcommand{\real}{\mathbb{R}}
+\newcommand{\cplx}{\mathbb{C}}
+\newcommand{\powerset}[1]{\mathcal{P}(#1)}
+\newcommand{\alphabet}{\mathcal{A}}
+\newcommand{\ar}{\mathrm{ar}}
+\newcommand{\derive}{\ | \hspace{-.4em} -}
+\newcommand{\modeled}{\ \mathrm{\reflectbox{$\models$}}}
+\newcommand{\bimodels}{\modeled \models}
+\newcommand{\STR}[1]{\mathfrak{#1}}
+\newcommand{\INT}{\mathfrak{I}}
+\newcommand{\df}[2]{\displaystyle\frac{#1}{#2}}
+\newcommand{\var}[1]{\mathop{\mathrm{var}}(#1)}
+\newcommand{\free}[1]{\mathop{\mathrm{free}}(#1)}
+\newcommand{\SF}{\mathrm{SF}}
+%%chapter 4
+\newcommand{\assm}{{(\mathrm{Assm})}}
+\newcommand{\ant}{{(\mathrm{Ant})}}
+\newcommand{\pc}{{(\mathrm{PC})}}
+\newcommand{\ctr}{{(\mathrm{Ctr})}}
+\newcommand{\ora}{{(\lor\mathrm{A})}}
+\newcommand{\ors}{{(\lor\mathrm{S})}}
+\newcommand{\ea}{{(\exists\mathrm{A})}}
+\newcommand{\es}{{(\exists\mathrm{S})}}
+\newcommand{\eq}{{(\equiv)}}
+\newcommand{\sub}{{(\mathrm{Sub})}}
+%%chapter 9
+\newcommand{\freeII}{\free_\mathrm{II}}
+\newcommand{\FOL}{\mathcal{L}_\mathrm{I}}
+\newcommand{\SOL}{\mathcal{L}_\mathrm{II}}
+\newcommand{\LII}{L_\mathrm{II}}
+\newcommand{\INFL}{\mathcal{L}_{\omega_1\omega}}
+\newcommand{\LINF}{L_{\omega_1\omega}}
+\newcommand{\QL}{\mathcal{L}_Q}
+\newcommand{\LQ}{L_Q}
+\newcommand{\domain}[1]{\mbox{the domain of } #1} %!!
+\newcommand{\Iff}{\mbox{iff}} %!!
+\newcommand{\dist}{\mathrm{dist}} %!!
+\newcommand{\nme}{\mathrm{NME}} %!!
+\newcommand{\indexed}{\mathrm{index}} %!!
+\newcommand{\natstr}{\mathfrak{N}} %the structure (\nat, +, \cdot, 0, 1)
+\newcommand{\zahstr}{\mathfrak{Z}} %the structure (\zah, +, \cdot, 0, 1)
+\newcommand{\realstr}{\mathfrak{R}} %the structure (\real, +, \cdot, 0, 1)
+\newcommand{\sat}{\mathrm{Sat} \,} %!!
+\newcommand{\con}{\mathrm{Con} \,} %!!
+\newcommand{\inc}{\mathrm{Inc} \,} %!!
+\newcommand{\mod}[1]{\mathrm{Mod}^{#1}}
+\newcommand{\thr}[1]{\mathrm{Th}(#1)}
+\newcommand{\Th}{\mathrm{Th}}
+\newcommand{\fld}{\mathrm{field}} %!!
+\newcommand{\abs}{\mathrm{abs}} %!!
+%%chapter 10
+\newcommand{\R}{\mathrm{R}}
+\newcommand{\LET}{\mathrm{LET}}
+\newcommand{\IF}{\mathrm{IF}}
+\newcommand{\THEN}{\mathrm{THEN}}
+\newcommand{\ELSE}{\mathrm{ELSE}}
+\newcommand{\OR}{\mathrm{OR}}
+\newcommand{\PRINT}{\mathrm{PRINT}}
+\newcommand{\HALT}{\mathrm{HALT}}
+\newcommand{\GOTO}{\mathrm{GOTO}}
+\newcommand{\p}{\mathrm{P}}
+\newcommand{\halt}{\mathrm{halt}}
+\newcommand{\length}{l}
+\newcommand{\PA}[2]{\LET \ \R_{#1} = \R_{#1} + #2}
+\newcommand{\PS}[2]{\LET \ \R_{#1} = \R_{#1} - #2}
+\newcommand{\PI}[4]{\IF \ \R_{#1} = \Box \ \THEN \ #2 \ \ELSE \ #3 \ldots \ \OR \ #4}
+\newcommand{\PII}[5]{\IF \ \R_{#1} = \Box \ \THEN \ #2 \ \ELSE \ #3 \ \OR \ldots \ #4 \ldots \ \OR \ #5}
+\newcommand{\pa}{\mathrm{PA}}
+\newcommand{\are}{{\mathrm{ar}^\prime}}
+\newcommand{\zfc}{\mathrm{ZFC}}
+\newcommand{\Der}[1]{\mathrm{Der}_{#1}}
+\newcommand{\atm}{\mathrm{atm}}
+\newcommand{\ngt}{\mathrm{ngt}}
+\newcommand{\dsj}{\mathrm{dsj}}
+\newcommand{\ext}{\mathrm{ext}}
+\newcommand{\sbt}{\mathrm{sbt}}
+\newcommand{\sbf}{\mathrm{sbf}}
+\newcommand{\drn}{\mathrm{drn}}
+\newcommand{\consis}[1]{\mathrm{Consis}_{#1}}
+\newcommand{\der}[1]{\mathrm{der}(\underline{n^{#1}})}
+\newcommand{\fvar}[1]{\mathop{\mathrm{fvar}(#1)}}
+\newcommand{\rpl}{\mathop{\mathrm{rpl}}}
+\newcommand{\sft}{\mathop{\mathrm{sft}}}
+\newcommand{\tbnd}{\mathop{\mathrm{tbnd}}}
+\newcommand{\fbnd}{\mathop{\mathrm{fbnd}}}
+
+%New commands for font sizes and styles
+\newcommand{\scripttext}[1]{{\mbox{\scriptsize#1}}}
+\newcommand{\mbf}[1]{{\mbox{\boldmath\begin{math}#1\end{math}}}}
+\newcommand{\mbfs}[1]{{\mbox{\scriptsize\boldmath\begin{math}#1\end{math}}}}
+\newcommand{\mbff}[1]{{\mbox{\footnotesize\boldmath\begin{math}#1\end{math}}}}
+\newcommand{\mbft}[1]{{\mbox{\tiny\boldmath\begin{math}#1\end{math}}}}
+\newcommand{\sbst}[2]{{\textstyle\frac{\displaystyle #1}{\displaystyle #2}}}
+
+\begin{document}
+\noindent
+\textsc{\huge G\"{o}del's Second Incompleteness \hfill\\Theorem.}\\
+\\
+\\
+\\
+Let $S_\are \colonequals S_\ar \cup \{ ? \}$, and $\Phi_\pa^\prime \colonequals \Phi_\pa \cup \Delta$, where $\Delta \colonequals ?$ is an extension by definitions.
+\begin{enumerate}[1.]
+\item \textbf{Encoding Pairs over $\nat$.} The mapping $\pi : \nat^2 \to \nat$,
+\[
+\pi (m, n) \colonequals \frac{1}{2}(m + n)(m + n + 1) + m
+\]
+is bijective. Notice that for $m, n \in \nat$,
+\[
+\begin{array}{lll}
+m & \leq & \pi (m, n), \mbox{ and}\cr
+n & \leq & \pi (m, n).
+\end{array}
+\]
+%
+\item \textbf{Encoding Finite Sets over $\nat$.} (Due to Hinman) For the nonempty set $\{ a_0, \ldots, a_r \}$, take the number
+\[
+\sum^r_{i = 0} 2^{a_i}.
+\]
+Take the number $0$ for $\emptyset$. This is a bijective mapping from finite sets over $\nat$ to $\nat$.
+%
+\item \textbf{Encoding Nonempty Finite Sequences over $\nat$.} For the nonempty sequence $\langle a_0, \ldots, a_r \rangle$, take the number
+\[
+\left(\prod_{i = 0}^{r - 1} p_i^{a_i}\right) \cdot p_r^{a_r + 1} - 2.
+\]
+It is easy to verify that there is a bijective mapping from $\nat$ to finite nonempty sequences over $\nat$. (In this context, we shall assume that sequences are nonempty.)
+%
+\item \textbf{A Bijective G\"{o}del Numbering of $S_\ar$-Terms.} The mapping $G_T : T^{S_\ar} \to \nat$,
+\[
+\begin{array}{lll}
+G_T(0) & \colonequals & 0;\cr
+G_T(1) & \colonequals & 1;\cr
+G_T(v_n) & \colonequals & 3n + 2;\cr
+G_T(t_1 + t_2) & \colonequals & 3\pi (G_T(t_1), G_T(t_2)) + 3;\cr
+G_T(t_1 \cdot t_2) & \colonequals & 3\pi (G_T(t_1), G_T(t_2)) + 4
+\end{array}
+\]
+is bijective.
+%
+\item \textbf{A Bijective G\"{o}del Numbering of $S_\ar$-Formulas.} The mapping $G_F : L^{S_\ar} \to \nat$,
+\[
+\begin{array}{lll}
+G_F(t_1 \equiv t_2) & \colonequals & 4\pi (G_T(t_1), G_T(t_2));\cr
+G_F(\neg\varphi ) & \colonequals & 4G_F(\varphi ) + 1;\cr
+G_F(\varphi\lor\psi ) & \colonequals & 4\pi (G_F(\varphi ), G_F(\psi )) + 2;\cr
+G_F(\exists v_n \varphi ) & \colonequals & 4\pi (n, G_F(\varphi )) + 3
+\end{array}
+\]
+is bijective.
+%
+\item \textbf{Encoding Sequents and Derivations.} We shall regard a derivation as a nonempty finite sequence $\langle \sigma_0, \ldots, \sigma_n \rangle$ in which $\sigma_i$ is the $(i + 1)$st sequent, $0 \leq i \leq n$. Each $\sigma_i = (a_i, s_i)$ consists of an antecedent $a_i$ (a possibly empty \emph{set} of formulas) and a succedent $s_i$ (a formula).\\
+\ \\
+If we encode formulas by means of a G\"{o}del numbering, then naturally sets of formulas, sequents, and derivations can be encoded by natural numbers.
+%
+\item \textbf{Lemma.} \emph{Let
+\[
+\varphi(x) \colonequals (\psi \land \chi (x)) \lor (\neg\psi \land \delta (x)),
+\]
+be an $S_\ar$-formula in which
+\[
+\begin{array}{rcl}
+\psi & \vdash & \exists^{=1} x \chi (x), \cr
+\neg\psi & \vdash & \exists^{=1} x \delta (x),
+\end{array}
+\]
+and
+$x$ does not occur free in $\psi$. Then $\vdash \exists^{=1} x \varphi(x)$.}\\
+\ \\
+\textit{Proof.} It suffices to show $\psi \vdash \exists^{=1}x \varphi(x)$ and $\neg\psi \vdash \exists^{=1}x \varphi(x)$. We shall give a derivation for $\psi \vdash \exists^{=1}x \varphi(x)$ below; the case $\neg\psi \vdash \exists^{=1}x \varphi(x)$ is symmetrical.\\
+\[
+\begin{array}{rll}
+1. & \psi \ \exists^{=1}x \chi(x) & \mbox{premise} \cr
+2. & \psi \ \psi & \mbox{$\assm$} \cr
+3. & \psi \ \neg\neg\psi & \mbox{IV.3.6(a1) applied to 2.} \cr
+4. & \psi \ (\neg\neg\psi \lor \neg\delta(y)) & \mbox{$\ors$ applied to 4. with $y \not\in \free(\varphi(x))$} \cr
+5. & \psi \ (\neg\neg\psi \lor \neg\delta(z)) & \mbox{$\ors$ applied to 4. with $y \neq z \not\in \free(\varphi(x))$} \cr
+6. & \psi \ \varphi(y) \ \varphi(y) & \mbox{$\assm$} \cr
+7. & \psi \ \varphi(y) \ (\psi \land \chi(y)) & \mbox{IV.3.5 applied to 6. and 4.} \cr
+8. & \psi \ \varphi(y) \ \chi(y) & \mbox{IV.3.6(d2) applied to 7.} \cr
+9. & \psi \ \varphi(z) \ \varphi(z) & \mbox{$\assm$} \cr
+10. & \psi \ \varphi(z) \ (\psi \land \chi(z)) & \mbox{IV.3.5 applied to 9. and 5.} \cr
+11. & \psi \ \varphi(z) \ \chi(z) & \mbox{IV.3.6(d2) applied to 10.} \cr
+12. & \psi \ (\chi(u) \land \forall v (\chi(v) \rightarrow v \equiv u)) \ (\chi(u) \land \forall v (\chi(v) \rightarrow v \equiv u)) & \mbox{$\assm$, $u \not\in \free(\varphi(x)) \cup \{ y, z \}$} \cr
+13. & \psi \ (\chi(u) \land \forall v (\chi(v) \rightarrow v \equiv u)) \ \chi(u) & \mbox{IV.3.6(d1) applied to 12.} \cr
+14. & \psi \ (\chi(u) \land \forall v (\chi(v) \rightarrow v \equiv u)) \ \psi & \mbox{$\assm$} \cr
+15. & \psi \ (\chi(u) \land \forall v (\chi(v) \rightarrow v \equiv u)) \ \psi \land \chi(u) & \mbox{IV.3.6(b) applied to 14. and 13.} \cr
+16. & \psi \ (\chi(u) \land \forall v (\chi(v) \rightarrow v \equiv y)) \ \varphi(u) & \mbox{$\ors$ applied to 15.} \cr
+17. & \psi \ (\chi(u) \land \forall v (\chi(v) \rightarrow v \equiv u)) \ \exists x \varphi(x) & \mbox{$\es$ applied to 16.} \cr
+18. & \psi \ \exists^{=1} x \chi(x) \ \exists x \varphi(x) & \mbox{$\ea$ applied to 17.} \cr
+19. & \psi \ \exists x \varphi(x) & \mbox{(Ch) applied to 1. and 18.} \cr
+20. & \psi \ (\chi(u) \land \forall v (\chi(v) \rightarrow v \equiv u)) \ \forall v (\chi(v) \rightarrow v \equiv u) & \mbox{IV.3.6(d2) applied to 12.} \cr
+21. & \psi \ (\chi(u) \land \forall v (\chi(v) \rightarrow v \equiv u)) \ (\chi(y) \rightarrow y \equiv u) & \mbox{IV.5.5(a1) applied to 20.} \cr
+22. & \psi \ (\chi(u) \land \forall v (\chi(v) \rightarrow v \equiv u)) \ (\chi(z) \rightarrow z \equiv u) & \mbox{IV.5.5(a1) applied to 20.} \cr
+23. & \psi \ (\chi(u) \land \forall v (\chi(v) \rightarrow v \equiv u)) \ \chi(y) \ (\chi(y) \rightarrow y \equiv u) & \mbox{$\ant$ applied to 21.} \cr
+24. & \psi \ (\chi(u) \land \forall v (\chi(v) \rightarrow v \equiv u)) \ \chi(z) \ (\chi(z) \rightarrow z \equiv u) & \mbox{$\ant$ applied to 22.} \cr
+25. & \psi \ (\chi(u) \land \forall v (\chi(v) \rightarrow v \equiv u)) \ \chi(y) \ \chi(y) & \mbox{$\assm$} \cr
+\end{array}
+\]
+\[
+\begin{array}{rll}
+26. & \psi \ (\chi(u) \land \forall v (\chi(v) \rightarrow v \equiv u)) \ \chi(z) \ \chi(z) & \mbox{$\assm$} \cr
+27. & \psi \ (\chi(u) \land \forall v (\chi(v) \rightarrow v \equiv u)) \ \chi(y) \ y \equiv u & \mbox{IV.3.5 applied to 23. and 25.} \cr
+28. & \psi \ (\chi(u) \land \forall v (\chi(v) \rightarrow v \equiv u)) \ \chi(z) \ z \equiv u & \mbox{IV.3.5 applied to 24. and 26.} \cr
+29. & \psi \ (\chi(u) \land \forall v (\chi(v) \rightarrow v \equiv u)) \ \chi(y) \ \chi(z) \ y \equiv u & \mbox{$\ant$ applied to 27.} \cr
+30. & \psi \ (\chi(u) \land \forall v (\chi(v) \rightarrow v \equiv u)) \ \chi(y) \ \chi(z) \ z \equiv u & \mbox{$\ant$ applied to 28.} \cr
+31. & \psi \ (\chi(u) \land \forall v (\chi(v) \rightarrow v \equiv u)) \ \chi(y) \ \chi(z) \ u \equiv y & \mbox{IV.5.3(a) applied to 29.} \cr
+32. & \psi \ (\chi(u) \land \forall v (\chi(v) \rightarrow v \equiv u)) \ \chi(y) \ \chi(z) \ u \equiv y \ z \equiv y & \mbox{$\sub$ applied to 30.} \cr
+33. & \psi \ (\chi(u) \land \forall v (\chi(v) \rightarrow v \equiv u)) \ \chi(y) \ \chi(z) \ z \equiv y & \mbox{(Ch) applied to 31. and 32.} \cr
+34. & \psi \ \exists^{=1} x \chi(x) \ \chi(y) \ \chi(z) \ z \equiv y & \mbox{$\ea$ applied to 33.} \cr
+35. & \psi \ \chi(y) \ \chi(z) \ \exists^{=1} x \chi(x) & \mbox{$\ant$ applied to 1.} \cr
+36. & \psi \ \chi(y) \ \chi(z) \ \exists^{=1} x \chi(x) \ z \equiv y & \mbox{$\ant$ applied to 34.} \cr
+37. & \psi \ \chi(y) \ \chi(z) \ z \equiv y & \mbox{(Ch) applied to 35. and 36.} \cr
+38. & \psi \ \varphi(y) \ \chi(y) \ \chi(z) \ z \equiv y & \mbox{$\ant$ applied to 37.} \cr
+39. & \psi \ \varphi(y) \ \chi(y) \ (\chi(z) \rightarrow z \equiv y) & \mbox{IV.3.6(c) applied to 38.} \cr
+40. & \psi \ \varphi(y) \ (\chi(z) \rightarrow z \equiv y) & \mbox{(Ch) applied to 8. and 39.} \cr
+41. & \psi \ \varphi(y) \ \varphi(z) \ \chi(z) & \mbox{$\ant$ applied to 11.} \cr
+42. & \psi \ \varphi(y) \ \varphi(z) \ (\chi(z) \rightarrow z \equiv y) & \mbox{$\ant$ applied to 40.} \cr
+43. & \psi \ \varphi(y) \ \varphi(z) \ z \equiv y & \mbox{IV.3.5 applied to 42. and 41.} \cr
+44. & \psi \ \varphi(y) \ (\varphi(z) \rightarrow z \equiv y) & \mbox{IV.3.6(c) applied to 43.} \cr
+45. & \psi \ \varphi(y) \ \forall z (\varphi(z) \rightarrow z \equiv y) & \mbox{IV.5.5(b4) applied to 44.} \cr
+46. & \psi \ \varphi(y) \ (\varphi(y) \land \forall z (\varphi(z) \rightarrow z \equiv y)) & \mbox{IV.3.6(b) applied to 6. and 45.} \cr
+47. & \psi \ \varphi(y) \ \exists^{=1} x \varphi(x) & \mbox{$\es$ applied to 46.} \cr
+48. & \psi \ \exists x \varphi(x) \ \exists^{=1} x \varphi(x) & \mbox{$\ea$ applied to 47.} \cr
+49. & \psi \ \exists^{=1} x \varphi(x) & \mbox{(Ch) applied to 19. and 48.}
+\end{array}
+\]
+%
+\item \textbf{Corollary.} \emph{If
+\[
+\vdash \varphi (x) \leftrightarrow ((\psi_0 \land \chi_0 (x)) \lor \ldots \lor (\psi_{n + 1} \land \chi_{n + 1} (x))),
+\]
+and for $0 \leq p < q \leq n + 1$,
+\[
+\vdash \neg\psi_p \lor \neg\psi_q,
+\]
+and if
+\[
+\vdash \bigvee_{k = 0}^{n + 1} \psi_k,
+\]
+then
+\[
+\vdash \exists^{=1} x \varphi (x).
+\]
+}
+%
+\item \textbf{Corollary.} \emph{Let
+\[
+\varphi (x_0, \ldots, x_{n - 1}, x) \colonequals (\psi \land \chi (x_0, \ldots, x_{n - 1}, x)) \lor (\neg\psi \land \delta (x_0, \ldots, x_{n - 1}, x)),
+\]
+be an $S_\ar$-formula in which
+\[
+\begin{array}{rll}
+\psi & \vdash & \exists^{=1} x \chi (x_0, \ldots, x_{n - 1}, x), \cr
+\neg\psi & \vdash & \exists^{=1} x \delta (x_0, \ldots, x_{n - 1}, x),
+\end{array}
+\]
+and $x$ does not occur free in $\psi$. Then $\vdash \forall x_0 \ldots \forall x_{n - 1} \exists^{=1} x \varphi (x_0, \ldots, x_{n - 1}, x)$.}
+%
+\item \textbf{Lemma.} (Course-of-Values Induction) \emph{Let $\varphi$ be an $S_\ar$-formula. Then
+\[
+\Phi_\pa \vdash \forall x ((\forall y < x)\varphi\sbst{y}{x} \rightarrow \varphi ) \rightarrow \forall x \varphi.
+\]}
+%
+\item \textbf{Lemma.} \emph{Let $\varphi$ be an $S_\ar$-formula, then
+\[
+\Phi_\pa \cup \{ \exists x \varphi \} \vdash \exists x (\varphi \land \forall (y < x)\neg\varphi\sbst{y}{x}).
+\]
+Furthermore we have
+\[
+\Phi_\pa \cup \{ \exists x \varphi \} \vdash \exists^{=1} x (\varphi \land \forall (y < x) \neg\varphi\sbst{y}{x}).
+\]}
+\ \\
+\textit{Proof.} Since
+\[
+\Phi_\pa \vdash \forall x ((\forall y < x)\neg\varphi\sbst{y}{x} \rightarrow \neg\varphi ) \rightarrow \forall x \neg\varphi.
+\]
+%
+\item \textbf{Definition.} A function $f : \nat^n \to \nat$ is \emph{$\Sigma_1$-definable} if there is a $\Sigma_1$-formula $\varphi(v_0, \ldots, v_{n - 1}, v_n)$ such that
+\begin{enumerate}[(1)]
+\item For all $a_0, \ldots, a_{n - 1} \in \nat$, $\Phi_\pa \vdash \varphi(\mbf{a_0}, \ldots, \mbf{a_{n - 1}}, \mbf{f(a_0, \ldots, a_{n - 1})})$;
+%%
+\item $\Phi_\pa \vdash \forall v_0 \ldots \forall v_{n - 1} \exists^{=1} v_n \varphi(v_0, \ldots, v_{n - 1}, v_n)$.
+\end{enumerate}
+%
+\item \textbf{Lemma.} \emph{$\beta$-function is $\Sigma_1$-definable.}\\
+\textit{Proof.} Since
+\[
+\chi (u, q, j, a) \vdash (a < q) \land \chi (u, q, j, a)
+\]
+and thus
+\[
+\chi (u, q, j, a) \vdash (\exists e < q) \chi (u, q, j, e),
+\]
+it follows that $\varphi_\beta (u, q, j, a)$ is equivalent to
+\[
+((\exists e < q)\chi (u, q, j, e) \land \chi (u, q, j, a) \land (\forall e < a)\neg\chi (u, q, j, e)) \lor ((\forall e < a)\neg\chi (u, q, j, e) \land a \equiv 0).
+\]
+Moreover,
+\[
+(\exists e < q)\chi (u, q, j, e) \vdash \exists^{=1}x (\chi (u, q, j, x) \land (\forall e < x)\neg\chi (u, q, j, x))
+\]
+and
+\[
+(\forall e < q)\neg\chi (u, q, j, e) \vdash \exists^{=1}x \ x \equiv 0.
+\]
+From \textbf{Lemma 1} we have that
+\[
+\vdash \exists^{=1}x \varphi_\beta (u, q, j, x)
+\]
+and further that
+\[
+\vdash \forall v_0 \forall v_1 \forall v_2 \exists^{=1}v \varphi_\beta (v_0, v_1, v_2, v).
+\]
+Finally, notice that $\varphi_\beta \in \Delta_0$, so $\varphi_\beta$ represents the $\beta$-function. The proof is complete.
+%
+\item \textbf{Lemma.} \emph{If $f : \nat \to \nat$ is $\Sigma_1$-definable by an $S_\ar$-formula $\varphi_f (v_0, v_1)$, then
+\[
+\Phi_\pa \vdash \forall n \exists t (\exists p < t) (\forall i \leq n) \varphi_f (i, \beta (t, p, i)).
+\]
+}
+\textit{Proof.} (INCOMPLETE.)
+%
+\item \textbf{Definition.} Let $R$ be an $(n + 1)$-ary relation over $\nat$, then we say the $(n + 1)$-ary function
+\[
+F (a_0, \ldots, a_n) \colonequals \cases{
+0 & if $Ra_0 \ldots a_n$ holds \cr
+1 & otherwise
+}
+\]
+is the characteristic function of $R$.
+%
+\item \textbf{Lemma.} \emph{Let $\exists x_0 \ldots \exists x_n \varphi$ be a $\Sigma_1$-formula in which $\varphi$ is $\Delta_0$. Then there is a $\Delta_0$-formula $\psi$ such that $\exists x \psi$ is equivalent to $\exists x_0 \ldots \exists x_n \varphi$, in which $x$ does not occur.}\\
+\ \\
+\textit{Proof.} Choose\\
+\phantom{$\talloblong$} \hfill $\psi \colonequals (\exists x_0 < x) \ldots (\exists x_n < x)\varphi$. \hfill$\talloblong$
+%
+\item \textbf{Lemma.} \emph{Let $\varphi$ and $\psi$ be $\Sigma_1$-formulas, then the following are all equivalent to some $\Sigma_1$-formulas:}
+\begin{enumerate}[(a)]
+\item $(\varphi \lor \psi)$,
+%%
+\item $(\varphi \land \psi)$,
+%%
+\item $(\exists x < t)\varphi$,
+%%
+\item $(\forall x < t)\varphi$,
+\end{enumerate}
+\emph{where in the above $x \not\in \var{t}$.}\\
+\ \\
+\textit{Proof.} If $\varphi$ and $\psi$ are both $\Delta_0$-formulas, then all the assertions are trivial. If both $\varphi$ and $\psi$ are not $\Delta_0$-formulas, then we may assume without loss of generality that
+\[
+\begin{array}{lll}
+\varphi & = & \exists u \varphi_0, \mbox{ and}\cr
+\psi & = & \exists v \psi_0,
+\end{array}
+\]
+where according to the above lemma $\varphi_0$ and $\psi_0$ are $\Delta_0$-formulas and furthermore, $u \neq v$, $u$ does not occur in $\psi_0$ and $v$ does not occur in $\varphi$. The assertions immediately follow:
+\begin{enumerate}[(a)]
+\item $(\varphi \lor \psi)$ is equivalent to
+\[
+\exists w (\exists u < w)(\exists v < w)( \varphi_0 \lor \psi_0 ),
+\]
+where $w$ does not occur in $\varphi$ or $\psi$.
+%%
+\item Similar to (a).
+%%
+\item $(\exists x < t)\varphi$ is equivalent to
+\[
+\exists w (\exists x < t)(\exists u < w)\varphi_0,
+\]
+where $w$ does not occur in $(\exists x < t)\varphi$.
+%%
+\item Similar to (c).
+\end{enumerate}
+As for the other two cases, the proof is similar.\nolinebreak\hfill$\talloblong$
+%
+\item \textbf{Lemma.} \emph{Let the $n$-ary function $f$ be represented by
+\[
+t \equiv v_n,
+\]
+where $t$ is a term with $\var{t} \subset \{ v_0, \ldots, v_{n - 1} \}$. Then $f$ is $\Sigma_1$-definable.}
+%
+\item \textbf{Lemma.} (Composition) \emph{Let $g_1, \ldots, g_m$ be a list of $n$-ary functions, and $h$ an $m$-ary function. Also, pick $f : \nat^n \to \nat$ with
+\[
+f(a_1, \ldots, a_n) = h(g_1(a_1, \ldots, a_n), \ldots, g_m(a_1, \ldots, a_n)),
+\]
+for $a_1, \ldots, a_n \in \nat$.\\
+If $g_1, \ldots, g_m$ and $h$ are all $\Sigma_1$-definable, then so is $f$.}
+%
+\item \textbf{Lemma.} (Primitive Recursion) \emph{Let $g$ and $h$ be $n$- and $(n + 2)$-ary functions, respectively. Also, pick $f : \nat^{n + 1} \to \nat$ with
+\[
+\begin{array}{l}
+f(a_1, \ldots, a_n, 0) = g(a_1, \ldots, a_n);\cr
+f(a_1, \ldots, a_n, a_{n + 1} + 1) = h(a_1, \ldots, a_{n + 1}, f(a_1, \ldots, a_n, a_{n + 1})),
+\end{array}
+\]
+for $a_1, \ldots, a_{n + 1} \in \nat$.\\
+If $g$ and $h$ are both $\Sigma_1$-definable, then so is $f$.}
+%
+\item The characteristic function $F_=$ of the binary relation $m = n$ is $\Sigma_1$-defined by the formula
+\[
+F_= (v_0, v_1) \equiv v_2 \colonequals (v_0 \equiv v_1 \land v_2 \equiv 0) \land (\neg v_0 \equiv v_1 \land v_2 \equiv 1).
+\]
+%
+\item The characteristic function $F_<$ of the binary relation $m < n$ is $\Sigma_1$-defined by the formula
+\[
+F_<(v_0, v_1) \equiv v_2 \colonequals (v_0 < v_1 \land v_2 \equiv 0) \lor (v_0 \geq v_1 \land v_2 \equiv 1).
+\]
+%
+\item The unary relation $R_{Odd} n$ states that $n$ is an odd number:
+\begin{center}
+$R_{Odd} n$ \ \ \ iff \ \ \ there is $m < n$ such that $n = 2m + 1$.
+\end{center}
+Its characteristic function $F_{Odd}$ is $\Sigma_1$-defined by the formula
+\[
+\begin{array}{lll}
+F_{Odd} (v_0) \equiv v_1 & \colonequals & ((\exists v_2 < v_0) v_0 \equiv 2 \cdot v_2 + 1 \land v_1 \equiv 1) \lor\cr
+\ & \ & ((\forall v_2 < v_0) \neg v_0 \equiv 2 \cdot v_2 + 1 \land v_1 \equiv 0).
+\end{array}
+\]
+%
+\item The binary function $m \stackrel{.}{-} n$ (cut-off subtraction) returns $m$ minus $n$ if $m \geq n$, otherwise it returns $0$:
+\[
+m \stackrel{.}{-} n \colonequals \cases{
+m - n & if $m \geq n$\cr
+0 & otherwise.
+}
+\]
+Since $\Phi_\pa \cup \{ v_0 \geq v_1 \} \vdash \exists^{=1} v_2 \, v_1 + v_2 \equiv v_0$, it is $\Sigma_1$-defined by
+\[
+v_0 \stackrel{.}{-} v_1 \equiv v_2 \colonequals (v_0 \geq v_1 \land v_1 + v_2 \equiv v_0) \lor (v_0 < v_1 \land v_2 \equiv 0).
+\]
+%
+\item The unary relation $R_{Div}mn$ states that $m$ divides $n$:
+\begin{center}
+$R_{Div}mn$ \ \ \ iff \ \ \ there is $k \leq n$ such that $m \cdot k = n$.
+\end{center}
+Its characteristic function $F_{Div}$ is $\Sigma_1$-defined by the formula
+\[
+\begin{array}{lll}
+F_{Div} (v_0, v_1) \equiv v_2 & \colonequals & ((\exists v_3 \leq v_1) v_0 \cdot v_3 \equiv v_1 \land v_2 \equiv 0) \lor\cr
+\ & \ & ((\forall v_3 \leq v_1) \neg v_0 \cdot v_3 \equiv v_1 \land v_2 \equiv 1).
+\end{array}
+\]
+%
+\item \textbf{Lemma.} \emph{If the characteristic function $F_R$ of the $(n + 1)$-ary relation $R$ is $\Sigma_1$-definable, then so is that of its complement.}\\
+\ \\
+\textit{Proof.} Let $F_{\neg R}$ be the characteristic function, then
+\[
+F_{\neg R}(a_0, \ldots, a_n) = 1 \stackrel{.}{-} F_R(a_0, \ldots, a_n).
+\]
+\ \nolinebreak\hfill$\talloblong$
+%
+\item \textbf{Lemma.} \emph{Let $P$ and $Q$ be $n$-ary and $m$-ary relations over $\nat$, and without loss of generality assume that $n \geq m$. If the charateristic functions of them are both $\Sigma_1$-definable, then so are those of the $n$-ary relations $P \cup Q$ and $P \cap Q$.}\\
+\ \\
+\textit{Proof.} Let $F_P$, $F_Q$, $F_{P \cup Q}$ and $F_{P \cap Q}$ be the characteristic functions of $P$, $Q$, $P \cup Q$ and $P \cap Q$, respectively. Then
+\[
+\begin{array}{lll}
+F_{P \cup Q}(a_1, \ldots, a_n) & = & F_P(a_1, \ldots, a_n) \cdot F_Q(a_1, \ldots, a_m), \mbox{ and}\cr
+F_{P \cap Q}(a_1, \ldots, a_n) & = & 1 \stackrel{.}{-} (1 \stackrel{.}{-} F_P(a_1, \ldots, a_n)) \cdot (1 \stackrel{.}{-} F_Q(a_1, \ldots, a_m)).
+\end{array}
+\]
+Clearly if $F_P$ and $F_Q$ are both $\Sigma_1$-definable, then so are $F_{P \cup Q}$ and $F_{P \cap Q}$.\nolinebreak\hfill$\talloblong$
+%
+\item If $f$ is a $\Sigma_1$-definable unary function, then the unary function
+\[
+\prod_{m = 0}^n f(m) \colonequals \cases{
+f(0) & if $n = 0$\cr
+f(n) \cdot \left(\displaystyle\prod_{m = 0}^{n \stackrel{.}{-} 1}f(m)\right) & otherwise
+}
+\]
+which takes $n$ as the argument is also $\Sigma_1$-definable because
+\[
+\begin{array}{lll}
+\displaystyle\prod_{m = 0}^0 f(m) & = & f(0), \mbox{ and}\cr
+\displaystyle\prod_{m = 0}^{n + 1}f(m) & = & f(n + 1) \cdot \left(\displaystyle\prod_{m = 0}^nf(m)\right).
+\end{array}
+\]
+%
+\item The function $n$ factorial
+\[
+n! \colonequals \prod^n_{m = 0} m
+\]
+is $\Sigma_1$-definable.
+%
+\item \textbf{Lemma.} \emph{If the characteristic function of the $(n + 1)$-ary relation $R$ is $\Sigma_1$-definable, then so is that of the $(n + 1)$-ary relation
+\begin{center}
+``there is some $b \leq a_n$ such that $R(a_0, \ldots, a_{n - 1}, b)$''.
+\end{center}}
+\textit{Proof.} Let $F$ and $F_\exists$ be the characteristic functions of $R$ and of
+\begin{center}
+``there is some $b \leq a_n$ such that $R(a_0, \ldots, a_{n - 1}, b)$'',
+\end{center}
+respectively, then
+\[
+F_\exists (a_0, \ldots, a_n) = \displaystyle\prod_{m = 0}^{a_n} F(a_0, \ldots, m).
+\]
+Clearly if $F$ is $\Sigma_1$-definable, then so is $F_\exists$.\nolinebreak\hfill$\talloblong$
+%
+\item \textbf{Corollary.} \emph{If the characteristic function of the $(n + 1)$-ary relation $R$ is $\Sigma_1$-definable, then so is that of the $(n + 1)$-ary relation
+\begin{center}
+``for all $b \leq a_n$, $R(a_0, \ldots, a_{n - 1}, b)$''.
+\end{center}}
+\textit{Proof.} Let $F$ and $F_\forall$ be the characteristic functions of $R$ and of
+\begin{center}
+``for all $b \leq a_n$, $R(a_0, \ldots, a_{n - 1}, b)$'',
+\end{center}
+respectively, then
+\[
+F_\forall (a_0, \ldots, a_n) = 1 \stackrel{.}{-} \displaystyle\prod_{m = 0}^{a_n} (1 \stackrel{.}{-} F(a_0, \ldots, m)).
+\]
+Clearly if $F$ is $\Sigma_1$-definable, then so is $F_\forall$.\nolinebreak\hfill$\talloblong$
+%
+\item \textbf{Corollary.} \emph{If the characteristic function of the $(n + 1)$-ary relation $R$ is $\Sigma_1$-definable, then so is that of the $(n + 1)$-ary relation
+\begin{center}
+``there is some $b < a_n$ such that $R(a_0, \ldots, a_{n - 1}, b)$''.
+\end{center}}
+\textit{Proof.} Let $F^\prime$ and $F$ be the characteristic functions of
+\begin{center}
+``there is some $b \leq a_n$ such that $R(a_0, \ldots, a_{n - 1}, b)$''
+\end{center}
+and of
+\begin{center}
+``there is some $b < a_n$ such that $R(a_0, \ldots, a_{n - 1}, b)$'',
+\end{center}
+respectively, then
+\[
+\begin{array}{lll}
+F (a_0, \ldots, a_n) = (1 \stackrel{.}{-} F_=(0, a_n)) + F_=(0, a_n) \cdot F^\prime (a_0, \ldots, a_n \stackrel{.}{-} 1).
+\end{array}
+\]
+Since the characteristic function of $R$ is $\Sigma_1$-definable, $F^\prime$ and hence $F$ are $\Sigma_1$-definable as well.\nolinebreak\hfill$\talloblong$
+%
+\item \textbf{Corollary.} \emph{If the characteristic function of the $(n + 1)$-ary relation $R$ is $\Sigma_1$-definable, then so is that of the $(n + 1)$-ary relation
+\begin{center}
+``for all $b < a_n$, $R(a_0, \ldots, a_{n - 1}, b)$''.
+\end{center}}
+\textit{Proof.} Let $F^\prime$ and $F$ be the characteristic functions of
+\begin{center}
+``for all $b \leq a_n$, $R(a_0, \ldots, a_{n - 1}, b)$''
+\end{center}
+and of
+\begin{center}
+``for all $b < a_n$, $R(a_0, \ldots, a_{n - 1}, b)$'',
+\end{center}
+respectively, then
+\[
+\begin{array}{lll}
+F (a_0, \ldots, a_n) = F_=(0, a_n) \cdot F^\prime (a_0, \ldots, a_n \stackrel{.}{-} 1).
+\end{array}
+\]
+Since the characteristic function of $R$ is $\Sigma_1$-definable, $F^\prime$ and hence $F$ are $\Sigma_1$-definable as well.\nolinebreak\hfill$\talloblong$
+%
+\item \textbf{Lemma.} (Bounded Minimalization) \emph{Let $f$ be a $\Sigma_1$-definable $(n + 1)$-ary function, then the $(n + 1)$-ary function}
+\[
+\begin{array}{ll}
+\ & (\mu q < a_n)[f(a_0, \ldots, a_{n - 1}, q) = 0] \cr
+\colonequals & \cases{
+\mbox{the least $q < a_n$ such that $f(a_0, \ldots, a_{n - 1}, q) = 0$} & if such a $q$ exists \cr
+a_n & otherwise,
+}
+\end{array}
+\]
+\emph{which takes arguments $a_0, \ldots, a_n$, is $\Sigma_1$-definable as well.}\\
+\ \\
+\textit{Proof.} Suppose $f$ is $\Sigma_1$-definable, then the characteristic function $F$ of the $(n + 1)$-ary relation
+\begin{center}
+``there is $q < a_n$ such that $f(a_0, \ldots, a_{n - 1}, q) = 0$''
+\end{center}
+is also $\Sigma_1$-definable, and so is the $(n + 2)$-ary function
+\[
+g(a_0, \ldots, a_n, b) \colonequals \cases{
+b & if $F(a_0, \ldots, a_n) = 0$ \cr
+a_n & otherwise
+}
+\]
+since
+\[
+g(a_0, \ldots, a_n, b) = (1 \stackrel{.}{-} F(a_0, \ldots, a_n)) \cdot b + F(a_0, \ldots, a_n) \cdot a_n.
+\]
+\ \\
+It turns out that $\mu q < a_n [f(a_0, \ldots, a_{n - 1}, q) = 0]$ is thus $\Sigma_1$-definable, because
+\[
+\begin{array}{lll}
+(\mu q < 0) [f(a_0, \ldots, a_{n - 1}, q) = 0] & = & 0, \mbox{ and}\cr
+(\mu q < a_n + 1) [f(a_0, \ldots, a_{n - 1}, q) = 0] & = & g(a_0, \ldots, a_n + 1, (\mu q < a_n) [f(a_0, \ldots, a_{n - 1}, q) = 0]).
+\end{array}
+\]
+\ \nolinebreak\hfill$\talloblong$
+%
+\item \textbf{Corollary.} (Enhanced Bounded Minimalization) \emph{Let $f$ and $g$ be $\Sigma_1$-definable $m$-ary and $n$-ary functions, respectively. Choose $k \colonequals \max\{ m - 1, n \}$, then the $k$-ary function}
+\[
+\begin{array}{ll}
+\ & (\mu q < g(a_1, \ldots, a_n))[f(a_1, \ldots, a_{m - 1}, q) = 0]\cr
+\colonequals & \cases{
+\mbox{the least $q < g(a_1, \ldots, a_n)$ such that $f(a_1, \ldots, a_{m - 1}, q) = 0$} & if such a $q$ exists\cr
+g(a_1, \ldots, a_n) & otherwise,
+}
+\end{array}
+\]
+\emph{which takes $a_1, \ldots, a_k$ as the arguments, is $\Sigma_1$-definable.}\\
+\ \\
+\textit{Proof.} Since $f$ is $\Sigma_1$-definable, the $m$-ary function
+\[
+h (a_1, \ldots, a_{m - 1}, b) \colonequals (\mu q < b)[f(a_1, \ldots, a_{m - 1}, q) = 0]
+\]
+is also $\Sigma_1$-definable. It follows that the $k$-ary function
+\[
+(\mu q < g(a_1, \ldots, a_n))[f(a_1, \ldots, a_{m - 1}, q) = 0] = h (a_1, \ldots, a_{m - 1}, g(a_1, \ldots, a_n))
+\]
+is $\Sigma_1$-definable as well.\nolinebreak\hfill$\talloblong$
+%
+\item The function $m \div n$ returns the quotient of $m$ divided by $n$ if $n \neq 0$, otherwise it returns $m + 1$:
+\[
+m \div n \colonequals \cases{
+m + 1 & if $n = 0$; \cr
+m \stackrel{.}{-} (\mu k < m + 1)[n \cdot (m \stackrel{.}{-} k) \stackrel{.}{-} m = 0] & otherwise.
+}
+\]
+It is $\Sigma_1$-definable because
+\[
+m \div n = (1 \stackrel{.}{-} n) \cdot (m + 1) + n \cdot (m \stackrel{.}{-} (\mu k < m + 1)[n \cdot (m \stackrel{.}{-} k) \stackrel{.}{-} m = 0])
+\]
+for $m, n \in \nat$.
+%
+\item The unary relation $R_{Prime}n$ states that $n$ is a prime:
+\begin{center}
+$R_{Prime}n$ \ \ \ iff \ \ \ $n > 1$ and for all $m \leq n \stackrel{.}{-} 1$, if $m$ divides $n$ then $m = 1$.
+\end{center}
+Its characteristic function $F_{Prime}$ is $\Sigma_1$-definable because
+\[
+F_{Prime}(n) = 1 \stackrel{.}{-} (1 \stackrel{.}{-} F_< (1, n)) \cdot \left(\prod^{n \stackrel{.}{-} 1}_{m = 0} (1 \stackrel{.}{-} (1 \stackrel{.}{-} F_{Div}(m, n)) \cdot F_=(1, m))\right).
+\]
+%
+\item The unary function $Prime(n)$ returns the $(n + 1)$st prime. It is $\Sigma_1$-definable because
+\[
+\begin{array}{lll}
+Prime(0) & = & 2 \cr
+Prime(n + 1) & = & (\mu m < Prime(n)! + 2)[1 \stackrel{.}{-} (1 \stackrel{.}{-} F_{Prime}(m)) \cdot (1 \stackrel{.}{-} F_<(Prime(n), m)) = 0].
+\end{array}
+\]
+%
+\item The exponential function $m^n$ returns the $n$th power of $m$:
+\[
+m^n \colonequals \cases{
+1 & if $n = 0$ \cr
+m \cdot m^{n - 1} & otherwise.
+}
+\]
+It is $\Sigma_1$-definable because
+\[
+\begin{array}{lll}
+m^0 & = & 1; \cr
+m^{n + 1} & = & m \cdot m^n.
+\end{array}
+\]
+%
+\item The pairing function $\pi (m, n)$ returns the number encoding the pair $(m, n)$:
+\[
+\pi (m, n) \colonequals (((m + n) \cdot (m + n + 1)) \div 2) + m,
+\]
+is $\Sigma_1$-definable.
+%
+\item The first-component function $\pi_1 (n)$ returns the first component of the pair encoded by $n$:
+\[
+\pi_1 (n) \colonequals (\mu m < n + 1)\left[\prod^n_{k = 0} F_=(\pi (m, k), n) = 0\right],
+\]
+is $\Sigma_1$-definable.
+%
+\item The second-component function $\pi_2 (n)$ returns the second component of the pair encoded by $n$:
+\[
+\pi_2 (n) \colonequals (\mu m < n + 1)\left[\prod^n_{k = 0} F_= (\pi (k, m), n) = 0\right],
+\]
+is $\Sigma_1$-definable.
+%
+\item The function $Length(n)$ returns the length of the sequence encoded by $n$:
+\[
+Length(n) \colonequals (n + 3) \stackrel{.}{-} (\mu m < n + 2)[F_{Div}(Prime(n + 2 \stackrel{.}{-} m), n + 2) = 0],
+\]
+is $\Sigma_1$-definable.\\
+\ \\
+(The least $m < n + 2$ such that $F_{Div}(Prime(n + 2 \stackrel{.}{-} m), n + 2) = 0$ equals $n + 2 \stackrel{.}{-} k$, where $F_{Div}(Prime(k), n + 2) = 0$ and for all $k^\prime > k$, $F_{Div}(Prime(k^\prime), n + 2) = 1$.)
+%
+\item The function $n [k]$ returns the $(k + 1)$st component of the sequence encoded by $n$:
+\[
+n[k] \colonequals 
+\cases{
+\mbox{the least $m < n + 2$ with $P (m, n, k)$} & if $k < Length(n) - 1$\cr
+\mbox{one less than the least $m < n + 2$ with $P (m, n, k)$}  & if $k = Length(n) - 1$\cr
+n + 1 & otherwise,
+}
+\]
+where the ternary relation $P (m, n, k)$ states that the $m$th power of the $(k + 1)$st prime divides $n + 2$ but the $(m + 1)$st power does not.\\
+\ \\
+Since the characteristic function
+\[
+F_P (m, n, k) = 1 \stackrel{.}{-} (1 \stackrel{.}{-} F_{Div}(Prime(k)^m, n + 2)) \cdot F_{Div}(Prime(k)^{m + 1}, n + 2)
+\]
+of $P (m, n, k)$ is $\Sigma_1$-definable, we have
+\[
+\begin{array}{ll}
+n[k] = & \phantom{+} (1 \stackrel{.}{-} F_<(k, Length(n) \stackrel{.}{-} 1)) \cdot (\mu m < n + 2)[F_P (m, n, k) = 0]\cr
+\ & + (1 \stackrel{.}{-} F_=(k, Length(n) \stackrel{.}{-} 1)) \cdot ((\mu m < n + 2)[F_P (m, n, k) = 0] \stackrel{.}{-} 1)\cr
+\ & + (1 \stackrel{.}{-} F_< (Length(n) \stackrel{.}{-} 1, k)) \cdot (n + 1)
+\end{array}
+\]
+is $\Sigma_1$-definable as well.
+%
+\item The function $m \ast n$ attaches the sequence encoded by $n$ to the sequence encoded by $m$:
+\[
+\begin{array}{llcl}
+m \ast n & \colonequals & \ & \left( (m + 2) \div Prime(Length(m) \stackrel{.}{-} 1) \right) \cr
+\ & \ & \cdot & \left(\displaystyle\prod_{k = 0}^{Length(n) \stackrel{.}{-} 1} Prime(Length(m) + k)^{n[k]}\right) \cr
+\ & \ & \cdot & Prime(Length(m) + Length(n) \stackrel{.}{-} 1) \cr
+\ & \ & \stackrel{.}{-} & 2
+\end{array}
+\]
+is $\Sigma_1$-definable.
+%
+\item \textbf{Lemma.} \emph{The following are derivable:}
+\begin{enumerate}[(a)]
+\item $\forall v_0 \forall v_1 Length(v_0 \ast v_1) \equiv Length(v_0) + Length(v_1)$;
+%%
+\item $\forall v_0 \forall v_1 (((v_0 + 2) \div Prime(Length(v_0) \stackrel{.}{-} 1)) \cdot Prime(Length(v_0))^{v_1 + 1}) \stackrel{.}{-} 2 \equiv v_0 \ast Prime(0)^{v_1 + 1}$;
+%%
+\item $(\forall i < Length(v_0))(v_0 \ast v_1)[i] \equiv v_0[i]$;
+%%
+\item $\forall i (Length(v_0) \leq i \rightarrow (v_0 \ast v_1)[i] \equiv v_1[i \stackrel{.}{-} Length(v_0)])$.
+\end{enumerate}
+%
+\item 
+%
+\item The function $Last(n)$ returns the last component of the sequence encoded by $n$:
+\[
+Last(n) \colonequals n[Length(n) \stackrel{.}{-} 1]
+\]
+is $\Sigma_1$-definable.
+%
+\item The binary relation $R_\in (m, n)$ states that $m$ is a member of the set encoded by $n$. Its characteristic function $F_\in$ is $\Sigma_1$-definable because
+\[
+F_\in (m, n) = F_{Odd} (n \div 2^m).
+\]
+%
+\item The function $Max(n)$ returns the maximum element of the set encoded by $n$ if that set is nonempty, otherwise it returns $0$:
+\[
+Max (n) \colonequals \cases{
+\mbox{the maximum $m$ with $R_\in (m, n)$} & if $n \neq 0$;\cr
+0 & otherwise.
+}
+\]
+It is $\Sigma_1$-definable because
+\[
+Max (n) = n \stackrel{.}{-} (\mu k < n + 1)[F_\in (n \stackrel{.}{-} k, n) = 0].
+\]
+%
+\item The binary relation $R_\subset (m, n)$ states that the set encoded by $m$ is a subset of the set encoded by $n$:
+\begin{center}
+$R_\subset (m, n)$ \ \ \ iff \ \ \ for all $k < m$, if $R_\in (k, m)$ then $R_\in (k, n)$.
+\end{center}
+Clearly its characteristic function $F_\subset$ is $\Sigma_1$-definable.
+%
+\item The function $m \cup n$ (cf. Fundamentals of Mathematical Logic, Hinman) returns the union of the two sets encoded by $m$ and $n$:
+\[
+m \cup n \colonequals (\mu k < m + n + 1)[1 \stackrel{.}{-} (1 \stackrel{.}{-} F_\subset (m, k)) \cdot (1 \stackrel{.}{-} F_\subset (n, k)) = 0],
+\]
+is $\Sigma_1$-definable.
+%
+\item The function $m \stackrel{.}{\setminus} n$ removes the element $n$ from the set encoded by $m$ if $n$ is a member of that set, otherwise it leaves $m$ unchanged:
+\[
+m \stackrel{.}{\setminus} n \colonequals \cases{
+m \stackrel{.}{-} 2^n & if $R_\in (n, m)$\cr
+m & otherwise.
+}
+\]
+It is $\Sigma_1$-definable because
+\[
+m \stackrel{.}{\setminus} n = (1 \stackrel{.}{-} F_\in (n, m)) \cdot (m \stackrel{.}{-} 2^n) + F_\in (n, m) \cdot m.
+\]
+%
+\item \textbf{Lemma.} (Course-of-Values Recursion)
+%
+\item The operation $t\sbst{t^\prime}{v_n}$ (simple term substitution) is defined inductively below:
+\[
+\begin{array}{lll}
+0\sbst{t}{v_n} & \colonequals & 0;\cr
+1\sbst{t}{v_n} & \colonequals & 1;\cr
+v_m\sbst{t}{v_n} & \colonequals & \cases{
+t & if $m = n$;\cr
+v_m & otherwise;
+}\cr
+(t_1 + t_2)\sbst{t}{v_n} & \colonequals & t_1\sbst{t}{v_n} + t_2\sbst{t}{v_n};\cr
+(t_1 \cdot t_2)\sbst{t}{v_n} & \colonequals & t_1\sbst{t}{v_n} \cdot t_2\sbst{t}{v_n}.
+\end{array}
+\]
+The corresponding ternary function $TSbst(m, n, k)$ returns the number encoding $t\sbst{t^\prime}{v_n}$, where $t$ and $t^\prime$ have G\"{o}del numbers $m$ and $k$, respectively. It is defined by
+\[
+\begin{array}{lll}
+TSbst(0, n, k) & \colonequals & 0; \cr
+TSbst(1, n, k) & \colonequals & 1; \cr
+TSbst(3m + 2, n, k) & \colonequals & \cases{
+k & if $m = n$; \cr
+3m + 2 & otherwise;
+} \cr
+TSbst(3m + 3, n, k) & \colonequals & 3 \cdot \pi (TSbst(\pi_1 (m), n, k), TSbst(\pi_2 (m), n, k)) + 3; \cr
+TSbst(3m + 4, n, k) & \colonequals & 3 \cdot \pi (TSbst(\pi_1 (m), n, k), TSbst(\pi_2 (m), n, k)) + 4.
+\end{array}
+\]
+It is $\Sigma_1$-definable.
+%
+\item The operation $\var{t}$ returning the set of all variables occurring in $t$ is defined inductively below:
+\[
+\begin{array}{lll}
+\var{0} & \colonequals & \emptyset;\cr
+\var{1} & \colonequals & \emptyset;\cr
+\var{v_n} & \colonequals & \{ v_n \};\cr
+\var{t_1 + t_2} & \colonequals & \var{t_1} \cup \var{t_2};\cr
+\var{t_1 \cdot t_2} & \colonequals & \var{t_1} \cup \var{t_2}.
+\end{array}
+\]
+The corresponding unary function $TVar(n)$ returns the number encoding $\var{t}$ where $t$ has G\"{o}del number $n$. It is defined by
+\[
+\begin{array}{lll}
+TVar(0) & \colonequals & 0;\cr
+TVar(1) & \colonequals & 0;\cr
+TVar(3n + 2) & \colonequals & 2^n;\cr
+TVar(3n + 3) & \colonequals & TVar(\pi_1 (n)) \cup TVar(\pi_2 (n));\cr
+TVar(3n + 4) & \colonequals & TVar(\pi_1 (n)) \cup TVar(\pi_2 (n)).
+\end{array}
+\]
+It is $\Sigma_1$-definable.
+%
+\item The operation $\fvar{\varphi}$ returning the set of all variables (free or bound) occuring in the formula $\varphi$ is defined inductively below:
+\[
+\begin{array}{lll}
+\fvar{t_1 \equiv t_2} & \colonequals & \var{t_1} \cup \var{t_2};\cr
+\fvar{\neg\varphi} & \colonequals & \fvar{\varphi};\cr
+\fvar{\varphi \lor \psi} & \colonequals & \fvar{\varphi} \cup \fvar{\psi};\cr
+\fvar{\exists v_n \varphi} & \colonequals & \{ v_n \} \cup \fvar{\varphi}.
+\end{array}
+\]
+The corresponding unary function $FVar(n)$ returns the number encoding $\fvar{\varphi}$ where $\varphi$ has G\"{o}del number $n$. It is defined by
+\[
+\begin{array}{lll}
+FVar(4n) & \colonequals & TVar(\pi_1 (n)) \cup TVar(\pi_2 (n));\cr
+FVar(4n + 1) & \colonequals & FVar(n);\cr
+FVar(4n + 2) & \colonequals & FVar(\pi_1 (n)) \cup FVar(\pi_2 (n));\cr
+FVar(4n + 3) & \colonequals & 2^{\pi_1 (n)} \cup FVar(\pi_2 (n)).
+\end{array}
+\]
+It is $\Sigma_1$-definable.
+%
+\item The operation $\free{\varphi}$ returning the set of all free variables of the formula $\varphi$ is defined inductively below:
+\[
+\begin{array}{lll}
+\free{t_1 \equiv t_2} & \colonequals & \var{t_1} \cup \var{t_2};\cr
+\free{\neg\varphi} & \colonequals & \free{\varphi};\cr
+\free{\varphi\lor\psi} & \colonequals & \free{\varphi} \cup \free{\psi};\cr
+\free{\exists v_n \varphi} & \colonequals & \free{\varphi} \setminus \{ v_n \}.
+\end{array}
+\]
+The corresponding unary function $Free(n)$ returns the number encoding $\free{\varphi}$ where $\varphi$ has G\"{o}del number $n$. It is defined by
+\[
+\begin{array}{lll}
+Free(4n) & \colonequals & TVar(\pi_1 (n)) \cup TVar(\pi_2 (n));\cr
+Free(4n + 1) & \colonequals & Free(n);\cr
+Free(4n + 2) & \colonequals & Free(\pi_1 (n)) \cup Free(\pi_2 (n));\cr
+Free(4n + 3) & \colonequals & Free(\pi_2 (n)) \stackrel{.}{\setminus} \pi_1 (n).
+\end{array}
+\]
+It is $\Sigma_1$-definable.
+%
+\item The operation $\rpl(\varphi, v_n, t)$ replaces in $\varphi$ all occurrences of $v_n$ (free or bound, if any) by those of the term $t$ if $t = v_m$, otherwise it only replaces all \emph{free} occurrences of $v_n$ (if any) by those of the term $t$. For example,
+\[
+\rpl (\exists v_0 \ v_0 \equiv v_1, v_0, v_1) = \exists v_1 \ v_1 \equiv v_1,
+\]
+and
+\[
+\rpl (v_1 \equiv 0 \lor \exists v_1 \ v_2 \equiv v_1, v_1, 0) = 0 \equiv 0 \lor \exists v_1 \ v_2 \equiv v_1.
+\]
+More precisely, it is defined inductively by
+\[
+\begin{array}{lll}
+\rpl (t_1 \equiv t_2, v_n, t) & \colonequals & t_1\sbst{t}{v_n} \equiv t_2\sbst{t}{v_n};\cr
+\rpl (\neg\varphi, v_n, t) & \colonequals & \neg \rpl (\varphi, v_n, t);\cr
+\rpl (\varphi\lor\psi, v_n, t) & \colonequals & \rpl (\varphi, v_n, t) \lor \rpl (\psi, v_n, t);\cr
+\rpl (\exists v_m \varphi, v_n, 0) & \colonequals & \cases{
+\exists v_m \varphi & if $m = n$;\cr
+\exists v_m \rpl (\varphi, v_n, 0) & otherwise;
+}\cr
+\rpl (\exists v_m \varphi, v_n, 1) & \colonequals & \cases{
+\exists v_m \varphi & if $m = n$;\cr
+\exists v_m \rpl (\varphi, v_n, 1) & otherwise;
+}\cr
+\rpl (\exists v_m \varphi, v_n, v_p) & \colonequals & \cases{
+\exists v_p \rpl (\varphi, v_n, v_p) & if $m = n$;\cr
+\exists v_m \rpl (\varphi, v_n, v_p) & otherwise;
+}\cr
+\rpl (\exists v_m \varphi, v_n, t_1 + t_2) & \colonequals & \cases{
+\exists v_m \varphi & if $m = n$;\cr
+\exists v_m \rpl (\varphi, v_n, t_1 + t_2) & otherwise;
+}\cr
+\rpl (\exists v_m \varphi, v_n, t_1 \cdot t_2) & \colonequals & \cases{
+\exists v_m \varphi & if $m = n$;\cr
+\exists v_m \rpl (\varphi, v_n, t_1 \cdot t_2) & otherwise.
+}\cr
+\end{array}
+\]
+The corresponding ternary function $Rpl(m, n, k)$ returns the number encoding $\rpl (\varphi, v_n, t)$ where $\varphi$ has G\"{o}del number $m$ and $t$ has G\"{o}del number $k$. It is defined by
+\[
+\begin{array}{lll}
+Rpl(4m, n, k) & \colonequals & 4 \cdot \pi (TSbst(\pi_1 (m), n, k), TSbst(\pi_2 (m), n, k)); \cr
+Rpl(4m + 1, n, k) & \colonequals & 4 \cdot Rpl(m, n, k) + 1; \cr
+Rpl(4m + 2, n, k) & \colonequals & 4 \cdot \pi (Rpl(\pi_1 (m), n, k), Rpl(\pi_2 (m), n, k)) + 2; \cr
+Rpl(4m + 3, n, 3k) & \colonequals & \cases{
+4m + 3 & if $\pi_1 (m) = n$;\cr
+4 \cdot \pi (\pi_1 (m), Rpl(\pi_2 (m), n, 3k)) + 3 & otherwise;
+}\cr
+Rpl(4m + 3, n, 3k + 1) & \colonequals & \cases{
+4m + 3 & if $\pi_1 (m) = n$;\cr
+4 \cdot\pi (\pi_1 (m), Rpl(\pi_2 (m), n, 3k + 1)) + 3 & otherwise;
+}\cr
+Rpl(4m + 3, n, 3k + 2) & \colonequals & \cases{
+4 \cdot\pi (k, Rpl(\pi_2 (m), n, 3k + 2)) + 3 & if $\pi_1 (m) = n$;\cr
+4 \cdot\pi (\pi_1 (m), Rpl(\pi_2 (m), n, 3k + 2)) + 3 & otherwise.
+}
+\end{array}
+\]
+It is $\Sigma_1$-definable.
+%
+\item The operation $\sft(\varphi, M)$ shifts in $\varphi$ all indices of bound variables $v_n$ by $M$, i.e. all bound occurrences of every variable $v_n$ are replaced by those of $v_{n + M}$. For example,
+\[
+\sft (\exists v_2 (v_0 \equiv v_2 \lor \exists v_0 \ v_0 \equiv v_1), 3) = \exists v_5 (v_0 \equiv v_5 \lor \exists v_3 \ v_3 \equiv v_1).
+\]
+More precisely, it is defined inductively by
+\[
+\begin{array}{lll}
+\sft (t_1 \equiv t_2, M) & \colonequals & t_1 \equiv t_2; \cr
+\sft (\neg\varphi, M) & \colonequals & \neg\sft (\varphi, M); \cr
+\sft (\varphi\lor\psi, M) & \colonequals & \sft (\varphi, M) \lor \sft (\psi, M); \cr
+\sft (\exists v_n \varphi, M) & \colonequals & \exists v_{n + M} \rpl (\sft (\varphi, M), v_n, v_{n + M}).
+\end{array}
+\]
+Notice that in any resulting formula after applying $\sft$, all occurrences of each variable (if any) are either all free or all bound.\\
+\ \\
+The corresponding binary function $Sft(m, n)$ returns the number encoding $\sft(\varphi, n)$ where $\varphi$ has G\"{o}del number $m$. It is defined by
+\[
+\begin{array}{lll}
+Sft(4m, n) & \colonequals & 4m; \cr
+Sft(4m + 1, n) & \colonequals & 4 Sft(m, n) + 1; \cr
+Sft(4m + 2, n) & \colonequals & 4\pi (Sft(\pi_1 (m), n), Sft(\pi_2 (m), n)) + 2; \cr
+Sft(4m + 3, n) & \colonequals & 4\pi (\pi_1 (m) + n, Rpl(Sft(\pi_2 (m), n), \pi_1 (m), \pi_1 (m) + n)) + 3.
+\end{array}
+\]
+It is $\Sigma_1$-definable.
+%
+\item The operation $\varphi\sbst{t}{v_n}$ (simple formula substitution) is defined inductively below:\footnote{The defintion of formula substitution stated here is slightly different from that given in textbook; for example, for the definition here we have $(\exists v_0 \exists v_1 \ v_0 + v_1 \equiv v_2)\sbst{v_1}{v_2} = \exists v_0 \exists v_4 \ v_0 + v_4 \equiv v_1$, and for that given in text we have $(\exists v_0 \exists v_1 \ v_0 + v_1 \equiv v_2)\sbst{v_1}{v_2} = \exists v_0 \exists v_3 \ v_0 + v_3 \equiv v_1$.}
+\[
+\begin{array}{lll}
+(t_1 \equiv t_2)\sbst{t}{v_n} & \colonequals & \left(t_1\sbst{t}{v_n}\right) \equiv \left(t_2\sbst{t}{v_n}\right); \cr
+(\neg\varphi)\sbst{t}{v_n} & \colonequals & \neg\left(\varphi\sbst{t}{v_n}\right); \cr
+(\varphi\lor\psi)\sbst{t}{v_n} & \colonequals & \left(\varphi\sbst{t}{v_n}\right) \lor \left(\psi\sbst{t}{v_n}\right); \cr
+(\exists v_m \varphi)\sbst{t}{v_n} & \colonequals & \cases{
+\exists v_m \varphi & if $t = v_n$ or $v_n \not\in \free{\exists v_m \varphi}$; \cr
+\exists v_m \left(\varphi\sbst{t}{v_n}\right) & if $t \neq v_n$, $v_n \in \free{\exists v_m \varphi}$, and $v_m \not\in \var{t}$; \cr
+\rpl(\sft(\exists v_m \varphi, M), v_n, t) & otherwise,
+}
+\end{array}
+\]
+where $M$ is one more than the maximum of indices of all variables occurring in $\exists v_m \varphi$ or $t$.\\
+\ \\
+The corresponding ternary function $FSbst (m, n, k)$ returns the number encoding $\varphi\sbst{t}{v_n}$ where $\varphi$ has G\"{o}del number $m$ and $t$ has G\"{o}del number $k$. It is defined by
+\[
+\begin{array}{lll}
+FSbst(4m, n, k) & \colonequals & 4\pi (TSbst(\pi_1 (m), n, k), TSbst(\pi_2 (m), n, k)); \cr
+FSbst(4m + 1, n, k) & \colonequals & 4 FSbst(m, n, k) + 1; \cr
+FSbst(4m + 2, n, k) & \colonequals & 4\pi (FSbst(\pi_1 (m), n, k), FSbst(\pi_2 (m), n, k)) + 2; \cr
+FSbst(4m + 3, n, k) & \colonequals &
+\left\{\begin{array}{l}
+4m + 3 \cr
+\ \ \ \ \ \mbox{if $k = 3n + 2$ or not $R_\in (n, Free(4m + 3))$}; \cr
+4\pi (\pi_1 (m), FSbst(\pi_2 (m), n, k)) + 3 \cr
+\ \ \ \ \ \mbox{if $k \neq 3n + 2$ and $R_\in (n, Free(4m + 3))$ and} \cr
+\ \ \ \ \ \mbox{not $R_\in (\pi_1 (m), TVar(k))$}; \cr
+Rpl(Sft(4m + 3, Max(FVar(4m + 3) \cup TVar(k)) + 1), n, k) \cr
+\ \ \ \ \ \mbox{otherwise}.
+\end{array}\right.
+\end{array}
+\]
+It is $\Sigma_1$-definable.
+%
+\item The operation $\tbnd (t, v_n)$ replaces in $t$ all occurrences of constants and of variables by those of $v_n$. For example,
+\[
+\tbnd (1 + (v_0 \cdot 0), v_2) = v_2 + (v_2 \cdot v_2).
+\]
+More precisely, it is defined inductively
+\[
+\begin{array}{lll}
+\tbnd (0, v_n) & \colonequals & v_n;\cr
+\tbnd (1, v_n) & \colonequals & v_n;\cr
+\tbnd (v_m, v_n) & \colonequals & v_n;\cr
+\tbnd (t_1 + t_2, v_n) & \colonequals & \tbnd (t_1, v_n) + \tbnd (t_2, v_n);\cr
+\tbnd (t_1 \cdot t_2, v_n) & \colonequals & \tbnd (t_1, v_n) \cdot \tbnd (t_2, v_n).
+\end{array}
+\]
+The corresponding function $TBnd(m, n)$ returns the number encoding $\tbnd (t, v_n)$ where $t$ has G\"{o}del number $m$. It is defined by
+\[
+\begin{array}{lll}
+TBnd(0, n) & \colonequals & 3n + 2; \cr
+TBnd(1, n) & \colonequals & 3n + 2; \cr
+TBnd(3m + 2, n) & \colonequals & 3n + 2; \cr
+TBnd(3m + 3, n) & \colonequals & 3\pi (TBnd(\pi_1 (m), n), TBnd(\pi_2 (m), n)) + 3; \cr
+TBnd(3m + 4, n) & \colonequals & 3\pi (TBnd(\pi_1 (m), n), TBnd(\pi_2 (m), n)) + 4.
+\end{array}
+\]
+It is $\Sigma_1$-definable.
+%
+\item The operation $\fbnd (\varphi, n)$ replaces in $\varphi$ all occurrences of constants and of variables (free or bound) by those of $v_n$. For example,
+\[
+\fbnd (\exists v_2 \neg (v_0 + v_1 \equiv 1 \cdot v_1), v_3) = \exists v_3 \neg (v_3 + v_3 \equiv v_3 \cdot v_3).
+\]
+It is defined inductively by
+\[
+\begin{array}{lll}
+\fbnd (t_1 \equiv t_2, v_n) & \colonequals & \tbnd (t_1, v_n) \equiv \tbnd (t_2, v_n);\cr
+\fbnd (\neg\varphi, v_n) & \colonequals & \neg\fbnd (\varphi, v_n);\cr
+\fbnd (\varphi\lor\psi, v_n) & \colonequals & \fbnd (\varphi, v_n) \lor \fbnd (\psi, v_n);\cr
+\fbnd (\exists v_m \varphi, v_n) & \colonequals & \exists v_n \fbnd (\varphi, v_n).
+\end{array}
+\]
+The corresponding function $FBnd(m, n)$ returns the number encoding $\fbnd (\varphi, v_n)$ where $\varphi$ has G\"{o}del number $m$. It is defined by
+\[
+\begin{array}{lll}
+FBnd(4m, n) & \colonequals & 4\pi (TBnd(\pi_1 (m), n), TBnd(\pi_2 (m), n)); \cr
+FBnd(4m + 1, n) & \colonequals & 4 FBnd(m, n) + 1; \cr
+FBnd(4m + 2, n) & \colonequals & 4\pi (FBnd(\pi_1 (m), n), FBnd(\pi_2 (m), n)) + 2; \cr
+FBnd(4m + 3, n) & \colonequals & 4\pi (n, FBnd(\pi_2 (m), n)) + 3.
+\end{array}
+\]
+It is $\Sigma_1$-definable.
+%
+\item The unary relation $R_\assm (n)$ states that the sequent encoded by $n$ results from applying the rule $\assm$:
+\begin{center}
+$R_\assm n$ \ \ \ iff \ \ \ $R_\in (\pi_2 (n), \pi_1 (n))$.
+\end{center}
+Its characteristic function $F_\assm (n)$ is $\Sigma_1$-definable because
+\[
+F_\assm (n) = F_\in (\pi_2 (n), \pi_1 (n)).
+\]
+%
+\item The unary relation $R_\eq (n)$ states that the sequent encoded by $n$ results from applying the rule $\eq$:
+\begin{center}
+$R_\eq (n)$ \ \ \ iff \ \ \ $R_= (\pi_1 (n), 0)$ and $P(n)$,
+\end{center}
+where $P(n)$ states that there is some $m < \pi_2 (n)$ such that
+\[
+R_= (\pi_2 (n), 4 \cdot \pi (m, m)),
+\]
+of which the characteristic function $F_P$ is $\Sigma_1$-definable. The characteristic function $F_\eq (n)$ is $\Sigma_1$-definable because
+\[
+F_\eq (n) = 1 \stackrel{.}{-} (1 \stackrel{.}{-} F_= (\pi_1 (n), 0)) \cdot (1 \stackrel{.}{-} F_P(n)).
+\]
+%
+\item The binary relation $R_\ant (m, n)$ states that the sequent encoded by $m$ results from applying the rule $\ant$ to the sequent encoded by $n$:
+\begin{center}
+$R_\ant (m, n)$ \ \ \ iff \ \ \ $R_\subset (\pi_1 (n), \pi_1 (m))$ and $\pi_2 (m) = \pi_2 (n)$.
+\end{center}
+Its characteristic function $F_\ant (m, n)$ is $\Sigma_1$-definable because
+\[
+F_\ant (m, n) = 1 \stackrel{.}{-} (1 \stackrel{.}{-} F_\subset (\pi_1 (n), \pi_1 (m))) \cdot (1 \stackrel{.}{-} F_=(\pi_2 (m), \pi_2 (n))).
+\]  
+%
+\item The ternary relation $R_\pc (m, n, k)$ states that the sequent encoded by $m$ results from applying the rule $\pc$ to the sequents encoded by $n$ and $k$, respectively:
+\begin{center}
+$R_\pc (m, n, k)$ \ \ \ iff \ \ \ $P (m, n, k, p)$, $\pi_2 (m) = \pi_2 (n)$ and $\pi_2 (n) = \pi_2 (k)$,
+\end{center}
+where $P (m, n, k, p)$ states that there is some $p < \pi_1 (n)$ such that
+\begin{center}
+$\pi_1 (n) = \pi_1 (m) + 2^p$ \ \ and \ \ $\pi_1 (k) = \pi_1 (m) + 2^{4 \cdot p + 1}$
+\end{center}
+($p$ encodes $\psi$), of which the characteristic function $F_P$ is $\Sigma_1$-definable. The characteristic function $F_\pc$ is $\Sigma_1$-definable because
+\[
+\begin{array}{lll}
+F (m, n, k) & = & 1 \stackrel{.}{-} (1 \stackrel{.}{-} F_P(m, n, k, p))\cr
+\ & \ & \ \ \phantom{1} \cdot (1 \cdot F_=(\pi_2 (m), \pi_2 (n)))\cr
+\ & \ & \ \ \phantom{1} \cdot (1 \stackrel{.}{-} F_=(\pi_2 (n), \pi_2 (k))).
+\end{array}
+\]
+%
+\item The ternary relation $R_\ctr (m, n, k)$ states that the sequent encoded by $m$ results from applying the rule $\ctr$ to the sequents encoded by $n$ and $k$, respecitvely:
+\begin{center}
+\begin{tabular}{lll}
+$R_\ctr (m, n, k)$ & iff & $\pi_1 (n) = \pi_1 (m) + 2^{4 \cdot \pi_2 (m) + 1}$,\cr
+\ & \ & $\pi_1 (k) = \pi_1 (n)$ and\cr
+\ & \ & $\pi_2 (k) = 4 \cdot \pi_2 (n) + 1$.
+\end{tabular}
+\end{center}
+Its characteristic function $F_\ctr$ is $\Sigma_1$-definable because
+\[
+\begin{array}{lll}
+F_\ctr (m, n, k) & = & 1 \stackrel{.}{-} (1 \stackrel{.}{-} F_=(\pi_1 (n), \pi_1 (m) + 2^{4\pi_2 (m) + 1}))\cr
+\ & \ & \ \ \phantom{1} \cdot (1 \stackrel{.}{-} F_=(\pi_1 (k), \pi_1 (n)))\cr
+\ & \ & \ \ \phantom{1} \cdot (1 \stackrel{.}{-} F_=(\pi_2 (k), 4\pi_2 (n) + 1)).
+\end{array}
+\]
+%
+\item The ternary relation $R_\ora (m, n, k)$ states that the sequent encoded by $m$ results from applying the rule $\ora$ to the sequents encoded by $n$ and $k$, respectively:
+\begin{center}
+$R_\ora (m, n, k)$ \ \ \ iff \ \ \ $P(m, n, k)$, $\pi_2 (m) = \pi_2 (n)$ and $\pi_2 (n) = \pi_2 (k)$,
+\end{center}
+where $P(m, n, k)$ states that there are some $p, q < \pi_1 (n)$ and some $r < \pi_1 (k)$ such that
+\begin{center}
+$\pi_1 (n) = p + 2^q$, \ \ $\pi_1 (k) = p + 2^r$ \ \ and \ \ $\pi_1 (m) = p \cup 2^{4 \cdot \pi (q, r) + 2}$
+\end{center}
+($p$ encodes $\Gamma$, $q$ encodes $\varphi$, $r$ encodes $\psi$), of which the characteristic function $F_P$ is $\Sigma_1$-definable. The characteristic function $F_\ora$ is $\Sigma_1$-definable because
+\[
+\begin{array}{lll}
+F_\ora (m, n, k) & = & 1 \stackrel{.}{-} (1 \stackrel{.}{-} F_P(m, n, k)) \cr
+\ & \ & \ \ \phantom{1} \cdot (1 \stackrel{.}{-} F_=(\pi_2 (m), \pi_2 (n))) \cr
+\ & \ & \ \ \phantom{1} \cdot (1 \stackrel{.}{-} F_=(\pi_2 (n), \pi_2 (k))).
+\end{array}
+\]
+%
+\item The binary relation $R_\ors (m, n)$ states that the sequent encoded by $m$ results from applying the rule $\ors$ to the sequent encoded by $n$:
+\begin{center}
+$R_\ors (m, n)$ \ \ \ iff \ \ \ $\pi_1 (m) = \pi_1 (n)$ and $P(m, n)$,
+\end{center}
+where $P(m, n)$ states that there is some $k < \pi_2 (m)$ such that
+\begin{center}
+$\pi_2 (m) = 4 \cdot \pi(k, \pi_2 (n)) + 2$ \ \ or \ \ $\pi_2 (m) = 4 \cdot \pi (\pi_2 (n), k) + 2$
+\end{center}
+($k$ encodes $\psi$), of which the characteristic function $F_P$ is $\Sigma_1$-definable. The characteristic function $F_\ors$ is $\Sigma_1$-definable because
+\[
+F_\ors (m, n) = 1 \stackrel{.}{-} (1 \stackrel{.}{-} F_=(\pi_1 (m), \pi_1 (n))) \cdot (1 \stackrel{.}{-} F_P(m, n)).
+\]
+%
+\item The binary relation $R_\ea (m, n)$ states that the sequent encoded by $m$ results from applying the rule $\ea$ to the sequent $n$:
+\begin{center}
+$R_\ea (m, n)$ \ \ \ iff \ \ \ $P(m, n)$ and $\pi_2 (m) = \pi_2 (n)$,
+\end{center}
+where $P(m, n)$ states that there are some $k, p < \pi_1 (n)$ and some $q < \pi_1 (m)$ such that
+\begin{enumerate}[(i)]
+\item $\pi_1 (m) = k \cup 2^{4 \cdot q + 3}$,
+%%
+\item $\pi_1 (n) = k + 2^{FSbst(\pi_2 (q), \pi_1 (q), 3 \cdot p + 2)}$,
+%%
+\item for all $r < \pi_1 (m)$, if $R_\in (r, \pi_1 (m))$ then not $R_\in (p, Free(r))$, and
+%%
+\item not $R_\in (p, Free(\pi_2 (m)))$
+\end{enumerate}
+($k$ encodes $\Gamma$, $p$ is the index of $y$ and $4q + 3$ encodes $\exists x \varphi$), of which the characteristic function $F_P$ is $\Sigma_1$-definable. The characteristic function $F_\ea$ is $\Sigma_1$-definable because
+\[
+F_\ea (m, n) = 1 \stackrel{.}{-} (1 \stackrel{.}{-} F_P(m, n)) \cdot (1 \stackrel{.}{-} F_=(\pi_2 (m), \pi_2 (n))).
+\]
+%
+\item The binary relation $R_\es (m, n)$ states that the sequent encoded by $m$ results from applying the rule $\es$ to the sequent encoded by $n$:
+\begin{center}
+$R_\es (m, n)$ \ \ \ iff \ \ \ $\pi_1 (m) = \pi_1 (n)$, $R_{Div} (4, \pi_2 (m) + 1)$ and $P(m, n)$,
+\end{center}
+where $P(m, n)$ states that there is some $k < \pi_2 (n)$ such that
+\[
+\pi_2 (n) = FSbst(\pi_2 ((\pi_2 (m) \stackrel{.}{-} 3) \div 4), \pi_1 ((\pi_2 (m) \stackrel{.}{-} 3) \div 4), k)
+\]
+($k$ encodes $t$), of which the characteristic function $F_P(m, n)$ is $\Sigma_1$-definable. The characteristic function $F_\es$ is $\Sigma_1$-definable because
+\[
+\begin{array}{lll}
+F_\es (m, n) & = & 1 \stackrel{.}{-} (1 \stackrel{.}{-} F_=(\pi_1 (m), \pi_1 (n)))\cr
+\ & \ & \ \ \phantom{1} \cdot (1 \stackrel{.}{-} F_{Div}(4, \pi_2 (m) + 1))\cr
+\ & \ & \ \ \phantom{1} \cdot (1 \stackrel{.}{-} F_P(m, n)).
+\end{array}
+\]
+%
+\item The binary relation $R_\sub (m, n)$ states that the sequent encoded by $m$ results from applying the rule $\sub$ to the sequent encoded by $n$:
+\begin{center}
+\begin{tabular}{lll}
+$R_\sub (m, n)$ & iff & there are some $k < \pi_1 (m)$,\cr
+\ & \ & some $p < FBnd (\pi_2 (m), Max(FVar(\pi_2 (m))) + 1)$ and\cr
+\ & \ & some $q < Max(Free(p)) + 1$ such that\cr
+\ & \ & \begin{tabular}{rl}
+(i) & $R_\in (q, Free(p))$,\cr
+(ii) & $\pi_1 (m) = \pi_1 (n) \cup 2^{4 \cdot k}$,\cr
+(iii) & $\pi_2 (m) = FSbst(p, q, \pi_2 (4 \cdot k))$, and\cr
+(iv) & $\pi_2 (n) = FSbst(p, q, \pi_1 (4 \cdot k))$
+\end{tabular}
+\end{tabular}
+\end{center} 
+($4k$ encodes $t \equiv t^\prime$, $p$ encodes $\varphi$ and $q$ is the index of $x$). Its characteristic function $F_\sub$ is $\Sigma_1$-definable.
+%
+\item The binary relation $R_{\in LA}(m, n)$ intuitively states that $m$ is a member of the last antecedent of $n$:
+\begin{center}
+$R_{\in LA}(m, n)$ \ \ \ :iff \ \ \ $R_{\in} (m, \pi_1(Last(n)))$.
+\end{center}
+Its characteristic function is $\Sigma_1$-definable because
+\[
+F_{\in LA}(m, n) = F_{\in}(m, \pi_1 (n[Last])).
+\]
+%
+\item We use $\varphi_{Dvn}(v_0)$ as an abbreviation for
+\[
+\begin{array}{l}
+(\varphi_\assm (v_0[0]) \lor \varphi_\eq (v_0[0]))\land\cr
+(1 < Length(v_0) \rightarrow (\varphi_\assm (v_0[1])\lor\cr
+\phantom{(1 < Length(v_0) \rightarrow (} \varphi_\ant (v_0[1], v_0[0])\lor\cr
+\phantom{(1 < Length(v_0) \rightarrow (} \varphi_\ora (v_0[1], v_0[0], v_0[0])\lor\cr
+\phantom{(1 < Length(v_0) \rightarrow (} \varphi_\ors (v_0[1], v_0[0])\lor\cr
+\phantom{(1 < Length(v_0) \rightarrow (} \varphi_\ea (v_0[1], v_0[0])\lor\cr
+\phantom{(1 < Length(v_0) \rightarrow (} \varphi_\es (v_0[1], v_0[0])\lor\cr
+\phantom{(1 < Length(v_0) \rightarrow (} \varphi_\eq (v_0[1])\lor\cr
+\phantom{(1 < Length(v_0) \rightarrow (} \varphi_\sub (v_0[1], v_0[0])))\land\cr
+(\forall k < Length(v_0))\cr
+(2 \leq k \rightarrow (\varphi_\assm (v_0[k])\lor\cr
+\phantom{(2 \leq k \rightarrow (} \varphi_\eq (v_0[k])\lor\cr
+\phantom{(2 \leq k \rightarrow (} (\exists j < k)\varphi_\ant (v_0[k], v_0[j])\lor\cr
+\phantom{(2 \leq k \rightarrow (} (\exists j < k)(\exists i < j)\varphi_\pc (v_0[k], v_0[i], v_0[j])\lor\cr
+\phantom{(2 \leq k \rightarrow (} (\exists j < k)(\exists i < j)\varphi_\pc (v_0[k], v_0[j], v_0[i])\lor\cr
+\phantom{(2 \leq k \rightarrow (} (\exists j < k)(\exists i < j)\varphi_\ctr (v_0[k], v_0[i], v_0[j])\lor\cr
+\phantom{(2 \leq k \rightarrow (} (\exists j < k)(\exists i < j)\varphi_\ctr (v_0[k], v_0[j], v_0[i])\lor\cr
+\phantom{(2 \leq k \rightarrow (} (\exists j < k)(\exists i < j)\varphi_\ora (v_0[k], v_0[i], v_0[j])\lor\cr
+\phantom{(2 \leq k \rightarrow (} (\exists j < k)(\exists i < j)\varphi_\ora (v_0[k], v_0[j], v_0[i])\lor\cr
+\phantom{(2 \leq k \rightarrow (} (\exists j < k)\varphi_\ors (v_0[k], v_0[j])\lor\cr
+\phantom{(2 \leq k \rightarrow (} (\exists j < k)\varphi_\ea (v_0[k], v_0[j])\lor\cr
+\phantom{(2 \leq k \rightarrow (} (\exists j < k)\varphi_\es (v_0[k], v_0[j])\lor\cr
+\phantom{(2 \leq k \rightarrow (} (\exists j < k)\varphi_\sub (v_0[k], v_0[j]))),
+\end{array}
+\]
+which intuitively states that $v_0$ encodes a derivation.
+%
+\item \textbf{Lemma.} \emph{The following sentence is derivable from $\Phi_\pa$:
+\[
+\forall v_0 \forall v_1 ((\varphi_{Dvn}(v_0) \land \varphi_{Dvn}(v_1)) \rightarrow \varphi_{Dvn}(v_0 \ast v_1)).
+\]}
+%
+\item Since $\Phi$ is decidable, the unary relation $R_\Phi(n)$ which states that the formula $\varphi$ with G\"{o}del number $n$ is a member of $\Phi$ is decidable as well and is represented in $\Phi_\pa$ by a $\Sigma_1$-formula $\varphi_0 (x)$; also, the complement of this relation is decidable and is represented by a $\Sigma_1$-formula $\varphi_1 (x)$.\\
+\ \\
+We choose
+\[
+\varphi_H (x, y) \colonequals (\varphi_{Dvn}(y) \land (\forall i < y)(\varphi_{\not\in LA}(i, y) \lor \varphi_0 (i)) \land ) \lor ().
+\]
+
+
+there is a $\Sigma_1$-formula $\varphi_0(x)$ that represents in $\Phi_\pa$ the unary relation  ; the complement of this relation is also \\
+\ \\
+Let $\delta_0(x)$ be a $\Sigma_1$-formula that is equivalent to
+\[
+\varphi_{Dvn}(x) \land (\forall i < \pi_1 (x[Last]))(R_\in (i, \pi_1 (x[Last])) \rightarrow \varphi_0 (i)).
+\]
+%
+\item The Predicate $\varphi_H(v_0, v_1)$ states that $v_1$ encodes a derivation for the formula encoded by $v_0$. (For $m \in \nat$, if $m$ does not encode a derivation from $\Phi$, then let it encode a derivation for the trivial theorem $0 \equiv 0$, which has G\"{o}del number $0$). It is defined as
+\[
+\begin{array}{l}
+\exists u ((F_{Drvn}(v_1) \equiv \pi_1 (\pi_1 (u)) + 1 \land\cr
+\phantom{\exists u()} F_{Der\Phi} (v_1) \equiv \pi_1 (\pi_2 (u)) + 1 \land\cr
+\phantom{\exists u()} v_0 \equiv \pi_2 (Last(v_1))) \lor\cr
+\phantom{\exists u(} ((F_{Drvn}(v_1) \equiv 0 \lor F_{Der\Phi} (v_1) \equiv 0) \land v_0 \equiv 0)),
+\end{array}
+\]
+where $F_{Drvn}(n)$ is the characteristic function of the unary relation stating that $n$ encodes a derivation and $F_{Der\Phi}(n)$ is the characteristic function of the unary relation stating that the antecedent of the last sequent of the derivation encoded by $n$ consists of axioms from $\Phi$.
+%
+\item (INCOMPLETE) The Predicate $\varphi_{Der\Phi}(v_0)$ states that $v_0$ encodes a derivation from $\Phi$. It is defined as
+\[
+\varphi_{Drvn}(v_0) \land (\forall i < \pi_1 (Last(v_0)))(\varphi_\in (i, \pi_1 (Last(v_0))) \rightarrow \varphi_\Phi (i))
+\]
+%
+\item \textbf{Theorem.} (Main) \emph{Let $\Phi \supset \Phi_\pa$ be decidable. Then
+\[
+\Phi_\pa \vdash \forall v_0 \forall v_1 ((\Der{\Phi}(v_0) \land \Der{\Phi}(4\pi (4v_0 + 1, v_1) + 2)) \rightarrow \Der{\Phi}(v_1)).
+\]}
+\textit{Proof.} It suffices to show $\Der{\Phi_\pa}(v_1)$ is derivable from
+\[
+\Phi_\pa \cup \{ \varphi_H (v_0, u_0), \varphi_{DerPA} (u_1) \land \pi_2 (Last(u_1)) \equiv 4\pi (4v_0 + 1, v_1) + 2 \}
+\]
+since
+\[
+(\varphi_{DerPA} (u_1) \land \pi_2 (Last(u_1)) \equiv 4\pi (4v_0 + 1, v_1) + 2) \leftrightarrow \varphi_H (4\pi (4v_0 + 1, v_1) + 2, u_1)
+\]
+is derivable from $\Phi_\pa$.\\
+\ \\
+This can be further devided into two cases:
+\begin{enumerate}[(1)]
+\item $\varphi_{DerPA} (u_0) \land \pi_2 (Last(u_0)) \equiv v_0$ holds;
+%%
+\item $\neg\varphi_{DerPA} (u_0) \land v_0 \equiv 0$ holds.
+\end{enumerate}
+\ \\
+Let us first consider (1). Let $v_0$ and $v_1$ be the G\"{o}del numbers of $\varphi$ and $\psi$, respectively. By assumption, $u_0$ encodes a derivation with the last sequent
+\[
+m. \ \Gamma_0 \ \varphi
+\]
+and $u_1$ encodes a derivation with the last sequent
+\[
+n. \ \Gamma_1 \ (\neg\varphi \lor \psi )
+\]
+Then the following
+\[
+\begin{array}{llllll}
+m. & \Gamma_0 & \ & \ & \varphi & \mbox{premise} \cr
+\multicolumn{6}{c}{\vdots}\cr
+(m + n). & \Gamma_1 & \ & \ & (\neg\varphi \lor \psi ) & \mbox{premise} \cr
+(m + n + 1). & \Gamma_0 \cup \Gamma_1 & \neg\varphi & \neg\psi & \varphi & \mbox{$\ant$ applied to $m$.} \cr
+(m + n + 2). & \Gamma_0 \cup \Gamma_1 & \neg\varphi & \neg\psi & \neg\varphi & \mbox{$\assm$} \cr
+(m + n + 3). & \Gamma_0 \cup \Gamma_1 & \ & \neg\varphi & \psi & \mbox{$\ctr$ applied to $(m + n + 1).$ and $(m + n + 2).$} \cr
+(m + n + 4). & \Gamma_0 \cup \Gamma_1 & \ & \psi & \psi & \mbox{$\assm$} \cr
+(m + n + 5). & \Gamma_0 \cup \Gamma_1 & \ & (\neg\varphi \lor \psi ) & \psi & \mbox{$\ora$ applied to $(m + n + 3).$ and $(m + n + 4).$} \cr
+(m + n + 6). & \Gamma_0 \cup \Gamma_1 & \neg (\neg\varphi \lor \psi ) & \neg\psi & (\neg\varphi \lor \psi ) & \mbox{$\ant$ applied to $(m + n).$} \cr
+(m + n + 7). & \Gamma_0 \cup \Gamma_1 & \neg (\neg\varphi \lor \psi ) & \neg\psi & \neg (\neg\varphi \lor \psi ) & \mbox{$\assm$} \cr
+(m + n + 8). & \Gamma_0 \cup \Gamma_1 & \ & \neg (\neg\varphi \lor \psi ) & \psi & \mbox{$\ctr$ applied to $(m + n + 6).$ and $(m + n + 7).$} \cr
+(m + n + 9). & \Gamma_0 \cup \Gamma_1 & \ & \ & \psi & \mbox{$\pc$ applied to $(m + n + 5).$ and $(m + n + 8).$}
+\end{array}
+\]
+is a derivation of $\psi$; it is encoded by the term $t_1$:
+\[
+\begin{array}{l}
+\phantom{\cdot} (((u_0 \ast u_1) + 2) \div Prime(A - 1)) \cr
+\cdot Prime(A)    ^{\pi (G_0 \cup G_1 \cup 2^{4B + 1} \cup 2^{4C + 1}, B)} \cr
+\cdot Prime(A + 1)^{\pi (G_0 \cup G_1 \cup 2^{4B + 1} \cup 2^{4C + 1}, 4B + 1)} \cr
+\cdot Prime(A + 2)^{\pi (G_0 \cup G_1 \cup 2^{4B + 1}, C)} \cr
+\cdot Prime(A + 3)^{\pi (G_0 \cup G_1 \cup 2^C, C)} \cr
+\cdot Prime(A + 4)^{\pi (G_0 \cup G_1 \cup 2^D, C)} \cr
+\cdot Prime(A + 5)^{\pi (G_0 \cup G_1 \cup 2^{4D + 1} \cup 2^{4C + 1}, D)} \cr
+\cdot Prime(A + 6)^{\pi (G_0 \cup G_1 \cup 2^{4D + 1} \cup 2^{4C + 1}, 4D + 1)} \cr
+\cdot Prime(A + 7)^{\pi (G_0 \cup G_1 \cup 2^{4D + 1}, C)} \cr
+\cdot Prime(A + 8)^{\pi (G_0 \cup G_1, C) + 1} - 2,
+\end{array}
+\]
+where $A = Length(u_0 \ast u_1)$, $G_0 = \pi_1 (Last(u_0))$, $G_1 = \pi_1 (Last(u_1))$, $B= \pi_2 (Last(u_0))$, $C = \pi_2 ((\pi_2 (Last(u_1)) - 2) \div 4)$ and $D = \pi_2 (Last(u_1))$.
+It can be verified that $\varphi_H (v_1, t_1)$ is true and hence derivable, thus so is $\Der{\Phi_\pa} (v_1)$.\\
+\ \\
+For (2), let $v_1$ be the G\"{o}del number of $\psi$. By assumption, $u_1$ encodes a derivation with the last sequent
+\[
+n. \ \Gamma_1 \ (\neg 0 \equiv 0 \lor \psi )
+\]
+Then the following
+\[
+\begin{array}{llllll}
+n. & \Gamma_1 & \ & \ & (\neg 0 \equiv 0 \lor \psi ) & \mbox{premise} \cr
+(n + 1). & \ & \ & \ & 0 \equiv 0 & \mbox{$\eq$} \cr
+(n + 2). & \Gamma_1 & \neg 0 \equiv 0 & \neg\psi & 0 \equiv 0 & \mbox{$\ant$ applied to $(n + 1).$} \cr
+(n + 3). & \Gamma_1 & \neg 0 \equiv 0 & \neg\psi & \neg 0 \equiv 0 & \mbox{$\assm$} \cr
+(n + 4). & \Gamma_1 & \ & \neg 0 \equiv 0 & \psi & \mbox{$\ctr$ applied to $(n + 2).$ and $(n + 3).$} \cr
+(n + 5). & \Gamma_1 & \ & \psi & \psi & \mbox{$\assm$} \cr
+(n + 6). & \Gamma_1 & \ & (\neg 0 \equiv 0 \lor \psi ) & \psi & \mbox{$\ora$ applied to $(n + 4).$ and $(n + 5).$} \cr
+(n + 7). & \Gamma_1 & \neg (\neg 0 \equiv 0 \lor \psi ) & \neg\psi & (\neg 0 \equiv 0 \lor \psi ) & \mbox{$\ant$ applied to $n.$} \cr
+(n + 8). & \Gamma_1 & \neg (\neg 0 \equiv 0 \lor \psi ) & \neg\psi & \neg (\neg 0 \equiv 0 \lor \psi ) & \mbox{$\assm$} \cr
+(n + 9). & \Gamma_1 & \ & \neg (\neg 0 \equiv 0 \lor \psi ) & \psi & \mbox{$\ctr$ applied to $(n + 7).$ and $(n + 8).$} \cr
+(n + 10). & \Gamma_1 & \ & \ & \psi & \mbox{$\pc$ applied to $(n + 6).$ and $(n + 9).$}
+\end{array}
+\]
+is a derivation for $\psi$; it is encoded by the term $t_2$:
+\[
+\begin{array}{l}
+\phantom{\cdot} ((u_1 + 2) \div Prime(Length(u_1) - 1))\cr
+\cdot Prime(Length(u_1))^{\pi (0, 0)}\cr
+\cdot Prime(Length(u_1) + 1)^{\pi (G_1 \cup 2^1 \cup 2^{4C + 1}, 0)}\cr
+\cdot Prime(Length(u_1) + 2)^{\pi (G_1 \cup 2^1 \cup 2^{4C + 1}, 1)}\cr
+\cdot Prime(Length(u_1) + 3)^{\pi (G_1 \cup 2^1, C)}\cr
+\cdot Prime(Length(u_1) + 4)^{\pi (G_1 \cup 2^C, C)}\cr
+\cdot Prime(Length(u_1) + 5)^{\pi (G_1 \cup 2^D, C)}\cr
+\cdot Prime(Length(u_1) + 6)^{\pi (G_1 \cup 2^{4D + 1} \cup 2^{4C + 1}, D)}\cr
+\cdot Prime(Length(u_1) + 7)^{\pi (G_1 \cup 2^{4D + 1} \cup 2^{4C + 1}, 4D + 1)}\cr
+\cdot Prime(Length(u_1) + 8)^{\pi (G_1 \cup 2^{4D + 1}, C)}\cr
+\cdot Prime(Length(u_1) + 9)^{\pi (G_1, C) + 1} - 2,
+\end{array}
+\]
+where $G_1$, $C$ and $D$ are as above. It can be verified that $\varphi_H (v_1, t_2)$ is true and hence derivable, thus so is $\Der{\Phi_\pa}(v_1)$.\nolinebreak\hfill$\talloblong$
+%
+\item \textbf{Corollary.} (The Derivability Condition (L2)) \emph{If $\Phi \supset \Phi_\pa$ is decidable, then
+\[
+\Phi \vdash (\Der{\Phi}(\mbf{n^\varphi}) \land \Der{\Phi}(\mbf{n^{\varphi \rightarrow \psi}})) \rightarrow \Der{\Phi}(\mbf{n^\psi}).
+\]}
+%
+
+\end{enumerate}
+\end{document}

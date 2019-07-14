@@ -1,0 +1,226 @@
+\textbf{\Large The Derivability Conditions}
+\ \\
+\ \\
+\begin{theorem}{Proposition}
+Course-of-Values Induction
+\end{theorem}\\
+\begin{theorem}{Proposition}
+The Least Principle
+\end{theorem}\\
+\begin{theorem}{Lemma}
+\[
+\Phi_\pa \derives (\varphi_{div}(x, y) \land 0 < y) \limply x \leq y.
+\]
+\end{theorem}
+\begin{theorem}{Lemma}
+\[
+\Phi_\pa \derives (\varphi_{prime}(x) \land \varphi_{div}(x, y \mul z) \land 0 < y \mul z) \limply (\varphi_{div}(x, y) \lor \varphi_{div}(x, z)).
+\]
+\end{theorem}
+\begin{theorem}{Lemma}
+\[
+\Phi_\pa \derives exp(2, x + 1) \geq 2.
+\]
+\end{theorem}
+\begin{theorem}{Lemma}
+\[
+\Phi_\pa \derives sub(exp(2, x + 1), 2) + 2 \equal exp(2, x + 1).
+\]
+\end{theorem}
+\begin{theorem}{Lemma}
+\[
+\Phi_\pa \derives ((\varphi_{prime}(y) \land \varphi_{div}(y, exp(2, x + 1))) \limply y \equal 2).
+\]
+\end{theorem}
+\begin{theorem}{Lemma A}
+\[
+\Phi_\pa \derives leng(seq(x)) \equal 1.
+\]
+\end{theorem}
+\begin{theorem}{Lemma B}
+\[
+\Phi_\pa \derives leng(concat(x, y)) \equal leng(x) + leng(y).
+\]
+\end{theorem}
+\begin{theorem}{Lemma C}
+\[
+\Phi_\pa \derives (\forall k < leng(x))index(concat(x, y), k) \equal index(x, k)
+\]
+and
+\[
+\Phi_\pa \derives (\forall k < leng(y))index(concat(x, y), leng(x) + k) \equal index(y, k).
+\]
+\end{theorem}
+\begin{theorem}{Lemma D}
+\[
+\Phi_\pa \derives P_\ant(x, sqnt(union(ant(x), y), suc(x))).
+\]
+\end{theorem}
+\begin{theorem}{Lemma E}
+\[
+\Phi_\pa \derives P_{mp}(sqnt(x, imp(y, z)), sqnt(x, y), sqnt(x, z)).
+\]
+\end{theorem}
+\begin{theorem}{Lemma F}
+\[
+\Phi_\pa \derives suc(sqnt(x, y)) \equal y.
+\]
+\end{theorem}
+\begin{theorem}{Lemma G}
+\[
+\Phi_\pa \derives ant(sqnt(x, y)) \equal x.
+\]
+\end{theorem}
+\begin{theorem}{Lemma H}
+\[
+\Phi_\pa \derives (\varphi_{dvn}(x) \land \varphi_{dvn}(y)) \limply \varphi_{dvn}(concat(x, y)).
+\]
+\end{theorem}
+\begin{theorem}{Lemma I}
+\[
+\Phi_\pa \derives (\forall z < union(x, y))(\varphi_\in(z, union(x, y)) \limply (\varphi_\in(z, x) \lor \varphi_\in(z, y))).
+\]
+\end{theorem}
+\begin{theorem}{Lemma}
+\[
+\Phi_\pa \derives (\varphi_H(u, x) \land \varphi_H(imp(u, v), y)) \limply \varphi_H(v, t_3)
+\]
+where
+\[
+\begin{array}{lll}
+t_0 & = & concat(x, y), \cr
+t_1 & = & concat(t_0, seq(sqnt(union(ant(last(x)), ant(last(y))), u))), \cr
+t_2 & = & concat(t_1, seq(sqnt(union(ant(last(x)), ant(last(y))), imp(u, v)))), \cr
+t_3 & = & concat(t_2, seq(sqnt(union(ant(last(x)), ant(last(y))), v))).
+\end{array}
+\]
+\end{theorem}
+\begin{proof} (INCOMPLETE)\\
+We get:
+\begin{enumerate}[(1)]
+%
+\item $\Phi_\pa \derives leng(t_3) \equal leng(x) + leng(y) + 3$ from Lemmas A and B;
+%
+\item By Lemma C, we have
+\[
+\Phi_\pa \derives index(t_3, leng(x) - 1) \equal last(x)
+\]
+and
+\[
+\Phi_\pa \derives index(t_3, leng(x) + leng(y)) \equal seq(sqnt(union(ant(last(x)), ant(last(y))), u)).
+\]
+Also,
+\[
+\Phi_\pa \setsum \setenum{\varphi_H(u, x)} \derives suc(last(x)) \equal u.
+\]
+Therefore, by Lemma D we conclude
+\[
+\Phi_\pa \setsum \setenum{\varphi_H(u, x), \varphi_H(imp(u, v), y)} \derives P_\ant(index(t_3, leng(x) - 1), index(t_3, leng(x) + leng(y))).
+\]
+%
+\item By Lemma C, we have
+\[
+\Phi_\pa \derives index(t_3, leng(x) + leng(y) - 1) \equal last(y)
+\]
+and
+\[
+\Phi_\pa \derives index(t_3, leng(x) + leng(y) + 1) \equal seq(sqnt(union(ant(last(x)), ant(last(y))), imp(u, v))).
+\]
+Also,
+\[
+\Phi_\pa \setsum \setenum{\varphi_H(imp(u, v), y)} \derives suc(last(y)) \equal imp(u, v).
+\]
+Therefore, by Lemma D we conclude
+\[
+\Phi_\pa \setsum \setenum{\varphi_H(u, x), \varphi_H(imp(u, v), y)} \derives P_\ant(index(t_3, leng(x) + leng(y) - 1), index(t_3, leng(x) + leng(y) + 1)).
+\]
+%
+\item By Lemma C, we have
+\[
+\Phi_\pa \derives index(t_3, leng(x) + leng(y)) \equal seq(sqnt(union(ant(last(x)), ant(last(y))), u)),
+\]
+\[
+\Phi_\pa \derives index(t_3, leng(x) + leng(y) + 1) \equal seq(sqnt(union(ant(last(x)), ant(last(y))), imp(u, v)))
+\]
+and
+\[
+\Phi_\pa \derives seq(sqnt(union(ant(last(x)), ant(last(y))), v)).
+\]
+Using Lemma E, we therefore conclude
+\[
+\Phi_\pa \setsum \setenum{\varphi_H(u, x), \varphi_H(imp(u, v), y)} \derives P_{mp}(index(t_3, leng(x) + leng(y) + 1), index(t_3, leng(x) + leng(y)), index(t_3, leng(x) + leng(y) + 2)).
+\]
+%
+\item Using (1) and Lemmas C and F, we obtain
+\[
+\Phi_\pa \setsum \setenum{\varphi_H(u, x), \varphi_H(imp(u, v), y)} \derives suc(last(t_3)) \equal v.
+\]
+%
+\item Using (1), (2), (3), (4) and Lemmas C, H, I, we obtain
+\[
+\Phi_\pa \setsum \setenum{\varphi_H(u, x), \varphi_H(imp(u, v), y)} \derives \varphi_{dvn\Phi}(t_3).
+\]
+%
+\end{enumerate}
+Thus,
+\[
+\Phi_\pa \setsum \setenum{\varphi_H(u, x), \varphi_H(imp(u, v), y)} \derives \varphi_H(v, t_3)
+\]
+and
+\[
+\Phi_\pa \derives (\varphi_H(u, x) \land \varphi_H(imp(u, v), y)) \limply \varphi_H(v, t_3). \qedhere
+\]
+\end{proof}
+(HERE)\\
+\ \\
+\textbf{Lemma.} $\Phi_\pa \vdash (P_{Dvn} (v_0) \land P_{Dvn} (v_1)) \rightarrow P_{Dvn} (v_0 \ast v_1)$.\\
+\ \\
+\textit{Proof.} It suffices to show
+\[
+\Phi_\pa \cup \{ P_{Dvn} (v_0), P_{Dvn} (v_1) \} \vdash P_{Dvn} (v_0 \ast v_1).
+\]
+By II.2.21 (p.247) we have
+\[
+\begin{array}{l}
+\Phi_\pa \cup \{ P_{Dvn} (v_0), P_{Dvn} (v_1) \} \vdash P_{Seq} (v_0 \ast v_1),\cr
+\Phi_\pa \cup \{ P_{Dvn} (v_0), P_{Dvn} (v_1) \} \vdash Length(v_0 \ast v_1) \equiv Length(v_0 + v_1).
+\end{array}
+\]
+Hence
+\[
+\Phi_\pa \cup \{ P_{Dvn} (v_0), P_{Dvn} (v_1) \} \vdash P_{Seq} (v_0 \ast v_1) \land 0 < Length(v_0 \ast v_1).
+\]
+Again by II.2.21,
+\[
+\begin{array}{l}
+\Phi_\pa \vdash (\forall i < Length(v_0))(v_0 \ast v_1)[i] \equiv v_0[i],\cr
+\Phi_\pa \vdash (\forall i < Length(v_1))(v_0 \ast v_1)[i + Length(v_0] \equiv v_1[i].
+\end{array}
+\]
+\ \\
+\textbf{Lemma.} $\Phi_\pa \vdash (P_{Dvn} (v_0) \land (\exists k < Length(v_0)) P_\ant (v_1, v_0[k])) \rightarrow P_{Dvn} (v_0 \ast \langle v_1 \rangle)$.\\
+\ \\
+\textit{Proof.}\\
+\ \\
+\textbf{Lemma.} $(P_{Dvn} (v_0) \land (\exists i < Length(v_0))(\exists j < Length(v_0))P_{Mp} (v_1, v_0[i], v_0[j]))$ $\rightarrow P_{Dvn} (v_0 \ast \langle v_1 \rangle)$.\\
+%Space consideration
+\ \\
+\textit{Proof.}\\
+\ \\
+\textbf{Lemma.} 
+\[
+\begin{array}{l}
+\Phi_\pa \vdash (\varphi_H (v_0, u_0) \land \varphi_H (4\pi (4v_0 + 1, v_1) + 2, u_1)) \rightarrow\cr
+\phantom{\Phi_\pa \vdash (} \varphi_H (v_1, u_0 \ast u_1 \ast \langle \pi (\pi_1 (Last(u_0)) \cup \pi_1 (Last(u_1)), v_0) \rangle\cr
+\phantom{\Phi_\pa \vdash (\varphi_H (v_1, u_0 \ast u_1} \ast \langle \pi (\pi_1 (Last(u_0)) \cup \pi_1 (Last(u_1)), 4\pi (4v_0 + 1, v_1) + 2) \rangle\cr
+\phantom{\Phi_\pa \vdash (\varphi_H (v_1, u_0 \ast u_1} \ast \langle \pi (\pi_1 (Last(u_0)) \cup \pi_1 (Last(u_1)), v_1) \rangle
+).
+\end{array}
+\]
+\ \\
+\textit{Proof.}\\
+\ \\
+\textbf{Corollary.} (The Derivability Condition (L2)) \emph{Let $\Phi \supset \Phi_\pa$ be decidable. Then for all $S_\ar$-formulas $\varphi$ and $\psi$,
+\[
+\Phi_\pa \vdash (\Der{\Phi} (\mbf{n}^\varphi ) \land \Der{\Phi} (\mbf{n}^{(\varphi \rightarrow \psi )})) \rightarrow \Der{\Phi} (\mbf{n}^\psi ).
+\]}

@@ -1,0 +1,442 @@
+\textbf{Lemma A1.} $\Phi_\pa \vdash \forall x \forall y \forall z (x + y) + z \equiv x + (y + z)$.\\
+\ \\
+\textit{Proof.} First we have
+\[
+\begin{array}{llll}
+(x + y) + 0 & \equiv & x + y, & \mbox{(by an axiom from $\Phi_\pa$)} \cr
+x + y & \equiv & x + (y + 0), & \mbox{(by an axiom from $\Phi_\pa$)}
+\end{array}
+\]
+so
+\[
+(x + y) + 0 \equiv x + (y + 0).
+\]
+Now, with the premise $(x + y) + z \equiv x + (y + z)$, we have, successively,
+\[
+\begin{array}{llll}
+(x + y) + (z + 1) & \equiv & ((x + y) + z) + 1, & \mbox{(by an axiom from $\Phi_\pa$)} \cr
+((x + y) + z) + 1 & \equiv & (x + (y + z)) + 1, & \mbox{(by premise)} \cr
+(x + (y + z)) + 1 & \equiv & x + ((y + z) + 1), & \mbox{(by an axiom from $\Phi_\pa$)} \cr
+x + ((y + z) + 1) & \equiv & x + (y + (z + 1)), & \mbox{(by an axiom from $\Phi_\pa$)} 
+\end{array}
+\]
+so
+\[
+(x + y) + (z + 1) \equiv x + (y + (z + 1)).
+\]
+By the induction axiom schema we have
+\[
+\forall z (x + y) + z \equiv x + (y + z)
+\]
+and hence
+\begin{center}
+\phantom{$\talloblong$} \hfill $\forall x \forall y \forall z (x + y) + z \equiv x + (y + z).$ \hfill $\talloblong$
+\end{center}
+\ \\
+\textbf{Lemma A2.} $\Phi_\pa \vdash \forall x \, x \equiv 0 + x$.\\
+\ \\
+\textit{Proof.} First we have
+\[
+0 + 0 \equiv 0,
+\]
+by an axiom from $\Phi_\pa$.\\
+\ \\
+Now, with the premise $x \equiv 0 + x$, we have, successively,
+\[
+\begin{array}{llll}
+x + 1 & \equiv & (0 + x) + 1, & \mbox{(by premise)} \cr
+(0 + x) + 1 & \equiv & 0 + (x + 1), & \mbox{(by \textbf{Lemma A1})}
+\end{array}
+\]
+so
+\[
+x + 1 \equiv 0 + (x + 1).
+\]
+By the induction axiom schema we have
+\begin{center}
+\phantom{$\talloblong$} \hfill $\forall x \, x \equiv 0 + x.$ \hfill $\talloblong$
+\end{center}
+\ \\
+\textbf{Lemma A3.} $\Phi_\pa \vdash \forall x \, x + 1 \equiv 1 + x$.\\
+\ \\
+\textit{Proof.} First we have
+\[
+\begin{array}{llll}
+0 + 1 & \equiv & 1, & \mbox{(by \textbf{Lemma A2})}\cr
+1 & \equiv & 1 + 0, & \mbox{(by an axiom from $\Phi_\pa$)}
+\end{array}
+\]
+so
+\[
+0 + 1 \equiv 1 + 0.
+\]
+Now, assuming $x + 1 \equiv 1 + x$, we have, successively,
+\[
+\begin{array}{llll}
+(x + 1) + 1 & \equiv & (1 + x) + 1, & \mbox{(by premise)}\cr
+(1 + x) + 1 & \equiv & 1 + (x + 1), & \mbox{(by \textbf{Lemma A1})}
+\end{array}
+\]
+so
+\[
+(x + 1) + 1 \equiv 1 + (x + 1).
+\]
+By the induction axiom schema we have
+\begin{center}
+\phantom{$\talloblong$} \hfill $\forall x \, x + 1 \equiv 1 + x.$ \hfill $\talloblong$
+\end{center}
+\ \\
+\textbf{Lemma A4.} $\Phi_\pa \vdash \forall x \forall y \, x + y \equiv y + x$.\\
+\ \\
+\textit{Proof.} First we have
+\[
+\begin{array}{llll}
+x + 0 & \equiv & x, & \mbox{(by an axiom from $\Phi_\pa$)}\cr
+x & \equiv & 0 + x, & \mbox{(by \textbf{Lemma A2})}\cr
+\end{array}
+\]
+so
+\[
+x + 0 \equiv 0 + x.
+\]
+Now, assuming $x + y \equiv y + x$, we have, successively,
+\[
+\begin{array}{llll}
+x + (y + 1) & \equiv & (x + y) + 1, & \mbox{(by an axiom from $\Phi_\pa$)}\cr
+(x + y) + 1 & \equiv & (y + x) + 1, & \mbox{(by premise)}\cr
+(y + x) + 1 & \equiv & y + (x + 1), & \mbox{(by an axiom from $\Phi_\pa$)}\cr
+y + (x + 1) & \equiv & y + (1 + x), & \mbox{(by \textbf{Lemma A3})}\cr
+y + (1 + x) & \equiv & (y + 1) + x, & \mbox{(by \textbf{Lemma A1})}
+\end{array}
+\]
+so
+\[
+x + (y + 1) \equiv (y + 1) + x.
+\]
+By the induction axiom schema we have
+\[
+\forall y \, x + y \equiv y + x
+\]
+and hence
+\begin{center}
+\phantom{$\talloblong$} \hfill $\forall x \forall y \, x + y \equiv y + x.$ \hfill $\talloblong$
+\end{center}
+\ \\
+\textbf{Lemma A5.} $\Phi_\pa \vdash \forall x \forall y \forall z (x + z \equiv y + z \rightarrow x \equiv y)$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A6.} $\Phi_\pa \vdash \forall x \forall y \forall z \, x \cdot (y + z) \equiv x \cdot y + x \cdot z$.\\
+\ \\
+\textit{Proof.} First we have
+\[
+\begin{array}{llll}
+x \cdot (y + 0) & \equiv & x \cdot y, & \mbox{(by an axiom from $\Phi_\pa$)}\cr
+x \cdot y & \equiv & x \cdot y + 0, & \mbox{(by an axiom from $\Phi_\pa$)}\cr
+x \cdot y + 0 & \equiv & x \cdot y + x \cdot 0, & \mbox{(by an axiom from $\Phi_\pa$)} 
+\end{array}
+\]
+so
+\[
+x \cdot (y + 0) \equiv x \cdot y + x \cdot 0.
+\]
+Now, assuming $x \cdot (y + z) \equiv x \cdot y + x \cdot z$, we have, successively,
+\[
+\begin{array}{llll}
+x \cdot (y + (z + 1)) & \equiv & x \cdot ((y + z) + 1), & \mbox{(by an axiom from $\Phi_\pa$)}\cr
+x \cdot ((y + z) + 1) & \equiv & x \cdot (y + z) + x, & \mbox{(by an axiom from $\Phi_\pa$)}\cr
+x \cdot (y + z) + x & \equiv & (x \cdot y + x \cdot z) + x, & \mbox{(by premise)}\cr
+(x \cdot y + x \cdot z) + x & \equiv & x \cdot y + (x \cdot z + x), & \mbox{(by \textbf{Lemma A1})}\cr
+x \cdot y + (x \cdot z + x) & \equiv & x \cdot y + x \cdot (z + 1), & \mbox{(by an axiom from $\Phi_\pa$)}
+\end{array}
+\]
+so
+\[
+x \cdot (y + (z + 1)) \equiv x \cdot y + x \cdot (z + 1).
+\]
+By the induction axiom schema we have
+\[
+\forall z \, x \cdot (y + z) \equiv x \cdot y + x \cdot z
+\]
+and hence
+\begin{center}
+\phantom{$\talloblong$} \hfill $\forall x \forall y \forall z \, x \cdot (y + z) \equiv x \cdot y + x \cdot z.$ \hfill $\talloblong$
+\end{center}
+\ \\
+\textbf{Lemma A7.} $\Phi_\pa \vdash \forall x \forall y \forall z \, (x \cdot y) \cdot z \equiv x \cdot (y \cdot z)$.\\
+\ \\
+\textit{Proof.} First we have
+\[
+\begin{array}{llll}
+(x \cdot y) \cdot 0 & \equiv & 0, & \mbox{(by an axiom from $\Phi_\pa$)}\cr
+0 & \equiv & x \cdot 0, & \mbox{(by an axiom from $\Phi_\pa$)}\cr
+x \cdot 0 & \equiv & x \cdot (y \cdot 0), & \mbox{(by an axiom from $\Phi_\pa$)}
+\end{array}
+\]
+so
+\[
+(x \cdot y) \cdot 0 \equiv x \cdot (y \cdot 0).
+\]
+Now, assuming $(x \cdot y) \cdot z \equiv x \cdot (y \cdot z)$, we have, successively,
+\[
+\begin{array}{llll}
+(x \cdot y) \cdot (z + 1) & \equiv & (x \cdot y) \cdot z + x \cdot y, & \mbox{(by an axiom from $\Phi_\pa$)}\cr
+(x \cdot y) \cdot z + x \cdot y & \equiv & x \cdot (y \cdot z) + x \cdot y, & \mbox{(by premise)}\cr
+x \cdot (y \cdot z) + x \cdot y & \equiv & x \cdot ((y \cdot z) + y), & \mbox{(by \textbf{Lemma A6})}\cr
+x \cdot ((y \cdot z) + y) & \equiv & x \cdot (y \cdot (z + 1)), & \mbox{(by an axiom from $\Phi_\pa$)}
+\end{array}
+\]
+so
+\[
+(x \cdot y) \cdot (z + 1) \equiv x \cdot (y \cdot (z + 1)).
+\]
+The induction axiom schema yields
+\[
+\forall z \, (x \cdot y) \cdot z \equiv x \cdot (y \cdot z),
+\]
+hence
+\begin{center}
+\phantom{$\talloblong$} \hfill $\forall x \forall y \forall z \, (x \cdot y) \cdot z \equiv x \cdot (y \cdot z).$ \hfill $\talloblong$
+\end{center}
+\ \\
+\textbf{Lemma A8.} $\Phi_\pa \vdash \forall x \, 0 \cdot x \equiv 0$.\\
+\ \\
+\textit{Proof.} First we have
+\[
+0 \cdot 0 \equiv 0,
+\]
+by an axiom from $\Phi_\pa$.\\
+\ \\
+Now, assuming $0 \cdot x \equiv 0$, we have, successively
+\[
+\begin{array}{llll}
+0 \cdot (x + 1) & \equiv & 0 \cdot x + 0, & \mbox{(by an axiom from $\Phi_\pa$)}\cr
+0 \cdot x + 0 & \equiv & 0 + 0, & \mbox{(by premise)}\cr
+0 + 0 & \equiv & 0, & \mbox{(by an axiom from $\Phi_\pa$)}
+\end{array}
+\]
+so
+\[
+0 \cdot (x + 1) \equiv 0.
+\]
+The induction axiom schema yields
+\begin{center}
+\phantom{$\talloblong$} \hfill $\forall x \, 0 \cdot x \equiv 0.$ \hfill $\talloblong$
+\end{center}
+\ \\
+\textbf{Lemma A9.} $\Phi_\pa \vdash \forall x \forall y \, (x + 1) \cdot y \equiv x \cdot y + y$.\\
+\ \\
+\textit{Proof.} First we have
+\[
+\begin{array}{llll}
+(x + 1) \cdot 0 & \equiv & 0, & \mbox{(by an axiom from $\Phi_\pa$)}\cr
+0 & \equiv & 0 + 0, & \mbox{(by an axiom from $\Phi_\pa$)}\cr
+0 + 0 & \equiv & x \cdot 0 + 0, & \mbox{(by an axiom from $\Phi_\pa$)}
+\end{array}
+\]
+so
+\[
+(x + 1) \cdot 0 \equiv x \cdot 0 + 0.
+\]
+Now, assuming $(x + 1) \cdot y \equiv x \cdot y + y$, we have, successively,
+\[
+\begin{array}{llll}
+(x + 1) \cdot (y + 1) & \equiv & (x + 1) \cdot y + (x + 1), & \mbox{(by an axiom from $\Phi_\pa$)}\cr
+(x + 1) \cdot y + (x + 1) & \equiv & (x \cdot y + y) + (x + 1), & \mbox{(by premise)}\cr
+(x \cdot y + y) + (x + 1) & \equiv & x \cdot y + (y + (x + 1)), & \mbox{(by \textbf{Lemma A1})}\cr
+x \cdot y + (y + (x + 1)) & \equiv & x \cdot y + ((y + x) + 1), & \mbox{(by an axiom from $\Phi_\pa$)}\cr
+x \cdot y + ((y + x) + 1) & \equiv & x \cdot y + ((x + y) + 1), & \mbox{(by \textbf{Lemma A4})}\cr
+x \cdot y + ((x + y) + 1) & \equiv & x \cdot y + (x + (y + 1)), & \mbox{(by an axiom from $\Phi_\pa$)}\cr
+x \cdot y + (x + (y + 1)) & \equiv & (x \cdot y + x) + (y + 1), & \mbox{(by \textbf{Lemma A1})}\cr
+(x \cdot y + x) + (y + 1) & \equiv & x \cdot (y + 1) + (y + 1), & \mbox{(by an axiom from $\Phi_\pa$)}
+\end{array}
+\]
+so
+\[
+(x + 1) \cdot (y + 1) \equiv x \cdot (y + 1) + (y + 1).
+\]
+The induction axiom schema yields
+\[
+\forall y \, (x + 1) \cdot y \equiv x \cdot y + y,
+\]
+hence
+\begin{center}
+\phantom{$\talloblong$} \hfill $\forall x \forall y \, (x + 1) \cdot y \equiv x \cdot y + y.$ \hfill $\talloblong$
+\end{center}
+\ \\
+\textbf{Lemma A10.} $\Phi_\pa \vdash \forall x \forall y \, x \cdot y \equiv y \cdot x$.\\
+\ \\
+\textit{Proof.} First we have
+\[
+\begin{array}{llll}
+x \cdot 0 & \equiv & 0, & \mbox{(by an axiom from $\Phi_\pa$)}\cr
+0 & \equiv & 0 \cdot x, & \mbox{(by \textbf{Lemma A8})}
+\end{array}
+\]
+so
+\[
+x \cdot 0 \equiv 0 \cdot x.
+\]
+Now, assuming $x \cdot y \equiv y \cdot x$, we have, successively,
+\[
+\begin{array}{llll}
+x \cdot (y + 1) & \equiv & x \cdot y + x, & \mbox{(by an axiom from $\Phi_\pa$)}\cr
+x \cdot y + x & \equiv & y \cdot x + x, & \mbox{(by premise)}\cr
+y \cdot x + x & \equiv & (y + 1) \cdot x, & \mbox{(by \textbf{Lemma A9})}
+\end{array}
+\]
+so
+\[
+x \cdot (y + 1) \equiv (y + 1) \cdot x.
+\]
+The induction axiom schema yields
+\[
+\forall y \, x \cdot y \equiv y \cdot x,
+\]
+hence
+\begin{center}
+\phantom{$\talloblong$} \hfill $\forall x \forall y \, x \cdot y \equiv y \cdot x.$ \hfill $\talloblong$
+\end{center}
+\ \\
+\textbf{Abbreviations A10.} For $x \not\in \var (t_1) \cup \var (t_2)$, we denote
+\[
+\exists x \, t_1 + (x + 1) \equiv t_2
+\]
+by
+\[
+t_1 < t_2.
+\]
+Moreover, for $x \not\in \var (t)$, we denote
+\[
+\exists x (x < t \land \varphi )
+\]
+by
+\[
+(\exists x < t) \varphi.
+\]
+\ \\
+\textbf{Lemma A11.} $\Phi_\pa \vdash \forall x \, \neg x < 0$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A12.} $\Phi_\pa \vdash \forall x \forall y (x < y + 1 \rightarrow x < y \lor x \equiv y)$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A13.} $\Phi_\pa \vdash \forall x \forall y (x < y \lor x \equiv y \lor y < x)$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A14.} $\Phi_\pa \vdash \forall x (0 < x \lor 0 \equiv x)$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A15.} $\Phi_\pa \vdash \forall x \forall y \forall z (x < y \land y < z \rightarrow x < z)$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A16.} $\Phi_\pa \vdash \forall x \, \neg x < x$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A17.} $\Phi_\pa \vdash \forall x \forall y (x < y \rightarrow x + 1 < y + 1)$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A18.} $\Phi_\pa \vdash \forall x \forall y (x < y \rightarrow x + 1 < y \lor x + 1 \equiv y)$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A19.} $\Phi_\pa \vdash \forall x \forall y \forall z (x < y \rightarrow x + z < y + z)$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A20.} $\Phi_\pa \vdash \forall x \forall y \forall z (x + z < y + z \rightarrow x < y)$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A21.} $\Phi_\pa \vdash \forall x \forall y (0 < y \rightarrow x + 1 < x + y \lor x + 1 \equiv x + y)$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A22.} $\Phi_\pa \vdash \forall x \forall y \forall z (0 < z \land x < y \rightarrow x \cdot z < x \cdot y)$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A23.} $\Phi_\pa \vdash \forall x \forall y \forall z (0 < z \land x \cdot z \equiv y \cdot z \rightarrow x \equiv y)$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A24.} $\Phi_\pa \vdash \forall x \forall y \forall z \forall u (x < y \land z < u \rightarrow x + z < y + u)$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A25.} $\Phi_\pa \vdash \forall x \forall y \forall z \forall u (x < y \land z < u \rightarrow x \cdot z < y \cdot u)$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A26.} $\Phi_\pa \vdash \forall x \forall y (x < y \rightarrow x \stackrel{.}{-} y \equiv 0)$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A27.} $\Phi_\pa \vdash \forall x \forall y \forall z \, z \cdot (x \stackrel{.}{-} y) \equiv (x \cdot z) \stackrel{.}{-} (y \cdot z)$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A28.} $\Phi_\pa \vdash \forall x \forall y (y \mid x \leftrightarrow \exists z \, y \cdot z \equiv x)$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A29.} $\Phi_\pa \vdash \forall x \forall y (RP(x, y) \rightarrow 0 < x \lor 0 < y)$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A30.} $\Phi_\pa \vdash \exists z \exists u \, (x \cdot z) \stackrel{.}{-} (y \cdot u) \equiv 1 \rightarrow RP(x, y)$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A31.} $\Phi_\pa \vdash \forall x \forall y (0 < x \land RP(x, y) \rightarrow RP(y, x))$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A32.} $\Phi_\pa \vdash \forall k \forall p \forall i (k \mid p \rightarrow RP(i \cdot p + 1, (i + k) \cdot p + 1))$.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+\textbf{Lemma A33.} $\Phi_\pa \vdash $.\\
+\ \\
+\textit{Proof.} omit.\\
+\ \\
+
+
+
+
+\par\noindent \textbf{Lemma.} \emph{The following are derivable from $\Phi_\pa$:}
+\begin{enumerate}[(a)]
+\item $\forall x \forall y (x + y \equiv x \rightarrow y \equiv 0)$.
+%%
+\item $\forall x (\neg x \equiv 0 \rightarrow \exists y \ x \equiv y + 1)$.
+%%
+\item $\forall x \forall y (\neg x \equiv y \rightarrow (x < y \lor y < x))$.
+%
+\item $\forall x \forall y (x < y \rightarrow \neg(x \equiv y \lor y < x))$.
+%
+\item $\forall x \forall y \forall z (x + z \equiv y + z \rightarrow x \equiv y)$.
+\end{enumerate}
+\ \\
+\textbf{To Do List.}
+\begin{enumerate}[(a)]
+\item $(2 \cdot x) \div (2 \cdot y) \equiv x \div y$.
+%
+\item $P_\in (0, 2n + 1)$.
+%
+\item $P_\in (m, n) \rightarrow P_\in (m + 1, 2n)$.
+%
+\item $2^n > 0$.
+%
+\item $\neg P_\in (x, 0)$.
+%
+\item $\exists i P_\in (i, x + 1)$ (Using course-of-values induction).
+%
+\item define $\cup$.
+\end{enumerate}

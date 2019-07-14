@@ -1,0 +1,234 @@
+%Chapter VII-------------------------------------------------------------------------------------------------
+{\LARGE \bfseries VII \\ \\ The Scope of First-Order Logic}
+\\
+\\
+\\
+%Sectin VII.2------------------------------------------------------------------------------------------------
+{\large \S2. Mathematics Within the Framework of First-Order Logic}
+\begin{enumerate}[1.]
+\item \textbf{Note to the Second Paragraph in Page 103.} The fact that the structure $\mathfrak{N}_\sigma = (\mathbb{N}, \sigma, 0)$ cannot be characterized up to isomorphism in $L^{\{ \mbf{\sigma}, 0 \}}$ immediately follows from Corollary VI.4.4. (Actually, we have mentioned this in notes to Section VI.4.)
+%
+\item \textbf{Note to the Mathematical Universe in Page 103.} Note that although the (mathematical) universe is characterized by the system $\Phi_0$ (or ZFC, as is introduced in Section 3) as a whole entity for mathematics, it is, however, \emph{not} a mathematical object itself, and hence not a set: If otherwise it were, then it would be the \emph{set of all sets},\footnote{or the \emph{set of all urelements and sets}, if $\Phi_0$ is adopted rather than ZFC.} the concept of which leads to a contradiction.\footnote{To my knowledge, there are three arguments (in the framework of ZFC) for this contradictory concept: One is to apply the \emph{separation axiom} to it with the predicate ``$x \not \in x$'', which then introduces \emph{Russell's Paradox}; another is to use the \emph{axiom of regularity} directly to refuse such set; and finally, the remaining one is to apply the \emph{axiom of powerset} to it, and argue that it includes its powerset as a subset, which violates \emph{Cantor's Theorem}.}\newline
+\ \\
+In this regard, we should not treat it as a \emph{model} of $\Phi_0$ (or ZFC) since, again, a model is still a mathematical object.
+%
+\item \textbf{Note to the Second Paragraph in Page 104.} The sentence
+\[
+\forall x \exists y \ x < y
+\]
+in $L^{\{ < \}}$ formalizes the proposition ``there is no largest real number'' (actually the proposition ``for every real number there is a larger one'') about the structure $(\mathbb{R}, <^\mathbb{R})$.
+%
+\item \textbf{Note to the First Paragraph in Page 105.} We provide a proof for the proposition:
+\[
+\mbox{$(x,y) = (x^\prime, y^\prime)$ iff $x = x^\prime$ and $y = y^\prime$.}
+\]
+In fact, we need only show that
+\[
+\mbox{if $(x, y) = (x^\prime, y^\prime)$ then $x = x^\prime$ and $y = y^\prime$},
+\]
+since the other direction is trivial.\\
+\\
+Suppose $(x,y) = (x^\prime, y^\prime)$, then
+\[
+(\mbox{$\{x, x\} = \{x^\prime, x^\prime\}$ and $\{x, y\} = \{x^\prime, y^\prime\}$})
+\]
+or
+\[
+(\mbox{$\{x, x\} = \{x^\prime, y^\prime\}$ and $\{x, y\} = \{x^\prime, y^\prime\}$}),
+\]
+since by (A3) every set is uniquely determined by its elements and hence by (A4) every pair set is uniquely determined given both its elements. By applying similar arguments, it follows that
+\[
+(\mbox{$x = x^\prime$ and $y = y^\prime$})
+\]
+or
+\[
+(\mbox{$x = y = x^\prime = y^\prime$}),
+\]
+i.e. $x = x^\prime$ and $y = y^\prime$.
+%
+\item \textbf{Note to the Abbreviations for Ease of Formalizing in $L^S$ in Page 105.} As mentioned in text, both approaches of introducing abbreviations to $L^S$ or introducing new symbols to $S$ together with expanding $\Phi_0$ by adding corresponding new axiom are equivalent.\\
+\\
+We illustrate this by taking the symbol `$\mbf{\subset}$' as an example. (The following discussion makes much use of the results in Section VIII.3, so the reader is suggested to read through that section before going ahead.)\\
+\\
+Let $I$ be the associated syntactic interpretation of $S \cup \{ \mbf{\subset} \}$ in $S$, with
+\[
+\varphi_\mbfs{\subset}(x, y) := (\mathbf{M}x \land \mathbf{M}y \land \forall z (z \in x \rightarrow z \in y)).
+\]
+Since `$\mbf{\subset}$' is a binary relation symbol, it is straightforward to define (cf. Definition VIII.3.1(a))
+\[
+\delta_\mbfs{\subset} := \forall x \forall y (x \mbf{\subset} y \leftrightarrow \varphi_\mbfs{\subset}(x, y)).
+\]
+\\
+Then parts (b) and (c) of Theorem on Definitions VIII.3.2 give
+\begin{enumerate}[(1)]
+\item For all $\varphi \in L^S$, $\Phi_0 \cup \{ \delta_\mbfs{\subset} \} \models \varphi$ iff $\Phi_0 \models \varphi$.
+%%
+\item For all $\varphi \in L^{S \cup \{ \mbfs{\subset} \}}$, $\Phi_0 \cup \{ \delta_\mbfs{\subset} \} \models \varphi$ iff $\Phi_0 \models \varphi^I$.
+\end{enumerate}
+\end{enumerate}
+%End of Section VII.2----------------------------------------------------------------------------------------
+\ 
+\\
+\\
+%Section VII.3-----------------------------------------------------------------------------------------------
+{\large \S3. The Zermelo-Fraenkel Axioms for Set Theory}
+\begin{enumerate}[1.]
+\item \textbf{Note to the Second to Last Paragraph in Page 107.} Replacing urelements by suitable sets is achieved by the \emph{axiom of regularity} REG, as will be introduced in later note (\textbf{Note to ZFC, As Is Introduced in Page 108}). It essentially states that every set has \emph{well foundations}, which play the role of urelements, i.e. there is no infinite chain of `$\mbf{\in}$'.
+%
+\item \textbf{Note to ZFC, As Is Introduced in Page 108.} The following axiom, REG (\emph{the axiom of regularity}, also known as \emph{the axiom of foundation}), is missing in text\footnote{However, it is not generally accepted as an axiom of ZFC. Indeed, some textbooks do not contain it.}:\\
+\\
+REG: $\forall x (\neg \mbf{\emptyset} \equiv x \rightarrow \exists y (y \mbf{\in} x \land x \mbf{\cap} y \equiv \mbf{\emptyset}))$\\
+``Given a nonempty set $x$, there exists a set $y$ in $x$ such that $x$ and $y$ are disjoint.''\\
+\\
+Now, we are going to transform ZFC into its counterpart $\Phi$ ($\subset L_0^{\{ \mbfs{\in} \}}$), so as to demonstrate the fact that all axioms in ZFC can be formalized in the first-order language involving only the symbol `$\mbf{\in}$'. (The following discussion makes much use of the results in Section VIII.3, so the reader is suggested to read through that section before going ahead.)\\
+\\
+Let $I$ be the associated syntactic interpretation of $\{ \mbf{\in}, \mbf{\emptyset}, \ \mbf{\subset}, \ \mbf{ \{ , \} }, \ \mbf{\cup}, \ \mbf{\cap}, \ \mathbf{P} \}$ in $\{ \mbf{\in} \}$, with
+\[
+\begin{array}{lll}
+\varphi_\mbfs{\emptyset}(x)   & := & \forall y \neg y \mbf{\in} x, \cr
+\varphi_\mbfs{\subset}(x,y)     & := & \forall z (z \mbf{\in} x \rightarrow z \mbf{\in} y), \cr
+\varphi_{\mbfs{ \{ , \} }}(x,y,z)    & := & \forall w (w \mbf{\in} z \leftrightarrow (w \equiv x \lor w \equiv y)), \cr
+\varphi_\mbfs{\cup}(x,y,z)        & := & \forall w (w \mbf{\in} z \leftrightarrow (w \mbf{\in} x \lor w \mbf{\in} y)), \cr
+\varphi_\mbfs{\cap}(x,y,z)        & := & \forall w (w \mbf{\in} z \leftrightarrow (w \mbf{\in} x \land w \mbf{\in} y)), \mbox{ and} \cr
+\varphi_\mathbf{P}(x,y)  & := & \forall z (z \mbf{in} y \leftrightarrow \forall w (w \mbf{\in} z \rightarrow w \mbf{\in} x)).
+\end{array}
+\]
+\\
+In addition, define
+\[
+\Delta := \{ \delta_\mbfs{\emptyset}, \delta_\mbfs{\subset}, \delta_{ \mbfs{ \{ , \} } }, \delta_\mbfs{\cup}, \delta_\mbfs{\cap}, \delta_{\mathbf{P}} \},
+\]
+where $\delta_\mbfs{\emptyset}$, $\delta_\mbfs{\subset}$, $\delta_{ \mbfs{ \{ , \} } }$, $\delta_\mbfs{\cup}$, $\delta_\mbfs{\cap}$, and $\delta_{\mathbf{P}}$ are defined accordingly (cf. Definition VIII.3.1). Later we shall see that all those $\delta$'s are $\{ \mbf{\in} \}$-definitions in $\Phi$ of the corresponding symbols, i.e. all the $\varphi$'s just mentioned satisfy the requirements in Definition VIII.3.1.\\
+\\
+Next, let $\Psi \subset L_0^{ \{ \mbfs{\in}, \mbfs{\emptyset}, \ \mbfs{\subset}, \ \mbfs{ \{ , \} }, \ \mbfs{\cup}, \ \mbfs{\cap}, \ \mathbf{P} \} }$ consist of the axioms SEP through REG. Note that in this way, $\mbox{ZFC} = \Psi \cup \Delta$.\\
+\\
+Finally, we set
+\[
+\Phi := \{ \psi^I | \psi \in \Psi \}.
+\]
+\\
+We are now ready to illustrate that the $\varphi$'s satisfy the requirements in Definition VIII.3.1 (instead of giving a rigorous proof, which is not pursued here). Firstly, $\mbox{INF}^I$\footnote{By $\mbox{INF}^I$ we mean the sentence in $L_0^{\{ \mbft{\in} \}}$ corresponding to $\mbox{INF}$ in $L_0^{ \{ \mbft{\in}, \mbft{\emptyset}, \ \mbft{\subset}, \ \mbft{ \{, \} }, \ \mbft{\cup}, \ \mbft{\cap}, \ \mathbf{P} \} }$ given the syntactic interpretation $I$. The cases for other axioms are similar.} establishes the existence of such a set $x$ that $\varphi_\mbfs{\emptyset}(x)$ holds, since the infinite set mentioned in $\mbox{INF}^I$ contains such an $x$ as its member. As for the uniqueness, it is guaranteed by $\mbox{EXT}$ ($= \mbox{EXT}^I$). Next, there is no need to verify $\delta_\mbfs{\subset}$ because `$\mbf{\subset}$' is a relation symbol (cf. Definition VIII.3.1). Finally, the existence property related to each of $\varphi_{\mbfs{ \{,\} }}$, $\varphi_\mbfs{\cup}$, $\varphi_\mbfs{\cap}$, and $\varphi_\mathbf{P}$ is established by $\mbox{PAIR}^I$, $\mbox{PAIR}^I$ together with $\mbox{SUM}$\footnote{By $\mbox{PAIR}^I$, \emph{a} pair set exists given two sets $x$ and $y$. Notice that we use the indefinite article \emph{a} instead of the definite article \emph{the}, for we have not provided a proof of its uniqueness. (We shall keep this style throughout.) And then by $\mbox{SUM}$, \emph{a} union of all sets in such a pair set (i.e. $x$ and $y$) exists.}, $\mbox{SEP}$\footnote{By $\mbox{SEP}$, a set $\{z \in x | z \in y\}$ exists (by setting $\varphi(z,y) := z \mbff{\in} y$).}, and $\mbox{POW}$, respectively; while the uniqueness property related to each of them is, again, confirmed by $\mbox{EXT}$. We briefly summarize, as follows:\\
+\ 
+\\
+\begin{tabular}{ccc}
+\hline
+\textsc{symbol} & \textsc{existence} & \textsc{uniqueness} \cr
+\hline\hline
+$\mbf{\emptyset}$ & $\mbox{INF}^I$ & $\mbox{EXT}$ ($= \mbox{EXT}^I$) \cr
+$\mbf{\subset}$ & - & - \cr
+$\mbf{ \{, \} }$ & $\mbox{PAIR}^I$ & $\mbox{EXT}$ \cr
+$\mbf{\cup}$ & $\mbox{PAIR}^I$, $\mbox{SUM}$ & $\mbox{EXT}$ \cr
+$\mbf{\cap}$ & $\mbox{SEP}$ & $\mbox{EXT}$ \cr
+$\mathbf{P}$ & $\mbox{POW}$ & $\mbox{EXT}$ \cr
+\hline
+\end{tabular}
+\\
+\\
+\\
+The following two results serve as the basis of the proof:
+\begin{enumerate}[(1)]
+\item Let $\chi \in \Psi$. By Theorem VIII.3.2(b) (and Exercise VIII.3.3 also),
+\[
+(\Phi \cup \Delta) \models (\chi \leftrightarrow \chi^I).
+\]
+Hence $(\Phi \cup \Delta) \models \chi$, since $(\Phi \cup \Delta) \models \chi^I$ (because $\chi^I \in \Phi$). Therefore,
+\[
+\modelclass{ \{ \mbfs{\in}, \mbfs{\emptyset}, \ \mbfs{\subset}, \ \mbfs{\{, \}}, \ \mbfs{\cup}, \ \mbfs{\cap}, \ \mathbf{P} \} }{(\Phi \cup \Delta)} \subset \modelclass{ \{ \mbfs{\in}, \mbfs{\emptyset}, \ \mbfs{\subset}, \ \mbfs{\{, \}}, \ \mbfs{\cup}, \ \mbfs{\cap}, \ \mathbf{P} \} }{\zfc}.
+\]
+%%
+\item By Theorem VIII.3.2(b), we have that for all $\chi \in \Psi$ (hence all $\chi^I \in \Phi$),
+\[
+\Delta (= \emptyset \cup \Delta) \models (\chi \leftrightarrow \chi^I).
+\]
+In particular,
+\[
+\mbox{ZFC} (= \Psi \cup \Delta) \models (\chi \leftrightarrow \chi^I).
+\]
+But $\mbox{ZFC} \models \chi$ (because $\chi \in \mbox{ZFC}$), we have that $\mbox{ZFC} \models \chi^I$. Therefore,
+\[
+\modelclass{ \{ \mbfs{\in}, \mbfs{\emptyset}, \ \mbfs{\subset}, \ \mbfs{\{, \}}, \ \mbfs{\cup}, \ \mbfs{\cap}, \ \mathbf{P} \} }{\zfc} \subset \modelclass{ \{ \mbfs{\in}, \mbfs{\emptyset}, \ \mbfs{\subset}, \ \mbfs{\{, \}}, \ \mbfs{\cup}, \ \mbfs{\cap}, \ \mathbf{P} \} }{(\Phi \cup \Delta)}.
+\]
+\end{enumerate}
+\ 
+\\
+Thus, (1) and (2) together yield
+\[
+\modelclass{ \{ \mbfs{\in}, \mbfs{\emptyset}, \ \mbfs{\subset}, \ \mbfs{\{, \}}, \ \mbfs{\cup}, \ \mbfs{\cap}, \ \mathbf{P} \} }{(\Phi \cup \Delta)} = \modelclass{ \{ \mbfs{\in}, \mbfs{\emptyset}, \ \mbfs{\subset}, \ \mbfs{\{, \}}, \ \mbfs{\cup}, \ \mbfs{\cap}, \ \mathbf{P} \} }{\zfc}.
+\]
+\\
+Also note that, by Theorem VIII.3.2(c), it follows that for all $\varphi \in L_0^{ \{ \mbfs{\in} \} }$ ($\subset L_0^{ \{ \mbfs{\in}, \mbfs{\emptyset}, \ \mbfs{\subset}, \ \mbfs{\{, \}}, \ \mbfs{\cup}, \ \mbfs{\cap}, \ \mathbf{P} \} }$),
+\[
+\mbox{$\Phi \models \varphi$ iff $(\Phi \cup \Delta) \models \varphi$}
+\]
+(since $\varphi^I = \varphi$ in this case).\\
+\\
+Finally, we obtain: for all $\varphi \in L_0^{ \{ \mbfs{\in} \} }$,
+\[
+\mbox{$\Phi \models \varphi$ iff $\mbox{ZFC} \models \varphi$}.
+\]
+Also notice that, for all $\varphi \in L_0^{ \{ \mbfs{\in} \} }$ ($\subset L_0^{ \{ \mbfs{\in}, \mbfs{\emptyset}, \ \mbfs{\subset}, \ \mbfs{\{, \}}, \ \mbfs{\cup}, \ \mbfs{\cap}, \ \mathbf{P} \} }$),
+\[
+\mbox{$\Phi \cup \Delta \models \varphi$ iff $\mbox{ZFC} \models \varphi$}.
+\]
+It is clear that $\Phi$ is the counterpart of ZFC in $L_0^{ \{ \mbfs{\in} \} }$.\\
+\\
+A subtlety is in order: In some textbooks of set theory, EXS (\emph{the axiom of the existence of a set})
+\[
+\exists x \; x \equiv x
+\]
+is included in ZFC, though it can be derived:
+\[
+\begin{array}{lll}
+1. & x \equiv x & \mbox{$(\equiv)$} \cr
+2. & \exists x \ x \equiv x & \mbox{IV.5.1(a) applied to 1.}
+\end{array}
+\]
+For more details for this, go to
+\[
+\mbox{http://en.wikipedia.org/wiki/Axiom$\underline{\ }$of$\underline{\ }$empty$\underline{\ }$set}.
+\]
+%
+\item \textbf{Note to the Fourth to Last Paragraph in Page 109.} The counterparts (in $L^{\{ \mbfs{\in} \}}$) of the abbreviations for ordered pair, ordered triple and others presented in Section 2 can be easily obtained, just by omitting in each of the formulas ($\mathbf{OP}$), ($\mathbf{OT}$), etc. the parts of the form `$\mathbf{M}x$', as well as the `$\land$' (if any) that immediately follows it.\\
+%
+\item \textbf{Note to the Structure $(\omega, \mbf{\nu}, \tilde{0})$ Mentioned in Page 109.} As mentioned in text, INF ensures an inductive set $x$, whereas by SEP with
+\[
+\varphi(z) := \forall y ((\mbf{\emptyset} \mbf{\in} y \land  \forall u (u \mbf{\in} y \rightarrow u \mbf{\cup} \mbf{\{ } u \mbf{ \}} \mbf{\in} y)) \rightarrow z \mbf{\in} y)
+\]
+we conclude that the set $\omega$ exists. Following the definitions of $\omega$ and $(\omega, \mbf{\nu}, \tilde{0})$ in page 109, we first show that $\omega$ is the smallest inductive set, and then that $(\omega, \mbf{\nu}, \tilde{0})$ is a Peano structure.\\
+\\
+Note that since $\emptyset \in x$ and for all inductive $y$, $\emptyset \in y$, we have that $\emptyset \in \omega$. And next, suppose that $t \in \omega$, namely $t \in x$ and $t \in y$ for all inductive $y$. Then it follows that $t \cup \{ t \} \in x$ because $x$ is inductive. Similarly, $t \cup \{ t \} \in y$ for all inductive $y$. Therefore $t \cup \{ t \} \in \omega$, i.e. $\omega$ is inductive. As for $\omega$ being the smallest, let $y$ be an arbitrary inductive set. If $t \in \omega$, then by definition $t \in y$. Thus $\omega \subset y$, i.e. $\omega$ is the smallest inductive set in the sense that \emph{every} inductive set includes it as a subset.\\
+\\
+It remains to show that $(\omega, \mbf{\nu}, \tilde{0})$ satisfies (P1)-(P3) (cf. III.7). First, for all sets $x$ in $\omega$, we have $x \in x \cup \{ x \}$, i.e. $\mbf{\nu}(x) = x \cup \{ x \} \neq \emptyset = \tilde{0}$ and (P1) is satisfied. As for (P2), let $x$, $y$ be both in $\omega$, and $x \cup \{ x \} = y \cup \{ y \}$. For the sake of contradiction, we assume that $x \neq y$. Then $x \in y$ since $\{ x \} \subset y \cup \{ y \}$. Similarly, we have that $y \in x$. But this (both $x \in y$ and $y \in x$ hold) contradicts REG, which implies that no cycle of `$\in$' exists. Hence $x = y$, and (P2) holds for $(\omega, \mbf{\nu}, \tilde{0})$. To show that (P3) also holds for $(\omega, \mbf{\nu}, \tilde{0})$, let $X \subset \omega$. If $X$ is inductive, then $\omega \subset X$ since $\omega$ is the smallest inductive set (as we have showed earlier). So $X = \omega$, and obviously $X$ contains all the elements in $\omega$. The proof is complete. 
+%
+\item \textbf{Note to the Third Paragraph in Page 110.} The formalizations of the definitions of $\mathbb{R}$, $\mathbf{Fin}$, etc. are not pursued in this text, but can be found in textbooks of set theory (e.g. \cite{Thomas_Jech}) or any books that deal with foundational problems in mathematics  (e.g. \cite{Edmund_Landau}).
+%
+\item \textbf{Note to the Sixth Paragraph in Page 110.} 3.1 and 3.2 together imply that CH together with ZFC are independent (for the notion of independent, cf. Exercises III.4.14 or VI.3.10), by the Adequacy Theorem V.4.2.
+\end{enumerate}
+%End of Section VII.3----------------------------------------------------------------------------------------
+\ 
+\\
+\\
+%Section VII.4-----------------------------------------------------------------------------------------------
+{\large \S4. Set Theory as a Basis for Mathematics}
+\begin{enumerate}[1.]
+\item \textbf{Note to 4.2.} Note that a formula $\varphi$ in $L^{\{ \mbfs{\in} \}}$ is likely to have \emph{different} meanings in object set theory and background set theory, thus we must carefully distinguish them.
+\item \textbf{Note to 4.3.} As will be introduced in VIII.1, the special case in which $S = \{ P^1, P^2, \ldots \}$ (that is, $S$ is a \emph{relational symbol set}) does not pose any restrictions in the sense that other cases can be easily transformed into it. Hence the arguments in 4.3 (indirectly) apply to other caes as well.\\
+\\
+A misprint is found in line 2, page 113: The definition of $\tilde{P}^x$ should be
+\[
+\mbox{``$\tilde{P}^x := (\tilde{1}, x)$ where $x \in \omega \setminus \{ \tilde{0} \}$.''}
+\]
+(The tilde `$\sim$' of $\tilde{0}$ is missing in textbook.)\\
+\\
+By the way, the symbol $At^{\equiv}$ shown up in page 113 stands for the set of \underline{at}omic formulas involving $\equiv$, whereas $At^R$ for the set of \underline{at}omic formulas involving relation symbols.
+%
+%VII.4.4-----------------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 4.4.} First-order logic and set theory are both appropriate for the development of mathematical theories.\\
+\\
+Actually, mathematicians inevitably need to use a language, which is more precise than daily languages such as English and without ambiguities, as a background language (so-called \textit{metalanguage}) to describe their investigations. Upon it they build up their theories (so-called \textit{object languages}).\\
+\\
+As a consequence, both first-order logic and set theory are suitable for the role of background language, with one playing this role and the other playing the role of object language. \begin{flushright}$\talloblong$\end{flushright}
+%VII.4.4-----------------------------------------------------------------------------------------------------
+\end{enumerate}
+%End of Section VII.4----------------------------------------------------------------------------------------
+%End of Chapter VII------------------------------------------------------------------------------------------

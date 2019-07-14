@@ -1,0 +1,977 @@
+%Chapter XIII---------------------------------------------------------------------
+{\LARGE \bfseries XIII \\ \\ Lindstr\"{o}m's Theorems}
+\\
+\\
+\\
+%Section XIII.1-------------------------------------------------------------------
+{\large \S1. Logical Systems}
+\begin{enumerate}[1.]
+%
+\item \textbf{Note on the Definition of $\modelclassarg[S]{\logsys}{\varphi}$ in the Second Paragraph on Page 262.} The statement ``$\struct{A} \models \varphi$'' should be replaced by ``$\struct{A} \models_\logsys \varphi$.''
+%
+\item \textbf{Note on the Examples Given below Definition 1.2.} That $\fstordlog \weakereq \weaksndordlog$ is trivial: Given a symbol set $S$ and $\varphi \in \languagebase_\firstorder(S)$, we have
+\begin{inparaenum}[(1)]
+%%
+\item $\varphi \in \languagebase^\weak_\secondorder(S)$ also
+%%
+\item $\modelclassarg[S]{\fstordlog}{\varphi} = \modelclassarg[S]{\weaksndordlog}{\varphi}$.
+%%
+\end{inparaenum}\bigskip\\
+For $\weaksndordlog \weakereq \sndordlog$, cf.\ part \reftitle{(b)} of \reftitle{Exercise IX.1.7}.
+%
+\item \textbf{Note on the Abbreviation $\rel{\logsys}$.} An additional requirement ``$U \not\in S$'' should be added to the premise.
+%
+\item \textbf{Verifying That $\sndordlog$, $\weaksndordlog$, $\infinlog$ and $\qlog$ Are Regular.} (INCOMPLETE) For $\sndordlog$, $\infinlog$ and $\qlog$ we have verified they are regular (cf. ? in the annotations to \reftitle{Chapter IX}). By similar arguments we have $\weaksndordlog$ is regular.
+%
+\item \textbf{The Semantic Notions ``Satisfiable'' and ``Valid'' Do Not Depend on a Fixed Symbol Set.} Let $S_0 \subset S_1$ be symbol sets and let $\varphi \in \languagebase(S_0)$ ($\subset \languagebase(S_1)$). Furthermore, let $\logsys$ be a logical system.\medskip\\
+Then:\smallskip\\
+\begin{tabular}{lll}
+\   & $\varphi$ is satisfiable with respect to $S_0$ \cr
+iff & $\modelclassarg[S_0]{\logsys}{\varphi} \neq \emptyset$ \cr
+iff & there is an $S_0$-structure $\struct{A}^\prime$ such that $\struct{A}^\prime \models_{\logsys} \varphi$ \cr
+iff & there is an $S_1$-structure $\struct{A}$ such that $\reduct{\struct{A}}{S_0} \models_{\logsys} \varphi$ \cr
+iff & \begin{minipage}[t]{64ex}there is an $S_1$-structure $\struct{A}$ such that $\struct{A} \models_{\logsys} \varphi$\\(by the reduct property of $\logsys$)\end{minipage} \cr
+iff & $\modelclassarg[S_1]{\logsys}{\varphi} \neq \emptyset$ \cr
+iff & $\varphi$ is satisfiable with respect to $S_1$;
+\end{tabular}\smallskip\\
+and also:\smallskip\\
+\begin{tabular}{ll}
+\   & $\varphi$ is valid with respect to $S_0$ \cr
+iff & $\modelclassarg[S_0]{\logsys}{\varphi}$ is the class of all $S_0$-structures \cr
+iff & for every $S_0$-structure $\struct{A}^\prime$, $\struct{A}^\prime \models_{\logsys} \varphi$ \cr
+iff & for every $S_1$-structure $\struct{A}$, $\reduct{\struct{A}}{S_0} \models_{\logsys} \varphi$ \cr
+iff & \begin{minipage}[t]{64ex}for every $S_1$-structure $\struct{A}$, $\struct{A} \models_{\logsys} \varphi$\\(by the reduct property of $\logsys$)\end{minipage} \cr
+iff & $\modelclassarg[S_1]{\logsys}{\varphi}$ is the class of all $S_1$-structures \cr
+iff & $\varphi$ is valid with respect to $S_1$.
+\end{tabular}
+%
+\item \textbf{Solution to Exercise 1.5.}
+\begin{asparaenum}[(a)]
+%%
+\item Below we check the four conditions mentioned in \reftitle{Definition 1.1} for $\logsys$.\medskip\\
+For the first condition, let $S_0$ and $S_1$ be two symbol sets with $S_0 \subset S_1$. Suppose $\varphi \in \languagebase(S_0)$, namely $\varphi = \enump{\exists X_1}{\exists X_n}\psi$ is an $\sndordlang{S_0}$-sentence in which $\psi$ does not contain a second-order quantifier. Then $\varphi$ is also an $\sndordlang{S_1}$-sentence (because $\languagebase_\secondorder(S_0) \subset \languagebase_\secondorder(S_1)$) and hence $\varphi \in \languagebase(S_1)$. So $\languagebase(S_0) \subset \languagebase(S_1)$.\medskip\\
+For the second condition, notice that by definition $\struct{A}$ and $\varphi$ are related under $\models_\logsys$ if and only if there is an $S$ such that $\varphi \in \languagebase(S)$ and $\struct{A}$ is an $S$-structure with $\struct{A} \models_\sndordlog \varphi$.\medskip\\
+For the third condition (namely the isomorphism property), assume $\struct{A} \iso \struct{B}$ are $S$-structures and $\varphi \in \languagebase(S)$. Then we have:\smallskip\\
+\begin{tabular}{ll}
+\    & $\struct{A} \models_\logsys \varphi$ \cr
+iff  & $\struct{A} \models_\sndordlog \varphi$ \cr
+then & $\struct{B} \models_\sndordlog \varphi$ \quad (by the isomorphism property of $\sndordlog$) \cr
+iff  & $\struct{B} \models_\logsys \varphi$.
+\end{tabular}\medskip\\
+For the last condition (namely the reduct property), let $S_0 \subset S_1$, $\varphi \in \languagebase(S_0)$ ($\subset \languagebase_\secondorder(S_0)$) and $\struct{A}$ be an $S_1$-structure. Then:\smallskip\\
+\begin{tabular}{lll}
+\   & $\struct{A} \models_\logsys \varphi$ \cr
+iff & $\struct{A} \models_\sndordlog \varphi$ \cr
+iff & $\reduct{\struct{A}}{S_0} \models_\sndordlog \varphi$ \quad (by the reduct property of $\sndordlog$) \cr
+iff & $\reduct{\struct{A}}{S_0} \models_\logsys \varphi$ \quad ($\reduct{\struct{A}}{S_0}$ is an $S_0$-structure).
+\end{tabular}
+%%
+\item For $\losko{\logsys}$, let $\varphi = \enump{\exists X_1}{\exists X_n} \psi \in \languagebase(S)$ be satisfiable, namely there is an $S$-structure $\struct{A}$ such that $\struct{A} \models_\logsys \varphi$ (and thus $\struct{A} \models_\sndordlog \varphi$). Then for some second-order assignment $\sndordassgn$ in $\struct{A}$, $\intparg{\struct{A}}{\sndordassgn} \models \psi$. Let $\seq[1]{P}{n} \not\in S$ be new relation symbols such that for $1 \leq i \leq n$, $P_i$ and $X_i$ have the same arity. Then we have the following chain of implications:\medskip\\
+$\intparg{\struct{A}}{\sndordassgn} \models \psi$;\smallskip\\
+$\intparg{(\struct{A}, \seqp{\intpted{P_1}{A}}{\intpted{P_n}{A}})}{\sndordassgn} \models \psi$ where $\intpted{P_i}{A} = \sndordassgn(X_i)$ for $1 \leq i \leq n$ \quad (by the Coincidence Lemma for $\sndordlog$);\medskip\\
+$\intparg{(\struct{A}, \seqp{\intpted{P_1}{A}}{\intpted{P_n}{A}})}{\sndordassgn} \models \psi\sbst{\enum[1]{P}{n}}{\enum[1]{X}{n}}$ \quad (by the Substitution Lemma for $\sndordlog$);\medskip\\
+$(\struct{A}, \seqp{\intpted{P_1}{A}}{\intpted{P_n}{A}}) \models \psi\sbst{\enum[1]{P}{n}}{\enum[1]{X}{n}}$ \quad ($\psi\sbst{\enum[1]{P}{n}}{\enum[1]{X}{n}}$ is a (first-order) $S$-sentence; by the Coincidence Lemma for $\sndordlog$);\medskip\\
+there is an at most countable $(S \cup \{ \seq[1]{P}{n} \})$-structure $\struct{A}^\prime$ such that $\struct{A}^\prime \models \psi\sbst{\enum[1]{P}{n}}{\enum[1]{X}{n}}$ \quad (by the L\"{o}wenheim-Skolem Theorem for $\fstordlog$);\medskip\\
+there are an at most countable $(S \cup \{ \seq[1]{P}{n} \})$-structure $\struct{A}^\prime$ and a second-order assignment $\sndordassgn^\prime$ in $\struct{A}^\prime$ such that $\intparg{\struct{A}^\prime}{\sndordassgn^\prime} \models \psi\sbst{\enum[1]{P}{n}}{\enum[1]{X}{n}}$ where $\sndordassgn^\prime(X_i) = \intpted{P_i}{A^\prime}$ for $1 \leq i \leq n$ \quad (by the Coincidence Lemma for $\sndordlog$);\medskip\\
+there are an at most countable $(S \cup \{ \seq[1]{P}{n} \})$-structure $\struct{A}^\prime$ and a second-order assignment $\sndordassgn^\prime$ in $\struct{A}^\prime$ such that $\intparg{\struct{A}^\prime}{\sndordassgn^\prime} \models \psi$ where $\sndordassgn^\prime(X_i) = \intpted{P_i}{A^\prime}$ for $1 \leq i \leq n$ \quad (by the Substitution Lemma for $\sndordlog$);\medskip\\
+there are an at most countable $(S \cup \{ \seq[1]{P}{n} \})$-structure $\struct{A}^\prime$ and a second-order assignment $\sndordassgn^\prime$ in $\struct{A}^\prime$ such that $\intparg{\struct{A}^\prime}{\sndordassgn^\prime} \models \varphi$ where $\sndordassgn^\prime(X_i) = \intpted{P_i}{A^\prime}$ for $1 \leq i \leq n$;\medskip\\
+there is an at most countable $(S \cup \{ \seq[1]{P}{n} \})$-structure $\struct{A}^\prime$ such that $\struct{A}^\prime \models_\sndordlog \varphi$ \quad (by the Coincidence Lemma for $\sndordlog$);\medskip\\
+there is an at most countable $S$-structure $\struct{A}^{\prime\prime}$ such that $\struct{A}^{\prime\prime} \models_{\sndordlog} \varphi$ (by the reduct property of $\sndordlog$) and hence $\struct{A}^{\prime\prime} \models_\logsys \varphi$.\\
+\ \\
+For $\comp{\logsys}$, we first define the operation $^\prime$ on $\languagebase(S)$ as follows: For each $\varphi = \enump{\exists X_1}{\exists X_n} \psi \in \languagebase(S)$ and each relation variable $X_i$ (with $1 \leq i \leq n$) that appears in the prefix $\enump{\exists X_1}{\exists X_n}$ of $\varphi$, we assign a new relation symbol $P^\varphi_i \not\in S$ such that its arity coincides with that of $X_i$; we set
+\[
+S^\prime \colonequals S \cup \sett{P^\varphi_i}{\(\varphi \in \Phi\) and \(X_i\) appears in the prefix of \(\varphi\)}
+\]
+and write $\varphi^\prime$ for $\psi\sbst{\enump{P_1^\varphi}{P_n^\varphi}}{\enum[1]{X}{n}}$ (which is a (first-order) $S^\prime$-sentence). Furthermore, for $\Psi \subset \languagebase(S)$, we denote $\Psi^\prime \colonequals \setm{\psi^\prime}{\psi \in \Psi}$.\medskip\\
+Next, we show that $\comp{\logsys}$ holds. Let $\Phi \subset \languagebase(S)$, and suppose that every finite subset of $\Phi$ is satisfiable. Then we have the following chain of implications:\medskip\\
+Every finite subset of $\Phi^\prime$ is satisfiable \quad (by the Coincidence Lemma and Substitution Lemma for $\sndordlog$);\medskip\\
+$\Phi^\prime$ is satisfiable \quad (by the Compactness Theorem for $\fstordlog$);\medskip\\
+$\Phi$ is satisfiable \quad (by the Coincidence Lemma and Substitution Lemma for $\sndordlog$).\\
+\ \\
+Finally, we let $S$ be a given symbol set and $\varphi \in \languagebase(S)$ ($\subset \languagebase_\secondorder(S)$) in the arguments below for showing $\rel{\logsys}$ and $\repl{\logsys}$:\medskip\\
+Let $U \not\in S$ be a unary relation symbol. By applying the Relativization Lemma for $\sndordlog$ to $\varphi$ (regarded as an $\languagebase_\secondorder(S)$-sentence), we obtain $\relativize{\varphi}{U}$ (which can easily be shown to be an $\languagebase(S \cup \{U\})$-sentence) and: for all $S$-structures $\struct{A}$ and all $S$-closed subsets $\intpted{U}{A}$ of $A$,\smallskip\\
+\begin{tabular}[b]{lll}
+$(\struct{A}, \intpted{U}{A}) \models_\logsys \varphi$ & iff & $(\struct{A}, \intpted{U}{A}) \models_{\sndordlog} \varphi$ \cr
+\ & iff & $\substr{\intpted{U}{A}}{\struct{A}} \models_{\sndordlog} \relativize{\varphi}{U}$ \cr
+\ & iff & $\substr{\intpted{U}{A}}{\struct{A}} \models_\logsys \relativize{\varphi}{U}$.
+\end{tabular}\smallskip\\
+So we have $\rel{\logsys}$.\medskip\\
+On the other hand, let $\relational{S}$ be chosen as for \reftitle{VIII.1.3}. By applying the Theorem on Replacement Operation on $\sndordlog$ to $\varphi$ (regarded as an $\languagebase_\secondorder(S)$-sentence), we obtain $\relational{\varphi}$ (which can easily be shown to be an $\languagebase(\relational{S})$-sentence) and: for all $S$-structures $\struct{A}$,\smallskip\\
+\begin{tabular}[b]{lll}
+$\struct{A} \models_\logsys \varphi$ & iff & $\struct{A} \models_{\sndordlog} \varphi$ \cr
+\ & iff & $\relational{\struct{A}} \models_{\sndordlog} \relational{\varphi}$ \cr
+\ & iff & $\relational{\struct{A}} \models_\logsys \relational{\varphi}$.
+\end{tabular}\smallskip\\
+It follows that $\repl{\logsys}$.
+%%
+\item Let $S = \{ \formal{\suc}, 0 \}$. Recall Peano's axioms given in \reftitle{III.7.3(2)}:
+\begin{compactenum}[(P1)]
+%%%
+\item $\forall x \neg\formal{\suc}x \equal 0$
+%%%
+\item $\forall x \forall y (\formal{\suc}x \equal \formal{\suc}y \limply x \equal y)$
+\item $\forall X ((X0 \land \forall x (Xx \limply X\formal{\suc}x)) \limply \forall y Xy)$.
+%%%
+\end{compactenum}
+They characterize $\natsuc$ up to isomorphism (cf.\ Dedekind's Theorem \reftitle{III.7.4}).\\
+\ \\
+If we denote by $\varphi_{\not\iso\natsuc}$ the $\languagebase(S)$-sentence
+\[
+\begin{array}{l}
+\exists X (\exists x \, \formal{\suc}x \equal 0 \lor \cr
+\phantom{\exists X (} \exists x \exists y (\formal{\suc}x \equal \formal{\suc}y \land \neg x \equal y) \lor \cr
+\phantom{\exists X (} ((X0 \land \forall x (Xx \limply X\formal{\suc}x)) \land \exists x \neg Xx)),
+\end{array}
+\]
+then $\modelclassarg[S]{\logsys}{\varphi_{\not\iso\natsuc}}$ is the class of $S$-structures \emph{not} isomorphic to $\natsuc$.\\
+\ \\
+We assert $\boole{\logsys}$ does not hold by showing that there is no $\psi \in \languagebase(S)$ with
+\[
+\begin{array}{lll}
+\modelclassarg[S]{\logsys}{\psi} & = & \sett{\struct{A}}{\(\struct{A}\) is an \(S\)-structure such that not \(\struct{A} \models_\logsys \varphi_{\not\iso\natsuc}\)} \cr
+\ & = & \sett{\struct{A}}{\(\struct{A}\) is an \(S\)-structure such that \(\struct{A} \iso \natsuc\)}.
+\end{array}
+\]
+Suppose there were an $\languagebase(S)$-sentence $\psi = \enump{\exists X_1}{\exists X_n} \chi$ such that $\modelclassarg[S]{\logsys}{\psi}$ is the class of $S$-structures isomorphic to $\natsuc$; in particular, $\natsuc \models_\logsys \psi$. Let $\seq[1]{P}{n} \not\in S$ be new relation symbols such that $P_i$ and $X_i$ have the same arity for $1 \leq i \leq n$. Then by appropriately choosing subsets $\seqp{\intpted{P_1}{\nat}}{\intpted{P_n}{\nat}}$ of $\nat$, we have $(\natsuc, \seqp{\intpted{P_1}{\nat}}{\intpted{P_n}{\nat}}) \models_\logsys \chi\sbst{\enum[1]{P}{n}}{\enum[1]{X}{n}}$ and hence $(\natsuc, \seqp{\intpted{P_1}{\nat}}{\intpted{P_n}{\nat}}) \models \chi\sbst{\enum[1]{P}{n}}{\enum[1]{X}{n}}$ since $\chi\sbst{\enum[1]{P}{n}}{\enum[1]{X}{n}}$ is an $\languagebase_\firstorder(S \cup \{ \seq[1]{P}{n} \})$-sentence.\\
+\ \\
+By the Theorem of L\"{o}wenheim, Skolem and Tarski \reftitle{VI.2.4}, we would have, for some $S$-structure $(\real, \intpted{\formal{\suc}}{\real}, \intpted{0}{\real})$ and some subsets $\seqp{\intpted{P_1}{\real}}{\intpted{P_n}{\real}}$ of $\real$, the following chain of implications, which leads to a contradiction:\medskip\\
+$(\real, \intpted{\formal{\suc}}{\real}, \intpted{0}{\real}, \seqp{\intpted{P_1}{\real}}{\intpted{P_n}{\real}}) \models \chi\sbst{\enum[1]{P}{n}}{\enum[1]{X}{n}}$;\medskip\\
+$(\real, \intpted{\formal{\suc}}{\real}, \intpted{0}{\real}, \seqp{\intpted{P_1}{\real}}{\intpted{P_n}{\real}}) \models_\logsys \psi$ \quad (by the Coincidence Lemma and the Substitution Lemma for $\sndordlog$);\medskip\\
+$(\real, \intpted{\formal{\suc}}{\real}, \intpted{0}{\real}) \models_\logsys \psi$ \quad (by the reduct property of $\logsys$);\medskip\\
+$(\real, \intpted{\formal{\suc}}{\real}, \intpted{0}{\real}) \iso \natsuc$;\medskip\\
+there is a bijective map $\pi : \real \to \nat$.
+%%
+\item Let $S$ be a symbol set. Then for every $\varphi \in \languagebase_\firstorder(S)$ ($\subset \languagebase(S)$),
+\[
+\begin{array}{ll}
+\ & \modelclassarg{\fstordlog}{\varphi} \cr
+= & \sett{\struct{A}}{\(\struct{A}\) is an \(S\)-structure and \(\struct{A} \models \varphi\)} \cr
+= & \sett{\struct{A}}{\(\struct{A}\) is an \(S\)-structure and \(\struct{A} \models_{\sndordlog} \varphi\)} \cr
+= & \sett{\struct{A}}{\(\struct{A}\) is an \(S\)-structure and \(\struct{A} \models_\logsys \varphi\)} \cr
+= & \modelclassarg{\logsys}{\varphi}.
+\end{array}
+\]
+Thus $\fstordlog \weakereq \logsys$.\\
+\ \\
+Next, we show not $\logsys \weakereq \fstordlog$. We choose $S = \{ \formal{\suc}, 0 \}$ and let $\varphi_{\not\iso\natsuc}$ be defined as in the above part of exercise.\\
+\ \\
+Suppose, for the sake of contradiction, that $\logsys \weakereq \fstordlog$. Then there would be an $\languagebase_\firstorder(S)$-sentence $\psi$ such that $\modelclassarg{\logsys}{\varphi_{\not\iso\natsuc}} = \modelclassarg{\fstordlog}{\psi}$. Moreover, we would have: for any $S$-structure $\struct{A}$,\smallskip\\
+\begin{tabular}{ll}
+\   & $\struct{A} \models \neg\psi$ \cr
+iff & $\struct{A} \not\in \modelclassarg{\fstordlog}{\psi}$ \cr
+iff & $\struct{A} \not\in \modelclassarg{\logsys}{\varphi_{\not\iso\natsuc}}$ \cr
+iff & not $\struct{A} \models_\logsys \varphi_{\not\iso\natsuc}$ \cr
+iff & $\struct{A} \iso \natsuc$,
+\end{tabular}\smallskip\\
+i.e.\ the $\languagebase_\firstorder(S)$-sentence $\neg\psi$ characterizes $\natsuc$ up to isomorphism, contrary to \reftitle{Theorem VI.4.3(a)}.
+%%
+\item Denote by $\varphi_\sndordpeanoarith$ the conjunction of $\languagebase_\secondorder(\arsymb)$-sentences in $\sndordpeanoarith$. Then $\varphi_\sndordpeanoarith$ characterizes $\natstr$ up to isomorphism (cf.\ \reftitle{Exercise III.7.5}). Also, for $\psi \in \languagebase_\firstorder(\arsymb)$ we write $\psi_\natstr$ for the $\languagebase(\arsymb)$-sentence
+\[
+\begin{array}{l}
+\exists X ( \exists x \, x + 1 \equal 0 \lor\cr
+\phantom{\exists X (} \exists x \exists y (x + 1 \equal y + 1 \land \neg x \equal y) \lor\cr
+\phantom{\exists X (} ((X0 \land \forall x (Xx \limply Xx + 1)) \land \exists y \neg Xy) \lor\cr
+\phantom{\exists X (} \exists x \neg x + 0 \equal x \lor\cr
+\phantom{\exists X (} \exists x \exists y \neg x + (y + 1) \equal (x + y) + 1 \lor\cr
+\phantom{\exists X (} \exists x \neg x \cdot 0 \equal 0 \lor\cr
+\phantom{\exists X (} \exists x \exists y \neg x \cdot (y + 1) \equal (x \cdot y) + x \lor\cr
+\phantom{\exists X (} \psi),
+\end{array}
+\]
+which is, in the sense of $\models_{\sndordlog}$, logically equivalent to $(\varphi_\sndordpeanoarith \limply \psi)$; obviously, we have\smallskip\\
+\begin{tabular}[b]{ll}
+\   & $\psi \in \theoarg{\natstr}$ \cr
+iff & $\natstr \models \psi$ \cr
+iff & $(\varphi_\sndordpeanoarith \limply \psi)$ is valid in the sense of $\models_{\sndordlog}$\cr
+iff & $\psi_\natstr$ is valid in the sense of $\models_\logsys$.
+\end{tabular}\bigskip\\
+It then turns out that the set of valid $\languagebase(\arsymb)$-sentences is not enumerable: If it were, then the set\\
+\centerline{$\sett{\psi \in \languagebase_\firstorder(\arsymb)}{\(\psi_\natstr\) is valid} = \theoarg{\natstr}$}\\
+would be enumerable as well, contrary to \reftitle{Corollary X.6.10}.
+%%
+\end{asparaenum}
+%
+\item \textbf{Solution to Exercise 1.6.} We immediately obtain $\qlog \weakereq \sndordlog$ from:\medskip\\
+\begin{theorem}{Claim}
+Let $S$ be a symbol set. If $\struct{A}$ is an $S$-structure, then for every (ordinary) assignment $\assgn$ and every second-order assignment $\sndordassgn$ in $\struct{A}$ such that $\assgn(v_n) = \sndordassgn(v_n)$ for $n \in \nat$, and for every \emph{formula} $\varphi \in \qlang{S}$, there is a \emph{formula} $\psi \in \sndordlang{S}$ such that\\
+\centerline{$\intparg{\struct{A}}{\assgn} \models \varphi$ \quad iff \quad $\intparg{\struct{A}}{\sndordassgn} \models \psi$.}
+\end{theorem}
+\begin{proof}
+Define the operation $^\prime$ on $\qlang{S}$ inductively as follows:\smallskip\\
+\begin{tabular}[b]{lll}
+$\varphi^\prime$ & $\colonequals$ & $\varphi$ \quad if $\varphi$ is atomic \cr
+$(\neg\varphi)^\prime$ & $\colonequals$ & $\neg\varphi^\prime$ \cr
+$(\varphi\lor\psi)^\prime$ & $\colonequals$ & $(\varphi^\prime \lor \psi^\prime)$ \cr
+$(\exists x \varphi)^\prime$ & $\colonequals$ & $\exists x \varphi^\prime$ \cr
+$(\qexist x \varphi)^\prime$ & $\colonequals$ & $\exists X (\neg\chi_{\leq\mathrm{ctbl}}(X) \land \forall x(Xx \limply \varphi^\prime))$,
+\end{tabular}\smallskip\\
+where $\chi_{\leq\mathrm{ctbl}}(X)$ formulates that $\sndordassgn(X)$ is an at most countable subset of $A$ (cf.\ \textbf{Note on the Discussions Concerning the Second-Order Logic and the Continuum Hypothesis on Pages 141 and 142} in notes to \reftitle{Chapter IX}).\medskip\\
+For each $\varphi \in \qlang{S}$, choose $\psi = \varphi^\prime$. We prove the claim by induction on $\varphi$ (let an $S$-structure $\struct{A}$ be fixed):\smallskip\\
+$\varphi$ is atomic: It follows immediately from the premise $\assgn(v_n) = \sndordassgn(v_n)$ for $n \in \nat$.\medskip\\
+$\neg\varphi$: $\intparg{\struct{A}}{\assgn} \models \neg\varphi$\smallskip\\
+\begin{tabular}[b]{ll}
+iff & not $\intparg{\struct{A}}{\assgn} \models \varphi$ \cr
+iff & not $\intparg{\struct{A}}{\sndordassgn} \models \varphi^\prime$ \quad (by induction hypothesis) \cr
+iff & $\intparg{\struct{A}}{\sndordassgn} \models \neg\varphi^\prime$.
+\end{tabular}\medskip\\
+$(\varphi\lor\psi)$: Similarly.\medskip\\
+$\exists x \varphi$: $\intparg{\struct{A}}{\assgn} \models \exists x \varphi$\smallskip\\
+\begin{tabular}[b]{ll}
+iff & there is an $a \in A$ such that $\intparg{\struct{A}}{\assgn\sbst{a}{x}} \models \varphi$ \cr
+iff & \begin{minipage}[t]{48ex}there is an $a \in A$ such that $\intparg{\struct{A}}{\sndordassgn\sbst{a}{x}} \models \varphi$\\(by induction hypothesis)\end{minipage} \cr
+iff & $\intparg{\struct{A}}{\sndordassgn} \models \exists x \varphi$.
+\end{tabular}\medskip\\
+$\qexist x \varphi$: $\intparg{\struct{A}}{\assgn} \models \qexist x \varphi$\smallskip\\
+\begin{tabular}[b]{ll}
+iff & $\setm{a \in A}{\intparg{\struct{A}}{\assgn\sbst{a}{x}} \models \varphi}$ is uncountable \cr
+iff & \begin{minipage}[t]{50ex}$\setm{a \in A}{\intparg{\struct{A}}{\sndordassgn\sbst{a}{x}} \models \varphi}$ is uncountable\\($\setm{a \in A}{\intparg{\struct{A}}{\assgn\sbst{a}{x}} \models \varphi} = \setm{a \in A}{\intparg{\struct{A}}{\sndordassgn\sbst{a}{x}} \models \varphi}$ by induction hypothesis)\end{minipage} \cr
+iff & $\intparg{\struct{A}}{\sndordassgn} \models \qexist x \varphi$.
+\end{tabular}
+\end{proof}
+Next, the following argument shows that not $\weaksndordlog \weakereq \qlog$: Notice that $\modelclassarg[\emptyset]{\weaksndordlog}{\exists X \forall x \, Xx}$ is the class of $\emptyset$-structures of finite domain. There is no $\languagebase_\qexist(\emptyset)$-sentence $\varphi$ such that $\modelclassarg[\emptyset]{\weaksndordlog}{\exists X \forall x \, Xx} = \modelclassarg[\emptyset]{\qlog}{\varphi}$: Suppose there were such an $\languagebase_\qexist(\emptyset)$-sentence $\varphi$, then we would have that the set
+\[
+\Phi \colonequals \{\varphi\} \cup \setm{\varphi_{\geq n}}{n \geq 2}
+\]
+is not satisfiable while every finite subset $\Phi_0 \subset \Phi$ is satisfiable, contrary to \reftitle{IX.3.2}.\\
+\ \\
+Finally, we show that not $\qlog \weakereq \weaksndordlog$. Note that $\modelclassarg[\emptyset]{\qlog}{\qexist x \, x \equal x}$ is the class of $\emptyset$-structures of uncountable domain.\medskip\\
+Since the \reftitle{L\"{o}wenheim-Skolem Theorem} holds for $\weaksndordlog$ (cf.\ \reftitle{Exercise IX.2.7}), we have that every satisfiable $\languagebase^\weak_\secondorder(\emptyset)$-sentence has a model over an at most countable domain; hence, there is no $\languagebase^\weak_\secondorder(\emptyset)$-sentence $\psi$ such that $\modelclassarg[\emptyset]{\qlog}{\qexist x \, x \equal x} = \modelclassarg[\emptyset]{\weaksndordlog}{\psi}$.
+%
+\end{enumerate}
+%End of Section XIII.1------------------------------------------------------------
+\
+\\
+\\
+%Section XIII.2-------------------------------------------------------------------
+{\large \S2. Compact Regular Logical Systems}
+\begin{enumerate}[1.]
+%
+\item \textbf{Note on Lemma 2.1.} In fact, the Compactness Theorem for the consequence relation and that for satisfaction are equivalent; assuming the former, the latter holds as well. We state and prove the converse of this lemma:\medskip\\
+\begin{theorem}{Lemma}
+If for $\Phi \cup \{ \varphi \} \subset \languagebase(S)$ there is a finite subset $\Phi_0$ of $\Phi$ such that $\Phi_0 \models_\logsys \varphi$ whenever $\Phi \models_\logsys \varphi$. Then $\comp{\logsys}$.
+\end{theorem}
+\begin{proof}
+Suppose $\Phi \subset \languagebase(S)$ is not satisfiable. Then for an arbitrary $\varphi \in \languagebase(S)$, $(\varphi \land \neg\varphi) \in \languagebase(S)$ by $\boole{\logsys}$ and moreover $\Phi \models_\logsys \varphi \land \neg\varphi$. By the premise, there is a finite subset $\Phi_0$ of $\Phi$ such that $\Phi_0 \models_\logsys \varphi \land \neg\varphi$, i.e.\ $\Phi_0$ is not satisfiable.
+\end{proof}
+%
+\item \textbf{Note on the Proof of Lemma 2.2.}
+\begin{asparaenum}[(1)]
+%%
+\item The sentence $\exists x Vx$ is redundant for $\Phi$ because\smallskip\\
+\centerline{$\{ \exists x Ux, \forall x (Ux \limply Vfx) \} \models \exists x Vx$.}\smallskip\\
+(However, $\exists y Vy$ in (viii) of the conjunction $\chi$ on page 268 is necessary because it is not a consequence of any other conjunct.)
+%%
+\item The passage from the third last line (on page 266) of the proof\smallskip\\
+\centerline{$(\struct{C}, \intpted{U}{C}, \intpted{V}{C}, \intpted{f}{C}) \models_\logsys \relativize{\psi}{U} \liff \relativize{\psi}{V}$}
+to the last line\smallskip\\
+\centerline{$\struct{A} \models_\logsys \psi$ \quad iff \quad $\struct{B} \models_\logsys \psi$}
+can be verified in the same manner as ``$\Phi^\ast \models_\logsys \relativize{\psi}{U} \liff \relativize{\psi}{V}$'' is verified in text:\medskip\\
+\begin{tabular}[b]{lll}
+\   & $\struct{A} \models_\logsys \psi$, i.e.\ $\substr{\intpted{U}{C}}{\struct{C}} \models_\logsys \psi$ & \cr
+iff & $(\struct{C}, \intpted{U}{C}) \models_\logsys \relativize{\psi}{U}$ & (by $\rel{\logsys}$) \cr
+iff & $(\struct{C}, \intpted{U}{C}, \intpted{V}{C}, \intpted{f}{C}) \models_\logsys \relativize{\psi}{U}$ & (by the reduct property of $\logsys$) \cr
+iff & $(\struct{C}, \intpted{U}{C}, \intpted{V}{C}, \intpted{f}{C}) \models_\logsys \relativize{\psi}{V}$ & (since $(\struct{C}, \intpted{U}{C}, \intpted{V}{C}, \intpted{f}{C}) \models_\logsys \relativize{\psi}{U} \liff \relativize{\psi}{V}$) \cr
+iff & $(\struct{C}, \intpted{V}{C}) \models_\logsys \relativize{\psi}{V}$ & (by the reduct property of $\logsys$) \cr
+iff & $\substr{\intpted{V}{C}}{\struct{C}} \models_\logsys \psi$, i.e.\ $\struct{B} \models_\logsys \psi$ & (by $\rel{\logsys}$).
+\end{tabular}
+%%
+\item Here we extend this proof to \emph{arbitrary} symbol sets $S$. In the following, let $S$ be fixed.\\
+\ \\
+Again, we assume $\comp{\logsys}$ and let $\psi \in \languagebase(S)$. By $\repl{\logsys}$ (note that $\logsys$ is assumed to be regular), $\relational{\psi}$ is an $\languagebase(\relational{S})$-sentence such that\smallskip\\
+\begin{quoteno}{($+$)}
+$\struct{A}_+ \models_\logsys \psi$ \quad iff \quad $\relational{\struct{A}_+} \models_\logsys \relational{\psi}$
+\end{quoteno}\smallskip\\
+for all $S$-structures $\struct{A}_+$.\\
+\ \\
+Given $\relational{S}$ is relational and $\relational{\psi} \in \languagebase(\relational{S})$, this proof yields a finite subset $S_0$ of $S$ such that $\relational{S_0}$ is a finite subset of $\relational{S}$ and for all $\relational{S}$-structures $\struct{A}_\ast$ and $\struct{B}_\ast$:\smallskip\\
+\begin{quoteno}{($\ast$)}
+If $\reduct{\struct{A}_\ast}{\relational{S_0}} \iso \reduct{\struct{B}_\ast}{\relational{S_0}}$ then ($\struct{A}_\ast \models_\logsys \relational{\psi}$ \quad iff \quad $\struct{B}_\ast \models_\logsys \relational{\psi}$).
+\end{quoteno}\\
+\ \\
+Now, suppose that $\struct{A}$ and $\struct{B}$ are two arbitrary $S$-structures with\smallskip\\
+\centerline{$\reduct{\struct{A}}{S_0} \iso \reduct{\struct{B}}{S_0}$.}\smallskip\\
+Since $\relational{(\reduct{\struct{A}}{S_0})} = \reduct{\relational{\struct{A}}}{\relational{S_0}}$ and $\relational{(\reduct{\struct{B}}{S_0})} = \reduct{\relational{\struct{B}}}{\relational{S_0}}$, we immediately have\smallskip\\
+\centerline{$\reduct{\relational{\struct{A}}}{\relational{S_0}} \iso \reduct{\relational{\struct{B}}}{\relational{S_0}}$}\smallskip\\
+(cf.\ \textbf{A Parallel to Corollary 1.4} in annotations to \reftitle{Chapter VIII}). Because $\relational{\struct{A}}$ and $\relational{\struct{B}}$ are $\relational{S}$-structures, ($\ast$) then yields\smallskip\\
+\begin{quoteno}{($\circ$)}
+$\relational{\struct{A}} \models_\logsys \relational{\psi}$ \quad iff \quad $\relational{\struct{B}} \models_\logsys \relational{\psi}$.
+\end{quoteno}\\
+\ \\
+So we have: $\struct{A} \models_\logsys \psi$\smallskip\\
+\begin{tabular}[b]{lll}
+iff & $\relational{\struct{A}} \models_\logsys \relational{\psi}$ & (by ($+$)) \cr
+iff & $\relational{\struct{B}} \models_\logsys \relational{\psi}$ & (by ($\circ$)) \cr
+iff & $\struct{B} \models_\logsys \psi$ & (by ($+$)).
+\end{tabular}\\
+Hence, \reftitle{Lemma 2.2} is valid for arbitrary symbol sets.
+%%
+\end{asparaenum}
+%
+\end{enumerate}
+%End of Section XIII.2------------------------------------------------------------
+\
+\\
+\\
+%Section XIII.3-------------------------------------------------------------------
+{\large \S3. Lindstr\"{o}m's First Theorem}
+\begin{enumerate}[1.]
+%
+\item \textbf{Note on the Introductory Paragraph in This Section.} If $\struct{A}$ and $\struct{B}$ are two $S$-structures such that $S_0 \subset S$ is finite and\smallskip\\
+\centerline{$\reduct{\struct{A}}{S_0} \iso_m \reduct{\struct{B}}{S_0}$}\smallskip\\
+for some large $m \in \nat$, then we say \emph{$\struct{A}$ and $\struct{B}$ are nearly identical with respect to the first-order language $\fstordlang{S_0}$}.
+%
+\item \textbf{Note on the Proof of Lemma 3.1.} Below we give some remarks:
+\begin{asparaenum}[(1)]
+%%
+\item Here $m$ is, without loss of generality, assumed to be $\geq 1$, because\smallskip\\
+\centerline{for $m \geq 1$: \quad if $\struct{A} \iso_m \struct{B}$ then $\struct{A} \iso_0 \struct{B}$.}\smallskip\\
+Thus, whenever we are given finite $S_0 \subset S$ and $m = 0$ and are asked to provide two $S$-structures $\struct{A}$ and $\struct{B}$ such that (+) in the lemma holds, we just apply this lemma to $S_0$ and ``$m = 1$'' to obtain $\struct{A}$ and $\struct{B}$; the statement (+) in which $m = 0$ is also valid for them.
+%%
+\item
+$\begin{array}[t]{ll}
+\       & \sett{\varphi^m_{\reduct{\struct{A}}{S_0}}}{\(\struct{A}\) is an \(S\)-structure and \(\struct{A} \models_\logsys \psi\)} \cr
+=       & \{ \varphi^m_{\struct{A}^\prime} \mid \mbox{\(\struct{A}^\prime\) is an \(S_0\)-structure and there is an \(S\)-expansion \(\struct{A}\) of \(\struct{A}^\prime\)} \cr
+\       & \phantom{\{ \varphi^m_{\struct{A}^\prime} \mid \ } \mbox{such that \(\struct{A} \models_\logsys \psi\)}\} \cr
+\subset & \sett{\varphi^m_{\struct{A}^\prime}}{\(\struct{A}^\prime\) is an \(S_0\)-structure},
+\end{array}$\smallskip\\
+so it is finite; it is also nonempty because there is an $S$-structure $\struct{A}$ with $\struct{A} \models_\logsys \psi$ (otherwise $\psi$ would be logically equivalent to the first-order $S$-sentence $\exists x \, \neg x \equal x$). Hence $\varphi$ is a first-order $S_0$-sentence.
+%%
+\item We verify that $(\psi \limply \varphi^\ast)$ is valid (in the sense of $\models_\logsys$). Let $\struct{A}$ be an $S$-structure with $\struct{A} \models_\logsys \psi$. Then $(\varphi^m_{\reduct{\struct{A}}{S_0}} \limply \varphi)$ is valid, by definition of $\varphi$. On the other hand, by the reduct property we have $\struct{A} \models \varphi^m_{\reduct{\struct{A}}{S_0}}$ since $\reduct{\struct{A}}{S_0} \models \varphi^m_{\reduct{\struct{A}}{S_0}}$ (cf.\ \reftitle{XII.3.5(b)}). So $\struct{A} \models \varphi$, and hence $\struct{A} \models_\logsys \varphi^\ast$.
+%%
+\item Because $(\psi \limply \varphi^\ast)$ is valid, we have either
+\begin{inparaenum}[(a)]
+%%%
+\item $\modelclassarg[S]{\logsys}{\psi} = \modelclassarg[S]{\logsys}{\varphi^\ast}$ or
+%%%
+\item $\modelclassarg[S]{\logsys}{\psi} \subsetneq \modelclassarg[S]{\logsys}{\varphi^\ast}$;
+%%%
+\end{inparaenum}
+by the premise the former is excluded.
+%%
+\item By the reduct property, it follows from $\struct{B} \models \varphi^m_{\reduct{\struct{A}}{S_0}}$ that $\reduct{\struct{B}}{S_0} \models \varphi^m_{\reduct{\struct{A}}{S_0}}$. Therefore $\reduct{\struct{A}}{S_0} \iso_m \reduct{\struct{B}}{S_0}$ by \reftitle{Exercise 3.10}.
+%%
+\item Using the results of \reftitle{Exercise XII.3.15} in the proof, we immediately obtain the generalization of this lemma to arbitrary symbol sets.
+%%
+\end{asparaenum}
+%
+\item \textbf{Note on the Conjunction $\chi$ on Page 268.} (INCOMPLETE)
+\begin{asparaenum}[(1)]
+%%
+\item It states ``there is a (finite or infinite) descending chain
+\[
+\ldots < c - 1 < c
+\]
+of length $\geq 1$ such that
+\begin{inparaenum}[(a)]
+%%%
+\item for every element $x$ in this chain, $I_x$ is a nonempty set of partial isomorphisms from the $S_0$-substructure induced on $U$ to the $S_0$-substructure induced on $V$;
+%%%
+\item for every two elements $x$ and $y$ in this chain, if $y = fx$ (namely $y$ is the predecessor of $x$) then both the back- and the forth-property hold for the passage from $I_x$ to $I_y$.''\footnote{In other words, for every $p \in I_x$ and every $a \in U$, there is a $q \in I_y$ such that $p \subset q$ and $a \in \dom{q}$; this is the forth-property. Analogously for the back-property.}
+%%%
+\end{inparaenum}\bigskip\\
+So $\chi$ does not depend on $m$ in (+) on page 266, for it does not specify the length of the descending chain.
+%%
+\item In (iv), ``The axioms of $\Phi_\pord$'' should be replaced by ``The axioms of $\Phi_\pord$ except $\exists x \exists y \, x < y$'': Since the relation $<$ may be empty (a case which corresponds to $m = 0$), which is inconsistent with that sentence.\bigskip\\
+If all the sentences in (iv) hold, then $<$ is a (linear) ordering over $W$.
+%%
+\item In (v), the outermost right parenthesis ``$)$'' is missing: ``$\forall x (Wx \limply \exists p (Pp \land Ixp)$'' should be replaced by ``$\forall x (Wx \limply \exists p (Pp \land Ixp))$''.\bigskip\\
+On the other hand, an additional conjunct\smallskip\\
+\centerline{$\forall x \forall p (Ixp \limply (Wx \land Pp))$}\smallskip\\
+should be added (which states $I$ is a binary relation between $W$ and $P$ or, more informally, $I_x^\prime = \sett{p}{\(Ixp\) holds}$ is a subset of $P$), otherwise there is no guarantee that $p$ is a partial isomorphism from the $S_0$-substructure induced on $U$ to the $S_0$-substructure induced on $V$ even if $Ixp$ holds for some $x$ in the field of $<$.
+
+%%
+\item A sentence for the back-property mentioned in (vii) of the conjunction $\chi$ is\smallskip\\
+$\begin{array}{l}
+\forall x \forall p \forall v ((fx < x \land Ixp \land Vv) \limply \cr
+\multicolumn{1}{r}{\phantom{aaaaaaaaaaaaaaaa}\exists q \exists u (Ifxq \land Gquv \land \forall x^\prime \forall y^\prime (Gx^\prime y^\prime \limply Gqx^\prime y^\prime))).}
+\end{array}$
+\end{asparaenum}
+%
+\item \textbf{Note on the Proof of 3.3.} (INCOMPLETE) It is possible for a total ordering $<$ over a set $M$ to have an infinite descending chain, a greatest and a least element at the same time, with every element except the least having an immediate predecessor. For example, if we take
+\[
+M \colonequals \{ -\infty \} \cup \setm{n \in \zah}{n \leq 0},
+\]
+$<$ the usual ordering relation, then $0$ is the greatest element while $-\infty$ the least, $<$ has an infinite descending chain
+\[
+\ldots < -2 < -1 < 0,
+\]
+and every element except $-\infty$ has an immediate predecessor: $n - 1$ is the immediate predecessor of $n$ for $n \leq 0$.\bigskip\\
+In the proof of 3.3, given a model $\struct{D}$ of $\chi$ we chose the $\languagebase(S^+ \cup \{ Q \})$-sentence
+\[
+\vartheta \colonequals Qc \land \forall x (Qx \limply (fx < x \land Qfx))
+\]
+to ensure a coutable model of $\chi$ obtained from $\struct{D}$ with infinite field of $<$ (clearly $Q \subset W$). One might think that it also works by setting $\vartheta$ to
+\[
+\forall x (Wx \limply \exists y \, y < x)
+\]
+(the field $W$ of $<$ does not have a least element). As we noted above, however, that could be incompatible with $\struct{D}$: $\intpted{W}{D}$ might look like $M$ above, which does have an infinite descending chain and a least element.
+%
+\item \textbf{Note on Main Lemma 3.4.} (INCOMPLETE) Part (a) of this lemma corresponds to 3.3(a); (i) of part (b) correponds to 3.3(b) (if $\struct{C}$ is a model of $\chi$, then clearly it satisfies the conjunct (iv), hence $\intpted{W}{C}$ is nonempty); (ii) of part (b) corresponds to 3.2.\bigskip\\
+Observe that $(\forall x \varphi \lor \exists x \psi)$ is a consequence of $\forall x (\varphi \lor \psi)$:\smallskip\\
+\begin{derivation}
+1. & $\forall x (\varphi \lor \psi)$ & $\forall x (\varphi \lor \psi)$ & $\assm$ \cr
+2. & $\forall x (\varphi \lor \psi)$ & $(\varphi \lor \psi)$ & IV.5.5(a2) applied to 1. \cr
+3. & $\forall x (\varphi \lor \psi)$ $\varphi$ & $\varphi$ & $\assm$ \cr
+4. & $\forall x (\varphi \lor \psi)$ $\psi$ & $\psi$ & $\assm$ \cr
+5. & $\forall x (\varphi \lor \psi)$ $\varphi$ & $(\exists x \psi \lor \varphi)$ & $\ors$ applied to 3. \cr
+6. & $\forall x (\varphi \lor \psi)$ $\psi$ & $\exists x \psi$ & IV.5.1(a) applied to 4. \cr
+7. & $\forall x (\varphi \lor \psi)$ $\psi$ & $(\exists x \psi \lor \varphi)$ & $\ors$ applied to 6. \cr
+8. & $\forall x (\varphi \lor \psi)$ $(\varphi \lor \psi)$ & $(\exists x \psi \lor \varphi)$ & $\ora$ applied to 5. and 7. \cr
+9. & $\forall x (\varphi \lor \psi)$ & $(\exists x \psi \lor \varphi)$ & (Ch) applied to 2. and 8. \cr
+10. & $\forall x (\varphi \lor \psi)$ $\exists x \psi$ & $\exists x \psi$ & $\assm$ \cr
+11. & $\forall x (\varphi \lor \psi)$ $\exists x \psi$ & $(\forall x \varphi \lor \exists x \psi)$ & $\ors$ applied to 10. \cr
+12. & $\forall x (\varphi \lor \psi)$ $\neg\exists x \psi$ & $(\exists x \psi \lor \varphi)$ & $\ant$ applied to 9. \cr
+13. & $\forall x (\varphi \lor \psi)$ $\neg\exists x \psi$ & $\neg\exists x \psi$ & $\assm$ \cr
+14. & $\forall x (\varphi \lor \psi)$ $\neg\exists x \psi$ & $\varphi$ & IV.3.4 applied to 12. and 13. \cr
+15. & $\forall x (\varphi \lor \psi)$ $\neg\exists x \psi$ & $\forall x \varphi$ & IV.5.5(b4) applied to 14. \cr
+16. & $\forall x (\varphi \lor \psi)$ $\exists x \psi$ & $(\forall x \varphi \lor \exists x \psi)$ & $\ors$ applied to 10. \cr
+17. & $\forall x (\varphi \lor \psi)$ $\neg\exists x \psi$ & $(\forall x \varphi \lor \exists x \psi)$ & $\ors$ applied to 15. \cr
+18. & $\forall x (\varphi \lor \psi)$ & $(\forall x \varphi \lor \exists x \psi)$ & $\pc$ applied to 16. and 17.
+\end{derivation}\smallskip\\
+With this observation, we explain in detail how we summarize considerations of 3.2 and 3.3 leading to 3.4. These considerations togerther yield, successively:\medskip\\
+``For all finite $S_0 \subset S$, (a) or (b) holds:
+\begin{compactenum}[(a)]
+%%
+\item There are $S$-structures $\struct{A}$ and $\struct{B}$ such that\smallskip\\
+\centerline{$\struct{A} \models_\logsys \psi$, $\struct{B} \models_\logsys \neg\psi$ and $\reduct{\struct{A}}{S_0} \iso \reduct{\struct{B}}{S_0}$.}
+%%
+\item For the $\languagebase(S_0 \cup \{ c, f, P, U, V, W, <, I, G \})$-sentence $\chi$ defined on page 268 (dependent on $S_0$ but not on $m$),
+\begin{compactenum}[(i)]
+%%%
+\item In every model $\struct{C}$ of $\chi$, $\intpted{W}{C}$ is finite and nonempty.
+%%%
+\item For every $m \geq 1$ there is a model $\struct{C}$ of $\chi$, in which $\intpted{W}{C}$ has exactly $m$ elements.''
+%%%
+\end{compactenum}
+%%
+\end{compactenum}
+``One of the following conditions (a) or (b) holds:
+\begin{compactenum}[(a)]
+%%
+\item For all finite $S_0 \subset S$, there are $S$-structures $\struct{A}$ and $\struct{B}$ such that\smallskip\\
+\centerline{$\struct{A} \models_\logsys \psi$, $\struct{B} \models_\logsys \neg\psi$ and $\reduct{\struct{A}}{S_0} \iso \reduct{\struct{B}}{S_0}$.}
+%%
+\item There is a finite $S_0 \subset S$ such that $\chi$ is an $\languagebase(S_0 \cup \{ c, f, P, U, V, W, <, I, G \})$-sentence and
+\begin{compactenum}[(i)]
+%%%
+\item In every model $\struct{C}$ of $\chi$, $\intpted{W}{C}$ is finite and nonempty.
+%%%
+\item For every $m \geq 1$ there is a model $\struct{C}$ of $\chi$, in which $\intpted{W}{C}$ has exactly $m$ elements.''
+%%%
+\end{compactenum}
+%%
+\end{compactenum}
+``One of the following conditions (a) or (b) holds:
+\begin{compactenum}[(a)]
+%%
+\item For all finite symbol sets $S_0$ with $S_0 \subset S$ there are $S$-structures $\struct{A}$ and $\struct{B}$ such that\smallskip\\
+\centerline{$\struct{A} \models_\logsys \psi$, $\struct{B} \models_\logsys \neg\psi$ and $\reduct{\struct{A}}{S_0} \iso \reduct{\struct{B}}{S_0}$.}
+%%
+\item For a unary relation symbol $W$ and a suitable symbol set $S^+$ with $S \cup \{W\} \subset S^+$ and finite $S^+ \setminus S$, there is an $\languagebase(S^+)$-sentence $\chi$ such that
+\begin{compactenum}[(i)]
+%%%
+\item In every model $\struct{C}$ of $\chi$, $\intpted{W}{C}$ is finite and nonempty.
+%%%
+\item For every $m \geq 1$ there is a model $\struct{C}$ of $\chi$, in which $\intpted{W}{C}$ has exactly $m$ elements.''
+%%%
+\end{compactenum}
+%%
+\end{compactenum}
+
+%
+\item \textbf{Note on the Proof of Lindstr\"{o}m's First Theorem.} For $n \geq 1$, the statement ``$W$ contains at least $n$ elements'' can be formulated by
+\[
+\varphi_{\card{W} \geq n} \colonequals \enump{\exists x_1}{\exists x_n} \left( \bigwedge_{1 \leq i < j \leq n} \neg x_i \equal x_j \land \bigwedge_{1 \leq i \leq n} Wx_i \right).
+\]
+For the statement ``$W$ contains at least $0$ elements'' we take $\varphi_{\card{W} \geq 0} \colonequals \exists x \, x \equal x$.\bigskip\\
+Actually, for a contradiction to $\comp{\logsys}$, we could have chosen the set\smallskip\\
+\centerline{$\{ \chi \} \cup \setm{\mbox{``\(W\) contains at least \(n\) elements''}}{n > 0}$,}\smallskip\\
+thus avoiding the trivial case $n = 0$.\bigskip\\
+In summary, the structure of the proof of 3.5 is illustrated by
+\[
+\begin{CD}
+\fbox{\parbox{27ex}{Premise:
+\begin{compactenum}
+%%
+\item \(\logsys\) is regular
+%%
+\item \(\fstordlog \weakereq \logsys\)
+%%
+\item \(\comp{\logsys}\)
+%%
+\item \(\losko{\logsys}\)
+%%
+\item \(\modelclassarg[S]{\logsys}{\psi} \neq \modelclassarg[S]{\fstordlog}{\varphi}\) for all \(\varphi \in \languagebase_\firstorder(S)\)
+%%
+\end{compactenum}}} @. \ \\
+@VV{\parbox{20ex}{Using \reftitle{1.4}}}V @. \ \\
+\fbox{\parbox{27ex}{\(\logsys\) is regular,\\
+\(\fstordlog \weakereq \logsys\),\\
+\(\comp{\logsys}\),\\
+\(\losko{\logsys}\), and\\
+there is a relational \(S\) such that \(\psi \in \languagebase(S)\) and \(\modelclassarg[S]{\logsys}{\psi} \neq \modelclassarg[S]{\fstordlog}{\varphi}\) for all \(\varphi \in \languagebase_\firstorder(S)\)}}
+@>>{\parbox{20ex}{Using \reftitle{2.2},
+a result of \(\comp{\logsys}\)}}>
+\fbox{\parbox{27ex}{For some finite \(S_0 \subset S\):\\
+If \(\reduct{\struct{A}}{S_0} \iso \reduct{\struct{B}}{S_0}\), then\\
+(\(\struct{A} \models_\logsys \psi\) iff \(\struct{B} \models_\logsys \psi\))\\
+for all \(S\)-structures \(\struct{A}\), \(\struct{B}\)}}\\
+@VV{\mbox{Using \reftitle{3.1}}}V  @V{\parbox{20ex}{Using 3.3, a result of \(\losko{\logsys}\)}}VV\\
+\fbox{\parbox{27ex}{For finite \(S_0 \subset S\), \(m \in \nat\):\\
+\(\struct{A} \models_\logsys \psi\),\\
+\(\struct{B} \models_\logsys \neg\psi\), and\\
+\(\reduct{\struct{A}}{S_0} \iso_m \reduct{\struct{B}}{S_0}\)\\
+for some \(S\)-structures \(\struct{A}\), \(\struct{B}\)\smallskip\\
+(\(\chi\) is satisfiable for \(m \in \nat\))}} @. \fbox{\parbox{27ex}{For some finite \(S_0 \subset S\):\\
+\(\{\chi\} \cup \setm{\mbox{``\(\absval{W} \geq n\)''}}{n \in \nat}\) is not satisfiable}}\\
+@VVV @VVV\\
+\fbox{\parbox{27ex}{For finite \(S_0 \subset S\):\\
+Every finite subset of\\
+\(\{\chi\} \cup \setm{\mbox{``\(\absval{W} \geq n\)''}}{n \in \nat}\)\\
+is satisfiable}}
+@>>>
+\parbox{20ex}{CONTRADICTION TO \(\comp{\logsys}\)}\\
+\end{CD}
+\]
+%
+\item \textbf{Note on the Discussion for Clarifying the Role of the Conditions $\losko{\logsys}$ and $\comp{\logsys}$ in Lindstr\"{o}m's First Theorem on Page 271.} (INCOMPLETE)\\The diagram given below depicts this discussion:
+\[
+\begin{CD}
+\fbox{\parbox{27ex}{Premise:
+\begin{compactenum}
+%%
+\item \(\logsys\) is regular
+%%
+\item \(\fstordlog \weakereq \logsys\)
+%%
+\item \(\comp{\logsys}\)
+%%
+\item \(\losko{\logsys}\)
+%%
+\item \(\modelclassarg[S]{\logsys}{\psi} \neq \modelclassarg[S]{\fstordlog}{\varphi}\) for all \(\varphi \in \languagebase_\firstorder(S)\)
+%%
+\end{compactenum}}} @. \ \\
+@VV{\parbox{20ex}{Using \reftitle{1.4}}}V @. \ \\
+\fbox{\parbox{27ex}{\(\logsys\) is regular,\\
+\(\fstordlog \weakereq \logsys\),\\
+\(\comp{\logsys}\),\\
+\(\losko{\logsys}\), and\\
+there is a relational \(S\) such that \(\psi \in \languagebase(S)\) and \(\modelclassarg[S]{\logsys}{\psi} \neq \modelclassarg[S]{\fstordlog}{\varphi}\) for all \(\varphi \in \languagebase_\firstorder(S)\)}}
+@>>{\parbox{20ex}{Using \reftitle{2.2},
+a result of \(\comp{\logsys}\)}}>
+\fbox{\parbox{27ex}{For some finite \(S_0 \subset S\):\\
+If \(\reduct{\struct{A}}{S_0} \iso \reduct{\struct{B}}{S_0}\), then\\
+(\(\struct{A} \models_\logsys \psi\) iff \(\struct{B} \models_\logsys \psi\))\\
+for all \(S\)-structures \(\struct{A}\), \(\struct{B}\)}}\\
+@VV{\mbox{Using \reftitle{3.1}}}V  @VVV\\
+\fbox{\parbox{27ex}{For finite \(S_0 \subset S\), \(m \in \nat\):\\
+\(\struct{A} \models_\logsys \psi\), \(\struct{B} \models_\logsys \neg\psi\), and\\
+\(\reduct{\struct{A}}{S_0} \iso_m \reduct{\struct{B}}{S_0}\)\\
+for some \(S\)-structures \(\struct{A}\), \(\struct{B}\)\smallskip\\
+(\(\chi\) is satisfiable for \(m \in \nat\))}} @. \parbox{20ex}{CONTRADICTION}\\
+@VV{\parbox{27ex}{Applying \(\comp{\logsys}\) to\\
+\(\{ \chi \} \cup \setm{\mbox{``\(\absval{W} \geq n\)''}}{n \in \nat}\)}}V @AAA\\
+\fbox{\parbox{27ex}{For finite \(S_0 \subset S\):\\
+\(\struct{A} \models_\logsys \psi\), \(\struct{B} \models_\logsys \neg\psi\), and\\
+\(\reduct{\struct{A}}{S_0} \iso_p \reduct{\struct{B}}{S_0}\)\\
+for some \(S\)-structures \(\struct{A}\), \(\struct{B}\)\smallskip\\
+(\(\chi \land \vartheta\) is satisfiable)}}
+@>>{\parbox{20ex}{Applying \(\losko{\logsys}\) to \(\chi \land \vartheta\)}}>
+\fbox{\parbox{27ex}{For finite \(S_0 \subset S\):\\
+\(\struct{A} \models_\logsys \psi\), \(\struct{B} \models_\logsys \neg\psi\), and \(\reduct{\struct{A}}{S_0} \iso \reduct{\struct{B}}{S_0}\)\\
+for some \(S\)-structures \(\struct{A}\), \(\struct{B}\)}}\\
+\end{CD}
+\]\bigskip\\
+On may notice that in proving \reftitle{Lemma 2.2} and Lindstr\"{o}m's First Theorem, we utilized the technique of \emph{formalization}. Below we explain in detail why the discussion given in text is valid, highlighting the utilization of formalization. Let $S$ be relational.\bigskip\\
+With the assumption that $\psi \in \languagebase(S)$ is not logically equivalent to any first-order sentence, we choose, by $\comp{\logsys}$ and \reftitle{2.2}, a finite subset $S_0$ of $S$ such that\smallskip\\
+\begin{quoteno}{($\ast$)}
+\begin{minipage}{64ex}
+for all $S$-structures $\struct{A}^\prime$ and $\struct{B}^\prime$:\\If $\reduct{\struct{A}^\prime}{S_0} \iso \reduct{\struct{B}^\prime}{S_0}$ then ($\struct{A}^\prime \models_\logsys \psi$ \quad iff \quad $\struct{B}^\prime \models_\logsys \psi$).
+\end{minipage}
+\end{quoteno}\smallskip\\
+On the other hand, by \reftitle{3.1} we have for $m \geq 1$,\smallskip\\
+\begin{quoteno}{($\ast\ast$)}
+\begin{minipage}{64ex}
+there are an $n \geq m$ and two $S$-structures $\struct{A}^\prime$ and $\struct{B}^\prime$ with\smallskip\\$\reduct{\struct{A}^\prime}{S_0} \iso_n \reduct{\struct{B}^\prime}{S_0}$, $\struct{A}^\prime \models_\logsys \psi$, and $\struct{B}^\prime \models_\logsys \neg\psi$.
+\end{minipage}
+\end{quoteno}\bigskip\\
+By a suitable formalization of ($\ast\ast$), i.e.\ the $\languagebase(S^+)$-sentence $(\chi \land \varphi_m)$ where $\varphi_m$ formulates ``there are at least $m$ elements in the descending chain'', we have $(\chi \land \varphi_m)$ is satisfiable for $m \geq 1$. By $\comp{\logsys}$, we then have
+\[
+\Phi \colonequals \{ \chi \} \cup \setm{\varphi_m}{m \geq 1}
+\]
+is satisfiable since every finite subset of it has a model. Let us say the $S^+$-structure $\struct{C}$ is a model of $\Phi$; we write $\struct{A}^C$ for $\substr{\intpted{U}{C}}{\reduct{\struct{C}}{S}}$ and $\struct{B}^C$ for $\substr{\intpted{V}{C}}{\reduct{\struct{C}}{S}}$. By $\rel{\logsys}$ we have $\struct{A}^C \models_\logsys \psi$ and $\struct{B}^C \models_\logsys \neg\psi$. Also, in $C$ there is an infinite sequence $(I_n)_{n \in \nat}$ of nonempty sets of partial isomorphisms from $\reduct{\struct{A}^C}{S_0}$ to $\reduct{\struct{B}^C}{S_0}$ in which the back- and the forth-property both hold for the passage from $I_n$ to $I_{n + 1}$ (in contrast to \reftitle{XII.1.3}) for $n \in \nat$. By taking $I \colonequals \bigcup_{n \in \nat} I_n$, we have $I: \reduct{\struct{A}^C}{S_0} \partiso \reduct{\struct{B}^C}{S_0}$. To summarize, we have
+\smallskip\\
+\begin{quoteno}{($\ast\ast\ast$)}
+$\reduct{\struct{A}^C}{S_0} \partiso \reduct{\struct{B}^C}{S_0}$, $\struct{A}^C \models_\logsys \psi$, and $\struct{B}^C \models_\logsys \neg\psi$.
+\end{quoteno}\smallskip\\
+Since $\intpted{P}{\struct{C}}$ is required by $\Phi$ to be a set of partial isomorphisms from $\reduct{\struct{A}^C}{S_0}$ to $\reduct{\struct{B}^C}{S_0}$, from which we can form the sequence $(I_n)_{n \in \nat}$, we may, without loss of generality, assume that $\intpted{P}{\struct{C}} = I$.
+\bigskip\\
+Again, ($\ast\ast\ast$) can be formalized, say, by the $\languagebase(S^+)$-sentence $\chi^\prime$, which is the conjunction of (i) - (iii), (viii) from $\chi$ and
+\begin{compactenum}[(i$^\prime$)]
+%%
+\item $\exists p \, Pp$\\($P$ is not empty).
+%%
+\item $\forall p \forall u ((Pp \land Uu) \limply \exists q \exists v (Pq \land Gquv \land \forall x^\prime \forall y^\prime (Gpx^\prime y^\prime \limply Gqx^\prime y^\prime)))$\\(the forth-property).
+%%
+\item $\forall p \forall v ((Pp \land Vv) \limply \exists q \exists u (Pq \land Gquv \land \forall x^\prime \forall y^\prime (Gpx^\prime y^\prime \limply Gqx^\prime y^\prime)))$\\(the back-property).
+%%
+\end{compactenum}
+It follows that $\struct{C} \models_\logsys \chi^\prime$ (note that we assume $\intpted{P}{\struct{C}} = I$). By $\losko{\logsys}$, there is an at most countable model $\struct{D}$ of $\chi^\prime$. We write $\struct{A}^D$ for $\substr{\intpted{U}{D}}{\reduct{\struct{D}}{S}}$ and $\struct{B}^D$ for $\substr{\intpted{V}{D}}{\reduct{\struct{D}}{S}}$. Then\smallskip\\
+\begin{quoteno}{($\circ$)}
+$\reduct{\struct{A}^D}{S_0} \partiso \reduct{\struct{B}^D}{S_0}$, $\struct{A}^D \models_\logsys \psi$, and $\struct{B}^D \models_\logsys \neg\psi$.
+\end{quoteno}\smallskip\\
+Since $\intpted{U}{D}$ and $\intpted{V}{D}$ are both at most countable, by \reftitle{XII.1.5(d)} we have that\smallskip\\
+\begin{quoteno}{($\circ\circ$)}
+$\reduct{\struct{A}^D}{S_0} \iso \reduct{\struct{B}^D}{S_0}$, $\struct{A}^D \models_\logsys \psi$, and $\struct{B}^D \models_\logsys \neg\psi$,
+\end{quoteno}\smallskip\\
+contrary to ($\ast$).
+%
+\item \textbf{Solution to Exercise 3.6.} Let $S$ be a finite symbol set, $\psi$ an $S$-sentence, and $\modelclassarg[S]{}{\psi}$ be closed under substructures.\footnote{$\psi$ is closed under substructures :iff for $S$-structures $\struct{A}$ and $\struct{B}$, if $\struct{A}$ is a substructure of $\struct{B}$ and if $\struct{B}$ is a model of $\psi$, then $\struct{A} \models \psi$.}\bigskip\\
+If $\psi$ is not satisfiable, namely $\modelclassarg[S]{}{\psi} = \emptyset$, then the claim is trivially true because $\psi$ is logically equivalent to, say, the universal sentence $\forall x \neg x \equal x$. So we shall assume $\psi$ is satisfiable.\bigskip\\
+As suggested in hint, for $m \geq 1$ we set\smallskip\\
+\centerline{$\varphi^m \colonequals \blor\sett{\psi^m_\struct{B}}{\(\struct{B}\) is an \(S\)-structure and \(\struct{B} \models \psi\)}$.}\smallskip\\
+It is a universal first-order sentence (cf.\ \reftitle{part (a)} and \reftitle{part (b)} of \textbf{Solution to Exercise XII.3.14} in the annotations to \reftitle{Chapter XII}). The following discussions will lead to the conclusion that $\psi$ is logically equivalent to some $\varphi^m$, thereby completing the exercise.\bigskip\\
+We first argue that $\psi \limply \varphi^m$ is valid: If $\struct{A}$ is an $S$-structure that satisfies $\psi$, then $\psi^m_\struct{A}$ is a disjunct in $\varphi^m$; since $\struct{A} \models \psi^m_\struct{A}$ (cf.\ part \reftitle{(b)} of \textbf{Solution to Exercise 3.14} in the annotations to \reftitle{Chapter XII}), it follows that $\struct{A} \models \varphi^m$.\bigskip\\
+Now, suppose $\psi$ is not logically equivalent to any $\varphi^m$ (we show that we will arrive at a contradiction based on this assumption). In other words, for all $m \geq 1$ there is an $S$-structure $\struct{A}$ such that $\struct{A} \models \neg\psi$ and $\struct{A} \models \varphi^m$; the latter yields an $S$-structure $\struct{B}$ with $\struct{B} \models \psi$ and $\struct{A} \models \psi^m_\struct{B}$, thus $\struct{A} \emb_m \struct{B}$ (cf.\ \reftitle{part (c)} of \textbf{Solution to Exercise 3.14} in the annotations to \reftitle{Chapter XII}). In summary, for all $m \geq 1$ there are $S$-structures $\struct{A}$ and $\struct{B}$ such that $\struct{A} \emb_m \struct{B}$, $\struct{A} \models \neg\psi$, and $\struct{B} \models \psi$; hence\smallskip\\
+\begin{quoteno}{($+$)}
+$\relational{\struct{A}} \emb_m \relational{\struct{B}}$, $\relational{\struct{A}} \models \neg\relational{\psi}$, and $\relational{\struct{B}} \models \relational{\psi}$
+\end{quoteno}\smallskip\\
+(since $\partism{\struct{A}}{\struct{B}} = \partism{\relational{\struct{A}}}{\relational{\struct{B}}}$ and by \reftitle{VIII.1.3}).\bigskip\\
+The statement ($+$) can be formulated. Let $S^+$ be obtained from $\relational{S}$(!) by adding the following new symbols: $c, f, P, U, V, W, < , I, G$ in the discussion on page 267 in text.\bigskip\\
+Take the $S^+$-sentence $\chi$ to be the conjunction of (i), (ii), (iv), (v), (vi) on page 268 in text together with
+\begin{itemize}
+%%
+\item for every $c \in S$, the sentence $(\relativize{(\relational{(\exists^{=1}x \, c \equal x)})}{U} \land \relativize{(\relational{(\exists^{=1}x \, c \equal x)})}{V})$;
+%%
+\item for every $n$-ary $f \in S$, the sentence\\
+$\begin{array}{r}
+(\relativize{(\relational{(\enump{\forall x_1}{\forall x_n}\exists^{=1}x \, f\enum[1]{x}{n} \equal x)})}{U} \land \phantom{aaaaa}\\
+\relativize{(\relational{(\enump{\forall x_1}{\forall x_n}\exists^{=1}x \, f\enum[1]{x}{n} \equal x)})}{V});
+\end{array}$
+%%
+\item for every $n$-ary $R \in \relational{S}$(!), the sentence\\
+$\begin{array}{r}
+\forall p (Pp \limply \enump{\forall x_1}{\forall x_n} \enump{\forall y_1}{\forall y_n} ((\enumpop{Gpx_1y_1}{\land}{Gpx_ny_n}) \limply \phantom{aaaaa}\\
+(R\enum[1]{x}{n} \liff R\enum[1]{y}{n})));
+\end{array}$
+%%
+\item the sentence $\exists x Ux \land \exists y Vy \land \relativize{(\neg\relational{\psi})}{U} \land \relativize{(\relational{\psi})}{V}$\\(both $U$ and $V$ are nonempty, and $\relational{\psi}$ holds in the $\relational{S}$-structure induced on $V$ but not in the one induced on $U$; the conjuncts $\exists x Ux$ and $\exists y Vy$ are necessary in case $S$ is relational).
+%%
+\end{itemize}
+We have formulated ($+$) by $\chi$, which does not depend on $m$.\bigskip\\
+We have the following result analogous to 3.2:\medskip\\
+\begin{theorem}{Claim}
+For every $m \geq 1$ there is a model $\struct{C}$ of $\chi$ in which the field $\intpted{W}{C}$ of $\intpted{<}{C}$ consists of exactly $(m + 1)$ elements.
+\end{theorem}
+\begin{proof}
+For a given $m$ we choose, according to ($+$), two $S$-structures $\struct{A}$, $\struct{B}$ and a sequence $(I_n)_{n \leq m}$ of nonempty subsets of $\partism{\struct{A}}{\struct{B}}$ with $A \cap B = \emptyset$, $(I_n)_{n \leq m}: \relational{\struct{A}} \emb_m \relational{\struct{B}}$, $\relational{\struct{A}} \models \neg\relational{\psi}$ and $\relational{\struct{B}} \models \relational{\psi}$.\medskip\\
+The claim immediately follows if we take as a model of $\chi$ an $S^+$-structure $\struct{C}$ with
+\begin{itemize}
+%%
+\item $C = A \cup B \cup \{\seqp{0}{m}\} \cup \bigcup_{n \leq m} I_n$;
+%%
+\item $\intpted{U}{C} = A$ and $\substr{\intpted{U}{C}}{\reduct{\struct{C}}{\relational{S}}} = \relational{\struct{A}}$;
+%%
+\item $\intpted{V}{C} = B$ and $\substr{\intpted{V}{C}}{\reduct{\struct{C}}{\relational{S}}} = \relational{\struct{B}}$;
+%%
+\item $\intpted{W}{C} = \{\seqp{0}{m}\}$, $\intpted{<}{C}$ is the natural ordering relation on $\{\seqp{0}{m}\}$, $\intpted{c}{C} = m$ and $\restrict{\intpted{f}{C}}{\intpted{W}{C}}$ is the predecessor function on $\intpted{W}{C}$ ($\intpted{f}{C}(n + 1) = n$ for $n < m$ and $\intpted{f}{C}(0) = 0$);
+%%
+\item $\intpted{P}{C} = \bigcup_{n \leq m} I_n$;
+%%
+\item $\intpted{I}{C}np$ \quad iff \quad $n \leq m$ and $p \in I_n$;
+%%
+\item $\intpted{G}{C}pab$ \quad iff \quad $\intpted{P}{C}p$, $a \in \dom{p}$ and $p(a) = b$. \qedhere
+%%
+\end{itemize}
+\end{proof}
+From the Compactness Theorem and the above claim it follows that the set\smallskip\\
+\centerline{$\{ \chi \} \cup \setm{\mbox{``\(W\) contains at least \(n\) element''}}{n \geq 2}$}\smallskip\\
+is satisfiable. Then the $S^+ \cup \{Q\}$-sentence $\chi \land \vartheta$ is also satisfiable, where $\vartheta$ is defined in the proof of 3.3. By the L\"{o}wenheim-Skolem Theorem, there is a countable model of $\chi \land \vartheta$.\bigskip\\
+Thus, there are two at most countable $\relational{S}$-structures $\struct{A}$ (with domain $A$) and $\struct{B}$ such that $\struct{A} \models \neg\relational{\psi}$, $\struct{B} \models \relational{\psi}$, and $\struct{A} \partemb \struct{B}$: As a result of the previous discussion, there is an infinite sequence $(I_n)_{n \in \nat}$ in which $\emptyset \neq I_n \subset \partism{\struct{A}}{\struct{B}}$ and the forth-property holds for the passage from $I_n$ to $I_{n + 1}$ for $n \in \nat$; by taking $I \colonequals \bigcup_{n \in \nat} I_n$ we have that $I: \struct{A} \partemb \struct{B}$.\bigskip\\
+Note that $\invrelational{\struct{A}}$ and $\invrelational{\struct{B}}$ are well-defined $S$-structures by the choice of $\chi$. From \reftitle{VIII.1.3} it follows that $\invrelational{\struct{A}} \models \neg\psi$, $\invrelational{\struct{B}} \models \psi$. Moreover, by $\partism{\struct{A}}{\struct{B}} = \partism{\invrelational{\struct{A}}}{\invrelational{\struct{B}}}$ we have $\invrelational{\struct{A}} \partemb \invrelational{\struct{B}}$; hence, $\invrelational{\struct{A}}$ is embeddable in $\invrelational{\struct{B}}$ since $A$ is at most countable (cf.\ \reftitle{Exercise 1.12(b)}). That is to say, $\invrelational{\struct{A}}$ is isomorphic to a substructure of $\invrelational{\struct{B}}$.\bigskip\\
+Therefore, the model $\invrelational{\struct{B}}$ of $\psi$ has a substructure which does not satisfy $\psi$ (by the Isomorphism Lemma), contrary to the premise that $\psi$ is closed under substructures. Hence, $\psi$ is logically equivalent to $\varphi^m$ for some $m \geq 1$.
+%
+\item \textbf{Solution to Exercise 3.7.} The direction from (1) to (2): Assume $\Phi$ defines $P$ explicitly or, to be precise, assume that $\psi \in \fstordlang[k]{S}$ and $\Phi \models \enump{\forall v_0}{\forall v_{k - 1}} (P\enum{v}{k - 1} \liff \psi)$. Let $\struct{A}$ be an $S$-structure, $P^1, P^2 \subset A^k$ with $\pair{\struct{A}}{P^1} \models \Phi$ and $\pair{\struct{A}}{P^2} \models \Phi$. Then for $\seq{a}{k - 1} \in A$,\smallskip\\
+\begin{tabular}{ll}
+\   & $P^1 \enum{a}{k - 1}$ \cr
+iff & $\pair{\struct{A}}{P^1} \models P\enum{v}{k - 1} [\seq{a}{k - 1}]$ \cr
+iff & $\pair{\struct{A}}{P^1} \models \psi [\seq{a}{k - 1}]$ \quad (by premise) \cr
+iff & $\struct{A} \models \psi [\seq{a}{k - 1}]$ \quad (by the Coincidence Lemma) \cr
+iff & $\pair{\struct{A}}{P^2} \models \psi [\seq{a}{k - 1}]$ \quad (by the Coincidence Lemma) \cr
+iff & $\pair{\struct{A}}{P^2} \models P\enum{v}{k - 1} [\seq{a}{k - 1}]$ \quad (by premise) \cr
+iff & $P^2\enum{a}{k - 1}$;
+\end{tabular}\smallskip\\
+that is, $P^1 = P^2$. It turns out that $\Phi$ defines $P$ implicitly.\bigskip\\
+In the following we prove the direction from (2) to (1). For convenience we shall restrict ourselves to the case of relational $S$, after arguing this restriction is not essential: Suppose that the claim has been proven valid for the case of relational symbol sets. We show that the claim is valid for arbitrary $S$ as well. Denoting $\relational{\Psi} \colonequals \setm{\relational{\psi}}{\psi \in \Psi}$ for $\Psi \subset \fstordlang[0]{S}$, we take $\Phi^\prime$ to be the set of sentences in $\relational{\Phi}$ together with
+\begin{itemize}
+%%
+\item for every constant $c \in S$, the $\relational{S}$-sentence $\relational{(\exuni x \, c \equal x)}$;
+%%
+\item for every $n$-ary function $f \in S$, the $\relational{S}$-sentence\\ $\relational{(\enump{\forall x_1}{\forall x_n} \exuni x \, f\enum[1]{x}{n} \equal x)}$.
+\end{itemize}
+It then follows (cf.\ \reftitle{VIII.1.3}) that:
+\begin{enumerate}[(a)]
+%%
+\item For every $S \cup \{ P \}$-structure $\struct{A}$, \qquad $\struct{A} \models \Phi$ \quad iff \quad $\relational{\struct{A}} \models \Phi^\prime$.
+%%
+\item For every $\relational{S} \cup \{ P \}$-structure $\struct{A}$, \qquad $\struct{A} \models \Phi^\prime$ \quad iff \quad ($\invrelational{\struct{A}}$ is well-defined and $\invrelational{\struct{A}} \models \Phi$).
+%%
+\end{enumerate}
+Assume $\Phi$ defines $P$ implicitly. If $\struct{A}$ is an $\relational{S}$-structure and if $P^1, P^2 \subset A^k$ such that $\pair{\struct{A}}{P^1} \models \Phi^\prime$ and $\pair{\struct{A}}{P^2} \models \Phi^\prime$, then $\invrelational{\struct{A}}$ is a well-defined $S$-structure, $\pair{\invrelational{\struct{A}}}{P^1} \models \Phi$ and $\pair{\invrelational{\struct{A}}}{P^2} \models \Phi$ by (b); hence $P^1 = P^2$ by assumption, i.e.\ $\Phi^\prime$ defines $P$ implicitly. Then we have $\Phi^\prime$ defines $P$ explicitly by the premise that the claim has been proven for the case of relational symbol sets. It turns out that $\Phi$ defines $P$ explicitly: Let $\psi \in \fstordlang[k]{\relational{S}}$ with $\Phi^\prime \models \enump{\forall v_0}{\forall v_{k - 1}} (P\enum{v}{k - 1} \liff \psi)$. Then for every $S \cup \{ P \}$-structure $\struct{A}$,\smallskip\\
+\begin{tabular}{ll}
+\    & $\struct{A} \models \Phi$ \cr
+iff  & $\relational{\struct{A}} \models \Phi^\prime$ \quad (by (a))\cr
+then & $\relational{\struct{A}} \models \enump{\forall v_0}{\forall v_{k - 1}} (P\enum{v}{k - 1} \liff \psi)$ \cr
+iff  & $\struct{A} \models \enump{\forall v_0}{\forall v_{k - 1}} (P\enum{v}{k - 1} \liff \invrelational{\psi})$ \quad (cf.\ \reftitle{VIII.1.3(b)}).
+\end{tabular}\smallskip\\
+That is $\Phi \models \enump{\forall v_0}{\forall v_{k - 1}} (P\enum{v}{k - 1} \liff \invrelational{\psi})$.\bigskip\\
+Now we return to showing the direction from (2) to (1), assuming that $S$ is relational. Note that if $\Phi$ is not satisfiable, then the claim immediately follows by choosing, say, $\psi = v_0 \equal v_0$. Hence we shall additionally assume that $\Phi$ is satisfiable.\bigskip\\
+To start, let $S_0$ be a given finite subset of $S$. For $n \geq 0$ consider, as suggested in hint, the $\fstordlang[k]{S_0}$-formula\smallskip\\
+\centerline{$\chi^n \colonequals \bigvee\sett{\varphi^n_{\reduct{\struct{A}}{S_0}, \vect{a}{k}}}{\(\struct{A}\) is an \(S\)-structure, \(\pair{\struct{A}}{\intpted{P}{A}} \models \Phi\) and \(\intpted{P}{A} \vect{a}{k}\)}$}\smallskip\\
+(cf.\ \reftitle{XII.3.4} to check it is a first-order formula).
+\bigskip\\
+We argue that $\enump{\forall v_0}{\forall v_{k - 1}}(P\enum{v}{k - 1} \limply \chi^n)$ is a consequence of $\Phi$: Let $\pair{\struct{A}}{\intpted{P}{A}}$ be an $S \cup \{ P \}$-structure that satisfies $\Phi$. If $\vect{a}{k} \in A$ and $\intpted{P}{A} \vect{a}{k}$, then $\varphi^n_{\reduct{\struct{A}}{S_0}, \vect{a}{k}}$ is a disjunct in $\chi^n$. So $\pair{\struct{A}}{\intpted{P}{A}} \models \chi^n [\vect{a}{k}]$ by the fact that $\reduct{\struct{A}}{S_0} \models \varphi^n_{\reduct{\struct{A}}{S_0}, \vect{a}{k}} [\vect{a}{k}]$ (cf.\ \reftitle{XII.3.5(b)}) and by the Coincidence Lemma.\bigskip\\
+The following discussions will show that for some finite subset $S_0$ of $S$ and some $n \geq 0$, $\enump{\forall v_0}{\forall v_{k - 1}} (\chi^n \limply P\enum{v}{k - 1})$ is a consequence of $\Phi$, provided that $\Phi$ defines $P$ implicitly. From this and the result just obtained, we shall therefore conclude the direction from (2) to (1).\bigskip\\
+\begin{theorem}{Claim 1}
+For finite subset $S_0$ of $S$ and $n \geq 0$, if $\enump{\forall v_0}{\forall v_{k - 1}} (\chi^n \limply P\enum{v}{k - 1})$ is not a consequence of $\Phi$ then there are $S \cup \{ P \}$-structures $\pair{\struct{A}}{\intpted{P}{A}}$, $\pair{\struct{B}}{\intpted{P}{B}}$, $\vect{a}{k} \in A$ and $\vect{b}{k} \in B$ such that, for any finite subset $\Phi_0 \subset \Phi$,\smallskip\\
+\begin{bquoteno}{68ex}{{\rm($+$)}}
+$\pair{\struct{A}}{\intpted{P}{A}} \models \Phi_0$, $\pair{\struct{B}}{\intpted{P}{B}} \models \Phi_0$, $\intpted{P}{A}\vect{a}{k}$, not $\intpted{P}{B}\vect{b}{k}$, and there is a sequence $(I_m)_{m \leq n}$ with $I_n = \{ \vect{a}{k} \mapsto \vect{b}{k} \}$ and $(I_m)_{m \leq n}: \reduct{\struct{A}}{S_0} \iso_n \reduct{\struct{B}}{S_0}$.
+\end{bquoteno}
+\end{theorem}
+\begin{proof}
+Let finite $S_0 \subset S$ and $n \geq 0$ be given, and assume the premise. Then there are an $S \cup \{ P \}$-structure $\pair{\struct{B}}{\intpted{P}{B}}$ that is a model of $\Phi$ and $\vect{b}{k} \in B$ such that $\reduct{\struct{B}}{S_0} \models \chi^n [\vect{b}{k}]$ but not $\intpted{P}{B} \vect{b}{k}$.\bigskip\\
+From $\reduct{\struct{B}}{S_0} \models \chi^n [\vect{b}{k}]$, we infer an $S \cup \{ P \}$-structure $\pair{\struct{A}}{\intpted{P}{A}}$ that is a model of $\Phi$ and $\vect{a}{k} \in A$ with $\intpted{P}{A}\vect{a}{k}$ so that $\reduct{\struct{B}}{S_0} \models \varphi^n_{\reduct{\struct{A}}{S_0}, \vect{a}{k}}[\vect{b}{k}]$. This yields a sequence $(I_m)_{m \leq n}$ with $I_n = \{ \vect{a}{k} \mapsto \vect{b}{k} \}$ and $(I_m)_{m \leq n}: \reduct{\struct{A}}{S_0} \iso_n \reduct{\struct{B}}{S_0}$ (cf.\ the proof for part \reftitle{(b)} of \reftitle{XII.3.8} for the back- and the forth-property).\bigskip\\
+Finally, if $\Phi_0$ is a finite subset of $\Phi$, then we also have $\pair{\struct{A}}{\intpted{P}{A}} \models \Phi_0$ and $\pair{\struct{B}}{\intpted{P}{B}} \models \Phi_0$.
+\end{proof}
+The statement ($+$) can be formulated. Let $S^+$ be obtained from $S \cup \{ P \}$ by adding the following new symbols: $c, f, R, U, V, W, <, I, G$ in the discussion on page 267 in text (note that $R$ is in place of $P$ because it is already used here), and constant symbols $\seq{d}{k - 1}, \seq{e}{k - 1}$. For $\Psi \subset \fstordlang[0]{S}$ we write $\relativize{\Psi}{U} \colonequals \setm{\relativize{\psi}{U}}{\psi \in \Psi}$ ($\relativize{\Psi}{V}$ is defined analogously).\bigskip\\
+For finite $S_0 \subset S$ and finite $\Phi_0 \subset \Phi$, take the conjunction $\delta^+$ of the sentences in (i) - (vii) on page 268 in text\footnote{Of course, $P$ appearing there should be replaced by $R$.} together with
+\begin{itemize}
+%%
+\item the conjunction of sentences in $\relativize{\Phi_0}{U}$;
+%%
+\item the conjunction of sentences in $\relativize{\Phi_0}{V}$;
+%%
+\item $P\enum{d}{k - 1} \land \neg P\enum{e}{k - 1}$\\($P$ holds for $\seq{d}{k - 1}$, but not for $\seq{e}{k - 1}$);
+%%
+\item $\exuni p (Rp \land Icp \land \bigwedge_{0 \leq i < k} Gpd_ie_i)$\\(the set $I_c$ consists solely of the map $\vect{d}{k} \mapsto \vect{e}{k}$).
+%%
+\end{itemize}
+(There is no need to include $\exists x Ux \land \exists y Vy$ as a conjunct because the last sentence above together with (i) ensures that $U$ and $V$ are both nonempty.) Thus, $\delta^+$ is the desired formulation of ($+$) and it does not depend on $n$.\bigskip\\
+In the following discussions leading to the summary, we assume that \emph{for any finite subset $S_0$ of $S$ and any $n \geq 0$, $\enump{\forall v_0}{\forall v_{k - 1}} (\chi^n \limply P\enum{v}{k - 1})$ is not a consequence of $\Phi$}.\bigskip\\
+\begin{theorem}{Claim 2}
+For finite $S_0 \subset S$, $n \geq 0$ and finite $\Phi_0 \subset \Phi$, there is a model $\struct{C}$ of $\delta^+$ in which the field $\intpted{W}{C}$ of $\intpted{<}{C}$ consists of exactly $(n + 1)$ elements.
+\end{theorem}
+\begin{proof}
+Given finite $S_0 \subset S$, $n \geq 0$ and finite $\Phi_0 \subset \Phi$, we choose, according to \textbf{Claim 1}, two $S \cup \{ P \}$-structures $\pair{\struct{A}}{\intpted{P}{A}}$, $\pair{\struct{B}}{\intpted{P}{B}}$ with $A \cap B = \emptyset$ and $\vect{a}{k} \in A$, $\vect{b}{k} \in B$ for which ($+$) holds.\bigskip\\
+Define an $S^+$-structure $\struct{C}$ with
+\begin{itemize}
+%%
+\item $C = A \cup B \cup \{\seqp{0}{n}\} \cup \bigcup_{m \leq n} I_m$;
+%%
+\item $\intpted{U}{C} = A$ and $\substr{\intpted{U}{C}}{\reduct{\struct{C}}{S \cup \{ P \}}} = \pair{\struct{A}}{\intpted{P}{A}}$;
+%%
+\item $\intpted{V}{C} = B$ and $\substr{\intpted{V}{C}}{\reduct{\struct{C}}{S \cup \{ P \}}} = \pair{\struct{B}}{\intpted{P}{B}}$;
+%%
+\item $\intpted{W}{C} = \{ \seqp{0}{n} \}$, $\intpted{<}{C}$ is the natural ordering relation on $\{ \seqp{0}{n} \}$, $\intpted{c}{C} = n$ and $\restrict{\intpted{f}{C}}{\intpted{W}{C}}$ is the predecessor function on $\intpted{W}{C}$ ($\intpted{f}{C}(m + 1) = m$ for $m < n$ and $\intpted{f}{C}(0) = 0$);
+%%
+\item $\intpted{R}{C} = \bigcup_{m \leq n} I_m$;
+%%
+\item $\intpted{I}{C}mp$ \quad iff \quad $m \leq n$ and $p \in I_m$;
+%%
+\item $\intpted{G}{C}pab$ \quad iff \quad $\intpted{R}{C}p$, $a \in \dom{p}$ and $p(a) = b$;
+%%
+\item $\intpted{d_i}{C} = a_i$ for $0 \leq i < k$;
+%%
+\item $\intpted{e_i}{C} = b_i$ for $0 \leq i < k$.
+%%
+\end{itemize}
+By definition $\struct{C}$ is a model of $\delta^+$ in which the field $\intpted{W}{C}$ of $\intpted{<}{C}$ consists of exactly $(n + 1)$ elements.
+\end{proof}
+We immediately have:\medskip\\
+\begin{theorem}{Claim 3}
+For finite $S_0 \subset S$ and finite $\Phi_0 \subset \Phi$, there are two $S \cup \{ P \}$-structures $\pair{\struct{A}}{\intpted{P}{A}}$ and $\pair{\struct{B}}{\intpted{P}{B}}$, $\vect{a}{k} \in A$, $\vect{b}{k} \in B$ and a map $\pi: A \to B$ such that\smallskip\\
+\begin{bquoteno}{68ex}{{\rm($\ast$)}}
+$\pair{\struct{A}}{\intpted{P}{A}} \models \Phi_0$, $\pair{\struct{B}}{\intpted{P}{B}} \models \Phi_0$, $\intpted{P}{A}\vect{a}{k}$, not $\intpted{P}{B}\vect{b}{k}$, $\pi: \reduct{\struct{A}}{S_0} \iso \reduct{\struct{B}}{S_0}$ and $\vect{a}{k} \mapsto \vect{b}{k} \subset \pi$.
+\end{bquoteno}
+\end{theorem}
+\begin{proof}
+Let finite subsets $S_0 \subset S$ and $\Phi_0 \subset \Phi$ be given. According to \textbf{Claim 2}, every finite subset of\smallskip\\
+\centerline{$\{\delta^+\} \cup \setm{\mbox{``\(W\) contains at least \(n\) elements''}}{n \in \nat}$}\smallskip\\
+is satisfiable; by the Compactness Theorem the set itself is also satisfiable.\bigskip\\
+So $\delta^+ \land \vartheta$ has a model (cf.\ the proof of \reftitle{3.3} for the definition of $\vartheta$); furthermore, by the L\"{o}wenheim-Skolem Theorem, we may assume this model is countable.\bigskip\\
+By an argument similar to that given in the proof of \reftitle{3.3}, it follows that the claim is true.
+\end{proof}
+The statement ($\ast$) can also be formulated. Let $S^\ast$ be obtained from $S \cup \{ P \}$ by adding the following new symbols: two unary relation symbols $U, V$, a unary function symbol $f$, and constant symbols $\seq{d}{k - 1}, \seq{e}{k - 1}$.\bigskip\\
+Take $\delta^\ast$ to be the conjunction of the following sentences
+\begin{itemize}
+%%
+\item $\bigwedge_{0 \leq i < k} Ud_i$;
+%%
+\item $\bigwedge_{0 \leq i < k} Ve_i$;
+%%
+\item $P\enum{d}{k - 1}$;
+%%
+\item $\neg P\enum{e}{k - 1}$;
+%%
+\item $\forall x (Ux \limply Vfx)$;
+%%
+\item $\forall y (Vy \limply \exists x (Ux \land fx \equal y))$;
+%%
+\item $\forall x \forall y ((Ux \land Uy \land fx \equal fy) \limply x \equal y)$;
+%%
+\item $\bigwedge_{0 \leq i < k} fd_i \equal e_i$.
+%%
+\end{itemize}
+Note that $\delta^\ast$ does not depend on $S$ or $\Phi$. For finite $S_0 \subset S$ and finite $\Phi_0 \subset \Phi$, the set\smallskip\\
+\centerline{$\relativize{\Phi_0}{U} \cup \relativize{\Phi_0}{V} \cup \setm{\varphi_R}{R \in S_0} \cup \{ \delta^\ast \}$}\smallskip\\
+is the desired formulation of ($\ast$), where $\varphi_R$ denotes the sentence\smallskip\\
+\centerline{$\enump{\forall x_1}{\forall x_m} ((\enumpop{Ux_1}{\land}{Ux_m}) \limply (R\enum[1]{x}{m} \liff R\enump{fx_1}{fx_m}))$}\smallskip\\
+with $m$-ary $R$.\bigskip\\
+\begin{theorem}{Claim 4}
+The set $\relativize{\Phi}{U} \cup \relativize{\Phi}{V} \cup \setm{\varphi_R}{R \in S} \cup \{ \delta^\ast \}$ is satisfiable.
+\end{theorem}
+\begin{proof}
+By the Compactness Theorem it suffices to show: For finite $S_0 \subset S$ and finite $\Phi_0 \subset \Phi$, the set\smallskip\\
+\centerline{$\relativize{\Phi_0}{U} \cup \relativize{\Phi_0}{V} \cup \setm{\varphi_R}{R \in S_0} \cup \{ \delta^\ast \}$}\smallskip\\
+is satisfiable.\bigskip\\
+Given $S_0$ and $\Phi_0$, we choose, according to \textbf{Claim 3}, two $S \cup \{ P \}$-structures $\pair{\struct{A}}{\intpted{P}{A}}$, $\pair{\struct{B}}{\intpted{P}{B}}$ with $A \cap B = \emptyset$, $\vect{a}{k} \in A$, $\vect{b}{k} \in B$ and a map $\pi : A \to B$ for which ($\ast$) holds.\bigskip\\
+Define an $S^\ast$-structure $\struct{D}$ with (cf.\ the proof of \reftitle{2.2})
+\begin{itemize}
+%%
+\item $D = A \cup B$;
+%%
+\item $\intpted{R}{D} = \intpted{R}{A} \cup \intpted{R}{B}$ for $R \in S$;
+%%
+\item $\intpted{U}{D} = A$, $\intpted{V}{D} = B$;
+%%
+\item $\restrict{\intpted{f}{D}}{\intpted{U}{D}} = \pi$;
+%%
+\item for $0 \leq i < k$, $\intpted{d_i}{D} = a_i$;
+%%
+\item for $0 \leq i < k$, $\intpted{e_i}{D} = b_i$;
+%%
+\item $\intpted{P}{D} = \intpted{P}{A} \cup \intpted{P}{B}$.
+%%
+\end{itemize}
+By definition, $\struct{D}$ is a model of $\relativize{\Phi_0}{U} \cup \relativize{\Phi_0}{V} \cup \setm{\varphi_R}{R \in S_0} \cup \{ \delta^\ast \}$.
+\end{proof}
+As a consequence of the above claim, there are two $S \cup \{ P \}$-structures $\pair{\struct{A}}{\intpted{P}{A}}$ and $\pair{\struct{B}}{\intpted{P}{B}}$ both of which are models of $\Phi$, $\vect{a}{k} \in A$, $\vect{b}{k} \in B$ and a map $\pi: A \to B$ such that $\intpted{P}{A}\vect{a}{k}$, not $\intpted{P}{B}\vect{b}{k}$, $\pi: \struct{A} \iso \struct{B}$ and $\vect{a}{k} \mapsto \vect{b}{k} \subset \pi$.\bigskip\\
+Using \reftitle{Corollary III.5.3}, we further get:\medskip\\
+\begin{theorem}{Claim 5}
+There are an $S$-structure $\struct{A}$, $P^1, P^2 \subset A^k$ and $\vect{a}{k} \in A$ such that $(\struct{A}, P^1) \models \Phi$, $(\struct{A}, P^2) \models \Phi$, $P^1\vect{a}{k}$ but not $P^2\vect{a}{k}$. \qed
+\end{theorem}\bigskip\\
+The summary is given below:\medskip\\
+\begin{theorem}{Summary}
+Suppose that for any finite $S_0 \subset S$ and any $n \geq 0$, the $S_0 \cup \{ P \}$-sentence $\enump{\forall v_0}{\forall v_{k - 1}} (\chi^n \limply P\enum{v}{k - 1})$ is not a consequence of $\Phi$. Then there are an $S$-structure $\struct{A}$ and $P^1, P^2 \subset A^k$ such that $\pair{\struct{A}}{P^1} \models \Phi$, $\pair{\struct{A}}{P^2} \models \Phi$ and $P^1 \neq P^2$. \qed
+\end{theorem}\bigskip\\
+With the earlier result that $\enump{\forall v_0}{\forall v_{k - 1}} (P\enum{v}{k - 1} \limply \chi^n)$ is a consequence of $\Phi$ for every finite $S_0 \subset S$ and every $n \geq 0$, we therefore conclude:\medskip\\
+If $\Phi$ defines $P$ implicitly, then $\Phi \models \enump{\forall v_0}{\forall v_{k - 1}} (P\enum{v}{k - 1} \liff \chi^n)$ for some finite $S_0 \subset S$ and some $n \geq 0$, i.e.\ $\Phi$ defines $P$ explicitly.
+%
+\end{enumerate}
+%End of Section XIII.3------------------------------------------------------------
+\
+\\
+\\
+%Section XIII.4-------------------------------------------------------------------
+{\large \S4. Lindstr\"{o}m's Second Theorem}
+\begin{enumerate}[1.]
+%
+\item \textbf{Note on Definition 4.1.} There is a typo in the second line of this definition: ``the set $\L(S)$ is decidable'' should be replaced by ``the set $\languagebase(S)$ is decidable''.
+%
+\item \textbf{Note on Definition 4.2.} The defining clause of $\logsys \effwkereq \logsys^\prime$ is not necessarily stricter than that of $\logsys \weakereq \logsys^\prime$: Be aware of the quantification ``for every \emph{decidable} symbol set $S$.''\medskip\\
+The situation is the same for \reftitle{4.3}.
+%
+\item \textbf{Note on Logical Systems Concerning Effectivity and $\effwkereq$.}
+\begin{asparaenum}[(a)]
+%%
+\item In each of the logical systems $\fstordlog$, $\weaksndordlog$, $\sndordlog$ and $\qlog$, for decidable $S$ the $S$-formulas are finite symbol strings generated by the corresponding calculus (cf.\ \reftitle{Definitions II.3.2, IX.1.1 and IX.3.1}) and hence the set of $S$-sentences are decidable; these logical systems are effective. In contrast, however, the logical system $\infinlog$ fails to be effective because, say, for the decidable set $S = \setm{c_n}{n \in \nat}$ and the $\infinlang{S}$-sentence\smallskip\\
+\centerline{$\varphi = \forall x \bigvee \setm{x \equal c_n}{n \in \nat}$,}\smallskip\\
+there is no finite $S_0 \subset S$ such that $\varphi \in \languagebase_\infin(S)$.
+%%
+\item By the argument in \textbf{Note on the Examples Given below Definition 1.2}, we immediately have $\fstordlog \effwkereq \weaksndordlog$.\bigskip\\
+As for $\weaksndordlog \effwkereq \sndordlog$, cf.\ part (b) of \textbf{Solution to Exercise 1.7} in the annotations to \reftitle{Chapter IX} and note that there the way we chose $\psi \in \sndordlang{S}$ logically equivalent to $\varphi \in \weaksndordlang{S}$ yields a computable function that satisfies the requirements mentioned in \reftitle{Definition 4.2(a)}.
+%%
+\end{asparaenum}
+%
+\item \textbf{Note on Definition 4.3.} (INCOMPLETE) There are two typos in (i): ``There is'' should be replaced by ``There are''; also, ``from $\languagebase\languagebase(S)$'' should be replaced by ``from $\languagebase(S)$''.
+%
+\item \textbf{Verifying $\fstordlog$, $\weaksndordlog$, $\sndordlog$ and $\qlog$ Are Effectively Regular Logical Systems.} We have verified, in \textbf{Note on Logical Systems Concerning Effectivity and $\effwkereq$}, that each of $\fstordlog$, $\weaksndordlog$, $\sndordlog$ and $\qlog$ is an effective logical system. By the discussions in the annotations to \reftitle{Chapter IX} (for relativization and replacement) we further claim that they are effectively regular: For example, the choice of $\relativize{\varphi}{U}$ for $\varphi \in \sndordlang{S}$ there yields a computable function that satisfies the requirements mentioned in the effective analogue of $\rel{\sndordlog}$, provided that $S$ is decidable.
+%
+\item \textbf{Verifying that for $\fstordlog$ and for $\qlog$ the Set of Valid Sentences Are Enumerable.} Both logical systems $\fstordlog$ and $\qlog$ have an adequate proof calculus, so in each of them the set of correct sequents over a decidable symbol set $S$ is enumerable. Since for every $S$-sentence $\varphi$, it is valid if and only if $\varphi$ itself is a correct sequent, it follows that the set of valid sentences are enumerable as well.
+%
+\item \textbf{Note on the Proof of Linstr\"{o}m's Second Theorem.} (INCOMPLETE)
+\begin{asparaenum}[(1)]
+%%
+\item In proving ($+$) for a more restricted (namely decidable, finite and relational) $S$, there is actually no need to assume that $S$ is decidable in addition to the assumption that $S$ is finite, since a finite set is definitely decidable.
+%%
+\item One may be confused why it is valid to apply \reftitle{3.4} in the proof while effective regularity does not necessarily imply regularity and neither does $\fstordlog \effwkereq \logsys$ imply $\fstordlog \weakereq \logsys$ (cf.\ \textbf{Note on Definition 4.2}).\bigskip\\
+Recall that in deriving the results in \reftitle{3.4}, we did not argue on \emph{every}, but rather, argued on \emph{an arbitrarily given}, symbol set $S$;\footnote{In other words, there in \reftitle{3.4} we could have assumed the requirements in defining clauses in $\logsys$ being a regular logical system, in $\fstordlog \weakereq \logsys$ and even in $\losko{\logsys}$ are satisfied only for some particular symbol sets including $S$.} we then drew the conclusion by \emph{justified generalization} (a common proof method which is formally described by \reftitle{Exercise IV.5.5(b4)}). Thus, it is valid to apply \reftitle{3.4} here.
+%%
+\item There are two typos in the fourth line of the fifth paragraph: ``$\struct{A} \models \psi$'' and ``$\struct{B} \models \neg\psi$'' should be replaced by ``$\struct{A} \models_\logsys \psi$'' and ``$\struct{B} \models_\logsys \neg\psi$'', respectively.
+%%
+\item As remarked at the end of \reftitle{Section X.5}, the results obtained there are also valid for any other symbol sets $S_0$ than $S_\infty$ which are effectively given and contain symbols that allow to describe the execution of programs. So we choose such an $S_0$ and, to be precise, let $S_0 \colonequals \{ R, <, f, c \}$, the set of symbols used in the proof of \reftitle{X.4.1}. By Trahtenbrot's Theorem, the set of \finval\ first-order $S_0$-sentences is not enumerable.\bigskip\\
+Since $S_0$ is finite, its relational counterpart $\relational{S_0}$ is decidable (for example, we assign $F$ and $C$ to $f$ and $c$, respectively). We may assume $\relational{S_0}$ is disjoint from $S^+$. Moreover:\medskip\\
+\begin{theorem}{Claim}
+The set of \finval\ first-order $\relational{S_0}$-sentences is not enumerable.
+\end{theorem}
+\begin{proof}
+For convenience, we write $\Phi_0$ for the set of \finval\ first-order $S_0$-sentences and $\Phi_1$ for the set of \finval\ first-order $\relational{S_0}$-sentences; we shall denote
+\[
+\relational{\Psi} \colonequals \setm{\relational{\varphi}}{\varphi \in \Psi}
+\]
+for subsets $\Psi \subset \fstordlang[0]{S_0}$. In addition, we write
+\begin{itemize}
+%%%
+\item $\psi_c$ for $\exuni x c \equal x$;
+%%%
+\item $\psi_f$ for $\forall x \exuni y fx \equal y$; and
+%%%
+\item $\varphi_f$ for $\forall x \forall y (fx \equal fy \limply x \equal y) \limply \forall y \exists x fx \equal y$ \quad (if $f$ is injective then it is surjective).
+%%%
+\end{itemize}
+It can be easily seen from definition that $\consqn{\Phi_0} = \Phi_0$. Thus,\smallskip\\
+\begin{quoteno}{($\circ$)}
+$\consqn{(\relational{\Phi_0})} = \relational{\Phi_0}$
+\end{quoteno}\smallskip\\
+by \textbf{Note on Consequence Closures Concerning Relativization} in the annotations to \reftitle{Chapter X}. Also, $\psi_c, \psi_f, \varphi_f \in \Phi_0$.\bigskip\\
+We argue that\smallskip\\
+\begin{quoteno}{($+$)}
+$\consqn{(\Phi_1 \cup \{ \relational{\psi_c}, \relational{\psi_f}, \relational{\varphi_f} \})} = \consqn{(\relational{\Phi_0})}$.
+\end{quoteno}\smallskip\\
+It suffices to show $\modelclass{\relational{S_0}}{(\Phi_1 \cup \{ \relational{\psi_c}, \relational{\psi_f}, \relational{\varphi_f} \})} = \modelclass{\relational{S_0}}{\relational{\Phi_0}}$: Let $\struct{A}$ be an $\relational{S}$-structure.\medskip\\
+If $\struct{A}$ satisfies $(\Phi_1 \cup \{ \relational{\psi_c}, \relational{\psi_f}, \relational{\varphi_f} \})$, then $\invrelational{\struct{A}}$ is well-defined\footnote{If there is an $S$-structure $\struct{B}$ such that $\struct{A} = \relational{\struct{B}}$, then such $\struct{B}$ be must unique; in this case we write $\invrelational{\struct{A}}$ for $\struct{B}$.} and $\invrelational{\struct{A}} \models \varphi_f$ by \reftitle{VIII.1.3(a)}; so $A$ is finite and hence $\invrelational{\struct{A}} \models \Phi_0$. Using \reftitle{VIII.1.3(a)} again, we have that $\struct{A}$ is a model of $\relational{\Phi_0}$.\medskip\\
+Conversely, if $\struct{A}$ satisfies $\relational{\Phi_0}$, then $\struct{A} \models (\relational{\psi_c} \land \relational{\psi_f})$ because $(\psi_c \land \psi_f) \in \Phi_0$ (note that $\consqn{\Phi_0} = \Phi_0$); thus $\invrelational{\struct{A}}$ is well-defined and $\invrelational{\struct{A}} \models \Phi_0$ by \reftitle{VIII.1.3(a)}. Since $\varphi_f \in \Phi_0$, $\struct{A} \models \relational{\varphi_f}$ because $\struct{A}$ is a model of $\relational{\Phi_0}$ by premise; also, $\invrelational{\struct{A}}$ is a model of $\varphi_f$, hence $A$ is finite. We have $\struct{A} \models \Phi_1$. In summary, $\struct{A}$ is a model of $\Phi_1 \cup \{ \relational{\psi_c}, \relational{\psi_f}, \relational{\varphi_f} \}$.\bigskip\\
+From ($\circ$) and ($+$), it follows that\smallskip\\
+\begin{quoteno}{($\ast$)}
+$\consqn{(\Phi_1 \cup \{ \relational{\psi_c}, \relational{\psi_f}, \relational{\varphi_f} \})} = \relational{\Phi_0}$.
+\end{quoteno}\bigskip\\
+By our previous discussion, $\Phi_0$ is not enumerable. We conclude $\Phi_1$ also, is not enumerable: If $\Phi_1$ were enumerable, then $\consqn{(\Phi_1 \cup \{ \relational{\psi_c}, \relational{\psi_f}, \relational{\varphi_f} \})}$ and hence $\relational{\Phi_0}$ would as well be enumerable by \reftitle{Theorem X.6.3} and \reftitle{Exercise X.6.6}, and by ($\ast$). Let $\procp{P}$ be an enumeration procedure for $\relational{\Phi_0}$. We describe an enumeration procedure $\procp{Q}$ for $\Phi_0$, thus yielding a contradiction: For $n = 1, 2, 3, \ldots$, generate the lexicographically first $n$ first-order $S_0$-sentences $\seq[1]{\varphi}{n}$ ($\fstordlang[0]{S_0}$ is enumerable because $S_0$ is finite), and form $\seqp{\relational{\varphi_1}}{\relational{\varphi_n}}$ (this can be done effectively). On the other hand, use $\procp{P}$ to list the lexicographically first $n$ $\relational{S_0}$-sentences in $\relational{\Phi_0}$. Output every $\varphi_i$ for which $\relational{\varphi_i}$ occurs on that list (if any).
+\end{proof}
+We may choose $\relational{S_0}$ for $S_1$ in the proof of \reftitle{4.4} in text.\bigskip\\
+\textit{Remark.} An alternative way to validate the claim is to show the results in \reftitle{X.5.2 - 4} are also valid for $\relational{S_0}$ using, for example, the sentence\smallskip\\
+\centerline{$\psi_\prog^\prime \colonequals \relational{\psi_\prog} \land \exuni x \, Cx \land \forall x \exuni \, y Fxy$}
+in place of $\psi_\prog$ in the proof of the result corresponding to \reftitle{X.5.3}.
+%%
+\item Note that in the direction from left to right in ($\circ$) in text, the $S_1$-structure $\substr{\intpted{W}{A}}{\reduct{\struct{A}}{S_1}}$ is well-defined since $S_1$ is relational.\bigskip\\
+On the other hand, we prove the other direction in ($\circ$) here. Assume $\models_\logsys \chi \limply \relativize{(\varphi^\ast)}{W}$. Let $\struct{A}$ be an $S_1$-structure with $m \geq 1$ elements in the domain $A$. According to (ii), we may choose an $S^+$-structure $\struct{C}$ that is a model of $\chi$ in which $\intpted{W}{C}$ contains exactly $m$ elements. Then we take the $(S^+ \cup S_1)$-expansion $\struct{D}$ of $\struct{C}$ such that $\substr{\intpted{W}{D}}{\reduct{\struct{D}}{S_1}}$ is isomorphic to $\struct{A}$ (this is possible because both $A$ and $\intpted{W}{D}$ contain $m$ elements and $S_1$ is relational). Thus, $\struct{D}$ is also a model of $\chi$ by the reduct property (recall that $S_1$ is disjoint from $S^+$). By the assumption $\models_\logsys \chi \limply \relativize{(\varphi^\ast)}{W}$, it follows that $\struct{D} \models_\logsys \relativize{(\varphi^\ast)}{W}$ and hence $\substr{\intpted{W}{D}}{\reduct{\struct{D}}{S_1}} \models_\logsys \varphi^\ast$, according to the effective variant of $\rel{\logsys}$. Hence, $\struct{A} \models_\logsys \varphi^\ast$ by the isomorphism property, so $\struct{A} \models \varphi$. Therefore $\varphi$ is \finval.
+%%
+\item The computability of the replacement operation is not used in the proof, so this theorem can be generalized to logical systems $\logsys$ for which $\relational{\varphi}$ exists for any $\varphi \in \languagebase(S)$ provided that $S$ is decidable, regardless of whether the replacement operation can be carried out effectively.
+%%
+\end{asparaenum}
+%
+\item \textbf{The Ordering Resulting from $\pair{\nat}{{\intpted{<}{\nat}}}$ by Adding an Isomorphic Copy Is a Well-Ordering.} Let $\pair{A}{{\intpted{<}{A}}}$ and $\pair{B}{{\intpted{<}{B}}}$ be two $\{ < \}$-structures isomorphic to $\pair{\nat}{{\intpted{<}{\nat}}}$ with $A \cap B = \emptyset$. Choose the $\{ < \}$-structure $\struct{C}$ with $C = A \cup B$ and\smallskip\\
+\centerline{${\intpted{<}{C}} = {\intpted{<}{A}} \cup {\intpted{<}{B}} \cup \setm{\pair{a}{b}}{a \in A, b \in B}$.}\smallskip\\
+Obviously, $\struct{C}$ is a well-ordering.
+%
+\item \textbf{Arguing that All Finite Well-Orderings Are $\logsys$-Accessible Provided that $\fstordlog \weakereq \logsys$.} If $\pair{A}{\intpted{<}{A}}$ is a finite well-ordering with $n \geq 1$ elements in $A$, then $\pair{A}{\intpted{<}{A}}$ is a model of $\varphi$, where $\varphi$ is the conjunction of sentences in $\Phi_\ord$ and of $\exactly{n} x\, x \equal x$ (the models of which are exactly those orderings with $n$ elements). By taking a $\languagebase(S)$-sentence $\psi$ logically equivalent to $\varphi$, we are done.
+%
+\item \textbf{Arguing There Is No $\logsys$-Accessible Infinite Well-Ordering Provided that $\comp{\logsys}$.} For the sake of contradiction, suppose that $\psi \in \languagebase(S)$ satisfies the properties (a) and (b) mentioned on page 267 in which ${<} \in S$, and that $\struct{A}$ is an $S$-structure that satisfies $\psi$ where $\pair{\field{A}}{{\intpted{<}{A}}}$ is an infinite well-ordering. Also, let $c \not\in S$ be a constant symbol, and for every first-order $(S \cup \{ c \})$-sentence $\varphi$ we assign an $\languagebase(S \cup \{ c \})$-sentence $\varphi^\ast$ logically equivalent to $\varphi$ (since $\fstordlog \weakereq \logsys$); for sets $\Phi \subset \fstordlang[0]{S \cup \{ c \}}$ we denote $\Phi^\ast \colonequals \setm{\varphi^\ast}{\varphi \in \Phi}$.\bigskip\\
+Let $\Psi \colonequals \{ \psi \} \cup \Phi_\pord^\ast \cup \setm{\varphi_n^\ast}{n > 0}$, where\smallskip\\
+\centerline{$\varphi_n \colonequals \atleast{n} x \, x < c$}\smallskip\\
+formulates ``there are at least $n$ elements smaller than $c$.''\bigskip\\
+Then, every finite subset $\Psi_0$ of $\Psi$ is satisfiable: Let $n_0 > 0$ be the largest $n$ such that $\varphi_n \in \Psi_0$ (set $n_0 \colonequals 1$ if there is no such $n$). Since $\pair{\field{A}}{{\intpted{<}{A}}}$ is an infinite well-ordering, there must be some $a \in A$ such that there are at least $n_0$ elements smaller (in the sense of $\intpted{<}{A}$) than $a$. By $\intpted{c}{A} \colonequals a$, the $(S \cup \{ c \})$-structure $\pair{\struct{A}}{\intpted{c}{A}}$ is a model of $\Psi_0$.\bigskip\\
+It follows from $\comp{\logsys}$ that $\Psi$ is satisfiable. Therefore, there is an $(S \cup \{ c \})$-structure $\pair{\struct{B}}{\intpted{c}{B}}$ satisfying $\Psi$; $\struct{B}$ is thus a model of $\psi$ (by the reduct property) in which $\pair{\field{B}}{{\intpted{<}{B}}}$ has an infinite descending chain, a contradiction.
+%
+\end{enumerate}
+%End of Section XIII.4------------------------------------------------------------
+%End of Chapter XIII--------------------------------------------------------------

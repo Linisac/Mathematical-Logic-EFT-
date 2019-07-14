@@ -1,0 +1,1349 @@
+%Chapter IX----------------------------------------------------------------------------------------
+{\LARGE \bfseries IX \\ \\ Extensions of First-Order Logic}
+\\
+\\
+\\
+%Section IX.1--------------------------------------------------------------------------------------
+{\large \S1. Second-Order Logic}
+\begin{enumerate}[1.]
+\item \textbf{Note to Second-Order Logic $\SOL$.} $\SOL$ may be characterized by the following ``equation'':
+\[
+\SOL \colonequals \bigcup\limits_S \LII^S + (\mbox{satisfaction relation for $\bigcup\limits_S \LII^S$}).
+\]
+\ \\
+Let $S$ be given. To be compatible with $\FOL$, we shall call $S$-formulas of the form
+\[
+Xt_1 \ldots t_n
+\]
+\emph{atomic}, where $X$ is an $n$-ary relation variable and $t_1$, \ldots, $t_n$ are $S$-terms.\\
+\ \\
+When it comes to the satisfaction relation ``$\models$'', on the other hand, we can also dispense with the connectives $\land$, $\rightarrow$, $\leftrightarrow$ and the quantifier $\forall$ in second-order languages, as we did in $\FOL$. This can be justified by the same arguments in III.4.
+%
+\item \textbf{Note to Remarks and Examples 1.3.} As introduced in text, the formation rules of second-order formulas are composed of those of first-order counterparts and two additional rules (for second-order). Thus when using inductions on second-order formulas or providing recursive definitions for them, there are indeed only two more cases (formulas of the form $X t_1 \ldots t_n$ or of the form $\exists X \varphi$) to be considered, campared with those for first-order ones.\\
+\\
+But sometimes, at least when it comes to discussing properties that are solely pertained to second-order logic, it is convenient to combine cases within the scope of first-order into one case. The definition of the free occurrences of relation variables given in (1) below exemplifies this argument.\\
+\\
+Here we present notes to all of the parts (1) - (7) of 1.3.
+\begin{enumerate}[(1)]
+\item The definition of the set of free (ordinary) \emph{variables} in a second-order formula $\varphi$ is obtained by extending that for first-order formulas (cf. II.5.1) by the following two cases:
+\[
+\begin{array}{lll}
+\free{X t_1 \ldots t_n}  & := & \enumpop{\var{t_1}}{\cup}{\var{t_n}} \cr
+\free{\exists X \varphi} & := & \free{\varphi}
+\end{array}
+\]
+\ \\
+As for the definition of the set of free \emph{relation variables} in a second-order formula $\varphi$, in which this set is denoted by $\sndordfree{\varphi}$, we have:\\
+\ \\
+\textbf{Definition of Free Occurrences of Relation Variables.}
+\[
+\begin{array}{lll}
+\sndordfree{\varphi}           & \colonequals & \emptyset \quad \mbox{if \(\varphi\) is a first-order formula} \cr
+\sndordfree{X\enum[1]{t}{n}}   & \colonequals & \{ X \} \cr
+\sndordfree{\neg\varphi}       & \colonequals & \sndordfree{\varphi} \cr
+\sndordfree{\varphi\lor \psi}  & \colonequals & \sndordfree{\varphi} \cup \sndordfree{\psi} \cr
+\sndordfree{\exists x\varphi}  & \colonequals & \sndordfree{\varphi} \cr
+\sndordfree{\exists X\varphi}  & \colonequals & \sndordfree{\varphi} \setminus \{ X \}
+\end{array}
+\]
+\ \\
+Now we are ready to state and prove the Coincidence Lemma for $\mathcal{L}_\mathrm{II}$:\\
+\\
+\textbf{Coincidence Lemma for $\mathcal{L}_\mathrm{II}$.} \emph{Let $\mathfrak{I}_1 = (\mathfrak{A}_1, \gamma_1)$ be a second-order $S_1$-interpretation and $\mathfrak{I}_2 = (\mathfrak{A}_2, \gamma_2)$ be a second-order $S_2$-interpretation, both with the same domain, i.e. $A_1 = A_2$. Put $S := S_1 \cap S_2$.}
+\begin{enumerate}[(a)]
+\item \emph{Let $t$ be an $S$-term. If $\mathfrak{I}_1$ and $\mathfrak{I}_2$ agree on the $S$-symbols occurring in $t$ and on the variables occurring in $t$, then $\mathfrak{I}_1(t) = \mathfrak{I}_2(t)$.}
+%%%
+\item \emph{Let $\varphi$ be a second-order $S$-formula. If $\mathfrak{I}_1$ and $\mathfrak{I}_2$ agree on the $S$-symbols and on the variables and relation variables occurring free in $\varphi$, then $\mathfrak{I}_1 \models \varphi$ iff $\mathfrak{I}_2 \models \varphi$.}
+\end{enumerate}
+\begin{proof} (a) cf. the proof of III.4.6.\\
+\ \\
+(b) We use induction on second-order $S$-formulas:
+\begin{description}
+\item $\varphi$ is a first-order $S$-formula: cf. the proof of III.4.6.
+%%%
+\item $\varphi = Xt_1 \ldots t_n$: $\mathfrak{I}_1 \models \varphi$\\
+\begin{tabular}{ll}
+iff & $\gamma_1(X)$ holds for $\mathfrak{I}_1(t_1)$, \ldots, $\mathfrak{I}_1(t_n)$ \cr
+iff & $\gamma_1(X)$ holds for $\mathfrak{I}_2(t_1)$, \ldots, $\mathfrak{I}_2(t_n)$ \quad (by (a)) \cr
+iff & \begin{minipage}[t]{59ex} $\gamma_2(X)$ holds for $\mathfrak{I}_2(t_1)$, \ldots, $\mathfrak{I}_2(t_n)$\\(by hypothesis, $\gamma_1(X) = \gamma_2(X)$)\end{minipage} \cr
+iff & $\mathfrak{I}_2 \models \varphi$.
+\end{tabular}
+%%%
+\item $\varphi = \neg \psi$: $\mathfrak{I}_1 \models \neg \psi$\\
+\begin{tabular}{ll}
+iff & not $\mathfrak{I}_1 \models \psi$\cr
+iff & not $\mathfrak{I}_2 \models \psi$ (by induction hypothesis)\cr
+iff & $\mathfrak{I}_2 \models \neg \psi$.
+\end{tabular}
+%%%
+\item $\varphi = (\psi \lor \chi)$: $\mathfrak{I}_1 \models (\psi \lor \chi)$\\
+\begin{tabular}{ll}
+iff & $\mathfrak{I}_1 \models \psi$ or $\mathfrak{I}_2 \models \chi$\cr
+iff & $\mathfrak{I}_2 \models \psi$ or $\mathfrak{I}_2 \models \chi$ (by induction hypothesis)\cr
+iff & $\mathfrak{I}_2 \models (\psi \lor \chi)$.
+\end{tabular}
+%%%
+\item $\varphi = \exists x \psi$: $\mathfrak{I}_1 \models \exists x \psi$\\
+\begin{tabular}{ll}
+iff & there is an $a \in A_1$ such that $\mathfrak{I}_1\frac{a}{x} \models \psi$\cr
+iff & \begin{minipage}[t]{59ex} there is an $a \in A_2 (= A_1)$ such that $\mathfrak{I}_2\frac{a}{x} \models \psi$ (by induction hypothesis applied to $\psi$, $\mathfrak{I}_1\frac{a}{x}$ and $\mathfrak{I}_2\frac{a}{x}$; note that, because $\free(\psi) \subset \free(\varphi) \cup \{ x \}$ and $\sndordfree{\psi} = \sndordfree{\varphi}$, the interpretations $\mathfrak{I}_1\frac{a}{x}$ and $\mathfrak{I}_2\frac{a}{x}$ agree on all symbols occurring in $\psi$ and all variables as well as all relation variables occurring free in $\psi$)\end{minipage} \cr
+iff & $\mathfrak{I}_2 \models \exists x \psi$.
+\end{tabular}
+%%%
+\item $\varphi = \exists X^n \psi$: $\mathfrak{I}_1 \models \exists X^n \psi$\\
+\begin{tabular}{ll}
+iff & there is a $C \subset A_1^n$ such that $\mathfrak{I}_1\frac{C}{X} \models \psi$\cr
+iff & \begin{minipage}[t]{59ex} there is a $C \subset A_2^n (= A_1^n)$ such that $\mathfrak{I}_2\frac{C}{X} \models \psi$ (by induction hypothesis applied to $\psi$, $\mathfrak{I}_1\frac{C}{X}$ and $\mathfrak{I}_2\frac{C}{X}$; similarly, because $\free(\psi) = \free(\varphi)$ and $\sndordfree{\psi} \subset \sndordfree{\varphi} \cup \{ X \}$, the interpretations $\mathfrak{I}_1\frac{C}{X}$ and $\mathfrak{I}_2\frac{C}{X}$ agree on all symbols occurring in $\psi$ and all variables as well as all relation variables occurring free in $\psi$)\end{minipage} \cr
+iff & $\mathfrak{I}_2 \models \exists X^n \psi$.\qedhere
+\end{tabular}
+\end{description}
+\end{proof}
+%%
+\item We justify the use of $\forall X \varphi$ as an abbreviation for $\neg \exists X \neg \varphi$:
+\begin{center}
+\begin{tabular}{ll}
+\ & $\mathfrak{I} \models \forall X^n \varphi$, namely $\mathfrak{I} \models \neg \exists X^n \neg \varphi$ \cr
+iff & not $\mathfrak{I} \models \exists X^n \neg \varphi$\cr
+iff & there is no $C \subset A^n$ such that $\mathfrak{I}\frac{C}{X} \models \neg \varphi$\cr
+iff & there is no $C \subset A^n$ such that not $\mathfrak{I}\frac{C}{X} \models \varphi$\cr
+iff & for all $C \subset A^n$, $\mathfrak{I}\frac{C}{X} \models \varphi$\cr
+\   & (since for any interpretation $\mathfrak{I}$, either $\mathfrak{I} \models \varphi$ or not $\mathfrak{I} \models \varphi$).
+\end{tabular}
+\end{center}
+%%
+\item A unary relation over a domain is a subset of it. On the other hand, the result
+\begin{quote}
+``No first-order axioms can characterize the structure $(\mathbb{N}, \mathbf{\sigma}, 0)$ up to isomorphism''
+\end{quote}
+follows from Corollary VI.4.4.
+%%
+\item Notice that we have discussed in VI.1 that $\mathfrak{R}^<$ cannot be characterized by any set of $S^<_{\mbox{\scriptsize ar}}$-sentences. A misprint is found in remark (4): '$S_{\mbox{\scriptsize ar}}$' in line 3 should be replaced by '$S^<_{\mbox{\scriptsize ar}}$'.
+%%
+\item We justify the validity of $(+)$. Given an arbitrary $S$-interpretation $\mathfrak{I} = (\mathfrak{A}, \gamma)$, we have for all variables $x$, $y$:
+\begin{enumerate}[1)]
+\item If $x \equiv y$ holds, i.e. $\mathfrak{I}(x) = \mathfrak{I}(y)$, then clearly for every subset $S$ of $A$, whenever it contains $\mathfrak{I}(x)$ it must also contain $\mathfrak{I}(y)$ and vice versa, hence $\forall X (Xx \leftrightarrow Xy)$ holds.
+%%%
+\item Conversely, if $\forall X (Xx \leftrightarrow Xy)$ holds, then for every subset $C$ of $A$, $\mathfrak{I} \displaystyle\frac{C}{X} \models (Xx \leftrightarrow Xy)$. In particular,
+\[
+\mathfrak{I}\frac{\{ \mathfrak{I}(y) \}}{X} \models (Xx \leftrightarrow Xy)
+\]
+(notice that $\{ \mathfrak{I}(y) \} = \{ a \in A | a = \mathfrak{I}(y) \}$). By definition, $\mathfrak{I} \displaystyle\frac{\{ \mathfrak{I}(y) \}}{X} \models Xy$. Thus we have $\mathfrak{I} \displaystyle\frac{\{ \mathfrak{I}(y) \}}{X} \models Xx$, or equivalently $\mathfrak{I}(x) = \mathfrak{I}(y)$, i.e. $x \equiv y$ holds.
+\end{enumerate}
+%%
+\item Recall that in VIII.1 we introduced term-reduced formulas (cf. Definition VIII.1.1). Likewise in $\mathcal{L}_\mathrm{II}$, we can define logically equivalent\footnote{The notion of logical equivalence in $\mathcal{L}_\mathrm{II}$ is defined analogously.} \emph{term-reduced second-order formulas} $\psi^\ast$ for arbitrary second-order formulas $\psi$, by extending the definition in the proof of Theorem VIII.1.2 by two more cases below: For $n$-ary relation variables $X$,
+\[
+\begin{array}{lll}
+[X t_1 \ldots t_n]^\ast & := & \exists x_1 \ldots \exists x_n ([t_1 \equiv x_1]^\ast \land \ldots \land [t_n \equiv x_n]^\ast \land \cr
+\                       & \  & \ X x_1 \ldots x_n); \cr
+[\exists X \psi]^\ast   & := & \exists X \psi^\ast.
+\end{array}
+\]
+It is easy to prove the logical equivalence between $\psi$ and $\psi^\ast$ by induction and hence obtain\\
+\ \\
+\textbf{Theorem.} \emph{For every $\psi \in \LII^S$ there is a logically equivalent, term-reduced $\psi^\ast \in \LII^S$ with $\free(\psi) = \free(\psi^\ast)$ and $\freeII(\psi) = \freeII(\psi^\ast)$.}\nolinebreak\hfill$\talloblong$\\
+\ \\
+Following the result for term-reduced second-order formulas, we show how to turn a second-order formula $\varphi$ with ``function variables'' into an ordinary one, $\varphi^+$, that is equivalent to $\varphi$ \emph{in principle}. (In fact, $\varphi$ and $\varphi^+$ are logically equivalent for those interpretations $\INT{I} = (\struct{A}, \gamma)$ with
+\begin{center}
+$\gamma(g) (a_0, \ldots, a_{n - 1}) = a_n$ iff $\gamma(G) a_0 \ldots a_n$,
+\end{center}
+where $G$ is the $(n + 1)$-ary relation variable in $\varphi^+$ corresponding to the $n$-ary function variable in $\varphi$.)
+\\
+\ \\
+Let $S$ be given. It suffices to define for term-reduced $\varphi$:\footnote{If $\varphi$ is not term-reduced, then we can turn it into a term-reduced one that is logically equivalent to $\varphi$ by earlier results. We get stucked, however, when recursively applying the definition to $\varphi$, if $\varphi$ does involve function variables; we did not take this case into account. A way around this problem is simple: Suppose the function variables occurring in $\varphi$ are among $g_0, \ldots, g_n$, then we ``pretend'' as if $S \cup \{ g_0, \ldots, g_n \}$ were a symbol set, i.e. as if $g_0, \ldots, g_n$ were function symbols, and we regard $\varphi$ as a second-order $S \cup \{ g_0, \ldots, g_n \}$-formula.}
+\[
+\begin{array}{lll}
+[x \equiv y]^+ & := & x \equiv y; \cr
+[f y_1 \ldots y_n \equiv x]^+ & := & f y_1 \ldots y_n \equiv x, \mbox{ if $f \in S$ is $n$-ary}; \cr
+[c \equiv x]^+ & := & c \equiv x; \cr
+[R x_1 \ldots x_n]^+ & := & R x_1 \ldots x_n, \mbox{ if $R \in S$ is $n$-ary}; \cr
+[g y_1 \ldots y_n \equiv x]^+ & := & (G y_1 \ldots y_n x \land \forall y_1 \ldots \forall y_n \exists^{=1} x G y_1 \ldots y_n x), \cr
+\ & \ & \mbox{ where $G$ is an $(n + 1)$-ary relation variable} \cr
+\ & \ & \mbox{ currently not used}; \cr
+[X x_1 \ldots x_n]^+ & := & X x_1 \ldots x_n; \cr
+[\neg \varphi]^+ & := & \neg \varphi^+; \cr
+(\varphi \lor \psi)^+ & := & (\varphi^ \lor \psi^+); \cr
+[\exists x \varphi]^+ & := & \exists x \varphi^+; \cr
+[\exists g \varphi]^+ & := & \exists G \varphi^+, \ \mbox{where $G$ is the relation variable that} \cr
+\ & \ & \ \mbox{replaces $g$ during the transition from $\varphi$} \cr
+\ & \ & \ \mbox{to $\varphi^+$ if $g$ occurs in $\varphi$; otherwise it is an} \cr
+\ & \ & \ \mbox{arbitrary relation variable}; \cr
+[\exists X \varphi]^+ & := & \exists X \varphi^+.
+\end{array}
+\]
+(We will introduce (simultaneous) substitutions in the next part.)\\
+\ \\
+Next, we provide a \textit{proof} for the claim
+\begin{quote}
+``Every injective function from $A$ to $A$ is surjective if and only if $A$ is finite.''
+\end{quote}
+\ \\
+Firstly, suppose $A$ is finite. Let $f: A \to A$ be a function, then by definition the range of $f$ is a subset of $A$. If $f$ is injective, then such a subset cannot be proper since, if it were, by the Pigeonhole Principle there would be two distinct elements $a_1$, $a_2$ of $A$ such that $f(a_1) = f(a_2)$ (notice that $A$ is \emph{finite}), which contradicts the premise that $f$ is injective.\\
+\\
+Conversely, suppose $A$ is not finite, then it must include a countable subset $B$. Let $g_1$ be a bijection from $B$ to $\mathbb{N}$. We choose a $b \in B$ and define $B^\prime := B \setminus \{ b \}$. Then obviously $B^\prime$ is a countable \emph{proper} subset of $A$. Let $g_2$ be a bijection from $B^\prime$ to $\mathbb{N}$. It is clear that $g_0 = g_2^{-1} \circ g_1$ is a bijection from $B$ to $B^\prime$. Let $g$ be a function from $A$ to $A$ such that
+\[
+g(a) := \begin{cases}
+a, & \mbox{if \(a \in A \setminus B\)};\cr
+g_0(a), & \mbox{otherwise},
+\end{cases}
+\]
+then $g$ is injective but not surjective, since its range $A \setminus \{ b \}$ is a proper subset of $A$ as we mentioned earlier.\nolinebreak\hfill$\talloblong$\\
+\ \\
+Finally, we close this part by an argument about $\varphi_{\mbox{\scriptsize fin}}$. The formula $\varphi_0 := \forall x \exists^{=1} y Xxy$ states that the binary relation $X$ is a (unary) function, and when conjuncted with it the formula $\varphi_1 := \forall x \forall y \forall z((Xxz \land Xyz) \rightarrow x \equiv y)$ states that the function $X$ is injective. However, the formula $\varphi_2 := \forall y \exists x Xxy$ alone does by no means state that ``the function $X$ is surjective'' as we might mistakenly think so; it merely says that for every $y$ there exists some $x$ such that the \emph{relation} $X$ holds (that is, $Xxy$ holds).\\
+\\
+Then, how can we claim that $\varphi_{\mbox{\scriptsize fin}}$ works correctly? Let us reveal the subtlety here. The statement ``If $X$ is an injective function then it is a surjective function'' can be formalized using $\varphi_0$, $\varphi_1$ and $\varphi_2$, as follows:
+\[
+(\varphi_0 \land \varphi_1) \rightarrow (\varphi_0 \land \varphi_2).
+\]
+It is easy to see that the above formula is logically equivalent to
+\[
+(\varphi_0 \land \varphi_1) \rightarrow \varphi_2.
+\]
+Hence, eliminating the second $\varphi_0$ in the formula above the previous one leaves the semantics unaltered.
+%%
+\item We introduce in $\mathcal{L}_\mathrm{II}$ some syntactic operations (substitutions and relativizations) and develop results analogous to $\mathcal{L}_\mathrm{I}$. Assume $S$ fixed.\\
+\ \\
+Before we proceed, let us generalize the notion of \emph{reassigning} variables in interpretations: Let $\xi_0, \ldots, \xi_r$ be a list of pairwise distinct variables (ordinary or relation) and $\mathfrak{I} = (\mathfrak{A}, \gamma)$ a second-order interpretation; and for $0 \leq i \leq r$,
+\begin{enumerate}[1)]
+\item $\alpha_i \in A$ if $\xi_i$ is an ordinary variable;
+%%%
+\item $\alpha_i \subset A^n$ if $\xi_i$ is an $n$-ary relation variable.
+\end{enumerate}
+Then let $\gamma \displaystyle\frac{\alpha_0 \ldots \alpha_r}{\xi_0 \ldots \xi_r}$ be the second-order assignment in $\mathfrak{A}$ with
+\[
+\gamma \frac{\alpha_0 \ldots \alpha_r}{\xi_0 \ldots \xi_r} (\upsilon) := \begin{cases}
+\gamma (\upsilon) & \mbox{if \(\upsilon \not\in \{ \xi_0, \ldots, \xi_r \}\)} \cr
+\alpha_i & \mbox{if \(\upsilon = \xi_i\)}
+\end{cases}
+\]
+and
+\[
+\mathfrak{I} \frac{\alpha_0 \ldots \alpha_r}{\xi_0 \ldots \xi_r} := \left( \mathfrak{A}, \gamma\frac{\alpha_0 \ldots \alpha_r}{\xi_0 \ldots \xi_r} \right).
+\]
+\ \\
+The substitution operation for formulas in $\mathcal{L}_{\mbox{\scriptsize II}}$ is defined analogously:\\
+\ \\
+\textbf{Definition of Simultaneous Substitution.} Suppose $\xi_0$, \ldots, $\xi_r$ are a list of pairwise distinct variables (each of which is ordinary or relation), and $\tau_0$, \ldots, $\tau_r$ are a list in which each $\tau_i$ is either a term or a relation variable. Furthermore, $\tau_i$ is a relation variable if and only if $\xi_i$ is.\\
+\ \\
+Moreover, let $\xi_{i_1}$, \ldots, $\xi_{i_s}$ ($i_1 < \ldots < i_s$) be exactly the ordinary variables among $\xi_0$, \ldots, $\xi_r$.
+\begin{enumerate}[(a)]
+\item $\varphi \displaystyle \frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} := \varphi\frac{\tau_{i_1} \ldots \tau_{i_s}}{\xi_{i_1} \ldots \xi_{i_s}}$ for $\varphi \in L^S$
+%%%
+\item \begin{math} [X t_1 \ldots t_n] \displaystyle \frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} := \left\{
+\begin{tabular}{l}
+$X t_1 \displaystyle \frac{\tau_{i_1} \ldots \tau_{i_s}}{\xi_{i_1} \ldots \xi_{i_s}} \ldots t_n \frac{\tau_{i_1} \ldots \tau_{i_s}}{\xi_{i_1} \ldots \xi_{i_s}}$, \cr
+\ \ \ if $X \not \in \{ \xi_0 \ldots \xi_r \}$ \cr
+$\xi_k t_1 \displaystyle \frac{\tau_{i_1} \ldots \tau_{i_s}}{\xi_{i_1} \ldots \xi_{i_s}} \ldots t_n \frac{\tau_{i_1} \ldots \tau_{i_s}}{\xi_{i_1} \ldots \xi_{i_s}}$, \cr
+\ \ \ if $X = \xi_k$
+\end{tabular}
+\right.
+\end{math}
+%%%
+\item $[\neg \varphi] \displaystyle \frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} := \neg \left[\varphi \frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} \right]$
+%%%
+\item $(\varphi \lor \psi) \displaystyle \frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} := \left(\varphi \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} \lor \psi \displaystyle \frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} \right)$
+%%%
+\item Suppose $\xi_{j_1}, \ldots, \xi_{j_p}$ ($j_1 < \ldots < j_p$) are exactly those variables $\xi_j$ (either ordinary or relation) among $\xi_0, \ldots, \xi_r$, such that
+\begin{center}
+$\xi_j \in \free(\exists x \varphi) \cup \freeII(\exists x \varphi)$ and $\xi_j \neq \tau_j$.
+\end{center}
+In particular, $x \neq \xi_{j_1}, \ldots, x \neq \xi_{j_p}$. Then set
+\[
+[\exists x \varphi] \frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} := \exists u \left[ \varphi \frac{\tau_{j_1} \ldots \tau_{j_p} u}{\xi_{j_1} \ldots \xi_{j_p} x} \right],
+\]
+where $u$ is the variable $x$ if $x$ does not occur in $\tau_{j_1}, \ldots, \tau_{j_p}$; otherwise $u$ is the first variable in the list $v_0, v_1, v_2, \ldots$ which does not occur in $\varphi, \tau_{j_1}, \ldots, \tau_{j_p}$.
+%%%
+\item Let $\xi_{j_1}, \ldots, \xi_{j_p}$ ($j_1 < \ldots < j_p$) be exactly those variables (either ordinary or relation) among $\xi_0$, \ldots, $\xi_r$, such that each $\xi_i$ other than $\xi_{j_1}$, \ldots, $\xi_{j_p}$ is a relation variable with
+\[
+\mbox{$\xi_i \not \in \free(\exists X^n \varphi)$ or $\xi_i = \tau_i$}.
+\]
+In particular, $X \neq \xi_{j_1}$, \ldots, $X \neq \xi_{j_p}$. Then set
+\[
+[\exists X^n \varphi] \displaystyle \frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} := \exists U^n \left[ \varphi \displaystyle \frac{\tau_{j_1} \ldots \tau_{j_p} U^n}{\xi_{j_1} \ldots \xi_{j_p} X^n} \right],
+\]
+where $U^n$ is the relation variable $X^n$ if $X^n \neq \tau_{j_1}$, \ldots, $X^n \neq \tau_{j_p}$; otherwise $U^n$ is the first relation variable in the list $V^n_0$, $V^n_1$, $V^n_2$, \ldots which does not occur in $\varphi$, $\tau_{j_1}$, \ldots, $\tau_{j_p}$.
+\end{enumerate}\ 
+\\
+We show that the Substitution Lemma holds for $\mathcal{L}_\mathrm{II}$:\\
+\ \\
+\textbf{Substitution Lemma for $\mathcal{L}_\mathrm{II}$.} (a) \emph{For every term $t$,
+\[
+\mathfrak{I} \left( t \frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} \right) = \mathfrak{I} \frac{\mathfrak{I}(\tau_0) \ldots \mathfrak{I}(\tau_r)}{\xi_0 \ldots \xi_r} (t).
+\]}
+(b) \emph{For every second-order formula $\varphi$,
+\begin{center}
+$\mathfrak{I} \models \varphi \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r}$ \ \ \ iff \ \ \ $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_0) \ldots \mathfrak{I}(\tau_r)}{\xi_0 \ldots \xi_r} \models \varphi$.
+\end{center}
+}
+\textit{Proof.} (a) Similar to the proof of part (a) of Substitution Lemma for $\mathcal{L}_\mathrm{I}$, and using Coincidence Lemma for $\mathcal{L}_\mathrm{II}$.\\
+\ \\
+(b) This is achieved by induction on $\varphi$. In the following, we assume that $\xi_{i_1}, \ldots, \xi_{i_s}$ ($i_1 < \ldots < i_s$) are exactly those ordinary variables among $\xi_0, \ldots, \xi_r$. Let $\mathfrak{I} = (\mathfrak{A}, \gamma)$.\\
+\ \\
+$\varphi$ is a first-order formula: Then $\varphi \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} = \varphi \displaystyle\frac{\tau_{i_1} \ldots \tau_{i_s}}{\xi_{i_1} \ldots \xi_{i_s}}$. Thus
+\begin{center}
+\begin{tabular}{ll}
+\ & $\mathfrak{I} \models \varphi \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r}$ \cr
+iff & $\mathfrak{I} \models \varphi \displaystyle\frac{\tau_{i_1} \ldots \tau_{i_s}}{\xi_{i_1} \ldots \xi_{i_s}}$ \cr
+iff & $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_{i_1}) \ldots \mathfrak{I}(\tau_{i_s})}{\xi_{i_1} \ldots \xi_{i_s}} \models \varphi$ (by the Substitution Lemma for $\mathcal{L}_\mathrm{I}$) \cr
+iff & $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_0) \ldots \mathfrak{I}(\tau_r)}{\xi_0 \ldots \xi_r} \models \varphi$ (by the Coincidence Lemma for $\mathcal{L}_\mathrm{II}$).
+\end{tabular}
+\end{center}
+$\varphi = X t_1 \ldots t_n$: Let $[X t_1 \ldots t_n] \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} = X^\prime t_1 \displaystyle\frac{\tau_{i_1} \ldots \tau_{i_s}}{\xi_{i_1} \ldots \xi_{i_s}} \ldots t_n \displaystyle\frac{\tau_{i_1} \ldots \tau_{i_s}}{\xi_{i_1} \ldots \xi_{i_s}}$. Thus
+\begin{center}
+\begin{tabular}{ll}
+\ & $\mathfrak{I} \models [X t_1 \ldots t_n] \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r}$ \cr
+iff & $\mathfrak{I} \models X^\prime t_1 \displaystyle\frac{\tau_{i_1} \ldots \tau_{i_s}}{\xi_{i_1} \ldots \xi_{i_s}} \ldots t_n \displaystyle\frac{\tau_{i_1} \ldots \tau_{i_s}}{\xi_{i_1} \ldots \xi_{i_s}}$ \cr
+iff & $\mathfrak{I}(X^\prime)$ holds for $\mathfrak{I}(t_1 \displaystyle\frac{\tau_{i_1} \ldots \tau_{i_s}}{\xi_{i_1} \ldots \xi_{i_s}}), \ldots, \mathfrak{I}(t_n \displaystyle\frac{\tau_{i_1} \ldots \tau_{i_s}}{\xi_{i_1} \ldots \xi_{i_s}})$ \cr
+iff & $\mathfrak{I}(X^\prime)$ holds for $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_{i_1}) \ldots \mathfrak{I}(\tau_{i_s})}{\xi_{i_1} \ldots \xi_{i_s}}(t_1), \ldots, \mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_{i_1}) \ldots \mathfrak{I}(\tau_{i_s})}{\xi_{i_1} \ldots \xi_{i_s}}(t_n)$ \cr
+\ & (by (a)) \cr
+iff & $\mathfrak{I}(X^\prime)$ holds for $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_0) \ldots \mathfrak{I}(\tau_r)}{\xi_0 \ldots \xi_r}(t_1), \ldots, \mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_0) \ldots \mathfrak{I}(\tau_r)}{\xi_0 \ldots \xi_r}(t_n)$ \cr
+\ & (by Coincidence Lemma for $\mathcal{L}_\mathrm{II}$) \cr
+iff & $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_0) \ldots \mathfrak{I}(\tau_r)}{\xi_0 \ldots \xi_r} (X)$ holds for $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_0) \ldots \mathfrak{I}(\tau_r)}{\xi_0 \ldots \xi_r}(t_1), \ldots,$ \cr
+\ & $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_0) \ldots \mathfrak{I}(\tau_r)}{\xi_0 \ldots \xi_r}(t_n)$ \cr
+\ & ($\mathfrak{I}(X^\prime) = \gamma(X^\prime) = \gamma \displaystyle\frac{\mathfrak{I}(\tau_0) \ldots \mathfrak{I}(\tau_r)}{\xi_0 \ldots \xi_r}(X) = \mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_0) \ldots \mathfrak{I}(\tau_r)}{\xi_0 \ldots \xi_r} (X)$) \cr
+iff & $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_0) \ldots \mathfrak{I}(\tau_r)}{\xi_0 \ldots \xi_r} \models X t_1 \ldots t_n$. \cr
+\end{tabular}
+\end{center}
+$\varphi = \neg \psi$: Then $[\neg \psi] \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} = \neg \left[ \psi \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} \right]$. Thus
+\begin{center}
+\begin{tabular}{ll}
+\ & $\mathfrak{I} \models [\neg \psi] \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r}$ \cr
+iff & $\mathfrak{I} \models \neg \left[ \psi \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} \right]$ \cr
+iff & not $\mathfrak{I} \models \psi \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r}$ \cr
+iff & not $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_0) \ldots \mathfrak{I}(\tau_r)}{\xi_0 \ldots \xi_r} \models \psi$ (by induction hypothesis) \cr
+iff & $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_0) \ldots \mathfrak{I}(\tau_r)}{\xi_0 \ldots \xi_r} \models \neg \psi$.
+\end{tabular}
+\end{center}
+$\varphi = (\psi_0 \lor \psi_1)$: Then $(\psi_0 \lor \psi_1) \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} = \left( \psi_0 \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} \lor \psi_1 \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} \right)$. Thus
+\begin{center}
+\begin{tabular}{ll}
+\ & $\mathfrak{I} \models (\psi_0 \lor \psi_1) \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r}$ \cr
+iff & $\mathfrak{I} \models \left( \psi_0 \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} \lor \psi_1 \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} \right)$ \cr
+iff & $\mathfrak{I} \models \psi_0 \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r}$ or $\mathfrak{I} \models \psi_1 \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r}$ \cr
+iff & $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_0) \ldots \mathfrak{I}(\tau_r)}{\xi_0 \ldots \xi_r} \models \psi_0$ or $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_0) \ldots \mathfrak{I}(\tau_r)}{\xi_0 \ldots \xi_r} \models \psi_1$ \cr
+\ & (by induction hypothesis) \cr
+iff & $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_0) \ldots \mathfrak{I}(\tau_r)}{\xi_0 \ldots \xi_r} \models (\psi_0 \lor \psi_1)$.
+\end{tabular}
+\end{center}
+$\varphi = \exists x \psi$: Let $[\exists x \psi] \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} = \exists u \left[\psi\displaystyle\frac{\tau_{j_1} \ldots \tau_{j_p} u}{\xi_{j_1} \ldots \xi_{j_p} x} \right]$. Thus
+\begin{center}
+\begin{tabular}{ll}
+\ & $\mathfrak{I} \models [\exists x \psi] \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r}$ \cr
+iff & $\mathfrak{I} \models \exists u \left[ \psi\displaystyle\frac{\tau_{j_1} \ldots \tau_{j_p} u}{\xi_{j_1} \ldots \xi_{j_p} x} \right]$ \cr
+iff & there is an $a \in A$ such that $\mathfrak{I} \displaystyle\frac{a}{u} \models \psi\displaystyle\frac{\tau_{j_1} \ldots \tau_{j_p} u}{\xi_{j_1} \ldots \xi_{j_p} x}$ \cr
+iff & there is an $a \in A$ such that $\mathfrak{I} \displaystyle\frac{\mathfrak{I}\displaystyle\frac{a}{u}(\tau_{j_1}) \ldots \mathfrak{I}\displaystyle\frac{a}{u}(\tau_{j_p}) a a}{\xi_{j_1} \ldots \xi_{j_p} u x} \models \psi$ \cr
+\ & (by induction hypothesis) \cr
+iff & there is an $a \in A$ such that $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_{j_1}) \ldots \mathfrak{I}(\tau_{j_p}) a a}{\xi_{j_1} \ldots \xi_{j_p} u x} \models \psi$ \cr
+\ & ($u$ does not occur in $\tau_{j_1}, \ldots, \tau_{j_p}$; using Coincidence Lemma for \cr
+\ & $\mathcal{L}_\mathrm{II}$) \cr
+iff & there is an $a \in A$ such that $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_{j_1}) \ldots \mathfrak{I}(\tau_{j_p}) a}{\xi_{j_1} \ldots \xi_{j_p} x} \models \psi$ \cr
+\ & (if $u \neq x$, then $u$ does not occur in $\psi$; using Coincidence Lemma \cr
+\ & for $\mathcal{L}_\mathrm{II}$) \cr
+iff & there is an $a \in A$ such that $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_0) \ldots \mathfrak{I}(\tau_r) a}{\xi_0 \ldots \xi_r x} \models \psi$ \cr
+\ & (by definition and Coincidence Lemma for $\mathcal{L}_\mathrm{II}$) \cr
+iff & $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_0) \ldots \mathfrak{I}(\tau_r) a}{\xi_0 \ldots \xi_r x} \models \exists x \psi$
+\end{tabular}
+\end{center}
+$\varphi = \exists X^n \psi$: Let $[\exists X^n \psi] \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r} = \exists U^n \left[ \psi \displaystyle\frac{\tau_{j_1} \ldots \tau_{j_p} U^n}{\xi_{j_1} \ldots \xi_{j_p} X^n} \right]$. Thus,
+\begin{center}
+\begin{tabular}{ll}
+\ & $\mathfrak{I} \models [\exists X^n \psi] \displaystyle\frac{\tau_0 \ldots \tau_r}{\xi_0 \ldots \xi_r}$ \cr
+iff & $\mathfrak{I} \models \exists U^n \left[ \psi \displaystyle\frac{\tau_{j_1} \ldots \tau_{j_p} U^n}{\xi_{j_1} \ldots \xi_{j_p} X^n} \right]$ \cr
+iff & there is $C \subset A^n$ such that $\mathfrak{I} \displaystyle\frac{C}{U^n} \models \psi \displaystyle\frac{\tau_{j_1} \ldots \tau_{j_p} U^n}{\xi_{j_1} \ldots \xi_{j_p} X^n}$ \cr
+iff & there is $C \subset A^n$ such that $\mathfrak{I} \displaystyle\frac{\mathfrak{I}\displaystyle\frac{C}{U^n}(\tau_{j_1}) \ldots \mathfrak{I}\displaystyle\frac{C}{U^n}(\tau_{j_p}) C C}{\xi_{j_1} \ldots \xi_{j_p} U^n X^n} \models \psi$ \cr
+iff & there is $C \subset A^n$ such that $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_{j_1}) \ldots \mathfrak{I}(\tau_{j_p}) C C}{\xi_{j_1} \ldots \xi_{j_p} U^n X^n} \models \psi$ \cr
+\ & ($U^n \not\in \{ \tau_{j_1}, \ldots, \tau_{j_p} \}$) \cr
+iff & there is $C \subset A^n$ such that $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_{j_1}) \ldots \mathfrak{I}(\tau_{j_p}) C}{\xi_{j_1} \ldots \xi_{j_p} X^n} \models \psi$ \cr
+\ & (if $U^n \neq X^n$, then $U^n$ does not occur in $\psi$; using Coincidence \cr
+\ & Lemma for $\mathcal{L}_\mathrm{II}$) \cr
+iff & there is $C \subset A^n$ such that $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_0) \ldots \mathfrak{I}(\tau_r) C}{\xi_0 \ldots \xi_r X^n} \models \psi$ \cr
+\ & (by definition and Coincidence Lemma for $\mathcal{L}_\mathrm{II}$) \cr
+iff & $\mathfrak{I} \displaystyle\frac{\mathfrak{I}(\tau_0) \ldots \mathfrak{I}(\tau_r)}{\xi_0 \ldots \xi_r} \models \exists X^n \psi$.
+\end{tabular}
+\end{center}
+\ \hfill$\talloblong$
+\ \\
+Let us proceed to Isomorphism Lemma for $\SOL$:\\
+\ \\
+\textbf{Isomorphism Lemma for $\SOL$.} \emph{If $\struct{A}$ and $\struct{B}$ are isomorphic structures then for all second-order sentences $\varphi$
+\begin{center}
+$\struct{A} \models \varphi$ \ \ \ iff \ \ \ $\struct{B} \models \varphi$.
+\end{center}}
+Before giving a proof for this lemma, let us consider the extension 
+\[
+\pi^\prime : A \cup (\bigcup\limits_{m \in \mathbb{Z}^+} \mathcal{P}(A^m)) \to B \cup (\bigcup\limits_{m \in \mathbb{Z}^+} \mathcal{P}(B^m))
+\]
+of $\pi$, where by $\mathcal{P}(C)$ we mean the \emph{power set of a set $C$}:
+\[
+\pi^\prime (\alpha) := \left\{
+\begin{array}{ll}
+\pi (\alpha)                                                   & \mbox{if $\alpha \in A$} \cr
+\{ ( \pi (a_1), \ldots, \pi (a_n) ) \ | \ \mbox{$a_1, \ldots, a_n \in A$} & \cr
+\multicolumn{1}{r}{\mbox{and $\alpha a_1 \ldots a_n$} \}}      & \mbox{if $\alpha \subset A^n$}
+\end{array} \right.
+\]
+Trivially $\pi^\prime$ is bijective, from the bijectiveness of $\pi$.\\
+\\
+Suppose $P$ is an $n$-ary relation over $A$. Then by definition, for all $a_1, \ldots, a_n \in A$,
+\begin{center}
+$Pa_1 \ldots a_n$ \ \ \ iff \ \ \ $\pi^\prime (P) \pi (a_1) \ldots \pi (a_n)$.
+\end{center}
+In particular, if $X$ is a relation variable and $\gamma$ is a second-order assignment in $\struct{A}$, then for all $a_1, \ldots, a_n \in A$,
+\begin{center}
+(+) \hfill $\gamma (X) a_1 \ldots a_n$ \ \ \ iff \ \ \ $\gamma^\pi (X) \pi (a_1) \ldots \pi (a_n)$, \hfill \phantom{(+)}
+\end{center}
+where $\gamma^\pi := \pi^\prime \circ \gamma$.\\
+\ \\
+Let $\INT^\pi := (\struct{B}, \gamma^\prime)$. Then we have
+\begin{center}
+$(*)$ \hfill $\pi(\INT(t)) = \INT{I}^\pi(t)$. \hfill \phantom{(*)}
+\end{center}
+This can be verified easily by induction on $t$:\\
+$t = x$:
+\[
+\begin{array}{ll}
+\ & \pi(\INT(x)) \cr
+= & \pi(\gamma(x)) \cr
+= & \pi^\prime(\gamma(x)) \cr
+= & \gamma^\pi(x) \cr
+= & \INT^\pi(x).
+\end{array}
+\]
+$t = c$:
+\[
+\begin{array}{ll}
+\ & \pi(\INT(c)) \cr
+= & \pi(c^\struct{A}) \cr
+= & c^\struct{B} \cr
+= & \INT^\pi(c).
+\end{array}
+\]
+$t = f t_1 \ldots t_n$:
+\[
+\begin{array}{ll}
+\ & \pi(\INT(f t_1 \ldots t_n)) \cr
+= & \pi(f^\struct{A} (\INT(t_1), \ldots, \INT(t_n))) \cr
+= & f^\struct{B} (\pi(\INT(t_1)), \ldots, \pi(\INT(t_n))) \cr
+= & f^\struct{B} (\INT^\pi(t_1), \ldots, \INT^\pi(t_n)) \ \mbox{(by induction hypothesis)} \cr
+= & \INT^\pi(f t_1 \ldots t_n).
+\end{array}
+\]
+Finally, notice that for any variable $\xi$ (ordinary or relation) and any $\alpha \in A \cup \powerset{A^n}$ with $n > 0$ such that \emph{$\alpha$ can be assigned to $\xi$ appropriately},\footnote{That is, $\alpha \in A$ if $\xi$ is an ordinary variable; $\alpha \in \powerset{A^n}$ if $\xi$ is an $n$-ary relation variable.}
+\begin{center}
+$(**)$ \hfill $\left( \INT \df{\alpha}{\xi} \right)^\pi = \INT^\pi \df{\pi^\prime(\alpha)}{\xi}$. \hfill \phantom{(**)}
+\end{center}
+This can be verified easily.\\
+\ \\
+Now we are ready to provide a \textit{proof} for the above lemma: It is similar to the one of Isomorphism Lemma for $\FOL$, with slight modifications. (Say, by replacing all appearances of $\beta$ with $\gamma$.) And consider two more cases below:\\
+$\varphi = X t_1 \ldots t_n$:
+\begin{center}
+\begin{tabular}{ll}
+\   & $\struct{I} \models X t_1 \ldots t_n$ \cr
+iff & $\gamma (X) \INT(t_1) \ldots \INT(t_n)$ \cr
+iff & $\gamma^\pi (X) \pi(\INT(t_1)) \ldots \pi(\INT(t_n))$ \ (by $(+)$) \cr
+iff & $\gamma^\pi (X) \INT^\pi (t_1) \ldots \INT^\pi (t_n)$ \ (by $(*)$) \cr
+iff & $\INT^\pi \models X t_1 \ldots t_n$.
+\end{tabular}
+\end{center}
+$\varphi = \exists X^n \psi$:
+\begin{center}
+\begin{tabular}{ll}
+\   & $\INT \models \exists X^n \psi$ \cr
+iff & there is a $C \subset A^n$ such that $\INT \df{C}{X^n} \models \psi$ \cr
+iff & there is a $C \subset A^n$ such that $\left( \INT \df{C}{X^n} \right)^\pi \models \psi$ \cr
+\   & (by induction hypothesis) \cr
+iff & there is a $C \subset A^n$ such that $\INT^\pi \df{\pi^\prime (C)}{X^n} \models \psi$ \cr
+\   & (by $(**)$) \cr
+iff & there is a $D \subset B^n$ such that $\INT^\pi \df{D}{X^n} \models \psi$ \cr
+\   & (since $A = B$ and $\pi^\prime$ is surjective) \cr
+iff & $\INT^\pi \models \exists X^n \psi$.
+\end{tabular}\\
+\phantom{a} \hfill $\talloblong$
+\end{center}
+Similarly, from this proof we infer \\
+\\
+\textbf{Corollary.} \emph{Suppose $\pi: \mathfrak{A} \cong \mathfrak{B}$. Let $a_0, \ldots, a_{p - 1} \in A$, $C_0 \subset A^{n_0}$, \ldots, $C_{q - 1} \subset A^{n_{q - 1}}$, and $V_0$, \ldots, $V_{q - 1}$ are relation variables such that each $V_i$ is $n_i$-ary. Furthermore, if $\gamma$ is a second-order assignment in $\mathfrak{A}$ with $\gamma(v_0) = a_0$, \ldots, $\gamma(v_{p - 1}) = a_{p - 1}$, $\gamma(V_0) = C_0$, \ldots, $\gamma(V_{q - 1}) = C_{q - 1}$, $\gamma^\prime$ a second-order assignment in $\mathfrak{B}$ with $\gamma^\prime(v_0) = \pi^\prime(a_0)$, \ldots, $\gamma^\prime(v_{p - 1}) = \pi^\prime(a_{p - 1})$, $\gamma^\prime(V_0) = \pi^\prime(C_0)$, \ldots, $\gamma^\prime(V_{q - 1}) = \pi^\prime(C_{q - 1})$ (cf. the above proof for the description of $\pi^\prime$), then for $\varphi \in L^S_{\mbox{\scriptsize\upshape II}}$ with $\free(\varphi) \subset \{ v_0, \ldots, v_{p - 1} \}$ and with $\freeII(\varphi) \subset \{ V_0, \ldots, V_{q - 1} \}$,
+\begin{center}
+\phantom{$\talloblong$} \hfill $(\mathfrak{A}, \gamma) \models \varphi$ \ \ \ iff \ \ \ $(\mathfrak{B}, \gamma^\prime) \models \varphi$. \hfill $\talloblong$
+\end{center}}
+\ \\
+Finally, we introduce relativizations in $\sndordlog$.\\
+\ \\
+\textbf{Definition of Relativization for $\sndordlog$.} Let $P$ be a unary relation symbol not contained in $S$. The \emph{relativization $\psi^P \in \LII^{S \cup \{ P \}}$ of second-order formulas $\psi \in \LII^S$ to $P$} is defined inductively by
+\begin{center}
+\begin{tabular}{lll}
+$\psi^P$                   & $:=$ & $\psi$, if $\psi$ is atomic \cr
+$[\neg \psi]^P$            & $:=$ & $\neg \psi^P$ \cr
+$(\psi_1 \lor \psi_2)^P$   & $:=$ & $(\psi_1^P \lor \psi_2^P)$ \cr
+$[\exists x \psi]^P$       & $:=$ & $\exists x (Px \land \psi^P)$ \cr
+$[\exists X^n \psi]^P$     & $:=$ & $\exists X^n (\forall v_0 \ldots \forall v_{n - 1} (X v_0 \ldots v_{n - 1} \rightarrow Pv_0 \land \ldots$ \cr
+\                          & \    & \ \ \ $\land Pv_{n - 1}) \land \psi^P)$.
+\end{tabular}
+\end{center}
+By induction on the formula $\psi$ one can easily prove that for all assignments $\gamma : (\{ v_n \ | \ n \in \nat \} \to P^A) \cup (\bigcup\limits_{m \in \zah^+} \{ V^m_n \ | \ n \in \nat \} \to \powerset{(P^A)^m})$,
+\begin{center}
+$(\left[ P^A \right]^\struct{A}, \gamma) \models \psi$ \ \ \ iff \ \ \ $(\struct{A}, \gamma) \models \psi^P$;
+\end{center}
+and hence obtains:\smallskip\\
+\begin{theorem}{Relativization Lemma for $\sndordlog$} Let $\struct{A}$ be an $S \cup \{ P \}$-structure such that $P \not\in S$ and $P$ is unary. Suppose the set $P^A \subset A$ is $S$-closed in $\struct{A}$. Then for all second-order $S$-sentences $\psi$,\smallskip\\
+$\left[ P^A \right]^\struct{A} \models \psi$ \quad iff \quad $\struct{A} \models \psi^P$.\qed
+\end{theorem}
+\end{enumerate}
+%
+\item \textbf{More Syntactic Operations on $\mathcal{L}_\mathrm{II}$.} (INCOMPLETE) Recall that we have investigated many syntactic properties of $\mathcal{L}_\mathrm{I}$ in Chapter VIII. Many of them can be transferred to $\mathcal{L}_\mathrm{II}$. We mention a few.
+\begin{enumerate}[(1)]
+\item A symbol set is called relational if it contains only relation symbols. (cf. VIII.1.)\\
+\ \\
+Given an arbitrary symbol set $S$ and an $S$-structure $\mathfrak{A}$, let $S^r$ and the $S^r$-structure $\mathfrak{A}^r$ be defined as in VIII.1. Then by extending the definition of $\psi^r$ for term-reduced formulas $\psi$ in the proof of part (a) of Theorem VIII.1.3 by two more cases:
+\[
+\begin{array}{lll}
+[X x_1 \ldots x_n]^r & := & X x_1 \ldots x_n; \cr
+[\exists X \psi ]^r  & := & \exists X \psi^r,
+\end{array}
+\]
+and extending the definition of $\psi^{-r}$ for $\psi$ in the proof of part (b) of the same theorem by two more cases:
+\[
+\begin{array}{lll}
+[X t_1 \ldots t_n]^{-r} & := & X t_1 \ldots t_n; \cr
+[\exists X \psi ]^{-r}  & := & \exists X \psi^{-r},
+\end{array}
+\]
+respectively, we obtain:\medskip\\
+\begin{theorem}{Theorem on Replacement Operation on $\sndordlog$}
+\begin{enumerate}[\rm(a)]
+\item For every $\psi \in \sndordlang{S}$ there is $\relational{\psi} \in \sndordlang{\relational{S}}$ such that for all (second-order) $S$-interpretations $\intp = \intparg{\struct{A}}{\sndordassgn}$,\\
+\centerline{$\intparg{\struct{A}}{\sndordassgn} \models \psi$ \quad iff \quad $\intparg{\relational{\struct{A}}}{\sndordassgn} \models \relational{\psi}$.}
+%%%
+\item For every $\psi \in \LII^{S^r}$ there is $\psi^{-r} \in \LII^S$ such that for all $S$-inter-pretations $\mathfrak{I} = (\mathfrak{A}, \gamma)$,\\
+\centerline{$(\mathfrak{A}, \gamma) \models \psi^{-r}$ \quad iff \quad $(\mathfrak{A}^r, \gamma) \models \psi$.}
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+By induction.
+\end{proof}
+\ \\
+As in \textbf{Note to Theorem 1.3} in notes to Chapter VIII, the above theorem can likewise be directly specialized to second-order sentences and structures (using, analogously, Coincidence Lemma for $\mathcal{L}_\mathrm{II}$). Moreover, if we take the $S^r$-sentence $\chi$ thereof then we obtain\\
+\ \\
+\textbf{Corollary.} \hfill \emph{$\models \psi$ \ \ \ iff \ \ \ $\models (\chi \rightarrow \psi^r)$.} \hfill \phantom{Corollary.}$\talloblong$
+%%
+\item In paragraph E of VIII.2 we introduced syntactic interpretations. By adopting the same definitions, we likewise obtain\\
+\ \\
+\textbf{Theorem on Syntactic Interpretations in $\sndordlog$.} \emph{Let $I$ be a syntactic interpretation on $S^\prime$ in $S$. Then, to every $\psi \in \LII^{S^\prime}$ one can associate a $\psi^I \in \LII^S$ with $\free(\psi^I) \subset \free(\psi)$ and $\freeII(\psi^I) = \freeII(\psi)$ such that for all $S$-structures $\mathfrak{A}$ with $\mathfrak{A} \models \Phi_I$ and all second-order assignments $\gamma$ in $\mathfrak{A}^{-I}$,
+\begin{center}
+$(\mathfrak{A}, \gamma) \models \psi^I$ \ \ \ iff \ \ \ $(\mathfrak{A}^{-I}, \gamma) \models \psi$.
+\end{center}
+In particular, for $\LII^{S^\prime}$-sentences $\psi$,
+\begin{center}
+$\mathfrak{A} \models \psi^I$ \ \ \ iff \ \ \ $\mathfrak{A}^{-I} \models \psi$.
+\end{center}}
+For the \emph{proof} of this theorem, extend the definition of $\varphi^I$ by two more cases: For $n$-ary relation variables $X$,
+\[
+\begin{array}{lll}
+[X x_0 \ldots x_{n - 1}]^I & := & X x_0 \ldots x_{n - 1}; \cr
+[\exists X \varphi]^I & := & \exists X (\varphi^I \land \forall x_0 \ldots \forall x_{n - 1} (X x_0 \ldots x_{n - 1} \rightarrow \cr
+\ & \ & \multicolumn{1}{r}{(\varphi_{S^\prime}(x_0) \land \ldots \land \varphi_{S^\prime}(x_{n - 1}))));}
+\end{array}
+\]
+and use induction.\nolinebreak\hfill$\talloblong$
+%%
+\item (INCOMPLETE HERE) Theorem on Prenex Normal Form for $\sndordlog$.
+\end{enumerate}
+%
+\item \textbf{Note to the Proof of Theorem 1.4.} For a complete description of $\varphi_{\geq n}$, see III.6.3 (on page 46).
+%
+\item \textbf{Note to the Proof of Theorem 1.5.}
+\begin{enumerate}[(1)]
+\item $\varphi_{\mbox{\scriptsize unc}}$ is satisfiable becasue $\mathbb{R} \models \varphi_{\mbox{\scriptsize unc}}$. Note that it makes no difference here to regard the set $\mathbb{R}$ of real numbers as a ``structure'' since we are speaking of $L^\emptyset_{\mbox{\scriptsize II}}$. On the other hand, the concept of a set's being countable or uncountable that we are mentioning in this chapter is in the background sense (cf. VII.2).
+%%
+\item Define
+\[
+\begin{array}{lll}
+\psi_{\mbox{\scriptsize fin}}(X) & := & \forall F ((\forall x (Xx \rightarrow \exists^{=1} y (Xy \land Fxy)) \\
+\                             & \  & \phantom{\forall F} \land \forall x \forall y \forall z ((Xx \land Xy \land Xz \land Fxz \land Fyz) \rightarrow x \equiv y)) \\
+\                             & \  & \phantom{\forall (} \rightarrow \forall y (Xy \rightarrow \exists x (Xx \land Fxy))).
+\end{array}
+\]
+The idea behind this is that ``Every injective function defined over the set $X$ is surjective if and only if $X$ is finite'' (cf. 1.3 (6)). Also note that in this idea, we consider the graph of a function (hence the relation variable $F$) instead of the function itself.
+%%
+\item We show that a set $A$ is at most countable if and only if there is an ordering relation on $A$ such that every element has only finitely many predecessors.\\
+\\
+Firstly, suppose $A$ is at most countable and hence let $f: A \to \mathbb{N}$ be injective (cf. Lemma II.1.1). We define $<^A$ to be the ordering preserved under $f$, i.e. for any $a_1$, $a_2 \in A$,
+\[
+\mbox{$a_1 <^A a_2$ :iff $f(a_1) <^\mathbb{N} f(a_2)$}.
+\]
+Then for any $a \in A$, $g(a)$ has finitely many predecessors (in the sense of $<^\mathbb{N}$), and so does $a$ (in the sense of $<^A$).\\
+\\
+Conversely, suppose there is such an ordering relation $<^A$. Let $g: A \to \mathbb{N}$ be the function such that for any $a \in A$, $g(a)$ denotes the number of predecessors of $a$ (in the sense of $<^A$). Then $g$ is injective since for any $a_1$, $a_2 \in A$ with $a_1 \neq a_2$, either $a_1 <^A a_2$ or $a_2 <^A a_1$ (trichotomy, cf. $\Phi_{\mbox{\scriptsize ord}}$ in III.6.4), and thus $g(a_1) \neq g(a_2)$. By Lemma II.1.1, we have that $A$ is at most countable. \begin{flushright}$\talloblong$\end{flushright}
+\end{enumerate}
+%
+\item \textbf{Note to 1.6.} Adhering to the terms referred to in our discussion in \textbf{Note to the Correctness (Theorem), the Completeness (Theorem), and the Adequacy (Theorem) of a Sequent Calculus} in the annotations to Chapter V, it is actually the absence of the Completeness Theorem for any possible sequent calculus suitable for $\mathcal{L}_\mathrm{II}$ that leads to the failure of the Compactness Theorem. Nevertheless, there is indeed no correct and complete sequent calculus for $\mathcal{L}_\mathrm{II}$ (cf. the remarks below X.5.5).\\
+\ \\
+To verify some correct sequent rules for $\SOL$, we may have to make explicit use of set-theoretical assumptions such as $\zfc$ (thus reflecting the relationship between second-order logic and set theory). For example, the rule (given a fixed symbol set $S$)\\
+\centerline{$\calrule{ }{\Gamma \ \ \ \exists X \enump{\forall v_0}{\forall v_{n - 1}} (X \enum{v}{n - 1} \leftrightarrow \varphi (\seq{v}{n - 1}))}$, \begin{minipage}[t]{2.5cm}
+$X$ is $n$-ary\\and $\varphi \in L^S_n$
+\end{minipage}}\\
+reflects the separation axioms of $\zfc$.\footnote{The domain of any structure is a set, to which separation axioms are applicable (cf. Section VII.3).} Also note that this rule cannot be generalized to $\varphi \in \LII^S$, since for $\varphi = \neg X v_0$ the sentence $\exists X \forall v_0 (X v_0 \leftrightarrow \neg X v_0)$ is not satisfiable.
+%
+%the following item is referenced in notes to Chapter XIII
+\item \textbf{Note to the Discussions Concerning the Second-Order Logic and the Continuum Hypothesis on Pages 141 and 142.} Note that $\varphi_{\mbox{\scriptsize CH}} \in L^\emptyset_{\mbox{\scriptsize II}}$. Therefore $\varphi_{\mbox{\scriptsize CH}}$ is a basic semantic question about $\mathcal{L}_{\mbox{\scriptsize II}}$, since it refers to no particular symbol set ($S = \emptyset$ here). Recall that its first-order counterpart, $\mbox{CH}$, can be formulated in $L^{\{ \mbfs{\in} \}}$ (see page 110), cf. VII.3. (We shall later show that $\models \varphi_{\mbox{\scriptsize CH}}$ if and only if CH holds.) Also in that section we mentioned that ZFC is sufficient for mathematics but unfortunately it cannot decide CH, hence we conclude that some semantical properties of $\mathcal{L}_{\mbox{\scriptsize II}}$ are beyond the scope of the ZFC framework.\\
+\\
+Now we are ready to provide a \emph{proof} for the statement:
+\[
+\mbox{$\varphi_{\mbox{\scriptsize CH}}$ iff CH holds.}
+\]
+To start, we equip ourselves by formulating $\chi_{\leq \mbox{\scriptsize ctbl}}(X)$ as follows:\\
+\begin{tabular}{lll}
+$\chi_{\leq \mbox{\scriptsize ctbl}}(X)$ & $:=$ & $\exists Z (\forall x (Xx \rightarrow \neg Zxx)$ \cr
+\ & \ & $\phantom{\exists Z (} \land \forall x \forall y \forall z ((Xx \land Xy \land Xz \land Zxy \land Zyz) \rightarrow Zxz)$ \cr
+\ & \ & $\phantom{\exists Z (} \land \forall x \forall y ((Xx \land Xy) \rightarrow (Zxy \lor x \equiv y \lor Zyx))$ \cr
+\ & \ & $\phantom{\exists Z (} \land \forall x (Xx \rightarrow \exists Y (\psi_{\mbox{\scriptsize fin}}(Y) \land \forall y (Yy \leftrightarrow Zyx))))$.
+\end{tabular}\\
+\\
+Let us proceed into a digression for a while. Observe how we transfer $\varphi_{\mbox{\scriptsize fin}}$ and $\varphi_{\leq \mbox{\scriptsize ctbl}}$, respectively, into $\psi_{\mbox{\scriptsize fin}}$ and $\chi_{\leq \mbox{\scriptsize ctbl}}$: The resulting formulations are obtained by replacing all subformulas of the form $\forall x \varphi$ by the corresponding formulas of the form $\forall x (Xx \rightarrow \varphi)$, where $X$ stands for the set to be described. The idea behind this is that we restrict the case from the domain to a subset (of it), hence the string `$Xx \rightarrow$' preceding $\varphi$.\\
+\\
+On the other hand, $\varphi_{\mathfrak{R}^<}$ in line 9 is erroneously typed, the correct one is $\psi_{\mathfrak{R}^<}$.\\
+\\
+Alright, let us return to our proof. To continue, we formulate the second-order sentence $\varphi_\mathbb{R}$ as
+\[
+\varphi_\mathbb{R} := \exists F_+ \exists F_\cdot \exists c_0 \exists c_1 \exists R_< (\chi_{\mbox{\scriptsize binary func}}(F_+) \land \chi_{\mbox{\scriptsize binary func}}(F_\cdot) \land \psi),
+\]
+where $\psi$ is obtained from $\psi_{\mathfrak{R}^<}$ by replacing each of the symbols $+$, $\cdot$, $0$, $1$ and $<$ by $F_+$, $F_\cdot$, $c_0$, $c_1$ and $R_<$, respectively, as is clear by the choice of the symbols.\\
+\\
+Well, the critical part starts. Suppose $\models \varphi_{\mbox{\scriptsize CH}}$, hence in particular $\mathbb{R} \models \varphi_{\mbox{\scriptsize CH}}$. Then since $\mathbb{R} \models \varphi_\mathbb{R}$,  it follows that every subset of $\mathbb{R}$ is either at most countable or else of the same cardinality as $\mathbb{R}$ (i.e. there is a bijection of $\mathbb{R}$ onto this subset), which means that CH holds.\\
+\\
+Conversely, suppose CH holds. Let $\mathfrak{A}$ be an arbitrarily chosen second-order structure (with respect to some symbol set $S$). If $A$ is of the same cardinality as $\mathbb{R}$, then by definition there is a bijection $f$ of $A$ onto $\mathbb{R}$. Consider any subset $B$ of $A$, it must be of the same cardinality as $f(B)$ (which is a subset of $\mathbb{R}$), with the restriction of $f$ on $B$ serving as a bijection for this. Since by hypothesis CH holds, $f(B)$ is either at most countable or there is a bijection of $\mathbb{R}$ onto $f(B)$. Thus we have that $B$ is either at most countable or there is a bijection of $\mathbb{R}$ onto $B$, and further that $B$ is either at most countable or else of the same cardinality as $A$. Therefore $\mathfrak{A} \models \varphi_{\mbox{\scriptsize CH}}$. Because $\mathfrak{A}$ is arbitrarily chosen (as mentioned earlier), it follows that $\models \varphi_{\mbox{\scriptsize CH}}$. The proof is complete. \begin{flushright}$\talloblong$\end{flushright}
+%
+\item \textbf{Solution to Exercise 1.7 with Remark.} (INCOMPLETE) Note that in $\mathcal{L}^w_{\mbox{\scriptsize II}}$, by the way that `$\exists X^n$' is interpreted, `$\forall X^n$' is interpreted as \emph{for all finite $C \subset A^n$}.\\
+\\
+On the other hand, the notion of satisfaction $\models_w$ for $\mathcal{L}^w_{\mbox{\scriptsize II}}$ is, formally speaking, defined to coincide with that for $\mathcal{L}_{\mbox{\scriptsize II}}$, except for the case that for $\mathfrak{I} = (\mathfrak{A}, \gamma)$:
+\[
+\mbox{$\mathfrak{I} \models_w \exists X^n \varphi$ iff there is a \emph{finite} $C \subset A^n$ such that $\mathfrak{I} \displaystyle \frac{C}{X^n} \models_w \varphi$.}
+\]
+(Notice that we have slightly modified the statement in text: We changed `$\models$' to `$\models_w$', since the original one seems a bit inconsistent with its intended meaning...)\\
+\\
+We provide solutions to parts (a) - (c).
+\begin{enumerate}[(a)]
+\item Here we formulate as a second-order $\{ \leq \}$-sentence $\varphi$ the statement ``for every nonempty set $X$, there is a maximum element in the sense of the relation $\leq$'':
+\[
+\varphi := \forall X (\exists z Xz \rightarrow \exists x ( Xx \land \forall y (Xy \rightarrow y \leq x))).
+\]
+Let $\mathfrak{A} = (\mathbb{N}, \leq)$. Then clearly $\mathfrak{A} \models_w \varphi$ but not $\mathfrak{A} \models \varphi$.
+%%
+\item We define a map $^+$ by induction on formulas, which associates with every $L^{w, S}_{\mbox{\scriptsize II}}$-formula $\varphi$ an $L^S_{\mbox{\scriptsize II}}$-formula $\varphi^+$, as follows:\\
+\begin{tabular}{lll}
+$\varphi$ is atomic & : & $\varphi^+ := \varphi$ \cr
+$\varphi = \neg \chi$ & : & $\varphi^+ := \neg \chi^+$ \cr
+$\varphi = (\chi_1 \lor \chi_2)$ & : & $\varphi^+ := (\chi_1^+ \lor \chi_2^+)$ \cr
+$\varphi = \exists x \chi$ & : & $\varphi^+ := \exists x \chi^+$ \cr
+$\varphi = \exists X \chi$ & : & $\varphi^+ := \exists X (\psi_{\mbox{\scriptsize fin}}(X) \land \chi^+)$
+\end{tabular}\\
+(For the formulation of $\psi_{\mbox{\scriptsize fin}}(X)$, cf. part (2) of \textbf{Note to the Proof of Theorem 1.5}.)\\
+\\
+We show by induction on formulas that for each $L^{w, S}_{\mbox{\scriptsize II}}$-formula $\varphi$, the $L^S_{\mbox{\scriptsize II}}$-formula $\varphi^+$ satisfies: For all $S$-interpretations $\mathfrak{I} = (\mathfrak{A}, \gamma)$,
+\[
+\mbox{$\mathfrak{I} \models_w \varphi$ iff $\mathfrak{I} \models \varphi^+$.}
+\]
+But before doing so, note that the only difference between $\mathcal{L}_{\mbox{\scriptsize II}}$ and $\mathcal{L}^w_{\mbox{\scriptsize II}}$ lies in the definitions of the notions of satisfaction for formulas of the form $\exists X \chi$. So the proof can be done by only giving the $\exists X$-step: Let $\varphi = \exists X^n \chi$, then $\varphi^+ = \exists X^n (\psi_{\mbox{\scriptsize fin}}(X^n) \land \chi^+)$. It follows that for all $S$-interpretations $\mathfrak{I} = (\mathfrak{A}, \gamma)$:\\
+\begin{tabular}{lll}
+$\mathfrak{I} \models_w \exists X^n \chi$ & iff & there is a finite $C \subset A^n$ such that $\mathfrak{I} \displaystyle \frac{C}{X^n} \models_w \chi$ \cr
+\ & iff & there is a $C \subset A^n$ such that $C$ is finite and \cr
+\ & \   & $\mathfrak{I} \displaystyle \frac{C}{X^n} \models_w \chi$ \cr
+\ & iff & there is a $C \subset A^n$ such that $C$ is finite and \cr
+\ & \   & $\mathfrak{I} \displaystyle \frac{C}{X^n} \models \chi^+$ (by induction hypothesis) \cr
+\ & iff & there is a $C \subset A^n$ such that $\mathfrak{I} \displaystyle \frac{C}{X^n} \models \psi_{\mbox{\scriptsize fin}}(X^n)$ \cr
+\ & \   & and $\mathfrak{I} \displaystyle \frac{C}{X^n} \models \chi^+$ \cr
+\ & iff & there is a $C \subset A^n$ such that \cr
+\ & \   & $\mathfrak{I} \displaystyle \frac{C}{X^n} \models (\psi_{\mbox{\scriptsize fin}}(X^n) \land \chi^+)$ \cr
+\ & iff & $\mathfrak{I} \models \exists X^n (\psi_{\mbox{\scriptsize fin}}(X^n) \land \chi^+)$,
+\end{tabular}\\
+namely $\mathfrak{I} \models (\exists X^n \chi)^+$. In particular, if $\varphi$ is an $L^{w, S}_{\mbox{\scriptsize II}}$-sentence, then $\varphi^+$ is an $L^S_{\mbox{\scriptsize II}}$-sentence and for all $S$-structures $\mathfrak{A}$, $\mathfrak{A} \models_w \varphi$ if and only if $\mathfrak{A} \models \varphi^+$ (by the Coincidence Lemma for $\mathcal{L}_{\mbox{\scriptsize II}}$, the argument is similar to that given at the bottom in page 37 in text). It is easy to see that $\psi := \varphi^+$ meets the requirement.
+%%
+\item The following set of $L^{w, \emptyset}_{\mbox{\scriptsize II}}$-sentences is a counterexample:
+\[
+\{ \exists X \forall x Xx \} \cup \{ \varphi_{\geq n} | n \geq 2 \}.
+\]
+\end{enumerate}
+\textit{Remark.} (INCOMPLETE HERE) Notice that $\weaksndordlog$ differs with $\sndordlog$ only in the satisfaction relation. In $\weaksndordlog$ we tacitly adopt syntactic and semantic notions (such as term-reduced formulas and logical equivalence, respectively) from $\sndordlog$. Then we have the following results:\medskip\\
+\begin{theorem}{Coincidence Lemma for $\weaksndordlog$}
+(INCOMPLETE)
+\end{theorem}
+\begin{proof}
+(INCOMPLETE)
+\end{proof}
+\begin{theorem}{Theorem on Term-Reduced Formulas in $\weaksndordlog$}
+For every $\psi \in \weaksndordlang{S}$ there is a logically equivalent, term-reduced formula $\psi^\ast \in \weaksndordlang{S}$ with $\free{\psi} = \free{\psi^\ast}$ and $\sndordfree{\psi} = \sndordfree{\psi^\ast}$.
+\end{theorem}
+\begin{proof}
+By induction.
+\end{proof}
+\begin{theorem}{Relativization Lemma for $\weaksndordlog$}
+Let $\struct{A}$ be an $S \cup \{ P \}$-structure such that $P \not\in S$ and $P$ is unary. Suppose the set $\intpted{P}{A} \subset A$ is $S$-closed in $\struct{A}$. Then for all $\weaksndordlang{S}$-sentences $\psi$,\smallskip\\
+\centerline{$\substr{{\intpted{P}{A}}}{\struct{A}} \models \psi$ \quad iff \quad $\struct{A} \models \relativize{\psi}{P}$.}
+\end{theorem}
+\begin{proof}
+By induction.
+\end{proof}
+\begin{theorem}{Theorem on Replacement Operation on $\weaksndordlog$}
+\begin{enumerate}[\rm(a)]
+\item For every $\psi \in \weaksndordlang{S}$ there is $\relational{\psi} \in \weaksndordlang{\relational{S}}$ such that for all (second-order) $S$-interpretations $\intp = \intparg{\struct{A}}{\sndordassgn}$,\\
+\centerline{$\intparg{\struct{A}}{\sndordassgn} \models \psi$ \quad iff \quad $\intparg{\relational{\struct{A}}}{\sndordassgn} \models \relational{\psi}$.}
+%%%
+\item For every $\psi \in \weaksndordlang{{\relational{S}}}$ there is $\invrelational{\psi} \in \weaksndordlang{S}$ such that for all $S$-interpretations $\intp = \intparg{\struct{A}}{\sndordassgn}$,\\
+\centerline{$\intparg{\struct{A}}{\sndordassgn} \models \invrelational{\psi}$ \quad iff \quad $\intparg{\relational{\struct{A}}}{\sndordassgn} \models \psi$.}
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+By induction.
+\end{proof}
+
+\end{enumerate}
+%End of Section IX.1-----------------------------------------------------------------------------------------
+\
+\\
+\\
+%Section IX.2----------------------------------------------------------------------------------------------
+{\large \S2. The System $\infinlog$}
+\begin{enumerate}[1.]
+\item \textbf{Note to 2.1 Definition of $\mathcal{L}_{\omega_1\omega}$.} Note that the formulas $\bigvee \{ \varphi, \psi \}$ and $(\varphi \lor \psi)$, though different in their syntactic characteristic, are logically equivalent.\footnote{The notion of logical equivalence in $\mathcal{L}_{\omega_1\omega}$ is defined analogously.}\\
+\\
+Also notice that the Theorem on the Prenex Normal Form does not hold for $\mathcal{L}_{\omega_1\omega}$, as is demonstrated by the counterexample below:
+\[
+\bigvee \{ \exists v_i \varphi_i | i \in \mathbb{N} \}.
+\]
+%
+\item \textbf{Note to the $\mathcal{L}_{\omega_1\omega}$-Sentence $\bigvee \{ \underbrace{1 + \ldots + 1}_{\mbox{\scriptsize\begin{math}n\end{math}-times}} \equiv 0 | n \geq 2 \}$ in Page 143.} Actually $\bigvee \{ \underbrace{1 + \ldots + 1}_{\mbox{\scriptsize \begin{math}p\end{math}-times}} \equiv 0 | \mbox{\begin{math}p\end{math} is a prime} \}$ is sufficient for the purpose, since if $\underbrace{1 + \ldots + 1}_{\mbox{\scriptsize\begin{math}p\end{math}-times}} \equiv 0$ holds for some prime $p$ then $\underbrace{1 + \ldots + 1}_{\mbox{\scriptsize\begin{math}n\end{math}-times}} \equiv 0$ also holds for all multiples $n$ of $p$.
+%
+\item \textbf{Note to the $L^{ \{ \mbfs{\sigma}, 0 \} }_{\omega_1\omega}$-Sentence Characterizing $(\mathbb{N}, \sigma, 0)$ Up to Isomorphism in Page 143.} Let (P3)$^\prime$ denote the following $L^{ \{ \mbfs{\sigma}, 0 \} }_{\omega_1\omega}$-sentence:
+\[
+\forall x \bigvee \{ x \equiv \underbrace{\mbf{\sigma} \ldots \mbf{\sigma}}_{\mbox{\scriptsize $n$-times}} 0 | n \geq 0 \}.
+\]
+We show that (P1), (P2) (cf. III.7.3) and (P3)$^\prime$ characterize $\mathfrak{N}_\sigma = (\mathbb{N}, \sigma, 0)$ up to isomorphism.\\
+\\
+To start, assume that $\mathfrak{A} = (A, \mbf{\sigma}^A, 0^A)$ is a $\{ \mbf{\sigma}, 0 \}$-structure satisfying (P1), (P2) and (P3)$^\prime$. Define the isomorphism $\pi: \mathfrak{N}_\sigma \cong \mathfrak{A}$ by the clause:
+\[
+\mbox{$\pi ( ( \mbf{\sigma}^\mathbb{N} )^n ( 0^\mathbb{N} ) ) := (\mbf{\sigma}^A)^n (0^A)$ \ \ \ for all $n \in \mathbb{N}$,}
+\]
+that is,
+\[
+\mbox{$\pi ( (\sigma)^n ( 0 ) ) = (\mbf{\sigma}^A)^n (0^A)$ \ \ \ for all $n \in \mathbb{N}$,}
+\]
+where by $(f)^n$ we mean $n$ iterative applications of a function $f$. From (P3)$^\prime$ it is clear that $\pi$ is well defined by the clause above. And it turns out that
+\begin{equation}
+\pi ( 0^\mathbb{N} ) = 0^A, \label{equation1}
+\end{equation}
+and again by (P3)$^\prime$ that
+\begin{equation}
+\mbox{$\pi( \mbf{\sigma}^\mathbb{N} ( n ) ) = \mbf{\sigma}^A ( \pi ( n ) )$ \ \ \ for all $n \in \mathbb{N}$.} \label{equation2}
+\end{equation}
+At this point, both the compatibility conditions ((\ref{equation1}) and (\ref{equation2}) above) for an isomorphism are already satisfied, and it remains to show that $\pi$ is bijective.\\
+\\
+Surjectivity: Immediately follows from (P3)$^\prime$ and the defining clause of $\pi$.\\
+\\
+Injectivity: Suppose $m$, $n \in \mathbb{N}$, $m \neq n$. Without loss of generality, we assume that $m < n$. Naturally, $m = (\sigma)^m ( 0 )$ and $n = (\sigma)^n ( 0 )$. Furthermore, from the defining clause of $\pi$ we have that $\pi (m) = (\mbf{\sigma}^A)^m (0^A)$ and $\pi (n) = (\mbf{\sigma}^A)^n (0^A)$. Here we claim that $\pi ( m ) \neq \pi ( n )$, for otherwise we could apply (P2) $m$ times to $(\pi (m) = ) \  (\sigma)^m (0) = (\sigma)^n (0) \  ( = \pi (n))$
+to obtain that $(\sigma)^{n - m} (0) = \sigma ( (\sigma)^{n - m - 1} (0) ) = 0$,
+which contradicts (P1).
+%
+\item \textbf{More Syntactic Operations on $\infinlog$.} We introduce several syntactic operations on $\infinlog$. In the following arguments, let a symbol set $S$ be given.\\
+\ \\
+First, we extend the definition of the set $\free{\varphi}$ of free variables occurring in $\varphi$ introduced in \reftitle{II.5} to obtain the $\infinlog$-version by considering one more case:
+\[
+\begin{array}{lll}
+\free{\bigvee\Phi} & \colonequals & \bigcup_{\varphi \in \Phi} \free{\varphi}.
+\end{array}
+\]
+Next, by adding the following clause
+\[
+\begin{array}{lll}
+\parenadj{\bigvee \Phi}^\ast & \colonequals & \bigvee \setm{\psi^\ast}{\psi \in \Phi}
+\end{array}
+\]
+to the definition of term-reduced formulas $\psi^\ast$ introduced in \reftitle{VIII.1} we obtain the $\infinlog$-version and\medskip\\
+\begin{theorem}{Theorem on Term-Reduced Formulas in $\infinlog$}
+For every $\psi \in \infinlang{S}$ there is a logically equivalent, term-reduced formula $\psi^\ast \in \infinlang{S}$ with $\free{\psi} = \free{\psi^\ast}$.
+\end{theorem}
+\begin{proof}
+By induction.
+\end{proof}
+Then, let $P \not\in S$ be unary. By adding the following clause
+\[
+\begin{array}{lll}
+\relativize{\parenadj{\bigvee\Phi}}{P} & \colonequals & \bigvee\setm{\relativize{\psi}{P}}{\psi \in \Phi}
+\end{array}
+\]
+to the definition of the relativization $\relativize{\psi}{P}$ of $\psi$ to $P$ introduced in \reftitle{VIII.2} we obtain the $\infinlog$-version and\medskip\\
+\begin{theorem}{Relativization Lemma for $\infinlog$}
+Let $\struct{A}$ be an $S \cup \{ P \}$-structure such that $P \not\in S$ and $P$ is unary. Suppose the set $P^A \subset A$ is $S$-closed in $\struct{A}$, and moreover $\assgn$ is an assignment in $\struct{A}$ with $\assgn(v_n) \in P^A$ for $n \in \nat$. Then for $\psi \in \infinlang{S}$,\\
+\centerline{$\intparg{\substr{P^A}{\struct{A}}}{\assgn} \models \psi$ \quad iff \quad $\intparg{\struct{A}}{\assgn} \models \relativize{\psi}{P}$.}
+\end{theorem}
+\begin{proof}
+By induction.
+\end{proof}
+Finally, let $\relational{S}$ and $\relational{\struct{A}}$ in which $\struct{A}$ is an $S$-structure be defined as in \reftitle{VIII.1}. Furthermore, we extend the definition of $\relational{\psi}$ mentioned there to obtain the $\infinlog$-version by adding the clause:
+\[
+\begin{array}{lll}
+\relational{\parenadj{\bigvee\Phi}} & \colonequals & \bigvee\setm{\relational{\psi}}{\psi \in \Phi};
+\end{array}
+\]
+and likewise extend the definition of $\invrelational{\psi}$ by adding the clause:
+\[
+\begin{array}{lll}
+\invrelational{\parenadj{\bigvee\Phi}} & \colonequals & \bigvee\setm{\invrelational{\psi}}{\psi \in \Phi}.
+\end{array}
+\]
+Then as in \reftitle{VIII.1.3}, we obtain:\medskip\\
+\begin{theorem}{Theorem on the Replacement Operation on $\infinlog$}
+\emph{\begin{enumerate}[(a)]
+\item \emph{For every $\psi \in \infinlang{S}$ there is $\relational{\psi} \in \infinlang{\relational{S}}$ such that for all $S$-interpretations $\intp = \intparg{\struct{A}}{\assgn}$,\\
+\centerline{$\intparg{\struct{A}}{\assgn} \models \psi$ \quad iff \quad $\intparg{\relational{\struct{A}}}{\assgn} \models \relational{\psi}$.}}
+%%
+\item \emph{For every $\psi \in \infinlang{\relational{S}}$ there is $\invrelational{\psi} \in \infinlang{S}$ such that for all $S$-interpretations $\intp = \intparg{\struct{A}}{\assgn}$,\\
+\centerline{$\intparg{\struct{A}}{\assgn} \models \invrelational{\psi}$ \quad iff \quad $\intparg{\relational{\struct{A}}}{\assgn} \models \psi$.}}
+\end{enumerate}}
+\end{theorem}
+\begin{proof}
+By induction.
+\end{proof}
+%
+\item \textbf{Note to 2.2 Remarks.} The items below correspond to the remarks listed in 2.2 in text.
+\begin{enumerate}
+\item The following argument serves as a verification of the assertion mentioned in Remark 2.2 (a):\\
+\ \\
+\begin{tabular}{ll}
+\ & $\mathfrak{I} \models \bigwedge \Phi$, namely $\mathfrak{I} \models \neg \bigvee \{ \neg \varphi | \varphi \in \Phi \}$ \cr
+\Iff & not $\mathfrak{I} \models \bigvee \{ \neg \varphi | \varphi \in \Phi \}$ \cr
+\Iff & not ($\mathfrak{I} \models \neg \varphi$ for some $\varphi \in \Phi$) \cr
+\Iff & for all $\varphi \in \Phi$, not $\mathfrak{I} \models \neg \varphi$ \cr
+\Iff & for all $\varphi \in \Phi$, $\mathfrak{I} \models \neg \neg \varphi$ \cr
+\Iff & for all $\varphi \in \Phi$, $\mathfrak{I} \models \varphi$.
+\end{tabular}\\
+\\
+First notice that the last (logical) equivalence follows from \textbf{Proposition}: \textit{For every formula $\varphi$, $\varphi \bimodels \neg \neg \varphi$} in notes to Section III.4. There is a word of caution: We cannot claim this equivalence from the derivable sequent rules
+\[
+\mbox{$\displaystyle \frac{\Gamma \;\;\; \varphi \phantom{\neg\neg}}{\Gamma \;\;\; \neg \neg \varphi}$ \ \ \ and
+\ \ \ $\displaystyle \frac{\Gamma \;\;\; \neg \neg \varphi}{\Gamma \;\;\; \varphi \phantom{\neg\neg}}$}
+\]
+presented in Section IV.3 (cf. parts (a1) and (a2) of Exercise 3.6) together with the Adequacy Theorem, as these results apply to $\mathcal{L}_\mathrm{I}$ only.
+%%
+\item As an extention of $\mathcal{L}_\mathrm{I}$, the system $\mathcal{L}_{\omega_1\omega}$ possesses slightly different properties. For example,
+\[
+\bigvee \{ v_n \equiv v_{n + 1} | n \geq 1 \} \not \in \SF(\bigvee \{ v_n \equiv v_{n + 1} | n \geq 0 \}).
+\]
+\\
+Next, the claim that an at most countable union of at most countable sets is at most countable basically follows from part (a) of Exercise II.1.4 (for the case of \emph{finite} union of at most countable sets, consider $M_p = \emptyset$ for all $p \geq n_0$, for some $n_0 \in \mathbb{N}$).\\
+\\
+Finally, let $\varphi$ be an arbitrary formula in $L^S_{\omega_1\omega}$. Note that it is obtained by \emph{finite} applications of the formution rules of $\mathcal{L}_{\omega_1\omega}$ (cf. Definition 2.1). Furthermore, $\SF(\varphi)$ is at most countable (shown in text). It turns out that $\varphi$ can be eventually decomposed into at most countably many subformulas (of $\varphi$) of finite lengths. Thus there are only at most countably many symbols involved in $\varphi$, showing that there exists an at most countable $S^\prime \subset S$ such that $\varphi \in L^{S^\prime}_{\omega_1\omega}$.
+%%
+\item The assertion mentioned in text is shown below. We confine ourselves to the $\bigvee$-step, as other cases are trivial.\\
+\\
+Let $\varphi := \bigvee \Phi$, and suppose $\free(\varphi) := \bigcup_{\psi \in \Phi} \free(\psi)$ is finite. Then clearly for every $\psi \in \Phi$, $\free(\psi)$ is also finite, which by induction hypothesis implies that $\free(\chi)$ is finite for every subformula $\chi$ of $\psi$. Therefore, $\free(\psi)$ is also finite for every subformula $\psi$ of $\varphi$. (Recall that $\SF(\bigvee \Phi) := \{ \bigvee \Phi \} \cup \bigcup_{\psi \in \Phi} \SF(\psi)$.)\\
+\\
+In particular, for every $\mathcal{L}_{\omega_1\omega}$-sentence $\varphi$ we have that $\free(\varphi) = \emptyset$, hence that $\varphi$ has only finitely many free variables.
+\end{enumerate}
+%
+\item \textbf{Note to Theorem 2.3.} The following discussion provides a counterexample of the Completeness as well as the Compactness Theorems for $\mathcal{L}_{\omega_1\omega}$:
+\begin{center}
+Let $S := \{ c_i | i \in \mathbb{N} \}$, and $\Phi := \{ \neg c_i \equiv c_j | i, j \in \mathbb{N}, i < j \}$.
+\end{center}
+We see that $\Phi \models \bigwedge \Phi$, but not $\Phi \vdash \bigwedge \Phi$,\footnote{There is no sequent $\Gamma \subset \Phi$ with $\Gamma \vdash \bigwedge \Phi$, as $\Gamma$ is finite in length.} even if we allow \emph{infinitely long} derivations. As a result, there is no finite subset $\Phi_0$ of $\Phi$ such that $\Phi_0 \models \bigwedge \Phi$; furthermore, there exist consistent but unsatisfiable sets of $\mathcal{L}_{\omega_1\omega}$-formulas (e.g. $\{ \psi_\mathrm{fin} \} \cup \{ \varphi_{\geq n} | n \geq 2 \}$ introduced before Theorem 2.3).
+%
+\item \textbf{Conjecture.} Note that in property (2) of $\mathcal{L}_{\omega_1\omega}$ stated in page 145, the correctness and the completeness of the sequent calculus for $\mathcal{L}_{\omega_1\omega}$ may be generalized to the case in which the sequent consists of formulas: Given \emph{$\mathcal{L}_{\omega_1\omega}$-formulas} $\varphi_1, \ldots, \varphi_n, \varphi$, the sequent $\varphi_1 \ldots \varphi_n \varphi$ is derivable iff it is correct. We argue this by reducing the original sequent into another in whicn new constants take the place where free variables originally occur, and apply the result to it and then restore to the original sequent. The key point is that in such case \emph{the free variables behave as constants}.
+%
+\item \textbf{Note to the Proof of Lemma 2.5.} First, the set $B_0$ mentioned in the preliminary analysis must incluce the set
+\[
+\{ t^\mathfrak{B} | \mbox{$t$ is a variable-free term} \}
+\]
+as a subset.\\
+\\
+Second, the definition of the sequence $A_0$, $A_1$, $A_2$, \ldots is actually a procedure for the domain $A$ of the countable substructure $\mathfrak{A}$ of $\mathfrak{B}$ (enlarging $A_0$ gradually to $A$). Also notice that this definition works as $\SF(\varphi)$ together with the set of formulas of the form $fx_1 \ldots x_n \equiv x$ are at most countable on the one hand, and $\free(\psi)$ is finite for all formulas $\psi \in \SF(\varphi)$ (since $\varphi$ is a \emph{sentence}, see part (c) of Remarks 2.2) on the other. Next, in the first paragraph in page 146 in text, the set $A_m$ is at most countable, hence so is $\{ (a_1, \ldots, a_n) | a_1, \ldots, a_n \in A_m \}$. And besides $\SF(\varphi)$ and $A_m$, the set of formulas of the form $fx_1 \ldots x_n \equiv x$ is also at most countable (this is a missing statement in text). Therefore, the $A_m^\prime$ is at most countable. (The previous two statements serve as a supplement to the reason for this result.)\\
+\\
+Third, in part (2) of the analysis of the domain $A$, note that
+\[
+\mathfrak{B} \models \exists x \; fx_1 \ldots x_n \equiv x[a_1, \ldots, a_n]
+\]
+definitely holds, as $f^\mathfrak{B}$ is defined over $B$.\\
+\\
+Finally, in the $\exists$-case of the inductive proof of ($\ast\ast$), the assumption that $\psi(x_1, \ldots, x_n) = \exists x \chi(x_1, \ldots, x_n, x)$ is no loss of generality since, if $x$ is among the $n$ variables $x_1$, \ldots, $x_n$, by applying substitution operation we can transform this formula into an equivalent one in which $x$ follows $x_1$, \ldots, $x_n$ in the variable list. Also note that ($\ast$) follows from ($\ast\ast$) because $\varphi \in \SF(\varphi)$ is a sentence.\\
+\\
+We close this note by the concluding remark: The L\"{o}wenheim-Skolem Theorem for the case of $\mathcal{L}_{\omega_1\omega}$-formulas $\varphi$ with only \emph{finitely} many free variables, i.e. that every satisfiable $\mathcal{L}_{\omega_1\omega}$-formula $\varphi$ involving only finitely many free variables is satisfiable over an at most countable domain, immediately follows from this proof.\newline
+\ 
+\\\textit{Remark.} Notice that we cannot directly generalize this lemme to the case of formulas in which infinitely many free variables occur: in the construction process given in the proof, uncountably many elements might be added if we allowed the formula $\psi \in \SF (\varphi)$ therein to contain infinitely many free variables. However, there is a way around this problem, see the \textbf{Claim} below.
+%
+\item \textbf{Claim.} \emph{Let $S$ be at most countable, $\varphi$ an $L^S_{\omega_1\omega}$-formula and $\mathfrak{B}$ an $S$-structure such that $(\mathfrak{B}, \beta) \models \varphi$. Then there is an at most countable substructure $\mathfrak{A} \subset \mathfrak{B}$ such that $(\mathfrak{A}, \beta) \models \varphi$, where $\beta(v_i) \in A$ for $i \in \mathbb{N}$.}\newline
+\ 
+\\Hence the complete statement given in the L\"{o}wenheim-Skolem Theorem VI.1.1 absolutely holds for $\mathcal{L}_{\omega_1\omega}$, as given any satisfiable and at most countable set $\Phi$ of formulas we can take the formula $\varphi := \bigwedge \Phi$ and apply the result in this conjecture to it. (If $\Phi$ consists of only \emph{sentences}, then 2.5 is sufficient for the purpose.)\newline
+\ 
+\\On the other hand, this claim is a generalization of 2.5, which in turn entails a generalization of 2.4:
+\begin{quote}
+\emph{Every satisfiable $\mathcal{L}_{\omega_1\omega}$-formula has a model over an at most countable domain.}
+\end{quote}
+\ 
+\\\textit{Proof.} First, we add countably many new constants $c_0$, $c_1$, \ldots to $S$ to comprise a new symbol set $S^\prime$. It is clear that $S^\prime$ is countable.\\
+\\
+Second, let $c_i$ correspond to $v_i$ for $i \in \mathbb{N}$, and define for every $L^S_{\omega_1\omega}$-\emph{formula} $\psi$ the $L^{S^\prime}_{\omega_1\omega}$-\emph{sentence} $\psi^\prime$ to be obtained by replacing all free occurrences of variables (if any) by occurrences of the corresponding constants. For example, if
+\[
+\psi = (\forall v_0 \exists v_1 v_0 \equiv f(v_1) \land \neg v_2 \equiv v_3),
+\]
+then
+\[
+\psi^\prime := (\forall v_0 \exists v_1 v_0 \equiv f(v_1) \land \neg c_2 \equiv c_3).
+\]
+\ \\
+Third, one should agree that for every $\psi \in L^S_{\omega_1\omega}$ and every $S$-structure $\mathfrak{C}$ with $(\mathfrak{C}, \beta_0) \models \psi$,
+\[
+(\mathfrak{C}, \beta_0) \models \psi \; \Iff \; \mathfrak{C}^\prime \models \psi^\prime,
+\]
+where $\mathfrak{C}^\prime$ is the $S^\prime$-expansion of $\mathfrak{C}$ with $c_i^{\mathfrak{C}^\prime} := \beta_0(v_i)$ for $i \in \mathbb{N}$. From this observation we have that $\mathfrak{B}^\prime \models \varphi^\prime$ since $(\mathfrak{B}, \beta) \models \varphi$ by premise.\\
+\\
+Finally, by Lemma 2.5 there is an at most countable substructure $\mathfrak{A}^\prime \subset \mathfrak{B}^\prime$ such that $\mathfrak{A}^\prime \models \varphi^\prime$. Then, by the observation made above again, we have that $(\mathfrak{A}, \beta) \models \varphi$, where $\mathfrak{A}$ is, symmetrically, the $S$-reduct of $\mathfrak{A}^\prime$. This is so because for $i \in \mathbb{N}$,
+\[
+\begin{tabular}{lll}
+$\beta(v_i)$ & $=$ $c_i^{\mathfrak{B}^\prime}$ \cr
+\            & $=$ $c_i^{\mathfrak{A}^\prime}$ (since $\mathfrak{A}^\prime \subset \mathfrak{B}^\prime$) \cr
+\            & $\in$ $A^\prime = A$ (note that $\mathfrak{A}^\prime$ is an $S^\prime$-expansion of $\mathfrak{A}$).
+\end{tabular}
+\]
+\begin{flushright}$\talloblong$\end{flushright}
+%
+\item \textbf{Note to the Paragraph Immediately Following the Proof of Lemma 2.5.} By applying 2.5 to $\varphi := \bigwedge \Phi$, we have that every model of $\Phi$ has an at most countable substructure which is also a model of $\Phi$. (Every model of $\varphi$ is a model of $\Phi$, and vice versa.)\\
+\\
+\textbf{Conjecture.} Instead of resorting to the generalization of 2.5 mentioned earlier, we can prove that of 2.4 directly: \textit{Suppose $\Phi$ is an at most countable set of first-order formulas, and $(\mathfrak{B}, \beta)$ a model of $\Phi$. Furthermore, let $\Phi^\prime$ be obtained by replacing every formula $\psi(x_1, \ldots, x_n) \in \Phi$ by $\exists x_1 \ldots \exists x_n \psi$ and $\varphi := \bigwedge \Phi^\prime$, then $\mathfrak{B} \models \Phi^\prime$ and hence $\mathfrak{B} \models \varphi$. By 2.5 there is an at most countable substructure $\mathfrak{A} \subset \mathfrak{B}$ such that $\mathfrak{A} \models \varphi$ and hence $\mathfrak{A} \models \Phi^\prime$, where in the procedure given in the proof of 2.5 we additionally dictate that $\beta(v_i) \in A_0$ for $i \in \mathbb{N}$. Also, in this procedure we will certainly encounter the case $\exists x \psi[\beta(x_1), \ldots, \beta(x_n)]$ in which $x \not \in \free(\psi)$ at some stage (since $\beta(x_i)$ is kept in $A_0$ as mandated). Therefore $(\mathfrak{A}, \beta) \models \exists x \psi$ and further $(\mathfrak{A}, \beta) \models \psi$ as $x \not \in \free(\psi)$. As it turns out, $(\mathfrak{A}, \beta) \models \Phi$. This serves as a demonstration of the L\"{o}wenheim-Skolem Theorem for first-order logic which does not rely on the proof of the Completeness Theorem. Note that the result stated in this conjecture also follows from the previous conjecture.}\begin{flushright}$\talloblong$\end{flushright}
+%
+\item \textbf{Note to Page 147.}
+\begin{enumerate}[(1)]
+\item In the third paragraph, the statement ``A group $\mathfrak{G}$ is said to be \emph{simple} if $\{ e^G \}$ and $G$ are the only normal subgroups of $\mathfrak{G}$.'' should be modified into ``A group $\mathfrak{G}$ is said to be \emph{simple} if $\{ e^G \}$ and $G$ are the domains of the only normal subgroups of $\mathfrak{G}$.'' (A set by itself is \emph{not} a group unless a binary function $\circ$ is defined over it and this set together with $\circ$ satisfy the group axioms.)
+%%
+\item The sentence
+\[
+\begin{array}{r}
+\forall x (\neg x \equiv e \rightarrow \forall y \bigvee \{ \exists u_0 \ldots \exists u_n \bigvee \{ y \equiv u_0 x^{z_0} u_0^{-1} \ldots u_n x^{z_n} u_n^{-1} | \phantom{n \in \mathbb{N} \} } \cr
+z_0, \ldots, z_n \in \mathbb{Z} \} | n \in \mathbb{N} \},
+\end{array}
+\]
+given in the middle of page 147, should be modified into
+\[
+\begin{array}{r}
+\forall x (\neg x \equiv e \rightarrow \forall y \bigvee \{ \exists u_0 \ldots \exists u_n \bigvee \{ y \equiv u_0 x^{z_0} u_0^{-1} \ldots u_n x^{z_n} u_n^{-1} | \phantom{n \in \mathbb{N} \} } \cr
+z_0, \ldots, z_n \in \mathbb{Z} \} | n \in \mathbb{N} \} ),
+\end{array}
+\]
+i.e. the right parenthesis `$)$' is missing in the original one.
+\end{enumerate}
+%
+\item \textbf{Note to 2.6.} In the premise of the statement given in 2.6, the simple group $\mathfrak{G}$ should furthermore be \emph{infinite}, otherwise it would be impossible for it to have a countable subgroup. Also note that in the proof of 2.6, applying 2.5 to $\mathfrak{G}^\prime$ and $\varphi_s$ only promises that the simple subgroup thus obtained is \emph{at most countable}. It is the fact that the subgroup contains the countable set $M$ that implies its being \emph{countable}.
+%
+\item \textbf{Solution to Exercise 2.7} Let a symbol set $S$ be given. We shall assume a countable set $U \colonequals \setm{v^{n, k}_{i, j}}{k \in \nat, n > 0, i > 0, 1 \leq j \leq n}$ of (first-order) variables not appearing in those $\weaksndordlang{S}$-sentences we consider in this exercise\footnote{This is possible since, say, we may multiply by $2$ all the indices of (first-order) variables occurring in each $\weaksndordlang{S}$-formula (for example, we obtain $\forall X \exists v_2 Xv_2$ from $\forall X \exists v_1 Xv_1$) and thus use only variables of even indices, yet having a countable set of unused variables, namely variables of odd indices.} (given $n$ and $k$, the variables $v^{n, k}_{i, j}$ will be associated with the second-order variable $V^n_k$). This is not an essential restriction for our purpose because for every $\weaksndordlang{S}$-sentence that contains variables from $U$ there is a logically equivalent one that contains no variables from $U$. For example, $\forall X \exists v^{1, 0}_{3, 1} X v^{1, 0}_{3, 1}$ is logically equivalent to $\forall X \exists v X v$, where $v$ is any variable other than those from $U$.\bigskip\\
+\emph{Notice that we are considering $\weaksndordlang{S}$-\emph{sentences} in this exercise, thus every second-order variable therein stands for a \emph{finite} set when we talk about satisfaction in a structure. Without loss of generality, therefore, we assume that for any structure $\struct{A}$ and any second-order assignment $\sndordassgn$ in $\struct{A}$, the set $\sndordassgn(V^n_k)$ is finite for every second-order variable $V^n_k$ (according to the Coincidence Lemma for $\weaksndordlog$). Moreover, if $\sndordassgn(V^n_k)$ contains $m > 0$ elements, then $\setm{\tuple{\seqp{\sndordassgn(v^{n, k}_{i, 1})}{\sndordassgn(v^{n, k}_{i, n})}}}{1 \leq i \leq m} = \sndordassgn(V^n_k)$; there is no restriction on the values of $\sndordassgn(v^{n, k}_{i, j})$ if $\sndordassgn(V^n_k) = \emptyset$. In order to be compatible, we assume additionally that these properties also hold for $\sndordassgn\sbst{C}{V^n_k}$ (definitely $C$ will be chosen to be finite in this situation).}\bigskip\\
+For $m \in \nat$ we say the pair $\pair{V^n_k}{m}$ is a \emph{substitute for $V^n_k$}. If $F$ is a set of substitutes for second-order variables, then we write\smallskip\\
+\centerline{$F \leftarrow \pair{V^n_k}{m} \colonequals (F \setminus \setm{\pair{V^n_k}{m^\prime}}{m^\prime \in \nat}) \cup \{ \pair{V^n_k}{m} \}$.}\bigskip\\
+Now, with every $\weaksndordlang{S}$-formula $\varphi$ and every set $F$ of substitutes for second-order variables in which $F \cap \sett{\pair{V^n_k}{m}}{\(V^n_k \in \sndordfree{\varphi}\) and \(m \in \nat\)}$ defines a map from $\sndordfree{\varphi}$ to $\nat$ if $\sndordfree{\varphi} \neq \emptyset$, we associate an $\infinlang{S}$-formula $\varphi^F$, which is defined by induction below:\medskip\\
+\begin{tabular}{lll}
+$(t_1 \equal t_2)^F$ & $\colonequals$ & $t_1 \equal t_2$ \cr
+$(R \enum[1]{t}{n})^F$ & $\colonequals$ & $R \enum[1]{t}{n}$ \cr
+$(V^n_k \enum[1]{t}{n})^F$ & $\colonequals$ &
+\begin{minipage}[t]{48ex}
+$\begin{cases}
+\bigvee\limits_{1 \leq i \leq m}\parenadj{\bigwedge\limits_{1 \leq j \leq n} t_j \equal v^{n, k}_{i, j}} & \mbox{if \(m > 0\)} \cr
+\exists v_0 \neg v_0 \equal v_0 & \mbox{otherwise,}
+\end{cases}$\smallskip\\
+in which $\pair{V^n_k}{m} \in F$
+\end{minipage} \cr
+$(\neg\varphi)^F$ & $\colonequals$ & $\neg\varphi^F$ \cr
+$(\varphi \lor \psi)^F$ & $\colonequals$ & $\varphi^F \lor \psi^F$ \cr
+$(\exists x \varphi)^F$ & $\colonequals$ & $\exists x \varphi^F$ \cr
+$(\exists V^n_k \varphi)^F$ & $\colonequals$ & $\bigvee \setm{ \exists^m \varphi^F_{V^n_k}}{m \in \nat}$,
+\end{tabular}\medskip\\
+where we adopt the following abbreviations throughout this exercise:\smallskip\\
+\begin{tabular}{lll}
+$\exists^0 \varphi^F_{V^n_k}$ & $\colonequals$ & $\varphi^{F \leftarrow \pair{V^n_k}{0}}$, \cr
+$\exists^1 \varphi^F_{V^n_k}$ & $\colonequals$ & $\enump{\exists v^{n, k}_{1, 1}}{\exists v^{n, k}_{1, n}} \varphi^{F \leftarrow \pair{V^n_k}{1}}$,
+\end{tabular}\smallskip\\
+and for $m \geq 2$,\smallskip\\
+\begin{tabular}{lll}
+$\exists^m \varphi^F_{V^n_k}$ & $\colonequals$ & $\enump{\enump{\exists v^{n, k}_{1, 1}}{\exists v^{n, k}_{1, n}}}{\enump{\exists v^{n, k}_{m, 1}}{\exists v^{n, k}_{m, n}}} \varphi^{F, m}_{V^n_k}$ \cr
+$\varphi^{F, m}_{V^n_k}$ & $\colonequals$ & $\bigwedge\limits_{1 \leq i < j \leq m} \parenadj{\bigvee\limits_{1 \leq l \leq n} \neg v^{n, k}_{i, l} \equal v^{n, k}_{j, l}} \land \varphi^{F \leftarrow \pair{V^n_k}{m}}$.
+\end{tabular}\bigskip\\
+For every (second-order) $S$-interpretation $\intparg{\struct{A}}{\sndordassgn}$ and every $\varphi \in \weaksndordlang{S}$, we say the (possibly empty) set $F$ of substitutes for second-order variables is a \emph{substitutor of $\intparg{\struct{A}}{\sndordassgn}$ and $\varphi$} if $F \cap \sett{\pair{V^n_k}{m}}{\(V^n_k \in \sndordfree{\varphi}\) and \(m \in \nat\)} = \setm{\pair{V^n_k}{\card{\sndordassgn(V^n_k)}}}{V^n_k \in \sndordfree{\varphi}}$ \quad ($\sndordassgn(V^n_k)$ is finite by assumption).\bigskip\\
+Finally, given an $S$-interpretation $\intparg{\struct{A}}{\sndordassgn}$ we denote by $\assgn^\sndordassgn$ the (first-order) assignment in $\struct{A}$ that is a subset of $\sndordassgn$ (identifying the maps $\sndordassgn$ and $\assgn^\sndordassgn$ with their graphs).\bigskip\\
+We then have:\medskip\\
+\begin{theorem}{Claim}
+For every $\weaksndordlang{S}$-formula $\varphi$, every $S$-interpretation $\intparg{\struct{A}}{\sndordassgn}$, and every substitutor $F$ of $\intparg{\struct{A}}{\sndordassgn}$ and $\varphi$,\smallskip\\
+\begin{quoteno}{\rm($\ast$)}
+$\intparg{\struct{A}}{\sndordassgn} \models_\weak \varphi$ \quad iff \quad $\intparg{\struct{A}}{\assgn^\sndordassgn} \models \varphi^F$.
+\end{quoteno}
+\end{theorem}
+\begin{proof}
+We prove ($\ast$) by induction on $\varphi$.\medskip\\
+For first-order atomic formulas $\varphi$, ($\ast$) is trivially true.\medskip\\
+For $\varphi = V^n_k \enum[1]{t}{n}$: If $\sndordassgn(V^n_k) = \emptyset$ then ($\ast$) is trivially true. So let $m \colonequals \card{\sndordassgn(V^n_k)} > 0$ below.\smallskip\\
+\begin{tabular}[b]{ll}
+\   & $\intparg{\struct{A}}{\sndordassgn} \models_\weak \varphi$ \cr
+iff & $\tuple{\seqp{\intparg{\struct{A}}{\sndordassgn}(t_1)}{\intparg{\struct{A}}{\sndordassgn}(t_n)}} \in \sndordassgn(V^n_k)$ \cr
+iff & $\seqp{\intparg{\struct{A}}{\sndordassgn}(t_1) = \sndordassgn(v^{n, k}_{i, 1})}{\intparg{\struct{A}}{\sndordassgn}(t_n) = \sndordassgn(v^{n, k}_{i, n})}$ \quad for some $1 \leq i \leq m$ \cr
+iff &
+\begin{minipage}[t]{64ex}
+$\seqp{\intparg{\struct{A}}{\assgn^\sndordassgn}(t_1) = \assgn^\sndordassgn(v^{n, k}_{i, 1})}{\intparg{\struct{A}}{\assgn^\sndordassgn}(t_n) = \assgn^\sndordassgn(v^{n, k}_{i, n})}$\\for some $1 \leq i \leq m$\\(since $\intparg{\struct{A}}{\sndordassgn}(t_j) = \intparg{\struct{A}}{\assgn^\sndordassgn}(t_j)$ and $\sndordassgn(v^{n, k}_{i, j}) = \assgn^\sndordassgn(v^{n, k}_{i, j})$)
+\end{minipage} \cr
+iff & $\seqp{\intparg{\struct{A}}{\assgn^\sndordassgn} \models t_1 \equal v^{n, k}_{i, 1}}{\intparg{\struct{A}}{\assgn^\sndordassgn} \models t_n \equal v^{n, k}_{i, n}}$ \quad for some $1 \leq i \leq m$ \cr
+iff & $\intparg{\struct{A}}{\assgn^\sndordassgn} \models \bigwedge\limits_{1 \leq j \leq n} t_j \equal v^{n, k}_{i, j}$ \quad for some $1 \leq i \leq m$ \cr
+iff & $\intparg{\struct{A}}{\assgn^\sndordassgn} \models \varphi^F$.
+\end{tabular}\bigskip\\
+For $\varphi = \neg\psi$: $\intparg{\struct{A}}{\sndordassgn} \models_\weak \varphi$\smallskip\\
+\begin{tabular}[b]{ll}
+iff & not $\intparg{\struct{A}}{\sndordassgn} \models_\weak \psi$ \cr
+iff & not $\intparg{\struct{A}}{\assgn^\sndordassgn} \models \psi^F$ \quad (by induction hypothesis) \cr
+iff & $\intparg{\struct{A}}{\assgn^\sndordassgn} \models \varphi^F$.
+\end{tabular}\bigskip\\
+For $\varphi = \psi \lor \chi$: $\intparg{\struct{A}}{\sndordassgn} \models_\weak \varphi$\smallskip\\
+\begin{tabular}[b]{ll}
+iff & $\intparg{\struct{A}}{\sndordassgn} \models_\weak \psi$ or $\intparg{\struct{A}}{\sndordassgn} \models_\weak \chi$ \cr
+iff & $\intparg{\struct{A}}{\assgn^\sndordassgn} \models \psi^F$ or $\intparg{\struct{A}}{\assgn^\sndordassgn} \models \chi^F$ \quad (by induction hypothesis) \cr
+iff & $\intparg{\struct{A}}{\assgn^\sndordassgn} \models \varphi^F$.
+\end{tabular}\bigskip\\
+For $\varphi = \exists x \psi$ ($x \not\in U$!): $\intparg{\struct{A}}{\sndordassgn} \models_\weak \varphi$\smallskip\\
+\begin{tabular}[b]{ll}
+iff & there is an $a \in A$ such that $\intparg{\struct{A}}{\sndordassgn\sbst{a}{x}} \models_\weak \psi$ \cr
+iff &
+\begin{minipage}[t]{62ex}
+there is an $a \in A$ such that $\intparg{\struct{A}}{\assgn^{\sndordassgn\scriptsbst{a}{x}}} \models \psi^F$\\(by induction hypothesis)
+\end{minipage} \cr
+iff &
+\begin{minipage}[t]{62ex}
+there is an $a \in A$ such that $\intparg{\struct{A}}{\assgn^\sndordassgn\sbst{a}{x}} \models \psi^F$\\(since $\assgn^{\sndordassgn\scriptsbst{a}{x}} = \assgn^\sndordassgn\sbst{a}{x}$)
+\end{minipage} \cr
+iff & $\intparg{\struct{A}}{\assgn^\sndordassgn} \models \varphi^F$.
+\end{tabular}\bigskip\\
+For $\varphi = \exists V^n_k \psi$: $\intparg{\struct{A}}{\sndordassgn} \models_\weak \varphi$\smallskip\\
+\begin{tabular}[b]{ll}
+iff & there is a finite $C \subset A^n$ such that $\intparg{\struct{A}}{\sndordassgn\sbst{C}{V^n_k}} \models_\weak \psi$ \cr
+iff &
+\begin{minipage}[t]{62ex}
+$\intparg{\struct{A}}{\sndordassgn\sbst{\emptyset}{V^n_k}} \models_\weak \psi$; or\smallskip\\
+$\intparg{\struct{A}}{\sndordassgn\sbst{C}{V^n_k}} \models_\weak \psi$ for some $C \subset A^n$ with $\card{C} = 1$; or\smallskip\\
+$\intparg{\struct{A}}{\sndordassgn\sbst{C}{V^n_k}} \models_\weak \psi$ for some $C \subset A^n$ with $\card{C} = 2$; or\smallskip\\
+\ldots
+\end{minipage} \cr
+iff &
+\begin{minipage}[t]{62ex}
+$\intparg{\struct{A}}{\assgn^{\sndordassgn\scriptsbst{\emptyset}{V^n_k}}} \models \psi^{F \leftarrow \pair{V^n_k}{0}}$; or\smallskip\\
+$\intparg{\struct{A}}{\assgn^{\sndordassgn\scriptsbst{C}{V^n_k}}} \models \psi^{F \leftarrow \pair{V^n_k}{1}}$ for some $C \subset A^n$ with $\card{C} = 1$; or\smallskip\\
+$\intparg{\struct{A}}{\assgn^{\sndordassgn\scriptsbst{C}{V^n_k}}} \models \psi^{F \leftarrow \pair{V^n_k}{2}}$ for some $C \subset A^n$ with $\card{C} = 2$; or\smallskip\\
+\ldots\\(by induction hypothesis)
+\end{minipage} \cr
+iff &
+\begin{minipage}[t]{62ex}
+$\intparg{\struct{A}}{\assgn^{\sndordassgn\scriptsbst{\emptyset}{V^n_k}}} \models \psi^{F \leftarrow \pair{V^n_k}{0}}$; or\smallskip\\
+$\intparg{\struct{A}}{\assgn^{\sndordassgn\scriptsbst{C}{V^n_k}}} \models \psi^{F \leftarrow \pair{V^n_k}{1}}$ for some $\seqp{a_{1, 1}}{a_{1, n}} \in A$ where $C = \{ \tuple{\seqp{a_{1, 1}}{a_{1, n}}} \}$; or\smallskip\\
+$\intparg{\struct{A}}{\assgn^{\sndordassgn\scriptsbst{C}{V^n_k}}} \models \psi^{F \leftarrow \pair{V^n_k}{2}}$ for some $\seqp{a_{1, 1}}{a_{1, n}}, \seqp{a_{2, 1}}{a_{2, n}} \in A$ where $C = \{ \tuple{\seqp{a_{1, 1}}{a_{1, n}}}, \tuple{\seqp{a_{2, 1}}{a_{2, n}}} \}$ and at least one of $\seqp{a_{1, 1} \neq a_{2, 1}}{a_{1, n} \neq a_{2, n}}$ is the case; or\smallskip\\
+\ldots\\(by the extensionality of sets)
+\end{minipage}
+\end{tabular}\\
+\begin{tabular}[b]{lll}
+iff &
+\begin{minipage}[t]{62ex}
+$\intparg{\struct{A}}{\assgn^\sndordassgn} \models \psi^{F \leftarrow \pair{V^n_k}{0}}$; or\smallskip\\
+$\intparg{\struct{A}}{\assgn^\sndordassgn\sbst{\enump{a_{1, 1}}{a_{1, n}}}{\enump{v^{n, k}_{1, 1}}{v^{n, k}_{1, n}}}} \models \psi^{F \leftarrow \pair{V^n_k}{1}}$ for some $\seqp{a_{1, 1}}{a_{1, n}} \in A$; or\smallskip\\
+$\intparg{\struct{A}}{\assgn^\sndordassgn\sbst{\enump{a_{1, 1}}{a_{1, n}}\enump{a_{2, 1}}{a_{2, n}}}{\enump{v^{n, k}_{1, 1}}{v^{n, k}_{1, n}}\enump{v^{n, k}_{2, 1}}{v^{n, k}_{2, n}}}} \models \bigwedge\limits_{1 \leq i < j \leq 2} \parenadj{\bigvee\limits_{1 \leq l \leq n} \neg v^{n, k}_{i, l} \equal v^{n, k}_{j, l}}$\\and $\intparg{\struct{A}}{\assgn^\sndordassgn\sbst{\enump{a_{1, 1}}{a_{1, n}}\enump{a_{2, 1}}{a_{2, n}}}{\enump{v^{n, k}_{1, 1}}{v^{n, k}_{1, n}}\enump{v^{n, k}_{2, 1}}{v^{n, k}_{2, n}}}} \models \psi^{F \leftarrow \pair{V^n_k}{2}}$\\for some $\seqp{a_{1, 1}}{a_{1, n}}, \seqp{a_{2, 1}}{a_{2, n}} \in A$; or\smallskip\\
+\ldots\\(by the fact that $\pair{V^n_k}{\sndordassgn(V^n_k)}$ is not in the map $\assgn^\sndordassgn$, and by the Coincidence Lemma for $\infinlog$: none of the variables $v^{n, k}_{i, j}$ occurs free in $\psi^{F \leftarrow \pair{V^n_k}{0}}$; none of the variables $v^{n, k}_{m + 1, j}$ occurs free in $\psi^{F \leftarrow \pair{V^n_k}{m}}$ for $m > 0$)
+\end{minipage} \cr
+iff &
+\begin{minipage}[t]{62ex}
+$\intparg{\struct{A}}{\assgn^\sndordassgn} \models \psi^{F \leftarrow \pair{V^n_k}{0}}$; or\smallskip\\
+$\intparg{\struct{A}}{\assgn^\sndordassgn\sbst{\enump{a_{1, 1}}{a_{1, n}}}{\enump{v^{n, k}_{1, 1}}{v^{n, k}_{1, n}}}} \models \psi^{F \leftarrow \pair{V^n_k}{1}}$ for some $\seqp{a_{1, 1}}{a_{1, n}} \in A$; or\smallskip\\
+$\intparg{\struct{A}}{\assgn^\sndordassgn\sbst{\enump{a_{1, 1}}{a_{1, n}}\enump{a_{2, 1}}{a_{2, n}}}{\enump{v^{n, k}_{1, 1}}{v^{n, k}_{1, n}}\enump{v^{n, k}_{2, 1}}{v^{n, k}_{2, n}}}} \models \psi^{F, 2}_{V^n_k}$\\for some $\seqp{a_{1, 1}}{a_{1, n}}, \seqp{a_{2, 1}}{a_{2, n}} \in A$; or\smallskip\\
+\ldots
+\end{minipage} \cr
+iff & $\intparg{\struct{A}}{\assgn^\sndordassgn} \models \exists^m \psi^F_{V^n_k}$ \quad for some $m \in \nat$ \cr
+iff & $\intparg{\struct{A}}{\assgn^\sndordassgn} \models \varphi^F$.
+\end{tabular}
+\end{proof}
+For every $\weaksndordlang{S}$-sentence $\varphi$, we choose $\varphi^\emptyset$ for $\psi$. The desired result immediately follows from the above claim.
+%
+\item \textbf{Solution to Exercise 2.8}
+\begin{enumerate}[(a)]
+\item A group $\mathfrak{G}$ is said to be \emph{finitely generated} if there exists a finite subset $G_0$ of the domain $G$ such that every element of $G$ can be expressed as a finite product of the elements in $G_0$ and their inverses. Therefore the class of finitely generated groups can be directly axiomatlzed by the $L^{S_\mathrm{grp}}_{\omega_1\omega}$-sentence $\varphi_a$, the conjuction of the group axioms and the following sentence:
+\[
+\begin{array}{r}
+\bigvee \{ \exists u_0 \ldots \exists u_m \forall x \bigvee \{ \bigvee \{ x \equiv v_0 \ldots v_n | \, \mbox{$v_i \in \{ u_0, u_0^{-1}, \ldots, u_m, u_m^{-1} \}$} \;\;\; \cr
+\mbox{for $1 \leq i \leq n$} \} | \, n \in \mathbb{N} \} | \, m \in \mathbb{N} \}.
+\end{array}
+\]
+Notice that in the sentence shown above, the formula inside the outermost braces with prefix $\exists u_0 \ldots \exists u_m$ states that $G_0$ contains \emph{at most} $m + 1$ elements; the case in which $G_0 = \emptyset$ has the same effect as the case in which $G_0 = \{ e \}$, which has been included.
+%%
+\item A structure isomorphic to $(\mathbb{Z}, <)$ is an ordering in whicn there are smaller and larger elements for every element and furthermore, for every pair of distinct elements there are only \emph{finitely many} elements (possibly none) between them. Hence the class of structures isomorphic to $(\mathbb{Z}, <)$ can be axiomatized by the $L^{ \{ < \} }_{\omega_1\omega}$-sentence $\varphi_b$, which is obtained by taking the conjuction of the sentences in the axioms of the theory of orderings $\Phi_\mathrm{ord}$ and the following three sentences:
+\[
+\forall x \exists y \, x < y
+\]
+(There is a larger one for every element),
+\[
+\forall x \exists y \, y < x
+\]
+(There is a smaller one for every element), and
+\[
+\begin{array}{r}
+\forall x \forall y ( \exists z (x < z \land z < y) \rightarrow \bigvee \{ \exists v_0 \ldots \exists v_n \forall z ( (x < z \land z < y) \rightarrow \;\;\; \cr
+(\bigvee\limits_{0 \leq m \leq n} z \equiv v_m ) ) | \, n \in \mathbb{N} \} )
+\end{array}
+\]
+(For every pair of distinct elements, if there is some element between them, then there are only finitely many such elements).\\
+\\
+Notice that in the last sentence shown above, the formula inside the braces with prefix $\exists v_0 \ldots v_n$ states that there are \emph{at most} $n + 1$ elements between $x$ and $y$.\\
+\\
+To show that every structure $(\mathfrak{A}, <^A)$ satisfying $\varphi_b$ is really isomorphic to $(\mathbb{Z}, <)$, one can define the mapping $\pi: \mathbb{Z} \to A$ such that
+\begin{enumerate}[(i)]
+\item $\pi(z) = a$, where $z \in \mathbb{Z}$ and $a \in A$ are both arbitrarily chosen
+%%%
+\item $\pi(w) = b$, where $b$ is the $n$th successor (or predecessor) of $a$ and similarly $w$ the $n$th successor (or predecessor) of $z$,
+\end{enumerate}
+and verify that $\pi$ is an isomorphism.
+\end{enumerate}
+%
+\item \textbf{Solution to Exercise 2.9}
+\begin{enumerate}[(a)]
+\item The set
+\[
+\{ \bigvee \{ v_n \equiv v_0 | \, n \in M \} | \, M \subset \mathbb{N} \} \subset L^S_{\omega_1\omega}
+\]
+is uncountable.
+%%
+\item Let $S := \{ c_n \, | \, n \in \mathbb{N} \} \cup \{ R \}$, $\mathfrak{B}$ an uncountable $S$-structure such that
+\begin{enumerate}[(i)]
+\item $B := \mathbb{N} \cup (2^\mathbb{N} \setminus \emptyset)$
+%%%
+\item For every $n \in \mathbb{N}$, $c_n^\mathfrak{B} := n$
+%%%
+\item For all $a, b \in B$, $R^\mathfrak{B}ab$ :iff $a \in b$.
+\end{enumerate}\ 
+\\
+Consider the following \emph{uncountable} set of $L^S_{\omega_1\omega}$-sentences:
+\[
+\Phi := \{ \neg c_i \equiv c_j \, | \, i, j \in \mathbb{N}, i \neq j \} \cup \{ \exists^{=1} d \bigwedge \{ Rc_kd \, | \, k \in M \} \, | \, \emptyset \neq M \subset \mathbb{N} \}.
+\]
+From this setting it is clear that $\mathfrak{B} \models \Phi$ and there is no countable $S$-structure $\mathfrak{A} \models \Phi$ as all of the $S$-structures satisfying $\Phi$ must be \emph{uncountable}.
+\end{enumerate}
+\end{enumerate}
+%End of Section IX.2-----------------------------------------------------------------------------------------
+\
+\\
+\\
+%Section IX.3----------------------------------------------------------------------------------------------
+{\large \S3. The System $\qlog$}
+\begin{enumerate}[1.]
+\item \textbf{More Syntactic Operations on $\qlog$.} (INCOMPLETE) We obtain the $\qlog$-version of $\sbfmlabase$ and $\freebase$ by considering one more case
+\[
+\sbfmla{\qexist x \varphi} := \{ \qexist x \varphi \} \cup \sbfmla{\varphi}
+\]
+and
+\[
+\free{\qexist x \varphi} := \free{\varphi} \setminus \{ x \},
+\]
+respectively, in each of \reftitle{Definitions II.4.5(b) and II.5.1}.\\
+\ \\
+Then, we introduce several syntactic operations on $\qlog$ below (assuming a fixed symbol set $S$ has been given):
+\begin{enumerate}[(1)]
+\item By adding the following clause
+\[
+\begin{array}{lll}
+(\qexist x \psi)^\ast & \colonequals & \qexist x \psi^\ast
+\end{array}
+\]
+to the definition of term-reduced formulas $\psi^\ast$ introduced in \reftitle{VIII.1} we obtain the $\qlog$-version and\medskip\\
+\begin{theorem}{Theorem on Term-Reduced Formulas in $\qlog$}
+For every $\psi \in \qlang{S}$ there is a logically equivalent, term-reduced formula $\psi^\ast \in \qlang{S}$ with $\free{\psi} = \free{\psi^\ast}$.
+\end{theorem}
+\begin{proof}
+By induction.
+\end{proof}
+%%
+\item Then, let $P \not\in S$ be unary. By adding the following clause
+\[
+\begin{array}{lll}
+\relativize{(\qexist x \psi)}{P} & \colonequals & \qexist x \relativize{\psi}{P}
+\end{array}
+\]
+to the definition of the relativization $\relativize{\psi}{P}$ of $\psi$ to $P$ introduced in \reftitle{VIII.2} we obtain the $\qlog$-version and\medskip\\
+\begin{theorem}{Relativization Lemma for $\qlog$}
+Let $\struct{A}$ be an $S \cup \{ P \}$-structure such that $P \not\in S$ and $P$ is unary. Suppose the set $P^A \subset A$ is $S$-closed in $\struct{A}$, and moreover $\assgn$ is an assignment in $\struct{A}$ with $\assgn(v_n) \in P^A$ for $n \in \nat$. Then for $\psi \in \qlang{S}$, $\intparg{\substr{P^A}{\struct{A}}}{\assgn} \models \psi$ \quad iff \quad $\intparg{\struct{A}}{\assgn} \models \relativize{\psi}{P}$.
+\end{theorem}
+\begin{proof}
+By induction.
+\end{proof}
+%%
+\item Finally, let $\relational{S}$ and $\relational{\struct{A}}$ in which $\struct{A}$ is an $S$-structure be defined as in \reftitle{VIII.1}. Furthermore, we extend the definition of $\relational{\psi}$ mentioned there to obtain the $\qlog$-version by adding the clause:
+\[
+\begin{array}{lll}
+\relational{(\qexist x \psi)} & \colonequals & \qexist x \relational{\psi};
+\end{array}
+\]
+and likewise extend the definition of $\invrelational{\psi}$ by adding the clause:
+\[
+\begin{array}{lll}
+\invrelational{(\qexist x \psi)} & \colonequals & \qexist x \invrelational{\psi}.
+\end{array}
+\]
+Then as in \reftitle{VIII.1.3}, we obtain\medskip\\
+\begin{theorem}{Theorem on the Replacement Operation on $\qlog$}
+\emph{\begin{enumerate}[(a)]
+\item \emph{For every $\psi \in \qlang{S}$ there is $\relational{\psi} \in \qlang{\relational{S}}$ such that for all $S$-interpretations $\intp = \intparg{\struct{A}}{\assgn}$,\smallskip\\
+$\intparg{\struct{A}}{\assgn} \models \psi$ \quad iff \quad $\intparg{\relational{\struct{A}}}{\assgn} \models \relational{\psi}$.}
+%%
+\item \emph{For every $\psi \in \qlang{\relational{S}}$ there is $\invrelational{\psi} \in \qlang{S}$ such that for all $S$-interpretations $\intp = \intparg{\struct{A}}{\assgn}$,\smallskip\\
+$\intparg{\struct{A}}{\assgn} \models \invrelational{\psi}$ \quad iff \quad $\intparg{\relational{\struct{A}}}{\assgn} \models \psi$.}
+\end{enumerate}}
+\end{theorem}
+\begin{proof}
+By induction.
+\end{proof}
+
+\end{enumerate}
+%
+\item $^\star$\textbf{Note to the $L_Q^{ \{ < \} }$-Sentence $\varphi_0$ Mentioned in Page 148.} The ordinal structure $\omega_1$ is a model of $\varphi_0$.
+%
+\item \textbf{Some Derivable Rules.}
+\begin{enumerate}[(a)]
+\item
+\[
+\begin{array}{ll}
+\Gamma & Qx\varphi \cr\hline
+\Gamma & QxQx \varphi
+\end{array}
+\]
+\textit{Justification.}
+\[
+\begin{array}{lllll}
+1. & \Gamma & \ & Qx\varphi & \mbox{premise} \cr
+2. & \Gamma & \varphi\frac{u}{x} & Qx\varphi & \mbox{(Ant) applied to 1. with $u$ not} \cr
+\ & \ & \ & \ & \mbox{occuring free in $\Gamma \ Qx\varphi$} \cr
+3. & \Gamma & \ & (\varphi\frac{u}{x} \rightarrow Qx\varphi) & \mbox{IV.3.6(c) applied to 2.} \cr
+4. & \Gamma & \ & \forall x (\varphi \to Qx\varphi) & \mbox{IV.5.5(b2) applied to 3.} \cr
+5. & \Gamma & \ & Qx\varphi \rightarrow QxQx\varphi & \mbox{third rule of $\mathcal{L}_Q$ applied to 4.} \cr
+6. & \Gamma & \ & QxQx\varphi & \mbox{IV.3.5 applied to 5. and 1.}
+\end{array}
+\]
+%%
+\item
+\[
+\begin{array}{ll}
+\Gamma & Qx\varphi \cr\hline
+\Gamma & Qx \ x \equiv x
+\end{array}
+\]
+\textit{Justification.}
+\[
+\begin{array}{lllll}
+1. & \Gamma & \ & Qx\varphi & \mbox{premise} \cr
+2. & \ & \ & y \equiv y & \mbox{($\equiv$) with $y \neq x$ not occuring free} \cr
+\  & \ & \ & \ & \mbox{in $\Gamma\varphi$} \cr
+3. & \Gamma & \varphi\frac{y}{x} & y \equiv y & \mbox{(Ant) applied to 2.} \cr
+4. & \Gamma & \ & (\varphi\frac{y}{x} \rightarrow y \equiv y) & \mbox{IV.3.6(c) applied to 3.} \cr
+5. & \Gamma & \ & \forall x (\varphi \rightarrow x \equiv x) & \mbox{IV.5.5(b2) applied to 4.} \cr
+6. & \Gamma & \ & Qx\varphi \rightarrow Qx \ x \equiv x & \mbox{third rule of $\mathcal{L}_Q$ applied to 5.} \cr
+7. & \Gamma & \ & Qx \ x \equiv x & \mbox{IV.3.5 applied to 6. and 1.}
+\end{array}
+\]
+\end{enumerate}
+\textit{Remark.} In general, the rule
+\[
+\begin{array}{ll}
+\Gamma & QxQy\varphi \cr\hline
+\Gamma & QyQx\varphi
+\end{array}
+\]
+is \emph{not} correct, i.e. the quantifier $Q$ is not commutative. For a counterexample, let $(\mathbb{C}, \abs^\mathbb{C})$ be an $\{ \abs \}$-structure with
+\[
+\mbox{ $\abs^\mathbb{C} (a, b)$ :iff $a$ is the absolute value of $b$ (i.e. $a = |b|$)}.
+\]
+We see that $(\mathbb{C}, \abs^\mathbb{C}) \models QxQy \ \abs \, x \, y$ but \emph{not} $(\mathbb{C}, \abs^\mathbb{C}) \models QyQx \ \abs \, x \, y$ though obviously $QxQy \ \abs \, x \, y \models QxQy \ \abs \, x \, y$ (we take $\Gamma := QxQy \ \abs \, x \, y$ here).
+%
+\item \textbf{Note to the Paragraph Immediately after the Introduction of Four Additional Sequent Rules.} That the calculus resulting from adding the four rules allows us to derive exactly the correct sequents does \emph{not} mean we obtain its completeness: Recall that a sequent calculus is complete if for every ``$\Phi$'' and $\varphi$, $\Phi \models \varphi$ implies that there is $\Gamma \subset \Phi$ such that $\Gamma \vdash \varphi$.
+%
+\item \textbf{Solution to Exercise 3.3.} Let $\varphi$ be an $L^S_Q$-sentence, and $\mathfrak{B}$ an $S$-structure with $\mathfrak{B} \models \varphi$. Since $\varphi$ is finite in length, we may assume without loss of generality that $S$ is finite, hence $L^S_Q$ is countable. We have to show that there is a substructure $\mathfrak{A} \subset \mathfrak{B}$ of cardinality at most $\aleph_1$ such that $\mathfrak{A} \models \varphi$.\newline
+\ 
+\\As in the proof of Lemma 2.5, for pairwise distinct variables $x_1, \ldots, x_n$ we write $\psi(x_1, \ldots, x_n)$ to denote a formula $\psi$ with $\free(\psi) \subset \{ x_1, \ldots, x_n \}$; $\mathfrak{D} \models \psi[a_1, \ldots, a_n]$ says that $\psi$ holds in $\mathfrak{D}$ if the variables $x_i$ get the assignment $a_i$ for $1 \leq i \leq n$.\newline
+\ 
+\\We define a sequence $A_0, A_1, A_2,\ldots$ of subsets of $B$ with their cardinalities $\leq \aleph_1$ such that for $m \in \mathbb{N}$:
+\begin{enumerate}[(a)]
+\item $A_m \subset A_{m + 1}$;
+%%
+\item for $a_1, \ldots, a_n \in A_m$:
+\begin{enumerate}[i)]
+\item and for $\psi(x_1, \ldots, x_n, x)$ a subformula of $\varphi$: if $\mathfrak{B} \models Qx \psi[a_1, \ldots, a_n]$, then there are $\aleph_1$ $a$'s in $A_{m + 1}$ such that $\mathfrak{B} \models \psi[a_1, \ldots, a_n, a]$; or else if $\mathfrak{B} \models Qx \psi[a_1, \ldots, a_n]$ fails to hold but $\mathfrak{B} \models \exists x \psi[a_1, \ldots, a_n]$ does, then there is an $a \in A_{m + 1}$ such that $\mathfrak{B} \models \psi[a_1, \ldots, a_n, a]$;
+%%%
+\item and for $f \in S$ an $n$-ary function symbol, $f^{\mathfrak{B}}(a_1, \ldots, a_n) \in A_{m + 1}$.
+\end{enumerate}
+\end{enumerate}
+\ 
+\\
+Let $A_0$ be a nonempty subset of $B$ with cardinality $\leq \aleph_1$ which contains $\{ c^\mathfrak{B} | c \in S \}$. Inductively, suppose $A_m$ with cardinality $\leq \aleph_1$ is already defined. To define $A_{m + 1}$, for $a_1, \ldots, a_n \in A_m$:
+\begin{enumerate}[i)]
+\item and for every subformula $\psi(x_1, \ldots, x_n, x)$: if $\mathfrak{B} \models Qx \psi[a_1, \ldots, a_n]$ then we choose $\aleph_1$ $b$'s in $B$ such that $\mathfrak{B} \models \psi[a_1, \ldots, a_n, b]$; otherwise, if $\mathfrak{B} \models \exists x \psi[a_1, \ldots, a_n]$, then we choose a $b \in B$ such that $\mathfrak{B} \models \psi[a_1, \ldots, a_n, b]$; 
+%%%
+\item for $f$ an $n$-ary function symbol, choose the element $b = f^{\mathfrak{B}}(a_1, \ldots, a_n) \in B$.
+\end{enumerate}
+Let $A_m^\prime$ be the set of $b$'s chosen in this way. Since the set of subformulas of $\varphi$ and the set of function symbols are both finite, and the cardinality of $A_m$ is at most $\aleph_1$, the cardinality of $A_m^\prime$ is also at most $\aleph_1$. We set $A_{m + 1} := A_m \cup A_m^\prime$. Then the cardinality of $A_{m + 1}$ is at most $\aleph_1$, and (a) and (b) are satisfied.\newline
+\ 
+\\Set
+\[
+A := \bigcup_{m \in \mathbb{N}} A_m.
+\]
+We have:
+\begin{enumerate}[(1)]
+\item The cardinality of $A$ is at most $\aleph_1$.
+%%
+\item $A$ is $S$-closed. By choice of $A_0$, we need only show that $A$ is closed under $f^{\mathfrak{B}}$ for $n$-ary $f \in S$. Let $a_0, \ldots, a_n \in A$. Since the sets $A_m$ form an ascending chain, $a_1, \ldots, a_n$ lie in some $A_k$. According to part ii) of (b), the element $f^{\mathfrak{B}}(a_1, \ldots, a_n)$ lies in $A_{k + 1}$, hence in $A$. 
+\end{enumerate}
+By (1) and (2), $A$ is the domain of a substructure $\mathfrak{A} \subset \mathfrak{B}$ with cardinality $\leq \aleph_1$. The proof is complete if we can show that $\mathfrak{A} \models \varphi$, which follows from the claim:\newline
+\ 
+\\For all $a_1, \ldots, a_n \in A$ and all subformulas $\psi(x_1, \ldots, x_n)$,\newline
+\phantom{a}\hfill $\mathfrak{A} \models \psi[a_1, \ldots, a_n]$ iff $\mathfrak{B} \models \psi[a_1, \ldots, a_n]$.\hfill\phantom{a}\newline
+\ 
+\\We prove this claim by induction on $\psi$, but restrict ourselves to the $Q$-case.\newline
+\ 
+\\Let $\psi(x_1, \ldots, x_n) = Qx \chi(x_1, \ldots, x_n, x)$, and suppose $a_1, \ldots, a_n \in A$.\linebreak[2] If $\mathfrak{A} \models Qx \chi[a_1, \ldots, a_n]$ then we obtain successively:\newline\ \\
+\begin{tabular}{l}
+$\{ a \in A \ | \ \mathfrak{A} \models \chi[a_1, \ldots, a_n, a] \}$ is uncountable;\ \ \ \ \ \ \ \ \ \ \cr
+$\{ a \in A \ | \ \mathfrak{B} \models \chi[a_1, \ldots, a_n, a] \}$ is uncountable\cr
+\multicolumn{1}{r}{(by induction hypothesis);}\cr
+$\mathfrak{B} \models Qx \chi[a_1, \ldots, a_n]$.
+\end{tabular}\newline\ \\
+Conversely, if $\mathfrak{B} \models Qx \chi[a_1, \ldots, a_n]$, we choose $k$ such that $a_1, \ldots, a_n \in A_k$, and we obtain successively:\newline
+\ \\
+\begin{tabular}{l}
+$\{ a \in A_{k + 1} \ | \ \mathfrak{B} \models \chi[a_1, \ldots, a_n, a] \}$ is uncountable\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \cr
+\multicolumn{1}{r}{(more precisely, its cardinality is $\aleph_1$, by part i) of (b));}\cr
+$\{ a \in A_{k + 1} \ | \ \mathfrak{A} \models \chi[a_1, \ldots, a_n, a] \}$ is uncountable\cr
+\multicolumn{1}{r}{(by induction hypothesis);}\cr
+$\mathfrak{A} \models Qx \chi[a_1, \ldots, a_n]$.
+\end{tabular}\newline
+\ 
+\\\textit{Remark.} Alternatively, we could consider \emph{all} formulas in $L^S_Q$ instead of only subformulas of $\varphi$ in part i) of the process. And then prove that for $a_1, \ldots, a_n \in A$ and for $\psi(x_1, \ldots, x_n) \in L^S_Q$, $\mathfrak{A} \models \psi[a_1, \ldots, a_n]$ iff $\mathfrak{B} \models \psi[a_1, \ldots, a_n]$. In particular, thus, we have that $\mathfrak{A} \models \varphi$.\footnote{Since all formulas are considered with this alternative method, the ``shape'' of the structure $\mathfrak{A}$ constructed in this way is independent of any particular $\varphi$, a situation different from the original method.}\newline
+\ 
+\\\textbf{Conjecture.} \emph{The result in this exercise can be generalized to the case of $\mathcal{L}_Q$-formulas: Every satisfiable $\mathcal{L}_Q$-formulas has a model over a domain of cardinality at most $\aleph_1$.}\newline
+\ 
+\\\textit{Proof.} Let $\varphi \in L^S_Q$, and $(\mathfrak{B}, \beta)$ an $S$-interpretation satisfying $\varphi$. Let $\free(\varphi) \subset \{ v_0, \ldots, v_n \}$. We add new constants $c_0, \ldots, c_n$ to $S$ to comprise a larger symbol set $S^\prime$. Then let $\mathfrak{B}^\prime$ be an $S^\prime$-expansion of $\mathfrak{B}$ with $c_i^{\mathfrak{B}^\prime} := \beta(v_i)$ for $0 \leq i \leq n$. Thus we get successively:\newline
+\ \\
+\begin{tabular}{l}
+$(\mathfrak{B}, \beta) \models \varphi$;\cr
+$(\mathfrak{B}^\prime, \beta) \models \varphi$\ \ \ (by the Coincidence Lemma);\cr
+$(\mathfrak{B}^\prime, \beta) \models \varphi\frac{c_0 \ldots c_n}{v_0 \ldots v_n}$\ \ \ (by the Substitution Lemma);\cr
+$\mathfrak{B}^\prime \models \varphi\frac{c_0 \ldots c_n}{v_0 \ldots v_n}$\ \ \ (by the Coincidence Lemma);\cr
+There is an $\mathfrak{A}^\prime \subset \mathfrak{B}^\prime$ with cardinality $\leq \aleph_1$ such that $\mathfrak{A}^\prime \models \varphi\frac{c_0 \ldots c_n}{v_0 \ldots v_n}$\cr
+\multicolumn{1}{r}{(apply the result of this exercise);}\cr
+There is an $\mathfrak{A}^\prime \subset \mathfrak{B}^\prime$ with cardinality $\leq \aleph_1$  such that $(\mathfrak{A}^\prime, \beta) \models \varphi\frac{c_0 \ldots c_n}{v_0 \ldots v_n}$\cr
+\multicolumn{1}{r}{(by the Coincidence Lemma);}\cr
+There is an $\mathfrak{A}^\prime \subset \mathfrak{B}^\prime$ with cardinality $\leq \aleph_1$ such that $(\mathfrak{A}^\prime, \beta) \models \varphi$\cr
+\multicolumn{1}{r}{(by the Substitution Lemma);}\cr
+There is an $\mathfrak{A} (= \mathfrak{A}^\prime |_S) \subset \mathfrak{B}$ with cardinality $\leq \aleph_1$ such that $(\mathfrak{A}, \beta) \models \varphi$\cr
+\multicolumn{1}{r}{(by the Coincidence Lemma).}
+\end{tabular}\\ \phantom{a}\hfill$\talloblong$
+%
+\item \textbf{Solution to Exercise 3.4.} The following example shows that the Compactness Theorem does not hold for $\mathcal{L}_Q^\circ$:
+\[
+\{ \neg Qx \ x \equiv x \} \cup \{ \varphi_{\geq n} | n \geq 2 \}.
+\]
+As for proving the L\"{o}wenheim-Skolem Theorem:
+\begin{quote}
+\emph{Every satisfiable and at most countable set $\Phi$ of $L_Q^{\circ, S}$-formulas is satisfiable over a domain which is at most countable};
+\end{quote}
+We assume as in the proof of VI.1.1 that $S$ is at most countable with no loss of generality. The rest is similar to the method employed in the previous exercise:\footnote{In fact, this method can also be applied to prove the Downward L\"{o}wenheim-Skolem Theorem.} Construct a substructure $\mathfrak{A}$ of $\mathfrak{B}$ where $\mathfrak{B} \models \Phi$, except that here we consider subformulas $\psi$ of the formulas $\varphi \in \Phi$ in the process of construction, and that for $a_1, \ldots, a_n \in A_m$ if $\mathfrak{B} \models Qx \psi [a_1, \ldots, a_n]$ then we add countably many $b \in B$ into $A_m^\prime$ during the progress. As noted in the remark to that exercise, we may alternatively consiser all formulas in $L_Q^{\circ, S}$ also.\footnote{Correspondingly, with this alternative method the ``shape'' of $\mathfrak{A}$ is independent of any particular $\Phi$.}\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+%End of Section IX.3-------------------------------------------------------------------------------
+%End of Chapter IX---------------------------------------------------------------------------------

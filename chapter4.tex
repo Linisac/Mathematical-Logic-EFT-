@@ -1,0 +1,817 @@
+%Chapter IV----------------------------------------------------------------------------------------
+{\LARGE \bfseries IV \\ \\ A Sequent Calculus}
+\\
+\\
+\\
+%Section IV.1--------------------------------------------------------------------------------------
+{\large \S1. Sequent Rules}
+\begin{enumerate}[1.]
+%
+\item \textbf{Note on the Paragraph after Definition 1.1.} The reader should bear in mind that, sequent rules themselves are only syntactic operations: we can speak of the \emph{correctness} of $\mathfrak{S}$ only if we interpret it as a tool for reasoning.
+%
+\item \textbf{Note on Sequents.} Implicitly implied by the context, a sequent is finite in length.
+%
+\end{enumerate}
+%End of Section IV.1-------------------------------------------------------------------------------
+\ 
+\\
+\\
+%Section IV.2--------------------------------------------------------------------------------------
+{\large \S2. Structural Rules and Connective Rules}
+\begin{enumerate}[1.]
+\item \textbf{Note to the Correctness of 2.4, Contradiction Rule (Ctr).} For every interpretation (more specifically, one that satisfies $\Gamma$), either it satisfies $\varphi$ or not, i.e. it satisfies either $\varphi$ or $\neg \varphi$. Furthermore, since there is no interpretation satisfying the sequence $\Gamma \neg \varphi$ of formulas (because of both $\Gamma \neg \varphi \psi$ and $\Gamma \neg \varphi \neg \psi$ being derivable sequents), it turns out that, for every interpretation that satisfies $\Gamma$, there is only one possibility --- it satisfies $\varphi$.
+%
+%IV.2.7--------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 2.7.}
+\begin{enumerate}[(a)]
+\item Correct. \\
+\textit{Justification.}
+\[
+\begin{array}{lllll}
+1. & \Gamma & \varphi_1 & \psi_1 & \mbox{premise} \\
+2. & \Gamma & \varphi_2 & \psi_2 & \mbox{premise} \\
+3. & \Gamma & \varphi_1 & (\psi_1 \lor \psi_2) & \mbox{($\lor$S) applied to 1.} \\
+4. & \Gamma & \varphi_2 & (\psi_1 \lor \psi_2) & \mbox{($\lor$S) applied to 2.} \\
+5. & \Gamma & (\varphi_1 \lor \varphi_2) & (\psi_1 \lor \psi_2) & \mbox{($\lor$A) applied to 3. and 4.} 
+\end{array}
+\]
+%%
+\item Incorrect. \\
+\textit{Counterexample.} Let $\Gamma = \emptyset$, $\psi_1 = \varphi_1$, and $\psi_2 = \varphi_2 = \neg \varphi_1$. 
+\end{enumerate} \begin{flushright}$\talloblong$\end{flushright}
+%End of IV.2.7-------------------------------------------------------------------------------------
+\end{enumerate}
+%End of Section IV.2-------------------------------------------------------------------------------
+\ 
+\\
+\\
+%Section IV.3--------------------------------------------------------------------------------------
+{\large \S3. Derivable Connective Rules}
+\begin{enumerate}[1.]
+\item \textbf{Note to the First Paragraph in \S3.} The basic form of tautologies $(\varphi \lor \neg \varphi)$ are derivable by applying the rule (TND) (see page 63).\\
+Note that other forms of tautologies are derivable from this basic form using logical connectives, $\neg$ and $\lor$, and hence are derivable in the sequent calculus $\mathfrak{S}$.
+%
+\item \textbf{Solution to Exercise 3.6.}
+\begin{itemize}
+\item[(a1)]
+\[
+\begin{array}{lllll}
+1. & \Gamma & \, & \varphi & \mbox{premise} \\
+2. & \Gamma & \neg \varphi & \neg \varphi & \mbox{(Assm)} \\
+3. & \Gamma & \neg \varphi & (\neg \varphi \lor \neg \neg \varphi) & \mbox{($\lor$S) applied to 2.} \\
+4. & \Gamma & \neg \neg \varphi & \neg \neg \varphi & \mbox{(Assm)} \\
+5. & \Gamma & \neg \neg \varphi & (\neg \varphi \lor \neg \neg \varphi) & \mbox{($\lor$S) applied to 4.} \\
+6. & \Gamma & \, & (\neg \varphi \lor \neg \neg \varphi) & \mbox{(PC) applied to 3. and 5.} \\
+7. & \Gamma & \, & \neg \neg \varphi & \mbox{3.5 applied to 6. and 1.}
+\end{array}
+\]
+%%
+\item[(a2)]
+\[
+\begin{array}{lllll}
+1. & \Gamma & \, & \neg \neg \varphi & \mbox{premise} \\
+2. & \Gamma & \neg \varphi & \neg \varphi & \mbox{(Assm)} \\
+3. & \Gamma & \neg \varphi & \neg \neg \varphi & \mbox{(Ant) applied to 1.} \\
+4. & \Gamma & \, & \varphi & \mbox{(Ctr) applied to 2. and 3.}
+\end{array}
+\]
+%%
+\item[(b)]
+\[
+\begin{array}{lllll}
+1. & \Gamma & \, & \varphi & \mbox{premise} \\
+2. & \Gamma & \, & \psi & \mbox{premise} \\
+3. & \Gamma & (\neg \varphi \lor \neg \psi) & \varphi & \mbox{(Ant) applied to 1.} \\
+4. & \Gamma & (\neg \varphi \lor \neg \psi) & \psi & \mbox{(Ant) applied to 2.} \\
+5. & \Gamma & (\neg \varphi \lor \neg \psi) & (\neg \varphi \lor \neg \psi) & \mbox{(Assm)} \\
+6. & \Gamma & (\neg \varphi \lor \neg \psi) & \neg \psi & \mbox{3.5 applied to 5. and 3.} \\
+7. & \Gamma & \, & \neg (\neg \varphi \lor \neg \psi) & \mbox{(Ctr) applied to 4. and 7.}
+\end{array}
+\]
+%%
+\item[(c)]
+\[
+\begin{array}{lllll}
+1. & \Gamma & \varphi & \psi & \mbox{premise} \\
+2. & \Gamma & \varphi & (\neg \varphi \lor \psi) & \mbox{($\lor$S) applied to 1.} \\
+3. & \Gamma & \neg \varphi & \neg \varphi & \mbox{(Assm)} \\
+4. & \Gamma & \neg \varphi & (\neg \varphi \lor \psi) & \mbox{($\lor$S) applied to 3.} \\
+5. & \Gamma & \, & (\neg \varphi \lor \psi) & \mbox{(PC) applied to 2. and 4.}
+\end{array}
+\]
+%%
+\item[(d1)]
+\[
+\begin{array}{lllll}
+1. & \Gamma & \, & \neg (\neg \varphi \lor \neg \psi) & \mbox{premise} \\
+2. & \Gamma & \neg \varphi & \neg \varphi & \mbox{(Assm)} \\
+3. & \Gamma & \neg \varphi & (\neg \varphi \lor \neg \psi) & \mbox{($\lor$S) applied to 2.} \\
+4. & \Gamma & \neg \varphi & \neg (\neg \varphi \lor \neg \psi) & \mbox{(Ant) applied to 1.} \\
+5. & \Gamma & \, & \varphi & \mbox{(Ctr) applied to 3. and 4.}
+\end{array}
+\]
+%%
+\item[(d2)]
+\[
+\begin{array}{lllll}
+1. & \Gamma & \, & \neg (\neg \varphi \lor \neg \psi) & \mbox{premise} \\
+2. & \Gamma & \neg \psi & \neg \psi & \mbox{(Assm)} \\
+3. & \Gamma & \neg \psi & (\neg \varphi \lor \neg \psi) & \mbox{($\lor$S) applied to 2.} \\
+4. & \Gamma & \neg \psi & \neg (\neg \varphi \lor \neg \psi) & \mbox{(Ant) applied to 1.} \\
+5. & \Gamma & \, & \psi & \mbox{(Ctr) applied to 3. and 4.}
+\end{array}
+\]
+\end{itemize} \begin{flushright}$\talloblong$\end{flushright}
+%End of IV.3.6-------------------------------------------------------------------------------------
+%
+\item \textbf{Derivable Rules:}
+\begin{enumerate}[(a)]
+\item \textbf{Commutativity Rule for $\lor$ (Comm).}
+\[
+\begin{array}{ll}
+\Gamma & (\varphi \lor \psi) \cr \hline
+\Gamma & (\psi \lor \varphi)
+\end{array}
+\]
+\\
+\textit{Justification.}
+\[
+\begin{array}{llll}
+1. & \Gamma & (\varphi \lor \psi) & \mbox{premise} \\
+2. & \Gamma \;\; \varphi & \varphi & \mbox{(Assm)} \\
+3. & \Gamma \;\; \varphi & (\psi \lor \varphi) & \mbox{($\lor$S) applied to 2.} \\
+4. & \Gamma \;\; \psi & \psi & \mbox{(Assm)} \\
+5. & \Gamma \;\; \psi & (\psi \lor \varphi) & \mbox{($\lor$S) applied to 4.} \\
+6. & \Gamma \;\; (\varphi \lor \psi) & (\psi \lor \varphi) & \mbox{($\lor$A) applied to 3. and 5.} \\
+7. & \Gamma & (\psi \lor \varphi) & \mbox{(Ch) applied to 1. and 6.}
+\end{array}
+\]
+%%
+\item
+\[
+\begin{array}{ll}
+\Gamma & (\varphi \rightarrow \psi) \cr
+\Gamma & (\psi \rightarrow \varphi) \cr \hline
+\Gamma & (\varphi \leftrightarrow \psi)
+\end{array}
+\]
+\\
+\textit{Justification.}
+\[
+\begin{array}{llll}
+1. & \Gamma & (\varphi \rightarrow \psi) & \mbox{premise} \\
+2. & \Gamma & (\psi \rightarrow \varphi) & \mbox{premise} \\
+3. & \Gamma \;\; \varphi & (\varphi \rightarrow \psi) & \mbox{(Ant) applied to 1.} \\
+4. & \Gamma \;\; \varphi & \varphi & \mbox{(Assm)} \\
+5. & \Gamma \;\; \varphi & \psi & \mbox{3.5 applied to 3. and 4.} \\
+6. & \Gamma \;\; \varphi & \neg (\neg \varphi \lor \neg \psi) & \mbox{3.6(b) applied to 4.} \\
+\  & \                   & \                                  & \mbox{and 5.} \\
+7. & \Gamma \;\; \varphi & (\neg (\varphi \lor \psi) \lor \neg (\neg \varphi \lor \neg \psi)) & \mbox{($\lor$S) applied to 6.} \\
+8. & \Gamma \;\; \psi & (\psi \rightarrow \varphi) & \mbox{(Ant) applied to 2.} \\
+9. & \Gamma \;\; \psi & \psi & \mbox{(Assm)} \\
+10.& \Gamma \;\; \psi & \varphi & \mbox{3.5 applied to 8. and 9.} \\
+11.& \Gamma \;\; (\varphi \lor \psi) & \varphi & \mbox{($\lor$A) applied to 4.} \\
+\  & \                               & \       & \mbox{and 10.} \\
+12.& \Gamma \;\; \neg \varphi & \neg (\varphi \lor \psi) & \mbox{3.3(a) applied to 11.} \\
+13.& \Gamma \;\; \neg \varphi & (\neg (\varphi \lor \psi) \lor \neg (\neg \varphi \lor \neg \psi)) & \mbox{($\lor$S) applied to 12.} \\
+14.& \Gamma & (\varphi \leftrightarrow \psi) & \mbox{(PC) applied to 7.} \\
+\  & \      & \                              & \mbox{and 13.}
+\end{array}
+\]
+%%
+\item 
+\[
+\begin{array}{ll}
+\Gamma & (\varphi \leftrightarrow \psi) \cr \hline
+\Gamma & (\varphi \rightarrow \psi)
+\end{array}
+\]
+\\
+\textit{Justification.}
+\[
+\begin{array}{llll}
+1. & \Gamma & (\varphi \leftrightarrow \psi) & \mbox{premise} \\
+2. & \Gamma \;\; \varphi & (\varphi \leftrightarrow \psi) & \mbox{(Ant) applied to 1.} \\
+3. & \Gamma \;\; \varphi & \varphi & \mbox{(Assm)} \\
+4. & \Gamma \;\; \varphi & (\varphi \lor \psi) & \mbox{($\lor$S) applied to 3.} \\
+5. & \Gamma \;\; \varphi & \neg (\neg \varphi \lor \neg \psi) & \mbox{3.5 applied to 2. and 4.} \\
+6. & \Gamma \;\; \varphi & \psi & \mbox{3.6(d2) applied to 5.} \\
+7. & \Gamma & (\varphi \rightarrow \psi) & \mbox{3.6(c) applied to 6.}
+\end{array}
+\]
+%%
+\item 
+\[
+\begin{array}{ll}
+\Gamma & (\varphi \leftrightarrow \psi) \cr \hline
+\Gamma & (\psi \rightarrow \varphi)
+\end{array}
+\]
+\\
+\textit{Justification.}
+\[
+\begin{array}{llll}
+1. & \Gamma & (\varphi \leftrightarrow \psi) & \mbox{premise} \\
+2. & \Gamma \;\; \psi & (\varphi \leftrightarrow \psi) & \mbox{(Ant) applied to 1.} \\
+3. & \Gamma \;\; \psi & \psi & \mbox{(Assm)} \\
+4. & \Gamma \;\; \psi & (\varphi \lor \psi) & \mbox{($\lor$S) applied to 3.} \\
+5. & \Gamma \;\; \psi & \neg (\neg \varphi \lor \neg \psi) & \mbox{3.5 applied to 2. and 4.} \\
+6. & \Gamma \;\; \psi & \varphi & \mbox{3.6(d1) applied to 5.} \\
+7. & \Gamma & (\psi \rightarrow \varphi) & \mbox{3.6(c) applied to 6.}
+\end{array}
+\]
+\end{enumerate} \begin{flushright}$\talloblong$\end{flushright}
+\end{enumerate}
+%End of Section IV.3-------------------------------------------------------------------------------
+\ 
+\\
+\\
+%Section IV.4--------------------------------------------------------------------------------------
+{\large \S4. Quantifier and Equality Rules}
+\begin{enumerate}[1.]
+\item \textbf{Note on 4.2.} The additional condition follows from the fact that the validity of $\psi$ may be based on $\varphi \frac{y}{x}$, the particular substitution of $y$ into $x$ in $\varphi$, without which $\psi$ may not be derivable.
+%
+\item \textbf{Note on 4.2.} This rule only applies to the case in which $y$ is a \textit{variable}, but not to the case in which it is a term other than a variable. The \textit{incorrect} sequent below serves as a counterexample:
+\[
+\begin{array}{ll}
+0 \equiv z & 0 \equiv z \cr \hline
+\exists x \; x \equiv z & 0 \equiv z
+\end{array}.
+\]
+%
+%IV.4.5--------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 4.5.} (INCOMPLETE) All three rules are correct. For the first two, we provide justifications:
+\[
+\begin{seqrule}{ll}
+\varphi & \psi \cr \hline
+\exists x \varphi & \exists x \psi
+\end{seqrule}
+\]
+\textit{Justification.}\\
+\centerline{
+\begin{derivation}
+1. & $\varphi$ & $\psi$ & premise \\
+2. & $\varphi$ & $\exists x \psi$ & $\es$ applied to 1. with $t = x$ \\
+3. & $\exists x \varphi$ & $\exists x \psi$ & $\ea$ applied to 2. with $y = x$
+\end{derivation}}
+\[
+\begin{seqrule}{lll}
+\Gamma & \varphi & \psi \cr \hline
+\Gamma & \forall x \varphi & \exists x \psi
+\end{seqrule}
+\]
+\textit{Justification.}\\
+\centerline{
+\begin{derivation}
+1. & $\Gamma \ \varphi$ & $\psi$ & premise \\
+2. & $\Gamma \ \neg \psi$ & $\neg \varphi$ & (Cp) applied to 1. \\
+3. & $\Gamma \ \neg \psi$ & $\exists x \neg \varphi$ & $\es$ applied to 2. with $t = x$ \\
+4. & $\Gamma \ \neg \exists x \neg \varphi$ & $\psi$ & (Cp) applied to 3. \\
+5. & $\Gamma \ \neg \exists x \neg \varphi$ & $\exists x \psi$ & $\es$ applied to 4. with $t = x$
+\end{derivation}}
+\medskip\\
+As for the last rule,\medskip\\
+\begin{bquoteno}{60ex}{($\ast$)}
+$\begin{seqrule}{ll}
+\Gamma & \varphi \sbst{fy}{x} \cr \hline
+\Gamma & \forall x \varphi
+\end{seqrule}$ \quad if $f$ is unary, and $f$ and $y$ do not occur in $\Gamma \ \forall x \varphi$,
+\end{bquoteno}\medskip\\
+we argue its correctness below:\medskip\\
+\textit{Correctness.} We show ($\ast$) by induction on \emph{the sequent rule} by which $\Gamma \ \varphi\sbst{fy}{x}$ is obtained in a derivation.\smallskip\\
+If the sequent $\Gamma \ \varphi\sbst{fy}{x}$ is obtained by applying $\assm$: Then $\varphi\sbst{fy}{x} \in \Gamma$. By the premise that $f$ and $y$ do not occur in $\Gamma \ \forall x \varphi$, we have $x \not\in \free{\varphi}$. Thus, $\varphi\sbst{z}{x} = \varphi = \varphi\sbst{fy}{x} \in \Gamma$, where $z$ is a variable not occurring in $\Gamma \ \forall x \varphi$. The following derivation yields that $\Gamma \derives \forall x \varphi$:\smallskip\\
+\begin{derivation}
+1. & $\Gamma$ & $\varphi\sbst{z}{x}$ & $\assm$\cr
+2. & \ & $v_0 \equal v_0$ & $\eq$\cr
+3. & \ & $\exists v_0 \, v_0 \equal v_0$ & $\es$ applied to 2. with $t = v_0$\cr
+4. & $\Gamma$ & $\exists v_0 \, v_0 \equal v_0$ & $\ant$ applied to 3.\cr
+5. & $\Gamma \ \exists v_0 \, v_0 \equal v_0$ & $\varphi\sbst{z}{x}$ & $\ant$ applied to 1.\cr
+6. & $\Gamma \ \neg\varphi\sbst{z}{x}$ & $\neg\exists v_0 \, v_0 \equal v_0$ & (Cp)(a) applied to 5.\cr
+7. & $\Gamma \ \exists x \neg\varphi$ & $\neg\exists v_0 \, v_0 \equal v_0$ & $\ea$ applied to 6.\cr
+8. & $\Gamma \ \exists v_0 \, v_0 \equal v_0$ & $\forall x \varphi$ & (Cp)(d) applied to 7.\cr
+9. & $\Gamma$ & $\forall x \varphi$ & (Ch) applied 4. and 8.
+\end{derivation}\medskip\\
+If the sequent $\Gamma \ \varphi\sbst{fy}{x}$ is obtained by applying $\ant$ to a derivable sequent $\Gamma' \ \varphi\sbst{fy}{x}$ where $\Gamma' \subset \Gamma$: Then $f$ and $y$ do not occur in $\Gamma'$, either. By induction hypothesis, we have $\Gamma' \derives \forall x \varphi$. The following derivation yields that $\Gamma \derives \forall x \varphi$:\smallskip\\
+\begin{derivation}
+1. & $\Gamma'$ & $\forall x \varphi$ & premise\cr
+2. & $\Gamma$  & $\forall x \varphi$ & $\ant$ applied to 1.
+\end{derivation}\medskip\\
+If the sequent $\Gamma \ \varphi\sbst{fy}{x}$ is obtained by applying $\pc$ to two derivable sequents $\Gamma \ \psi \ \varphi\sbst{fy}{x}$ and $\Gamma \ \neg\psi \ \varphi\sbst{fy}{x}$: Then
+HERE\medskip\\
+{[OLD TEXT STARTS HERE]} \textit{Correctness.} First of all, let us assume that $\Gamma \ \forall x \varphi$ is a sequent over $L^S$. Suppose $\Gamma \models \varphi\frac{fy}{x}$ and $f$ is unary, and $f$ and $y$ do not occur in $\Gamma \  \forall x \varphi$. Let the $S$-interpretation $\mathfrak{I} = (\mathfrak{A}, \beta)$ be a model of $\Gamma$. Then by premise and the Coincidence Lemma, it follows that the value of $\beta(y)$ can be arbitrarily chosen; moreover, for \emph{any} $S \cup \{ f \}$-interpretation $\mathfrak{I}^\prime = (\mathfrak{A}^\prime, \beta)$ with $\mathfrak{A}^\prime$ an $S \cup \{ f \}$-expansion of $\mathfrak{A}$, $\mathfrak{I}^\prime \models \Gamma$. Without loss of generality, let us pick the one with $f^A$ being the \emph{identity} (i.e. $f^A(a) = a$ for all $a \in A$). Thus, we have that $\mathfrak{I}^\prime \models \varphi\frac{fy}{x}$, and further that $\mathfrak{I}^\prime \frac{f^A(\beta(y))}{x} \models \varphi$ by the Substitution Lemma. Hence $\mathfrak{I}^\prime \frac{\beta(y)}{x} \models \varphi$, since $f^A$ is identity. Yet at this point any random value can be assigned to $\beta(y)$, as is stated previously. In other words,\newline
+\ \newline
+for all $a \in A$, $(\mathfrak{I}^\prime\frac{a}{y})\frac{\mathfrak{I}^\prime\frac{a}{y}(y)}{x} \models \varphi$, and successively:\\
+for all $a \in A$, $(\mathfrak{I}^\prime\frac{a}{x})\frac{\mathfrak{I}^\prime\frac{a}{x}(x)}{y} \models \varphi$;\\
+for all $a \in A$, $(\mathfrak{I}^\prime\frac{a}{x}) \models \varphi$ (since $y$ does not occur in $\varphi$, and using Coincidence Lemma\footnote{Alternatively, this can be argued by Substitution Lemma, and using the fact that $\varphi\frac{x}{y} = \varphi$.}),\\
+\ \newline
+namely, $\mathfrak{I}^\prime \models \forall x \varphi$. Again, using the Coincidence Lemma, we obtain $\mathfrak{I} \models \forall x \varphi$.\nolinebreak\hfill$\talloblong$\newline
+
+\textit{Remarks.}
+\begin{enumerate}[(a)]
+\item The last sequent rule $(*)$ seems not to be derivable as the first two are, though correct --- the reader may notice that we verified its correctness (in a semantical flavor) instead of providing a justification (which is syntactical in contrast).\\
+\ \\
+In light of this, I conjecture that there are some correct rules which are \emph{not} derivable,  as $(*)$ suggests. In some cases, a derivation fragment for the passage from one derivable sequent to another ($\Gamma \, \varphi\frac{fy}{x}$ to $\Gamma \, \forall x \varphi$ in this example) may vary according to the actual context in their common antecedent ($\Gamma$ in this example). That is to say, it is not always possible to carry out a derivation fragment for a correct sequent rule; a general form (one in which the antecedent is represented merely by a symbol such as $\Gamma$, which is too inconclusive in this kind of situation) for it may not exist.\\
+\ \\
+Nevertheless, it does not contradict the \emph{completeness} of $\mathfrak{S},$\footnote{For more details see Chapter V, which is entirely devoted to developing the Completeness Theorem.} which guarantees a derivation for a correct \emph{sequent} instead of a correct \emph{sequent rule}.
+%%
+\item
+We shall investigate more about $(*)$. Consider the \emph{correct} rule below,\\ \newline
+$(**)$ \hfill $\begin{array}{lll}
+\Gamma & \varphi\frac{fy}{x} & \psi \cr \hline
+\Gamma & \exists x \varphi & \psi
+\end{array}$ if $f$ is unary, and $f$ and $y$ do not occur in $\Gamma \, \exists x \varphi \, \psi$, \hfill \ \\ \newline
+which also seems not to be derivable. (The reader is encouraged to verify its correctness.) Interestingly, it is \emph{equivalent} to $(*)$. Here we say that two rules are equivalent if one is derivable after the addition of the other into $\mathfrak{S}$. The two derivations below confirm this:
+\begin{enumerate}[(1)]
+\item \textit{$(*)$ is given.}
+\[
+\begin{array}{lllll}
+1. & \Gamma & \varphi\frac{fy}{x} & \psi & \mbox{premise} \cr
+2. & \Gamma & \neg\psi & \neg\varphi\frac{fy}{x} & \mbox{(Cp) applied to 1.} \cr
+3. & \Gamma & \neg\psi & \forall x \neg\varphi & \mbox{$(*)$ applied to 2., note that $f$ and $y$ do not} \cr
+\ & \ & \ & \ & \mbox{occur in $\Gamma \, \neg\psi \, \forall x \neg\varphi$} \cr
+4. & \Gamma & \neg\psi & \neg\varphi\frac{u}{x} & \mbox{5.5(a1) applied to 3., with $u$ not free in} \cr
+\ & \ & \ & \ & \Gamma \, \exists x \varphi \, \psi \cr
+5. & \Gamma & \varphi\frac{u}{x} & \psi & \mbox{(Cp) applied to 4.} \cr
+6. & \Gamma & \exists x \varphi & \psi & \mbox{($\exists$A) applied to 5.}
+\end{array}
+\]
+%%%
+\item \textit{$(**)$ is given.}
+\[
+\begin{array}{lllll}
+1. & \ & \ & v \equiv v & \mbox{$(\equiv)$, with $v \neq y$} \cr
+2. & \Gamma & \ & v \equiv v & \mbox{(Ant) applied to 1.} \cr
+3. & \Gamma & \ & \varphi\frac{fy}{x} & \mbox{premise} \cr
+4. & \Gamma & v \equiv v & \varphi\frac{fy}{x} & \mbox{(Ant) applied to 3.} \cr
+5. & \Gamma & \neg\varphi\frac{fy}{x} & \neg v \equiv v & \mbox{(Cp) applied to 4.} \cr
+6. & \Gamma & \exists x \neg \varphi & \neg v \equiv v & \mbox{$(**)$ applied to 5., note that $f$ and $y$ do} \cr
+\  & \ & \ & \ & \mbox{not occur in $\Gamma \, \exists x \neg \varphi \, \neg v \equiv v$} \cr
+7. & \Gamma & v \equiv v & \forall x \varphi & \mbox{(Cp) applied to 6.} \cr
+8. & \Gamma & \ & \forall x \varphi & \mbox{(Ch) applied to 2. and 7.}
+\end{array}
+\]
+\end{enumerate}
+The rules $(+)$ and $(++)$ below are obtained by replacing $fy$ by a suitable constant symbol $c$ in $(*)$ and $(**)$, respectively:\\
+\begin{tabular}{lll}
+$(+)$  & $\begin{array}{ll}
+\Gamma & \varphi \frac{c}{x} \cr \hline
+\Gamma & \forall x \varphi
+\end{array}$ & if $c$ does not occur in $\Gamma \, \forall x \varphi$; \cr
+$(++)$ & $\begin{array}{lll}
+\Gamma & \varphi \frac{c}{x} & \psi \cr \hline
+\Gamma & \exists x \varphi & \psi
+\end{array}$ & if $c$ does not occur in $\Gamma \, \exists x \varphi \, \psi$
+\end{tabular}
+\ \\
+Both $(+)$ and $(++)$ are correct and can be justified similarly,\footnote{We may apply \emph{extensions by definitions} (a technique which will be introduced in Chapter VIII) to verify it.} except a little easier.\footnote{Alternatively, there is a syntactic way to verify this: Take the constant symbol $c$ as a variable , say $y$; since by assumption $c$ does not occur in the conclusion sequents, there is only syntactic difference between $c$ and $y$. Now it should be easy to see that both $(+)$ and $(++)$ are correct.} Likewise, they are equivalent; the derivations establishing the equivalence can be obtained by slightly modifying those for the equivalence between $(*)$ and $(**)$.\\
+\ \\
+Also, the rules below turn out to be correct and equivalent:\\
+\begin{tabular}{lll}
+$(\circ)$      & $\begin{array}{ll}
+\Gamma & \varphi \frac{t}{x} \cr \hline
+\Gamma & \forall x \varphi
+\end{array}$       & if $t$ is a term containing no symbols or \cr
+\              & \ & variables occurring in $\Gamma \ \forall x \varphi$; \cr
+$(\circ\circ)$ & $\begin{array}{lll}
+\Gamma & \varphi \frac{t}{x} & \psi \cr \hline
+\Gamma & \exists x \varphi   & \psi
+\end{array}$       & if $t$ is a term containing no symbols or \cr
+\              & \ & variables occurring in $\Gamma \ \exists x \varphi \ \psi$.
+\end{tabular}
+\ \\
+The correctness of $(\circ)$ can be established in a similar way as the final rule of the exercise: Let $S$ be a symbol set such that $\Gamma$ is a sequent over $S$, and $S^\prime \supset S$ a symbol set such that $t$ is an $S^\prime$-term. For every $S$-interpretation $\INT = (\struct{A}, \beta)$, let $\INT^\prime$ be the $S^\prime$-interpretation in which
+\begin{enumerate}[1)]
+\item $\struct{A}^\prime |_S = \struct{A}$;
+%%%
+\item for every unary $f \in S^\prime \setminus S$ (if any) $f^{\struct{A}^\prime}$ is the identity function over $A$;
+%%%
+\item for every $n$-ary ($n > 1$) $f \in S^\prime \setminus S$ (if any) $f^{\struct{A}^\prime}$ is the function that projects its first argument. For example, if $n = 2$ then $f^{\struct{A}^\prime} (a, b) = a$ for all $a, b \in A$;
+%%%
+\item constant symbols $c \in S^\prime \setminus S$ (if any) are interpreted arbitrarily.
+\end{enumerate}
+It can be verified by induction that $\INT^\prime(t)$ equals either $\beta(v_i)$ for some $v_i$ occurring in $t$ or $c^{\struct{A}^\prime}$ for some $c$ occurring in $t$.\footnote{More precisely, it equals the value of the first non-function symbol (which is obviously either a variable or a constant symbol) in $t$ under $\INT^\prime$.} In such a way the remaining of the argument can be likewise conducted.\\
+\ \\
+The equivalence between $(\circ)$ and $(\circ\circ)$ can be verified as was the one between $(*)$ and $(**)$ above; hence the correctness of $(\circ\circ)$ is established.\\
+\ \\
+Notably the rules $(\circ)$ and $(\circ\circ)$ can be generalized to \emph{multiple quantifications}. For instance, by succesively applying $(\circ)$, we obtain\\
+\begin{tabular}{lll}
+$(\cdot)$ & $\begin{array}{ll}
+\Gamma & \varphi \frac{t_1 \ldots t_n}{x_1 \ldots x_n} \cr \hline
+\Gamma & \forall x_1 \ldots \forall x_n \varphi
+\end{array}$  & if the symbols and variables occurring \cr
+\         & \ & in $t_1, \ldots, t_n$ do not occur in $\Gamma \ \forall x_1 \ldots x_n \varphi$.
+\end{tabular}
+%%
+\item Note that the sequent rules in $\mathfrak{S}$ are much like \emph{definitions}, while in contrast the derivable rules are much like \emph{theorems}, in the sense that the former all together \emph{defines} a set of sequents whereas the latter \emph{guarantees} some sequents are in that set with the fact that derivable rules all consist of (finite) applications of sequent rules in $\mathfrak{S}$. Thus, derivable rules are somewhat like \emph{shortcuts} in a certain viewpoint.\\
+\\
+We conclude these remarks by giving another correct rule (which also seems not to be derivable):
+\[
+\begin{array}{ll}
+\ & \ \cr\hline
+\Gamma & \varphi
+\end{array},
+\]
+where
+\[
+\varphi := \begin{cases}
+v_0 \equiv v_0, & \mbox{if \(\Gamma\) contains an even number of formulas}; \cr
+v_1 \equiv v_1, & \mbox{otherwise}.
+\end{cases}
+\]
+A general derivation is unlikely to exist, as the succedent varies according to the parity of the number of formulas in the antecedent.\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+%End of IV.4.5-------------------------------------------------------------------------------------
+%
+\item \textbf{Note to Exercise 4.5.} Similar to the first derivable rule, the following one is also derivable:
+\[
+\begin{array}{ll}
+\varphi & \psi \cr \hline
+\forall x \varphi & \forall x \psi
+\end{array}
+\]
+\\
+\textit{Justification.}
+\[
+\begin{array}{llll}
+1. & \varphi & \psi & \mbox{premise} \\
+2. & \forall x \varphi & \psi & \mbox{5.5(b3) applied to 1.} \\
+3. & \forall x \varphi & \forall x \psi & \mbox{5.5(b4) applied to 2.}
+\end{array}
+\]
+\end{enumerate}
+%End of Section IV.4-----------------------------------------------------------------------------------------
+\ 
+\\
+\\
+%Section IV.5------------------------------------------------------------------------------------------------
+{\large \S5. Further Derivable Rules and Sequents}
+\begin{enumerate}[1.]
+%IV.5.5--------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 5.5.}
+\begin{itemize}
+\item[(a1)]
+\[
+\begin{array}{lllll}
+1. & \Gamma & \, & \neg \exists x \neg \varphi & \mbox{premise} \\
+2. & \Gamma & \neg \varphi \frac{t}{x} & \neg \varphi \frac{t}{x} & \mbox{(Assm)} \\
+3. & \Gamma & \neg \varphi \frac{t}{x} & \exists x \neg \varphi & \mbox{($\exists$S) applied to 2.} \\
+4. & \Gamma & \neg \varphi \frac{t}{x} & \neg \exists x \neg \varphi & \mbox{(Ant) applied to 1.} \\
+5. & \Gamma & \, & \varphi \frac{t}{x} & \mbox{(Ctr) applied to 3. and 4.}
+\end{array}
+\]
+%%
+\item[(a2)] Immediately follows from (a1).
+%%
+\item[(b1)]
+\[
+\begin{array}{lllll}
+1. & \Gamma & \varphi \frac{t}{x} & \psi & \mbox{premise} \\
+2. & \Gamma & \neg \psi & \neg \varphi \frac{t}{x} & \mbox{(Cp) applied to 1.} \\
+3. & \Gamma & \neg \psi & \exists x \neg \varphi & \mbox{($\exists$S) applied to 2.} \\
+4. & \Gamma & \neg \exists x \neg \varphi & \psi & \mbox{(Cp) applied to 3.}
+\end{array}
+\]
+%%
+\item[(b2)]
+\[
+\begin{array}{lllll}
+1. & \Gamma & \, & \varphi \frac{y}{x} & \mbox{premise} \\
+2. & \Gamma & \exists x \neg \varphi & \varphi \frac{y}{x} & \mbox{(Ant) applied to 1.} \\
+3. & \Gamma & \neg \varphi \frac{y}{x} & \neg \exists x \neg \varphi & \mbox{(Cp) applied to 2.} \\
+4. & \Gamma & \exists x \neg \varphi & \neg \exists x \neg \varphi & \mbox{($\exists$A) applied to 3.} \\
+\, & \, & \, & \, & \mbox{(note that $y$ is not free in $\exists x \neg \varphi$)} \\
+5. & \Gamma & \neg \exists x \neg \varphi & \neg \exists x \neg \varphi & \mbox{(Assm)} \\
+6. & \Gamma & \, & \neg \exists x \neg \varphi & \mbox{(PC) applied to 4. and 5.}
+\end{array}
+\]
+\textit{Remark.} Generally we cannot derive $\Gamma \ \forall x \varphi$ from $\Gamma \ \varphi\frac{t}{x}$ where $t$ is a \emph{term}, even if all variables in $\var(t)$ do not appear free in $\Gamma$. For a counter example, consider the case: $\Gamma = c \equiv y$, $\varphi = x \equiv y$ and $t = c$. However, if all the \emph{symbols} in $t$ do not occur in $\Gamma$, then $\Gamma \ \forall x \varphi$ can be derived. (See the third derivable rules in Exercise 4.5.)
+%%
+\item[(b3)] Immediately follows from (b1).
+%%
+\item[(b4)] Immediately follows from (b2).
+\end{itemize} \begin{flushright}$\talloblong$\end{flushright}
+%End of IV.5.5-------------------------------------------------------------------------------------
+%
+\item \textbf{Derivable Rules.}
+\begin{enumerate}[(a)]
+\item
+\[
+\begin{array}{ll}
+\Gamma & \exists x \varphi \cr\hline
+\Gamma & \exists x \neg\neg\varphi
+\end{array}
+\]
+\textit{Justification.}
+\[
+\begin{array}{lllll}
+1. & \Gamma & \ & \exists x \varphi & \mbox{premise} \cr
+2. & \ & \varphi & \varphi & \mbox{(Assm)} \cr
+3. & \ & \varphi & \neg\neg\varphi & \mbox{3.6(a1) applied to 2.} \cr
+4. & \ & \exists x \varphi & \exists x \neg\neg\varphi & \mbox{4.5 applied to 3.} \cr
+5. & \Gamma & \exists x \varphi & \exists x \neg\neg\varphi & \mbox{(Ant) applied to 4.} \cr
+6. & \Gamma & \ & \exists x \neg\neg\varphi & \mbox{(Ch) applied to 1. and 5.}
+\end{array}
+\]
+%%
+\item
+\[
+\begin{array}{ll}
+\Gamma & \exists x \neg\neg\varphi \cr\hline
+\Gamma & \exists x \varphi
+\end{array}
+\]
+\textit{Justification.}
+\[
+\begin{array}{lllll}
+1. & \Gamma & \ & \exists x \neg\neg\varphi & \mbox{premise} \cr
+2. & \ & \neg\neg\varphi & \neg\neg\varphi & \mbox{(Assm)} \cr
+3. & \ & \neg\neg\varphi & \varphi & \mbox{3.6(a2) applied to 2.} \cr
+4. & \ & \exists x \neg\neg\varphi & \exists x \varphi & \mbox{4.5 applied to 3.} \cr
+5. & \Gamma & \exists x \neg\neg\varphi & \exists x \varphi & \mbox{(Ant) applied to 4.} \cr
+6. & \Gamma & \ & \exists x \varphi & \mbox{(Ch) applied to 1. and 5.}
+\end{array}
+\]
+%%
+\item
+\[
+\begin{array}{ll}
+\Gamma & \forall x \varphi \cr\hline
+\Gamma & \forall x \neg\neg\varphi
+\end{array}
+\]
+\textit{Justification.}
+\[
+\begin{array}{lllll}
+1. & \Gamma & \ & \forall x \varphi & \mbox{premise} \cr
+2. & \ & \varphi & \varphi & \mbox{(Assm)} \cr
+3. & \ & \varphi & \neg\neg\varphi & \mbox{3.6(a1) applied to 2.} \cr
+4. & \ & \forall x \varphi & \neg\neg\varphi & \mbox{5.5(b3) applied to 3.} \cr
+5. & \ & \forall x \varphi & \forall x \neg\neg\varphi & \mbox{5.5(b4) applied to 4.} \cr
+6. & \Gamma & \forall x \varphi & \forall x \neg\neg\varphi & \mbox{(Ant) applied to 5.} \cr
+7. & \Gamma & \ & \forall x \neg\neg\varphi & \mbox{(Ch) applied to 1. and 6.}
+\end{array}
+\]
+%%
+\item
+\[
+\begin{array}{ll}
+\Gamma & \forall x \neg\neg\varphi \cr\hline
+\Gamma & \forall x \varphi
+\end{array}
+\]
+\textit{Justification.}
+\[
+\begin{array}{lllll}
+1. & \Gamma & \ & \forall x \neg\neg\varphi & \mbox{premise} \cr
+2. & \ & \neg\neg\varphi & \neg\neg\varphi & \mbox{(Assm)} \cr
+3. & \ & \neg\neg\varphi & \varphi & \mbox{3.6(a2) applied to 2.} \cr
+4. & \ & \forall x \neg\neg\varphi & \varphi & \mbox{5.5(b3) applied to 3.} \cr
+5. & \ & \forall x \neg\neg\varphi & \forall x \varphi & \mbox{5.5(b4) applied to 4.} \cr
+6. & \Gamma & \forall x \neg\neg\varphi & \forall x \varphi & \mbox{(Ant) applied to 5.} \cr
+7. & \Gamma & \ & \forall x \varphi & \mbox{(Ch) applied to 1. and 6.}
+\end{array}
+\]
+\end{enumerate}
+%
+\item \textbf{Note to Exercise III.4.11(c).} Here we give a derivation for this. In the following, let $x \not \in \free(\varphi)$.
+\begin{enumerate}[(i)]
+\item $\forall x (\varphi \lor \psi) \derives (\varphi \lor \forall x \psi)$:
+\[
+\begin{array}{llll}
+1. & \forall x (\varphi \lor \psi) \;\; \varphi & \varphi & \mbox{(Assm)} \\
+2. & \forall x (\varphi \lor \psi) \;\; \varphi & (\varphi \lor \forall x \psi) & \mbox{($\lor$S) applied to 1.} \\
+3. & \forall x (\varphi \lor \psi) \;\; \neg \varphi & \forall x (\varphi \lor \psi) & \mbox{(Assm)} \\
+4. & \forall x (\varphi \lor \psi) \;\; \neg \varphi & (\varphi \lor \psi) & \mbox{5.5(a2) applied to 3.} \\
+5. & \forall x (\varphi \lor \psi) \;\; \neg \varphi & \neg \varphi & \mbox{(Assm)} \\
+6. & \forall x (\varphi \lor \psi) \;\; \neg \varphi & \psi & \mbox{3.4 applied to 4. and 5.} \\
+7. & \forall x (\varphi \lor \psi) \;\; \neg \varphi & \forall x \psi & \mbox{5.5(b4) applied to 6.} \\
+8. & \forall x (\varphi \lor \psi) \;\; \neg \varphi & (\varphi \lor \forall x \psi) & \mbox{($\lor$S) applied to 7.} \\
+9. & \forall x (\varphi \lor \psi) & (\varphi \lor \forall x \psi) & \mbox{(PC) applied to 2. and 8.}
+\end{array}
+\]
+%%%
+\item $(\varphi \lor \forall x \psi) \derives \forall x (\varphi \lor \psi)$:
+\[
+\begin{array}{llll}
+1. & (\varphi \lor \forall x \psi) \;\; \varphi & \varphi & \mbox{(Assm)} \\
+2. & (\varphi \lor \forall x \psi) \;\; \varphi & (\varphi \lor \psi) & \mbox{($\lor$S) applied to 1.} \\
+3. & (\varphi \lor \forall x \psi) \;\; \neg \varphi & (\varphi \lor \forall x \psi) & \mbox{(Assm)} \\
+4. & (\varphi \lor \forall x \psi) \;\; \neg \varphi & \neg \varphi & \mbox{(Assm)} \\
+5. & (\varphi \lor \forall x \psi) \;\; \neg \varphi & \forall x \psi & \mbox{3.4 applied to 3. and 4.} \\
+6. & (\varphi \lor \forall x \psi) \;\; \neg \varphi & \psi & \mbox{5.5(a2) applied to 5.} \\
+7. & (\varphi \lor \forall x \psi) \;\; \neg \varphi & (\varphi \lor \psi) & \mbox{($\lor$S) applied to 6.} \\
+8. & (\varphi \lor \forall x \psi) & (\varphi \lor \psi) & \mbox{(PC) applied to 2. and 7.} \\
+9. & (\varphi \lor \forall x \psi) & \forall x (\varphi \lor \psi) & \mbox{5.5(b4) applied to 8.}
+\end{array}
+\]
+\end{enumerate}
+\end{enumerate}
+%End of Section IV.5-----------------------------------------------------------------------------------------
+\ 
+\\
+\\
+%Section IV.6------------------------------------------------------------------------------------------------
+{\large \S6. Summary and Example}
+\begin{enumerate}[1.]
+\item \textbf{Note to the Rule (Assm).} We are going to show that (Assm) is not \emph{redundant}, i.e. it cannot be derived from other rules in $\mathfrak{S}$. Assume that $S = \{ R \}$, where $R$ is a unary relation symbol, and let $\mathfrak{S}^- := \mathfrak{S} \setminus \{ \mbox{(Assm)} \}$. We restrict ourselves to show that the correct sequent
+\[
+Rx \ Rx
+\]
+is not derivable in $\mathfrak{S}^-$. (Note that $Rx$ is not valid.)\newline
+\\
+We assert this by proving the following claim:\newline
+\\
+\textbf{Claim.} \textit{For every derivable sequent in $\mathfrak{S}^-$, there is at least one subformula of the form $t \equiv t$ not within the scope of $\neg$ \footnote{We say that a subformula $t \equiv t$ of $\varphi$ is within the scope of $\neg$ iff $t \equiv t$ is contained in some formula $\neg\chi$ which in turn is also a subformula of $\varphi$. For example, $x \equiv y$ is within the scope of $\neg$ in $(Rz \land x \equiv y)$ since $(Rz \land x \equiv y)$ is taken to be an abbreviation for $\neg(\neg Rz \lor \neg x \equiv y)$; however, it is not so in $(x \equiv y \lor Ry)$.} in the succedent, where $t$ is a term.}\newline
+\\
+\textit{Proof.} We show by induction on the rules of $\mathfrak{S}^-$ that the succedent of the sequent thus generated has at least one subformula of the form $t \equiv t$ that is not within the scope of $\neg$.
+\begin{enumerate}[(1)]
+\item For ($\equiv$), it is trivial.
+%%
+\item For (Ant), (PC), ($\lor\mathrm{A}$), ($\lor\mathrm{S}$), ($\exists\mathrm{A}$), ($\exists\mathrm{S}$) and (Sub), it is trivial, as the succedent of the conclusion sequent is the same as, or a subformula of, that of the premise sequent. For (Ctr), note that the succedent of the second premise sequent must not have such a subformula whether or not the one in the first does, therefore the statement ``if the premise has this property, then so does the conclusion'' holds.\footnote{As a result, the rule (Ctr) is never used in any derivation carried out in $\mathfrak{S}^-$ since it demands as the second premise sequent a sequent of which the succedent contains no subformula $t \equiv t$ outside the scope of $\neg$, which is impossible.}\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+%
+\item \textbf{Note to the Concept of $\derives$.} Let $S$ be a symbol set, $\Phi$ a set of $S$-formulas, and $\varphi$ an $S$-formula. The problem of telling whether $\Phi \derives \varphi$ is undecidable, i.e. there is no algorithm for derivability.
+%
+\item \textbf{Note to the Correctness Theorem.} It is termed the \emph{Soundness Theorem} in many other textbooks.
+%
+\item \textbf{Note to the Derivable Rule (Comm).} In part (a) of \textbf{Derivable Rules} in the notes to Section 3, we proved $(\mathrm{Comm})$, the Commutativity Rule for $\lor$:
+\[
+\begin{array}{ll}
+\Gamma & (\varphi \lor \psi) \cr\hline
+\Gamma & (\psi \lor \varphi)
+\end{array}
+\]
+We shall show that it is \emph{equivalent} to both parts (a) and (b) of $(\lor\mathrm{S})$, in which by `equivalent' here we mean that one rule can be derived from the other (and of course, possibly with the help of other rules in $\mathfrak{S}$). More specifically, if two among $(\mathrm{Comm})$ and parts (a) and (b) of $(\lor\mathrm{S})$ are given, then the other can be derived.\newline
+\\
+For the case of deriving $(\mathrm{Comm})$ from other two rules, we have already done this before. As for the case of deriving part (b) of $(\lor\mathrm{S})$ given other two, the derivation is provided:
+\[
+\begin{array}{llll}
+1. & \Gamma & \varphi & \mbox{premise} \cr
+2. & \Gamma & (\varphi \lor \psi) & \mbox{part $(\mathrm{a})$ of $(\lor\mathrm{S})$ applied to 1.} \cr
+3. & \Gamma & (\psi \lor \varphi) & \mbox{$(\mathrm{Comm})$ applied to 2.}
+\end{array}
+\]
+The case for deriving part (a) is symmetric.
+%
+\item \textbf{Note to the Sequent Rules $(\lor\mathrm{S})$ in $\mathfrak{S}$.} After being introduced to $\mathfrak{S}$, the reader may notice that $(\lor\mathrm{S})$ is different from other rules in $\mathfrak{S}$: It is the only rule that consists of two parts. In this setting, $(\mathrm{Comm})$ can be derived (see part (a) of \textbf{Derivable Rule} in the notes to Section 3), with both parts of $(\lor\mathrm{S})$ playing critical roles. Conversely, both parts (a) and (b) of $(\lor\mathrm{S})$ can be derived from $(\mathrm{Comm})$ provided that the other is given, as we discussed in \textbf{Note to the Derivable Rule (Comm)}.\newline
+\\
+Some natural questions thus arise: Can part $(\mathrm{a})$ be derived from other rules in $\mathfrak{S}$? How about part $(\mathrm{b})$? Can $(\mathrm{Comm})$ still be derived with either part of $(\lor\mathrm{S})$ omitted? If otherwise both parts of $(\lor\mathrm{S})$ are replaced by $(\mathrm{Comm})$ alone, can they be derived from it? All the answers are ``No'', by the following argument.\newline
+\\
+Assume $S$ to be fixed. We shall denote by $\mathfrak{S}^-$ a set of sequent rules, with its contents varying according to the case.
+\begin{enumerate}[(1)]
+\item \emph{Part $(\mathrm{b})$ is omitted.} \begin{math}\mathfrak{S}^- := \mathfrak{S} \setminus \{\mbox{part (b) of $(\lor\mathrm{S})$}\}\end{math}. Observe that $\lor$ is merely a syntactic object, which carries no internal semantics, and hence is not necessarily interpreted as \emph{disjunction}: Within $\mathfrak{S}^-$, $\lor$ can otherwise be interpreted as \emph{projection1}.\footnote{\emph{projection of the first argument}, for which we adopt the symbol $\mathbf{proj}_1$: For all $\varphi$, $\psi$ in $L^S$, $(\varphi \ \mathbf{proj}_1 \ \psi) \bimodels \varphi$.} The reader is encouraged to verify that disjunction and projection1 are the only two among 16 possible interpretations for $\lor$ that establishes the correctness of $\mathfrak{S}^-$:
+\begin{center}
+For all $\Phi$ and $\varphi$, if $\Phi \derives_{\mathfrak{S}^-} \varphi$\footnote{Here we use subscript $_{\mathfrak{S}^-}$ to clarify the notion of \emph{derivability within $\mathfrak{S}^-$}.} then $\Phi \models_{\lor : \mbox{\scriptsize disjunction}} \varphi$,\footnote{Likewise, we use the subscripts $_{\lor : \mbox{\tiny disjunction}}$ and $_{\lor : \mbox{\tiny projection1}}$ to distinguish the notions of \emph{consequence relation with respect to the disjunction-} and \emph{projection1-interpretations of $\lor$}.}
+\end{center}
+and
+\begin{center}
+For all $\Phi$ and $\varphi$, if $\Phi \derives_{\mathfrak{S}^-} \varphi$ then $\Phi \models_{\lor : \mbox{\scriptsize projection1}} \varphi$.
+\end{center}
+\ \newline
+Since $\mathfrak{S}^-$ consists of nothing but syntactic operations (as does $\mathfrak{S}$), it is clear that whether $\lor$ is interpreted as disjunction or projection1 is irrelevant as far as those rules in $\mathfrak{S}^-$ are concerned.\newline
+\\
+Let us focus on the projection1-interpretation of $\lor$: Part (b) of $(\lor\mathrm{S})$ from $\mathfrak{S}$ is \emph{not} correct , because introducing an arbitrary formula $\psi$ to $\varphi$ as the first component of projection1 given $\varphi$ is generally not valid; likewise, $(\mathrm{Comm})$ is also not correct. (In fact, since the equivalence between them was established in \textbf{Note to the Derivable Sequent (Comm)}, we know that they are correct or not correct at the same time.)\newline
+\\
+Therefore, neither rules are derivable within $\mathfrak{S}^-$, since $\mathfrak{S}^-$ is correct under the projection1-interpretation of $\lor$, as we just claimed.
+%%
+\item \emph{Part $(\mathrm{a})$ is omitted.} \begin{math}\mathfrak{S}^- := \mathfrak{S} \setminus \{\mbox{part (a) of $(\lor\mathrm{S})$}\}\end{math}. The argument is symmetric to the previous case.
+%%
+\item \emph{Both parts $(\mathrm{a})$ and $(\mathrm{b})$ are replaced by $(\mathrm{Comm})$.} \begin{math}\mathfrak{S}^- := (\mathfrak{S} \cup \{(\mathrm{Comm})\}) \setminus \{(\lor\mathrm{S})\}\end{math}. In this case, $\lor$ can be interpreted as \emph{absurdity},\footnote{Or \emph{falsum}, \emph{contradiction}, for which we adopt the symbol $\bot$: For all $\varphi$, $\psi$, $\chi$ in $L^S$, $(\varphi \bot \psi) \bimodels (\chi \land \neg \chi)$.} \emph{conjunction} or \emph{exclusive disjunction}, in addition to disjunction. Neither $(\mathrm{a})$ nor $(\mathrm{b})$ is correct under these interpretations, except under the disjunction-interpretation. The argument is similar.
+\end{enumerate}
+\emph{Remark}. The completeness of $\mathfrak{S}^-$ obviously does not hold in all three cases, under the usual disjunction-interpretation of $\lor$. On the other hand, $\lor$ can only be interpreted as disjunction in $\mathfrak{S}$ regarding the correctness.
+%
+%%BEGIN: the item below is subjected to doubtedness, hence commented by now
+%\item \textbf{Note to the Theorem on the Correctness of $\mathfrak{S}$ 6.2.} A better statement for this theorem might be
+%\[
+%\mbox{``\emph{For all $\Gamma$ and $\varphi$, if $\Gamma \derives \varphi$ then $\Gamma \models \varphi$.}''}
+%\]
+%For the original one in text, namely
+%\[
+%\mbox{``\emph{For all $\Phi$ and $\varphi$, if $\Phi \derives \varphi$ then $\Phi \models \varphi$}''}
+%\]
+%is indeed the \emph{Theorem on the Soundness of First-Order Logic}. And the proof given in text is essentially the one for the former statement, except for the premise $\Phi \derives \varphi$ and the conclusion $\Phi \models \varphi$.\\
+%\\
+%However, there is only a slight difference between them, as $\Phi \derives \varphi$ means $\Gamma \derives \varphi$ for some $\Gamma \subset \Phi$ by definition and meanwhile $\Gamma \models \varphi$ obviously implies $\Phi \models \varphi$. (It turns out that the Correctness Theorem implies the Soundness Theorem.) Therefore this problem can be ignored.
+%END
+%
+\item \textbf{A Derivation Over $\mathfrak{S}$ May Be Obtained in Various Ways.} For some derivations, there is no unique sequence of applications of sequent rules from $\mathfrak{S}$. For example, we can obtain the derivation
+\[
+\begin{array}{lll}
+1. & \ & 0 \equiv 0 \cr
+2. & 0 \equiv 0 & 0 \equiv 0
+\end{array}
+\]
+by either (1) Apply $\eq$, and then apply $\ant$ to the sequent just derived; or (2) Apply $\eq$, and then apply $\assm$.\\
+\ \\
+\textit{Remark.} One may notice that in contrast, terms and formulas are obtained in unique ways. Such discrepancy arises from the fact that the rules of $\mathfrak{S}$ are not set up according to disjoint cases, unlike those of calculi of terms and formulas.
+\end{enumerate}
+%End of Section IV.6-----------------------------------------------------------------------------------------
+\ 
+\\
+\\
+\newpage\noindent
+%Section IV.7--------------------------------------------------------------------------------------
+{\large \S7. Consistency}
+\begin{enumerate}[1.]
+\item \textbf{Note to the Concept of Consistency.} As an immediate result of \textbf{Note to the Concept of $\derives$} mentioned in the annotations of last section, the problem of telling whether a set $\Phi$ of formulas is consistent is undecidable.
+%
+\item \textbf{Proposition:} \textit{Let $S \subset S^\prime$ and $\Phi \subset L^S$. \textit{If $\con_{S^\prime} \Phi$ then $\con_S \Phi$.}}\\
+\textit{Proof.} Since $\inc_S \Phi$ implies $\inc_{S^\prime} \Phi$.\nolinebreak\hfill$\talloblong$
+%
+\item \textbf{Note to Lemma 7.6.} In the proof of (a), note that in the case that $\Phi \cup \{ \neg \varphi \}$ is inconsistent, there is some suitable $\Gamma$ such that the sequent $\Gamma \; \varphi$ is derivable. Such a $\Gamma$ may or may not contain $\neg \varphi$. However, in either cases the sequent $\Gamma \; \neg \varphi \; \varphi$ is derivable (by the rule (Ant)), as stated in text.\\
+\\
+On the other hand, the implication stated in (c) should, in fact, be \emph{bi-directional}, as the implication ``If $\con \Phi \cup \{ \varphi \}$ or $\con \Phi \cup \{ \neg \varphi \}$, then $\con \Phi$'' is trivial: Its contraposition is ``If $\inc \Phi$, then $\inc \Phi \cup \{ \varphi \}$ and $\inc \Phi \cup \{ \neg \varphi \}$''.
+%
+\item \textbf{Note to Lemma 7.5.} In fact, it is an equivalent statement of the Correctness Theorem. The proof of this lemma given in text shows that it follows from the Correctness Theorem. Here we prove the converse, namely that the Correctness Theorem holds assuming this lemma: For $\Phi$ and $\varphi$, we have
+\begin{center}
+\begin{tabular}{lll}
+\    & $\Phi \derives \varphi$ & \ \cr
+iff  & $\inc \Phi \cup \{ \neg\varphi \}$ & (by 7.6(a)) \cr
+then & not $\sat \Phi \cup \{ \neg\varphi \}$ & (by premise) \cr
+iff  & $\Phi \models \varphi$ & (by III.4.4).
+\end{tabular}
+\end{center}
+%
+\item \textbf{Proposition:} \textit{Let $S$ and $S^\prime$ be symbol sets with $S \subset S^\prime$, and $\Phi \subset L^S$ a set of formulas. If $\inc_S \, \Phi$ then $\inc_{S^\prime} \, \Phi$.}\\
+\textit{Proof.} Since for an $S$-formula $\varphi$, $\Phi \derives_S \varphi$ implies $\Phi \derives_{S^\prime} \varphi$. \begin{flushright}$\talloblong$\end{flushright}
+%
+%IV.7.8--------------------------------------------------------------------------------------------
+\item \textbf{Solution to Exercise 7.8.}
+\begin{enumerate}[(a)]
+\item No.\\
+\textit{Reason.} Suppose that ($\exists\forall$) is a derivable rule. Then it makes no changes to the sequent calculus $\mathfrak{S}$ if we add this rule to it, except introducing some convenience for deriving sequents (cf. IV.3 in text).\\
+\\
+However, the following derivation showing that $\derives \forall x \forall y \ x \equiv y$ (assuming the symbol set $S$ to be fixed) and hence (by the Theorem on the Correctness of $\mathfrak{S}$) that $\models \forall x \forall y \ x \equiv y$ is a contradiction, as that sentence is indeed \emph{not} valid (it is not satisfied by any structure whose domain is not a singleton set):\\
+\[
+\begin{array}{llll}
+1. & \ & x \equiv x & \mbox{($\equiv$)}\\
+2. & \ & \exists y \ x \equiv y & \mbox{($\exists$S) applied to 1. with $t = x$}\\
+3. & \exists y \ x \equiv y & \forall y \ x \equiv y & \mbox{($\exists\forall$)}\\
+4. & \ & \forall y \ x \equiv y & \mbox{(Ch) applied to 2. and 3.}\\
+5. & \ & \forall x \forall y \ x \equiv y & \mbox{5.5(b4) applied to 4.}
+\end{array}
+\]
+It turns out that ($\exists\forall$) is not a derivable rule.
+%%
+\item No.\\
+\textit{Reason.} Suppose that every sequent is derivable in $\mathfrak{S}^\prime$ (again, assuming $S$ to be fixed); in particular, the sequent $\forall x \forall y \  x \equiv y \ \neg \forall x \forall y \ x \equiv y$ is also derivable in $\mathfrak{S}^\prime$.\\
+\\
+Assume that we are given a derivation of the sequent mentioned above in $\mathfrak{S}^\prime$. We shall show below that we can construct in two stages a derivation of that sequent using only the rules of $\mathfrak{S}$ by modifying the given one. This, when appended to with the fragment of derivation below (assuming there are $p$ steps in the previous derivation), yields a derivation for $\derives \ \neg\forall x \forall y \ x \equiv y$ in $\mathfrak{S}$, which contradicts the correctness of $\mathfrak{S}$:
+\[
+\begin{array}{llll}
+(p + 1). & \neg\forall x \forall y \ x \equiv y & \neg\forall x \forall y \ x \equiv y & \mbox{(Assm)} \cr
+(p + 2). & \ & \neg\forall x \forall y \ x \equiv y & \mbox{(PC) applied to $p.$ and} \cr
+\ & \ & \ & \mbox{$(p + 1).$}
+\end{array}
+\]
+\ \\
+At the first stage, we \emph{prepend} the sentence $\forall x \forall y \ x \equiv y$ to the antecedent $\Gamma$ of the sequent $\Gamma \varphi$ in each step of the derivation that is not resulted by the rule ($\equiv$) (which has no antecedent) or that does not contain that sentence (i.e. $\forall x \forall y \ x \equiv y \not \in \Gamma$). More specifically, if in the $m$th step the sequent is
+\[
+\begin{array}{lll}
+m. & \Gamma & \varphi
+\end{array}
+\]
+and satisfies the aforementioned conditions, then it becomes
+\[
+\begin{array}{lll}
+m. & \Gamma^\prime & \varphi,
+\end{array}
+\]
+in which $\Gamma^\prime := \forall x \forall y \ x \equiv y \ \Gamma$, after this modification. The reader could verify that it remains a derivation of $\forall x \forall y \ x \equiv y \ \neg \forall x \forall y \ x \equiv y$ (in $\mathfrak{S}^\prime$) by examining the rules of $\mathfrak{S}^\prime$.\\
+\\
+At the second stage, we replace in the derivation just obtained all the steps resulted by ($\exists\forall$) (assuming the sequents therein are of the form $\Gamma^\prime \ \exists x \varphi \ \forall x \varphi$, where $\Gamma^\prime$ contains $\forall x \forall y \ x \equiv y$ as stated in the previous stage) with the following derivation:\\ \ \\
+\(
+\begin{array}{lllll}
+n.     & \forall x \forall y \ x \equiv y & \ & \ & \forall x \forall y \ x \equiv y \cr
+\      & \multicolumn{4}{l}{\mbox{(Assm)}} \cr
+(n+1). & \forall x \forall y \ x \equiv y & \ & \ & \forall y \ u \equiv y \cr
+\      & \multicolumn{4}{l}{\mbox{5.5(a1) applied to $n.$, } u \not \in \free(\varphi)} \cr
+(n+2). & \forall x \forall y \ x \equiv y & \ & \ & u \equiv v \cr
+\      & \multicolumn{4}{l}{\mbox{5.5(a1) applied to $(n+1).$, } u \neq v \not \in \free(\varphi)} \cr
+(n+3). & \forall x \forall y \ x \equiv y & \varphi\frac{u}{x} & \ & u \equiv v \cr
+\      & \multicolumn{4}{l}{\mbox{(Ant) applied to $(n+2).$}} \cr
+(n+4). & \forall x \forall y \ x \equiv y & \varphi\frac{u}{x} & \ & \varphi\frac{u}{x} \cr
+\      & \multicolumn{4}{l}{\mbox{(Assm)}} \cr
+(n+5). & \forall x \forall y \ x \equiv y & \varphi\frac{u}{x} & u \equiv v & \varphi\frac{v}{x} \cr
+\      & \multicolumn{4}{l}{\mbox{(Sub) applied to $(n+4).$}} \cr
+(n+6). & \forall x \forall y \ x \equiv y & \varphi\frac{u}{x} & \ & \varphi\frac{v}{x} \cr
+\      & \multicolumn{4}{l}{\mbox{(Ch) applied to $(n+3).$ and $(n+5).$}} \cr
+(n+7). & \forall x \forall y \ x \equiv y & \varphi\frac{u}{x} & \ & \forall x \varphi \cr
+\      & \multicolumn{4}{l}{\mbox{5.5(b2) applied to $(n+6).$}} \cr
+(n+8). & \forall x \forall y \ x \equiv y & \exists x \varphi & \ & \forall x \varphi \cr
+\      & \multicolumn{4}{l}{\mbox{($\exists$A) applied to $(n+7).$}}
+\end{array}
+\)\\ \ \\
+and additionally the sequent:\\ \ \\
+\(
+\begin{array}{lllll}
+(n+9). & \Gamma^\prime\phantom{\forall y \ x \equiv y } \, & \exists x \varphi \, & \phantom{u \equiv v} & \forall x \varphi \cr
+\      & \multicolumn{4}{l}{\mbox{(Ant) applied to $(n+8).$}}
+\end{array}
+\)\\ \ \\
+if $\Gamma^\prime$ contains sequents other than $\forall x \forall y \ x \equiv y$. The derivation thus obtained uses only the rules of $\mathfrak{S}$.
+\end{enumerate} \begin{flushright}$\talloblong$\end{flushright}
+%End of IV.7.8-----------------------------------------------------------------------------------------------
+\end{enumerate}
+%End of Section IV.7-----------------------------------------------------------------------------------------
+%End of Chapter IV-------------------------------------------------------------------------------------------

@@ -1,0 +1,280 @@
+%Author: Wei-Lin (Linisac) Wu
+\documentclass[11pt, leqno]{report}
+
+
+%Packages
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{stmaryrd}
+\usepackage{colonequals}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{amscd}
+\usepackage{paralist}
+\usepackage{bm}
+\usepackage{titlesec}
+\usepackage[margin=3cm]{geometry}
+
+%ifthen package
+\usepackage{ifthen}
+
+
+%New Commands for Abbreviations
+%%Catalog <
+%%%general
+%%%definition
+%%%enumeration, sequence, tuple, vector
+%%%set operations
+%%%function type, function operations
+%%%special set(s)
+%%%structure, symbol interpretation, structure operations, structure relations
+%%%partial isomorphism
+%%%elementary equivalence
+%%%Ehrenfeucht-Fraisse game
+%%%isomorphism types
+%%%graph, graph functions, graph relations
+%%%logic
+%%%counting specifiers
+%%%connectives, quantifiers, formula operations
+%%%substitution
+%%%logic relations
+%%%logic operations
+%%%finite notions
+%%%nullary relations and predicates
+%%%operations on formulas and structures
+%%%global relations
+%%%special classes of structures
+%% >
+
+%%general <
+\newcommand{\header}[1]{{\rm\textbf{#1.}}}
+\newcommand{\refitem}[1]{{\rm#1}}
+%% >
+
+%%definition <
+\newcommand{\defas}{\colonequals}
+%% >
+
+%%enumeration, sequence, tuple, vector <
+\newcommand{\etc}{\ldots} %et cetera
+\newcommand{\length}{\mathrm{length}}
+\newcommand{\emptyseq}{\emptyset} %empty sequence
+\newcommand{\seq}[2]{(#1)_{#2}} %indexed sequence
+\newcommand{\vect}[1]{\overline{#1}} %vector, \vect{a} = \overbar{a}
+%% >
+
+%%some common operators <
+\newcommand{\mul}{\mathop{\cdot}} %multiplication
+\newcommand{\abs}[1]{\left|#1\right|}
+%% >
+
+%%set operations <
+\newcommand{\sete}[1]{{\{#1\}}} %set by enumeration. sete{a, b, c} = {a, b, c}
+\newcommand{\setm}[2]{{\{#1 \mid #2\}}} %set by math description. setd{#1}{#2} = {#1 | #2}
+\newcommand{\sett}[2]{{\{#1 \mid \mbox{#2}\}}} %set by text description. sett{#1}{#2} = {#1 | #2}, where #2 is a text
+\newcommand{\cart}{\mathop{\times}} %cartesian product of two sets
+\newcommand{\cartpwr}[2]{#1^{#2}} %(#2)nd cartesian power of set #1
+\newcommand{\intsc}{\mathop{\cap}} %intersection
+\newcommand{\union}{\mathop{\cup}} %union
+\newcommand{\card}[1]{\|#1\|} %cardinality. card{A} = || A ||
+\newcommand{\cmpl}[1]{#1^\mathit{c}} %complement of the set #1
+%% >
+
+%%function operations <
+\newcommand{\dm}{\mathrm{do}} %domain (of a function)
+\newcommand{\rg}{\mathrm{rg}} %range (of a function)
+\newcommand{\emptymap}{\emptyset} %empty map
+\newcommand{\inv}[1]{#1^{-1}} %inverse of function #1
+%% >
+
+%%special set(s) <
+\newcommand{\nat}{\mathbb{N}} %set of natural numbers
+\newcommand{\rand}{\mathrm{rand}} %random
+\newcommand{\spec}{\mathrm{Spec}} %spectrum
+%% >
+
+%%structure, symbol interpretation, structure operations, structure relations <
+\newcommand{\strct}[1]{\mathfrak{#1}} %structure
+\newcommand{\intpr}[2]{#1^{#2}} %symbol #1 interpreted under #2
+\newcommand{\sbstrct}[2]{#1^{#2}} %substructure of #2 induced by the subset #1
+\newcommand{\isom}[1][]{\ifthenelse{\equal{#1}{}}{\cong}{\cong^{#1}}} %isomorphic in #1 number of variables
+\newcommand{\product}{\cart} %product of two structures
+\newcommand{\dsjuni}{\mathop{\dot{\cup}}} %disjoint union of two structures
+\newcommand{\ordsum}{\mathop{\lhd}} %ordered sum of two ordered structures
+\newcommand{\ultprd}[2]{#1^{#2}} %ultra product. \ultprd{A}{I} = A^I
+\newcommand{\ball}[1][]{\ifthenelse{\equal{#1}{}}{{\mathit{S}}}{{\mathit{S}^{#1}}}}
+\newcommand{\ballstrct}[1][]{\ifthenelse{\equal{#1}{}}{{\mathcal{S}}}{{\mathcal{S}^{#1}}}}
+%% >
+
+%%partial isomorphism <
+\newcommand{\partisoms}{\mathrm{Part}} %set of partial isomorphisms between structures #1 and #2
+%% >
+
+%%elementary equivalence <
+\newcommand{\equv}[1][]{\ifthenelse{\equal{#1}{}}{\equiv}{\equiv^{#1}}} %equivalence in (#1)-logic
+%% >
+
+%%Ehrenfeucht-Fraisse games <
+\newcommand{\game}[2][]{\ifthenelse{\equal{#1}{}}{{\mathrm{G}_{#2}}}{{\mathrm{G}^{#1}_{#2}}}} %the game G^#1_#2
+\newcommand{\winpos}[2][]{\ifthenelse{\equal{#1}{}}{\mathit{W}_{#2}}{\mathit{W}^{#1}_{#2}}}
+\newcommand{\msogame}[1]{\operatorname{\MSO-\mathrm{G}}_{#1}} %the game in monadic second-order logic
+%% >
+
+%%isomorphism types <
+\newcommand{\hint}[2]{\varphi^{#1}_{#2}} %(#1)-isomorphic type (Hintikka formula) over #2 in first-order logic
+\newcommand{\ityp}[3][]{\ifthenelse{\equal{#1}{}}{{\psi^{#2}_{#3}}}{{^{#1}\psi^{#2}_{#3}}}} %(#2)-isomorphism type over #2 in other logics in #1 number of variables
+%% >
+
+%%graph, graph functions, graph relations <
+\newcommand{\graph}{\mathrm{GRAPH}} %the set of finite graphs
+\newcommand{\conn}{\mathrm{CONN}} %the set of connected graphs
+\newcommand{\dist}[1][]{\ifthenelse{\equal{#1}{}}{\mathit{d}}{\mathit{d}_{#1}}} %distance between two points in a graph
+\newcommand{\tree}{\mathrm{TREE}} %the set of finite trees
+\newcommand{\gaifman}{\mathcal{G}} %the Gaifman graph of #1 (structure)
+%% >
+
+%%logics <
+\newcommand{\fo}{\mathrm{FO}} %first-order logic
+\newcommand{\foe}{\fo^\ast}
+%\newcommand{\MSO}{\mathrm{MSO}} %monadic second-order logic
+\newcommand{\logic}[2][]{\ifthenelse{\equal{#1}{}}{\mathrm{L}_{#2}}{\mathrm{L}^{#1}_{#2}}} %parameterized logic (like infinitary logics)
+\newcommand{\logicvar}{\mathcal{L}} %(variable for ) logic
+%% >
+
+%%counting specifiers <
+\newcommand{\atleast}[1]{\geq #1} %at least #1
+\newcommand{\atmost}[1]{\leq #1} %at most #1
+\newcommand{\exactly}[1]{= #1} %exactly #1
+\newcommand{\cardatleast}[1]{\varphi_{\atleast{#1}}} %cardinality at least #1
+\newcommand{\cardatmost}[1]{\varphi_{\atmost{#1}}} %cardinality at most #1
+\newcommand{\cardexactly}[1]{\varphi_{\exactly{#1}}} %cardinality exactly #1
+%% >
+
+%%connectives, quantifiers, formula operations <
+\newcommand{\lthen}{\rightarrow} %logicial then
+\newcommand{\liff}{\leftrightarrow} %logical iff (between two formulas)
+\newcommand{\blor}{\bigvee} %big disjunction
+\newcommand{\bland}{\bigwedge} %big conjunction
+\newcommand{\existatleast}[1]{\exists^{\atleast{#1}}} %exist at least #1
+\newcommand{\existatmost}[1]{\exists^{\atmost{#1}}} %exist at most #1
+\newcommand{\existexactly}[1]{\exists^{\exactly{#1}}} %exist exactly #1
+\newcommand{\free}{\mathrm{free}} %set of free variables of #1
+\newcommand{\qr}{\mathrm{qr}} %quantifier rank (of a formula)
+\newcommand{\modclass}{\mathrm{Mod}} %model class (of a formula)
+%% >
+
+%%substitution <
+\newcommand{\sbst}[2]{{\scriptstyle\frac{\displaystyle #1}{\displaystyle #2}}} %substitution of #2 with #1
+%% >
+
+%%logic relations <
+\newcommand{\satis}{\models} %satisfaction relation
+\newcommand{\consq}{\models} %consequence relation
+%% >
+
+%%logic operations <
+\newcommand{\rel}[1]{#1^\mathit{r}} %#1 relationalized
+\newcommand{\invrel}[1]{#1^{-\mathit{r}}} %#1 inverse-relationalized
+%% >
+
+%%finite notions <
+\newcommand{\fin}{\mathrm{fin}} %finite
+\newcommand{\consqfin}{\consq_\fin} %consequence relation restricted to finite structures
+%% >
+
+%%nullary relations and predicates <
+\newcommand{\true}{\mathrm{TRUE}} %TRUE symbol
+\newcommand{\false}{\mathrm{FALSE}} %FALSE symbol
+\newcommand{\tr}{\mathrm{T}} %T symbol
+\newcommand{\fls}{\mathrm{F}} %F symbol
+%% >
+
+%%operations on formulas and structures <
+\newcommand{\tuplesby}[2]{{#1^{#2}(\_)}} %tuples defined by formula #1 and structure #2
+\newcommand{\rltv}[2]{#1^{#2}} %formula #1 relativized to the set #2
+%% >
+
+%%global relations <
+\newcommand{\transcls}{\mathrm{TC}} %transitive closure relation
+%% >
+
+%%special classes of structures <
+\newcommand{\ordclass}{\mathcal{O}} %class of finite ordered structures (in a vocabulary)
+\newcommand{\even}{\mathrm{EVEN}} %class of finite structures of even cardinality (in a vocabulary)
+%% >
+
+
+\newenvironment{quoteno}[1]{(#1)\hfill}{\hfill\phantom{(+)}}
+
+
+%if resetting of equation counter is required, use the instruction below:
+%\setcounter{equation}{0}
+
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+\theoremstyle{note}
+\newtheorem*{note}{Note}
+
+\begin{document}
+\noindent\textsc{\large First-Order Logic and Equality\bigskip\\}
+I argue that the notion of equality cannot be axiomatized in first-order logic without the equality symbol below.
+\medskip\\
+Let $\tau$ be any vocabulary that contains a relation symbol (it may contain constant symbols $c$, function symbols $f$ or other relation symbols $R$). Let $\fo[\tau]$ and $\foe[\tau]$ denote the first-order language of $\tau$ with and without the equality symbol, respectively; the satisfaction/consequence relations $\satis$ for $\foe$ are defined in the standard way. Note that in $\foe[\tau]$, atomic formulas are of the form $Rt_1 \etc t_n$.
+\medskip\\
+Consider two $\tau$-structures $\strct{A}, \strct{B}$ such that
+\begin{itemize}
+%
+\item $\strct{A}$ has domain $A = \sete{0, 1}$ and $\strct{B}$ has domain $B = \sete{0}$.
+%
+\item For constant symbols $c \in \tau$ (if any), $\intpr{c}{A} = 0$ and $\intpr{c}{B} = 0$.
+%
+\item For $n$-ary function symbols $f \in \tau$ (if any), $\intpr{f}{A} = \cartpwr{A}{n} \cart \sete{0}$ and $\intpr{f}{B} = \cartpwr{B}{n} \cart \sete{0}$.
+%
+\item For $n$-ary relation symbols $R \in \tau$, $\intpr{R}{A} = \cartpwr{A}{n}$ and $\intpr{R}{B} = \cartpwr{B}{n}$.
+%
+\end{itemize}
+An assignment $\alpha$ in $\strct{A}$ (or $\beta$ in $\strct{B}$) is a mapping of variables $v_0, v_1, v_2, \etc$ to elements in $A$ (or $B$, respectively). Let $\alpha\sbst{a}{x}$ denote the assignment in $\strct{A}$ that maps the variable $x$ to $a \in A$ and is identical to $\alpha$ elsewhere (similarly for $\beta\sbst{b}{x}$).
+\medskip\\
+Note that if $t$ is a $\tau$-term, then $\intpr{t}{(\strct{A}, \alpha)} = 0$ or $\intpr{t}{(\strct{A}, \alpha)} = 1$ and $\intpr{t}{(\strct{B}, \beta)} = 0$; but both $(\strct{A}, \alpha)$ and $(\strct{B}, \beta)$ are models of the atomic formulas $Rt_1 \etc t_n$.
+\bigskip\\
+\textbf{Claim.} \emph{For every formula $\varphi$ in $\foe[\tau]$, every assignment $\alpha$ in $\strct{A}$ and every assignment $\beta$ in $\strct{B}$, $(\strct{A}, \alpha)$ satisfies $\varphi$ if and only if $(\strct{B}, \beta)$ satisfies $\varphi$.}
+\begin{proof}
+This is proved simultaneously for all assignments $\alpha$ in $\strct{A}$ and all assignments $\beta$ in $\strct{B}$ by induction on $\varphi$.
+\medskip\\
+For $\varphi$ atomic, $\varphi$ takes the form $Rt_1 \etc t_n$. This case follows by the previous observation.
+\medskip\\
+For $\varphi = \neg\psi$, this case follows by\\
+\begin{tabular}[b]{lll}
+\   & $(\strct{A}, \alpha) \satis \neg\psi$ & \ \cr
+iff & not $(\strct{A}, \alpha) \satis \psi$ & \ \cr
+iff & not $(\strct{B}, \beta) \satis \psi$ & (by induction hypothesis) \cr
+iff & $(\strct{B}, \beta) \satis \neg\psi$. & \ \cr
+\end{tabular}
+\medskip\\
+For $\varphi = \psi \lor \chi$, this case follows by\\
+\begin{tabular}[b]{lll}
+\   & $(\strct{A}, \alpha) \satis \psi \lor \chi$ & \ \cr
+iff & $(\strct{A}, \alpha) \satis \psi$ or $(\strct{A}, \alpha) \satis \chi$ & \ \cr
+iff & $(\strct{B}, \beta) \satis \psi$ or $(\strct{B}, \beta) \satis \chi$ & (by induction hypothesis) \cr
+iff & $(\strct{B}, \beta) \satis \psi \lor \chi$. & \ \cr
+\end{tabular}
+\medskip\\
+For $\varphi = \exists x \psi$, this case follows by\\
+\begin{tabular}[b]{lll}
+\   & $(\strct{A}, \alpha) \satis \exists x \psi$ & \ \cr
+iff & $(\strct{A}, \alpha\sbst{0}{x}) \satis \psi$ or $(\strct{A}, \alpha\sbst{1}{x}) \satis \psi$ & (since $A = \sete{0, 1}$) \cr
+iff & $(\strct{B}, \beta\sbst{0}{x}) \satis \psi$ or $(\strct{B}, \beta\sbst{0}{x}) \satis \psi$ & (by induction hypothesis) \cr
+iff & $(\strct{B}, \beta\sbst{0}{x}) \satis \psi$ & \ \cr
+iff & $(\strct{B}, \beta) \satis \exists x \psi$ & (since $B = \sete{0}$). \cr
+\end{tabular}
+\end{proof}
+\noindent From this claim it follows that \emph{for every set of formulas $\Phi \subseteq \foe[\tau]$, every assignment $\alpha$ in $\strct{A}$ and every assignment $\beta$ in $\strct{B}$, $(\strct{A}, \alpha)$ is a model of $\Phi$ if and only if $(\strct{B}, \beta)$ is a model of $\Phi$} (because they satisfy the same formulas in $\foe[\tau]$).
+\medskip\\
+However, $(\strct{A}, (\alpha\sbst{0}{x})\sbst{1}{y})$ does not satisfy the $\fo[\tau]$-formula $x = y$ while $(\strct{B}, \beta)$ satisfies it, for every $\alpha$ in $\strct{A}$ and every $\beta$ in $\strct{B}$; moreover, $\strct{A}$ is a model of $\exists x \exists y \neg x = y$ while $\strct{B}$ is not.
+\medskip\\
+Therefore, the notion of equality cannot be axiomatized in first-order logic without the equality symbol.
+\end{document}

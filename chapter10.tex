@@ -1,0 +1,3043 @@
+%Chapter X-----------------------------------------------------------------------------------------
+{\LARGE \bfseries X \\ \\ Limitations of the Formal Method}
+\\
+\\
+\\
+%Section X.1---------------------------------------------------------------------------------------
+{\large \S1. Decidability and Enumerability}
+\begin{enumerate}[1.]
+\item \textbf{Solution to Exercise 1.2.}
+\begin{enumerate}[(a)]
+\item $W \cup W^\prime$. Given $\zeta \in \alphabet^\ast$, decide whether $\zeta \in W$. If so, then the answer is ``yes''. Otherwise we have to further decide whether $\zeta \in W^\prime$, the answer is ``yes'' if $\zeta \in W^\prime$ and ``no'' otherwise.
+%%
+\item $\alphabet^\ast \setminus W$. Given $\zeta \in \alphabet^\ast$, decide whether $\zeta \in W$. If so the answer is ``no'' and ``yes'' otherwise.
+%%
+\item $W \cap W^\prime$. From the results we just obtained above, it follows that $\alphabet^\ast \setminus W$ and $\mathcal{A}^\ast \setminus W^\prime$ are both decidable, and thus so is $(\mathcal{A}^\ast \setminus W) \cup (\mathcal{A}^\ast \setminus W^\prime) = \mathcal{A}^\ast \setminus (W \cap W^\prime)$. Since $W \cap W^\prime = \mathcal{A}^\ast \setminus (\mathcal{A}^\ast \setminus (W \cap W^\prime))$, we have that $W \cap W^\prime$ is also decidable.\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+%
+\item \textbf{Solution to Exercise 1.3.}
+\begin{enumerate}[(a)]
+\item Given $\zeta \in \mathcal{A}_0^\ast$, we treat it as a string over $\mathcal{A}_\infty$. If $\zeta \neq \boxempty$, then we proceed to check the first symbol of $\zeta$ and the substring of $\zeta$ excluding the first symbol, respectively, against the set of variables (cf. II.2.1(a)) and the formation rules for formulas (cf. II.3.2, possibly with the help of II.3.1). Assume that both pass the check, then let us denote the first symbol by $x$, the substring by $\varphi$. We generate the set $\free (\varphi)$\footnote{This set may be implemented as a \emph{list} for practical concerns.} according to II.4.5(a) and II.5.1. Finally, we check whether $x$ occurs in thie set: if it does then the answer is ``yes''. If at any stage stated above the process fails the check, then the answer is ``no''.
+%%
+\item As in the former, we treat a given $\zeta \in \mathcal{A}_0^\ast$ as a string over $\mathcal{A}_\infty$. Then decide whether $\zeta$ is a formula. If it is some formula $\varphi$, then go on to generate the set $\free (\varphi)$. If $\free (\varphi) = \emptyset$ then $\varphi$ is a sentence and the answer is ``yes''. If at any stage stated above the process fails the check, then the answer is ``no''.\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+%
+\item \textbf{Note to Decision and Enumeration Procedures.} Given an alphabet $\mathcal{A}$, a decision procedure $\mathfrak{P}$ may be seen as a function $f: \mathcal{A}^* \to \mathcal{A}^*$ mapping from strings to strings over $\mathcal{A}$; while this may not be true for enumeration procedures, which may not halt.
+%
+\item \textbf{Note to the Proof of 1.5.} The set $\mathcal{A}^\ast$ can be enumerated in lexicographic order by successively listing all strings of length $n$ over $\mathcal{A}$ in lexicographic order for all $n \in \mathbb{N}$.
+%
+\item \textbf{One More Enumerability Property.} If $W$ and $W^\prime$ are both enumerable, then so is $W \cup W^\prime$: List the elements in $W$ and the ones in $W^\prime$ in an interleaving fashion.
+%
+\item \textbf{Solution to Exercise 1.9.} Given a string $\zeta \in \mathcal{A}^\ast$, we show how to decide whether $\zeta \in W$. First decide whether $\zeta \in U$. If not, then the answer is ``no''; if $\zeta \in U$, then simultaneously run the enumeration procedures for $W$ and $U \setminus W$. Since these two procedures together enumerate all the strings in $U$, $\zeta$ will be on either output list of them. If $\zeta$ appears on the output list produced by the enumeration procedure for $W$, then the answer is ``yes'' and ``no'' otherwise.\nolinebreak\hfill$\talloblong$
+%
+\item \textbf{Solution to Exercise 1.10.} Suppose $W$ is decidable with respect to $\mathcal{A}_1$, then by definition there is a decision procedure $\mathfrak{P}$ for $W$. We claim that $W$ is decidable with respect to $\mathcal{A}_2$: For strings $\zeta \in \mathcal{A}_2^*$, it is easy to decide whether $\zeta \in \mathcal{A}_1^*$; if $\zeta \in \mathcal{A}_1^*$, then invoke $\mathfrak{P}$ to decide whether $\zeta \in W$.\\
+\ \\
+Conversely, if $W$ is decidable with respect to $\mathcal{A}_2$, then it is decidable with respect to $\mathcal{A}_1$: Since $\mathcal{A}_1 \subset \mathcal{A}_2$, a decision procedure with respect to $\mathcal{A}_2$ (that is, one which expects input from $\mathcal{A}_2^*$) of course accepts input from $\mathcal{A}_1^*$.\\
+\ \\
+On the other hand, given $\mathcal{A}_1 \subset \mathcal{A}_2$, a set $W \subset \mathcal{A}_1^*$ is obviously a subset both of $\mathcal{A}_1^*$ and of $\mathcal{A}_2^*$. Hence an enumeration procedure for $W$ with respect to $\mathcal{A}_1$ (that is, one which regards output as a subset of $\mathcal{A}_1^*$) is one with resepct to $\mathcal{A}_2$; conversely, an enumeration procedure for $W$ with respect to $\mathcal{A}_2$ is one with respect to $\mathcal{A}_1$.\nolinebreak\hfill$\talloblong$
+%
+\item \textbf{Solution to Exercise 1.11.} Define for every $n \in \mathbb{Z}^+$ the collection $P_n$ of polynomials which take the form:
+\[
+\sum_{i = 0}^{m} \mbox{term}_i,
+\]
+and satisfy:
+\begin{enumerate}[1)]
+\item $0 \leq m < n$. That is, the number of terms therein is lowerbounded by $1$ and upperbounded by $n$.
+%%
+\item The variables occurring in each term are indexed at most $n - 1$.
+%%
+\item Each term has \emph{degree} at most $n$. That is, there are, possibly with repetitions, at most $n$ variables occurring in each term.
+%%
+\item For $i \neq j$, $\mbox{term}_i$ and $\mbox{term}_j$ differ by at least one variable.
+%%
+\item The coefficients are integers ranging from $-n$ to $n$, and are nonzero. A constant term (that is, one with no variables) is itself a coefficient.
+%%
+\item There is at least one variable that occurs. That is, we do not concern constant polynomials here.
+\end{enumerate}
+For example,
+\[
+3 x_0^2 x_1 -3 x_1^2 -4
+\]
+and
+\[
+x_0^3 - 3 x_2^2
+\]
+are such polynomials in $P_3$, while
+\[
+\begin{array}{rl}
+x_0^3 + x_1^2 - 2 x_2^2 + 3 & \mbox{(violating 1))}, \cr
+x_3^3 + x_1^2 - 1 & \mbox{(violating 2))}, \cr
+x_2^4 + x_0^2 + 2 x_0^2 & \mbox{(violating 3) and 4))}, \cr
+-4 x_1^2 - 7 x_0 + 2 & \mbox{(violating 5))}, \mbox{ and} \cr
+2 & \mbox{(violating 6))}
+\end{array}
+\]
+are not.\\
+\ \\
+From this setting it is conceivable that each of the polynomials we shall concern in this exercise falls into $P_n$ for some $n$. Furthermore, notice that $P_n \subset P_{n + 1}$ for all $n \in \mathbb{Z}^+$. We say that a polynomial $p$ has \emph{degree} $k$ if the maximum degree among those of the terms is $k$.\\
+\ \\
+Below we will provide a procedure for each part.
+\begin{enumerate}[(a)]
+\item For every given $n \in \mathbb{Z}^+$, and for every polynomial $p \in P_n$, check whether there is an $n$-tuple from $\{-n, \ldots, -1, 1, \ldots, n\}^n$ such that it is a root of $p$. If so, list $p$ in the output list.
+%%
+\item Let us agree that the polynomials $p$ of degree $n$ ($n \in \mathbb{Z}^+$) with one variable ($x$ here) take the form:
+\[
+p(x) = \sum_{k = 1}^n a_k x^k + a_0,
+\]
+where for $0 \leq k \leq n$, $a_k \in \mathbb{Z}^+$, and in particular, $a_n \neq 0$.\\
+\ \\
+Let
+\[
+m := \max \left\{ b_k \ \left| \  0 \leq k \leq n \right\}\right.,
+\]
+where for $0 \leq k \leq n$,
+\[
+b_k := \begin{cases}
+1, & \mbox{if \(k = 0\)}; \cr
+\left\lceil \,\sqrt[k]{ n \left| \displaystyle\frac{a_{n - k}}{a_n} \right| }\, \right\rceil, & \mbox{otherwise}.
+\end{cases}
+\]
+Then we have\\
+(1) \hfill $m \geq 1$ \hfill \phantom{(1)}\\
+and\\
+(2) \hfill $\displaystyle m \geq \left\lceil \,\sqrt[k]{ n \left| \displaystyle\frac{a_{n - k}}{a_n} \right| }\, \right\rceil$ \hfill \ \phantom{(2)}\\
+for $1 \leq k \leq n$.\\
+\ \\
+Let us consider the two cases below concerning the sign of $a_n$:
+\begin{enumerate}[1)]
+\item $a_n \geq 1$. For $x \geq m + 1$,
+\[
+\begin{array}{lll}
+p(x) & = & \displaystyle\sum_{k = 1}^n a_k x^k + a_0 \cr
+\    & \geq & \displaystyle\sum_{k = 1}^n a_k (m + 1)^k + a_0 \cr
+\multicolumn{3}{r}{\mbox{(note that $m + 1 > 0$ by (1))}} \cr
+\    & = & \displaystyle\sum_{k = 1}^n \left[ \displaystyle\frac{1}{n} a_n (m + 1)^k + a_{n - k} \right] (m + 1)^{n - k} \cr
+\    & \geq & \displaystyle\sum_{k = 1}^n \left[ \displaystyle\frac{1}{n} a_n (m^k + 1) + a_{n - k} \right] (m + 1)^{n - k} \cr
+\multicolumn{3}{r}{\mbox{(by (1))}} \cr
+\    & \geq & \displaystyle\sum_{k = 1}^n \left[ \displaystyle\frac{1}{n} a_n \left(\left\lceil \,\sqrt[k]{ n \left| \displaystyle\frac{a_{n - k}}{a_n} \right| }\, \right\rceil^k + 1\right) + a_{n - k} \right] (m + 1)^{n - k} \cr
+\multicolumn{3}{r}{\mbox{(by (2))}} \cr
+\    & \geq & \displaystyle\sum_{k = 1}^n \left[ \displaystyle\frac{1}{n} a_n \left(\left( \,\sqrt[k]{ n \left| \displaystyle\frac{a_{n - k}}{a_n} \right| }\, \right)^k + 1\right) + a_{n - k} \right] (m + 1)^{n - k} \cr
+\    & = & \displaystyle\sum_{k = 1}^n \left[ \displaystyle\frac{1}{n} a_n \left( n \left| \displaystyle\frac{a_{n - k}}{a_n} \right| + 1\right) + a_{n - k} \right] (m + 1)^{n - k} \cr
+\    & = & \displaystyle\sum_{k = 1}^n \left[ \left| a_{n - k} \right| + a_{n - k} + \displaystyle\frac{1}{n} a_n \right] (m + 1)^{n - k} \cr
+\multicolumn{3}{r}{\mbox{(since $a_n > 0$)}} \cr
+\    & \geq & \displaystyle\sum_{k = 1}^n \displaystyle\frac{1}{n} a_n (m + 1)^{n - k} \cr
+\multicolumn{3}{r}{\mbox{(since $\left|a_{n - k}\right| + a_{n - k} \geq 0$)}} \cr
+\ & > & 0.
+\end{array}
+\]
+Similarly, for $x \leq -m - 1$, $p(x) > 0$ if $n$ is even and $p(x) < 0$ if $n$ is odd.
+%%
+\item $a_n \leq -1$. By applying the result in the above case to $-p(x)$, we immediately obtain for $x \geq m + 1$, $p(x) < 0$ and for $x \leq -m - 1$, $p(x) < 0$ if $n$ is even and $p(x) > 0$ is $n$ is odd.
+\end{enumerate}
+\ \\
+It follows that all integer roots of $p(x) = 0$ (if any) lie in the interval $[-m, m]$. And it is easy to check for each integer $i$ with $-m \leq i \leq m$ whether $p(i) = 0$.\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+%
+\item \textbf{Solution to Exercise 1.12.} Below we show that (i) implies (ii) in (a), that (ii) implies (iii) in (b), and finally that (iii) implies (i) in (c), hence the equivalence between them:
+\begin{enumerate}[(a)]
+\item We provide an enumeration procedure for $\{ \zeta\# f(\zeta) \,|\, \zeta \in \mathcal{A}^\ast \}$: Produce all strings over $\mathcal{A}$ in alphabetic order. For each string $\zeta \in \mathcal{A}^\ast$, compute $f(\zeta)$, and then print the string $\zeta\#f(\zeta)$ in the output list.
+%%
+\item We show how to decide the set $\{ \zeta\#f(\zeta) \,|\, \zeta \in \mathcal{A}^\ast \}$ given an enumeration procedure for it. Given a string $\chi \in (\mathcal{A} \cup \mathcal{B} \cup \{ \# \})^\ast$, first decide whether $\chi = \zeta\#\xi$ for some $\zeta \in \mathcal{A}^\ast$ and $\xi \in \mathcal{B}^\ast$. If not, then answer is simply ``no''; otherwise, run the enumeration procedure for $\{ \zeta\#f(\zeta) \,|\, \zeta \in \mathcal{A}^\ast \}$. Search the output list for \emph{the} string $\theta$ prefixed by $\zeta\#$ (note there is exactly one such $\theta$ on the list since $f$ is a function). If $\theta = \chi$, then the answer is ``yes''; if at any stage stated above the check fails, then the answer is ``no''.
+%%
+\item Provided that the set $\{ \zeta\#f(\zeta) \,|\, \zeta \in \mathcal{A}^\ast \}$ is decidable, we show how to compute $f(\zeta)$ for each $\zeta \in \mathcal{A}^\ast$: Decide for each $\xi \in \mathcal{B}^\ast$ in alphabetic order whether $\zeta\#\xi$ is in the set just mentioned. If the answer is ``yes'', then we are done, $\xi = f(\zeta)$. If the answer is ``no'', then go on to check the next to $\xi$ until the answer ``yes'' is obtained.\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+\end{enumerate}
+%End of Section X.1--------------------------------------------------------------------------------
+\
+\\
+\\
+%Section X.2---------------------------------------------------------------------------------------
+{\large \S2. Register Machines}
+\begin{enumerate}[1.]
+\item \textbf{The Program $\mathrm{P}$ as an Exercise in Page 160 Suggested by the Authors.} Below we provide an instance:
+\[
+\begin{array}{rl}
+0 & \IF \ \R_0 = \boxempty \ \THEN \ 7 \ \ELSE \ 7 \ \OR \ 7 \ \OR \ 1 \cr
+1 & \PS{0}{a_2} \cr
+2 & \IF \ \R_0 = \boxempty \ \THEN \ 7 \ \ELSE \ 3 \ \OR \ 7 \ \OR \ 7 \cr
+3 & \PS{0}{a_0} \cr
+4 & \IF \ \R_0 = \boxempty \ \THEN \ 7 \ \ELSE \ 5 \ \OR \ 7 \ \OR \ 7 \cr
+5 & \PS{0}{a_0} \cr
+6 & \IF \ \R_0 = \boxempty \ \THEN \ 8 \ \ELSE \ 7 \ \OR \ 7 \ \OR \ 7 \cr
+7 & \GOTO \ 7 \cr
+8 & \HALT
+\end{array}
+\]
+%
+\item \textbf{Note to the Paragraph Below Defintion 2.6.} The program
+\[
+\begin{array}{rl}
+0 & \PRINT \cr
+1 & \HALT
+\end{array}
+\]
+is one that decides $\{ \Box \}$.\\
+\ \\
+Also note that a program that enumerates a finite set does not necessarily halt. For example, the program referred to in text
+\[
+\begin{array}{rl}
+0 & \PA{1}{a_0} \cr
+1 & \GOTO \ 0 \cr
+2 & \HALT
+\end{array}
+\]
+does not halt although it enumerates $\emptyset$.
+%
+\item \textbf{Corollary to 2.8.} Since for $\varphi \in L_0^{S_\infty}$,
+\begin{center}
+not $\sat \varphi$ iff $\neg \varphi$ is valid,
+\end{center}
+it is easy to provide a program that enumerates the set of unsatisfiable $S_\infty$-sentences, and hence that set is R-enumerable.
+%
+\item \textbf{Solution to Exercise 2.9.} For intuitive treatment (a \emph{procedure}) of this exercise, refer to \textbf{Solution to Exercise 1.2}. As for the precise counterpart (a \emph{program}), see below.\\
+\ \\
+Let $\mathcal{A} = \{ a_0, \ldots, a_r \}$, and let $\p_W$ and $\p_{W^\prime}$ be programs that decide $W$ and $W^\prime$, respectively. Furthermore, assume that there are $L + 2$ and $L^\prime + 2$ instructions, respectively, in $\p_W$ and $\p_{W^\prime}$,\footnote{One for the print-instruction, and one for halt-instruction.} where $L \geq 0$ and $L^\prime \geq 0$. In addition, there is exactly one print-instruction in each of $\p_W$ and $\p_{W^\prime}$.\\
+\ \\
+We prove $\mathcal{A}^\ast \setminus W$, $W \cap W^\prime$ and $W \cup W^\prime$ are all R-decidable by showing how to construct the programs $\p_{\mathcal{A}^\ast \setminus W}$, $\p_{W \cap W^\prime}$ and $\p_{W \cup W^\prime}$, that decide them, respectively.
+\begin{enumerate}[(a)]
+\item $\p_{\mathcal{A}^\ast \setminus W}$. This program is obtained from $\p_W$ by replacing the print-instruction
+\[
+\begin{array}{rl}
+L_0 & \PRINT
+\end{array}
+\]
+by
+\[
+\begin{array}{rl}
+L_0 & \PI{0}{L_0 + 1}{L_0 + 3}{L_0 + 3} \cr
+L_0 + 1 & \PA{0}{a_0} \cr
+L_0 + 2 & \GOTO \ L_0 + r + 5 \cr
+L_0 + 3 & \PS{0}{a_0} \cr
+\multicolumn{2}{c}{\vdots} \cr
+L_0 + r + 3 & \PS{0}{a_r} \cr
+L_0 + r + 4 & \IF \ \R_0 \ \THEN \ L_0 + r + 5 \ \ELSE \ L_0 + 3 \ldots \cr
+\ & \OR \ L_0 + 3 \cr
+L_0 + r + 5 & \PRINT
+\end{array}
+\]
+and increase all labels in $\p_W$ that are greater than $L_0$ by the amount of $r + 5$.\\
+\ \\
+(If in $\p_W$ the print-instruction is to be executed with $\R_0 = \Box$, which means that $\zeta \in W$, then in $\p_{\mathcal{A}^\ast \setminus W}$ we add $a_0$ to $\R_0$; otherwise, $\zeta \not\in W$, then we clear $\R_0$ before the content in it is printed out.)
+%%
+\item $\p_{W \cap W^\prime}$. Assume that the registers used in $\p_W$ are among $\R_0, \ldots, \R_s$. Then there are $L + L^\prime + (r + 2)s + 11r + 17$ instructions in $\p_{W \cap W^\prime}$, where
+\begin{enumerate}[(1)]
+\item Instructions $0$ - $7r + 8$ are
+\[
+\begin{array}{rl}
+0 & \IF \ \R_0 = \Box \ \THEN \ 4r + 5 \ \ELSE \ 1 \cr
+\ & \OR \ldots \ 4k + 1 \ldots \ \OR \ 4r + 1 \cr
+1 & \PS{0}{a_0} \cr
+2 & \PA{1}{a_0} \cr
+3 & \PA{s + 1}{a_0} \cr
+4 & \GOTO \ 0 \cr
+\multicolumn{2}{c}{\vdots} \cr
+4r + 1 & \PS{0}{a_r} \cr
+4r + 2 & \PA{1}{a_r} \cr
+4r + 3 & \PA{s + 1}{a_r} \cr
+4r + 4 & \GOTO \ 0 \cr
+4r + 5 & \IF \ \R_1 = \Box \ \THEN \ 7r + 9 \ \ELSE \ 4r + 6 \cr
+\ & \OR \ldots \ 4r + 3k + 6 \ldots \ \OR \ 7r + 6 \cr
+4r + 6 & \PA{0}{a_0} \cr
+4r + 7 & \PS{1}{a_0} \cr
+4r + 8 & \GOTO \ 4r + 5 \cr
+\multicolumn{2}{c}{\vdots} \cr
+7r + 6 & \PA{0}{a_r} \cr
+7r + 7 & \PS{1}{a_r} \cr
+7r + 8 & \GOTO \ 4r + 5 \cr
+\end{array}
+\]
+(Copy the input $\zeta$ in $\R_0$ to $\R_{s + 1}$ (in reverse order), using $\R_1$ as a temporary storage. Upon completion, $\R_0$ contains $\zeta$, whereas $\R_{s + 1}$ contains $\zeta$ in reverse order.)
+%%%
+\item Instructions $7r + 9$ - $L + 7r + 9$ are derived from $\p_W$ with the last instruction
+\[
+\begin{array}{rl}
+L + 1 & \HALT
+\end{array}
+\]
+left out. More precisely, for $0 \leq l \leq L$, instruction at label $l + 7r + 9$ is the one at label $l$ in $\p_W$ with all labels therein (if any) increased by $7r + 9$. Suppose the print-instruction in $\p_W$ is at label $L_0$:
+\[
+\begin{array}{rl}
+L_0 & \PRINT
+\end{array}
+\]
+Then the instruction at label $L_0 + 7r + 9$ is replaced by
+\[
+\begin{array}{rl}
+L_0 & \PI{0}{L + 7r + 10}{L_1}{L_1}
+\end{array}
+\]
+(If in $\p_W$ the content in $\R_0$ is to be printed out, then in $\p_{W \cap W^\prime}$ we jump to the print-instruction (see part (4)) if $\R_0 \neq \Box$ (which means that $\zeta \not\in W$), and proceed to check whether $\zeta \in W^\prime$ otherwise.)
+%%%
+\item Instructions $L + 7r + 10$ - $L + (r + 2)s + 11r + 15$ are
+\[
+\begin{array}{rl}
+L + 7r + 10 & \PS{0}{a_0} \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 8r + 10 & \PS{0}{a_r} \cr
+L + 8r + 11 & \IF \ \R_0 = \Box \ \THEN \ L + 8r + 12 \cr
+\ & \ELSE \ L + 7r + 10 \ldots \ \OR \ L + 7r + 10 \cr
+\multicolumn{2}{c}{\vdots} \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + (r + 2)s + 7r + 10 & \PS{s}{a_0} \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + (r + 2)s + 8r + 10 & \PS{s}{a_r} \cr
+L + (r + 2)s + 8r + 11 & \IF \ \R_s = \Box \cr
+\ & \THEN \ L + (r + 2)s + 8r + 12 \cr
+\ & \ELSE \ L + (r + 2)s + 7r + 10 \ldots \cr
+\ & \OR \ L + (r + 2)s + 7r + 10 \cr
+L + (r + 2)s + 8r + 12 & \IF \ \R_{s + 1} = \Box \cr
+\ & \THEN \ L + (r + 2)s + 11r + 16 \cr
+\ & \ELSE \ L + (r + 2)s + 8r + 13 \cr
+\ & \OR \ldots \ L + (r + 2)s + 8r + 3k + 13 \ldots \cr
+\ & \OR \ L + (r + 2)s + 11r + 13 \cr
+L + (r + 2)s + 8r + 13 & \PS{s + 1}{a_0} \cr
+L + (r + 2)s + 8r + 14 & \PA{0}{a_0} \cr
+L + (r + 2)s + 8r + 15 & \GOTO \ L + (r + 2)s + 8r + 12 \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + (r + 2)s + 11r + 13 & \PS{s + 1}{a_r} \cr
+L + (r + 2)s + 11r + 14 & \PA{0}{a_r} \cr
+L + (r + 2)s + 11r + 15 & \GOTO \ L + (r + 2)s + 8r + 12
+\end{array}
+\]
+(On entrance into this part, we have $\zeta \in W$. Therefore, clear $\R_0, \ldots, \R_s$, then recover $\zeta$ in $\R_0$ using $\R_{s + 1}$, and check whether $\zeta \in W^\prime$ in the next part. Note that instructions $L + 7r + 10$ - $L + 8r + 11$ are actually redundant since $\R_0$ is already empty, we put them here for compatibility issues.)
+%%%
+\item Instructions $L + (r + 2)s + 11r + 16$ - $L + L^\prime + (r + 2)s + 11r + 16$ are derived from $\p_{W^\prime}$ by increasing all labels in it by $L + (r + 2)s + 11r + 16$. Assume the print-instruction is at label $L_1$.\\
+\ \\
+(This final part checks whether $\zeta \in W^\prime$ and prints the contents in $\R_0$ as output accordingly.)
+\end{enumerate}
+%%
+\item $W \cup W^\prime$. It is obtained from the previous program by replacing the instruction at label $L_0$ with
+\[
+\begin{array}{rl}
+L_0 & \PI{0}{L_1}{L + 7r + 10}{L + 7r + 10}
+\end{array}
+\]
+(Check whether $\zeta \in W^\prime$ only if $\zeta \not\in W$.)\nolinebreak\hfill$\talloblong$\\
+\ \\
+\textit{Remark.} Alternatively, this part can be argued in the same way as is done in Exercise 1.2.
+\end{enumerate}
+%
+\item \textbf{Solution to Exercise 2.10.} Assume that $\mathcal{A} = \{ a_0, \ldots, a_r \}$.
+\begin{enumerate}[(a)]
+\item Intuitively, we can enumerate the set $\mathcal{A}^\ast$ by successively enumerating all strings of length $n$ (in lexicographic order) over $\mathcal{A}$ for all $n \in \mathbb{N}$.\\
+\ \\
+Below is a program that enumerates $\mathcal{A}^\ast$:
+\[
+\begin{array}{rl}
+0 & \PI{1}{4}{1}{1} \cr
+1 & \PS{1}{a_0} \cr
+2 & \PA{0}{a_0} \cr
+3 & \GOTO \ 0 \cr
+4 & \PRINT \cr
+5 & \PII{0}{6}{8}{3k + 8}{3r + 8} \cr
+6 & \PA{0}{a_0} \cr
+7 & \GOTO \ 0 \cr
+8 & \PS{0}{a_0} \cr
+9 & \PA{0}{a_1} \cr
+10 & \GOTO \ 0 \cr
+\multicolumn{2}{c}{\vdots} \cr
+3k + 8 & \PS{0}{a_k} \cr
+3k + 9 & \PA{0}{a_{k + 1}} \cr
+3k + 10 & \GOTO \ 0 \cr
+\multicolumn{2}{c}{\vdots} \cr
+3r + 8 & \PS{0}{a_r} \cr
+3r + 9 & \PA{1}{a_0} \cr
+3r + 10 & \GOTO \ 5 \cr
+3r + 11 & \HALT
+\end{array}
+\]
+In case that $r = 0$, there are $11$ instructions in this program, where instructions $8$ - $10$ are
+\[
+\begin{array}{rl}
+8 & \PS{0}{a_0} \cr
+9 & \PA{1}{a_0} \cr
+10 & \GOTO \ 5 \cr
+\end{array}
+\]
+\ \\
+This program enumerates $\mathcal{A}^\ast$ by listing
+\[
+\Box, a_0, \ldots, a_r, a_0a_0, \ldots, a_0a_r, \ldots, a_ra_0, \ldots, a_ra_r, a_0a_0a_0, \ldots
+\]
+\ \\
+Instructions $0$ - $3$ serve to append the content in $\R_1$ to $\R_0$. Instruction $4$ prints out the content in $\R_0$. Instruction $5$ checks whether $\R_0$ is empty:
+\begin{enumerate}[(1)]
+\item If $\R_0$ is empty, then an $a_0$ is added to it at instruction $6$, and subsequently all strings of length $n + 1$ are printed out, assuming the content in $\R_1$ is $\underbrace{a_0 \ldots a_0}_{n\mbox{\scriptsize-times}}$, at label $6$. (So, after jumping at label $7$ and later executing instructions $0$ - $3$, the content in $\R_0$ is $\underbrace{a_0 \ldots a_0}_{(n + 1)\mbox{\scriptsize-times}}$.)
+%%%
+\item If otherwise $\R_0$ terminates with $a_r$, that is, the content in $\R_0$ is $\zeta a_r$ for some $\zeta \in \mathcal{A}^\ast$, then $\R_0$ becomes $\zeta$ and an $a_0$ is added to $\R_1$ ($\R_1$ serves to record the suffix appened later to $\R_0$, hence the instructions $0$ - $3$), at instructions $3r + 8$ - $3r + 9$. The program then jumps at label $3r + 10$ to label $5$ for further checks.
+%%%
+\item If $\R_0$ terminates with some $a_i$ (that is, the content in $\R_0$ is $\zeta a_i$ for some $\zeta \in \mathcal{A}^\ast$) with $i < r$, then it will terminate with $a_{i + 1}$ (the content in $\R_0$ becomes $\zeta a_{i + 1}$) after executing instructions $3i + 8$ - $3i + 9$, and then the program jumps at label $3i + 10$ to instruction $0$ to append the content in $\R_1$ to $\R_0$.
+\end{enumerate}
+Note that initially all registers are empty. Furthermore, after executing instructions $0$ - $3$, $\R_0$ must either be empty (the first time they are executed) or terminate with $\underbrace{a_0 \ldots a_0}_{\mbox{\scriptsize\begin{math}n\end{math}-times}}$ where $n \in \mathbb{Z}^+$, while $\R_1$ becomes empty.
+%%
+\item For an intuitive treatment, see Theorem 1.8. Here we provide programs for this argument.\\
+\ \\
+Suppose $W$ is R-decidable, i.e. there is a program $\p$ that decides it, then we show below how to construct the programs $\p_W$ and $\p_{\mathcal{A}^\ast \setminus W}$, respectively, that enumerate $W$ and $\mathcal{A}^\ast \setminus W$. For convenience, let us assume that there is exactly one print-instruction in $\p$, that there are $L + 2$ instructions therein with $L \geq 0$, and that the registers used in it are among $\R_0, \ldots, \R_s$ with $s \geq 1$.\\
+\ \\
+\emph{The program $\p_W$.} There are $L + (r + 2)s + 13r + 32$ instructions in it, where
+\begin{enumerate}[(1)]
+\item Instructions $0$ - $3r + 10$ are derived from the program in part (a), with the last instruction
+\[
+\begin{array}{rl}
+3r + 11 & \HALT
+\end{array}
+\]
+left out, and with the instruction at label 4 replaced by
+\[
+\begin{array}{rl}
+4 & \GOTO \ 3r + 11
+\end{array}
+\]
+(Produce a string $\zeta \in \mathcal{A}^\ast$ in $\R_0$.)
+%%%
+\item Instructions $3r + 11$ - $10r + 19$ are
+\[
+\begin{array}{rl}
+3r + 11 & \IF \ \R_0 = \Box \ \THEN \ 7r + 16 \ \ELSE \ 3r + 12 \cr
+\ & \OR \ldots \ 3r + 4k + 12 \ldots \ \OR \ 7r + 12 \cr
+3r + 12 & \PS{0}{a_0} \cr
+3r + 13 & \PA{1}{a_0} \cr
+3r + 14 & \PA{s + 1}{a_0} \cr
+3r + 15 & \GOTO \ 3r + 11 \cr
+\multicolumn{2}{c}{\vdots} \cr
+7r + 12 & \PS{0}{a_r} \cr
+7r + 13 & \PA{1}{a_r} \cr
+7r + 14 & \PA{s + 1}{a_r} \cr
+7r + 15 & \GOTO \ 3r + 11 \cr
+7r + 16 & \IF \ \R_1 = \Box \ \THEN \ 10r + 20 \ \ELSE \ 7r + 17 \cr
+\ & \OR \ldots \ 7r + 3k + 17 \ldots \ \OR \ 10r + 17 \cr
+7r + 17 & \PA{0}{a_0} \cr
+7r + 18 & \PS{1}{a_0} \cr
+7r + 19 & \GOTO \ 7r + 16 \cr
+\multicolumn{2}{c}{\vdots} \cr
+10r + 17 & \PA{0}{a_r} \cr
+10r + 18 & \PS{1}{a_r} \cr
+10r + 19 & \GOTO \ 7r + 16 \cr
+\end{array}
+\]
+(Copy the content in $\R_0$ to $\R_{s + 1}$ (in reverse order), using $\R_1$ as a temporary repository. (Note that on entrance into this part, $\R_1 = \Box$.) Upon completion, $\R_0$ contains a string $\zeta$ produced previously, while $\R_{s + 1}$ contains $\zeta$ in reverse order and all other registers are empty.)
+%%%
+\item Instructions $10r + 20$ - $L + 10r + 20$ are derived from $\p$, with the last instruction
+\[
+\begin{array}{rl}
+L + 1 & \HALT
+\end{array}
+\]
+left out, and with all labels increased by $10r + 20$. Suppose in the resulting program fragment the print-instruction is located at label $L_0$:
+\[
+\begin{array}{rl}
+L_0 & \PRINT
+\end{array}
+\]
+replace it with
+\[
+\begin{array}{rl}
+L_0 & \GOTO \ L + 10r + 21
+\end{array}
+\]
+(Apply $\p$ to $\zeta$, the content in $\R_0$. Whenever in $\p$ the print-instruction is to be issued, check whether $\R_0 = \Box$, i.e. whether $\zeta \in W$, in the next part.)
+%%%
+\item Instructions $L + 10r + 21$ - $L + (r + 2)s + 13r + 31$ are
+\[
+\begin{array}{rl}
+L + 10r + 21 & \IF \ \R_0 = \Box \ \THEN \ L + 10r + 23 \cr
+\ & \ELSE \ L + 10r + 22 \ldots \cr
+\ & \OR \ L + 10r + 22 \cr
+L + 10r + 22 & \PA{s + 2}{a_0} \cr
+L + 10r + 23 & \IF \ \R_{s + 1} = \Box \ \THEN \ L + 13r + 27 \cr
+\ & \ELSE \ L + 10r + 24 \cr
+\ & \OR \ldots \ L + 10r + 3k + 24 \ldots \cr
+\ & \OR \ L + 13r + 24 \cr
+L + 10r + 24 & \PS{s + 1}{a_0} \cr
+L + 10r + 25 & \PA{0}{a_0} \cr
+L + 10r + 26 & \GOTO \ L + 10r + 23 \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 13r + 24 & \PS{s + 1}{a_r} \cr
+L + 13r + 25 & \PA{0}{a_r} \cr
+L + 13r + 26 & \GOTO \ L + 10r + 23 \cr
+L + 13r + 27 & \IF \ \R_{s + 2} = \Box \ \THEN \ L + 13r + 28 \cr
+\ & \ELSE \ L + 13r + 29 \ldots \cr
+\ & \OR \ L + 13r + 29 \cr
+L + 13r + 28 & \PRINT \cr
+L + 13r + 29 & \PS{s + 2}{a_0} \cr
+L + 13r + 30 & \PS{1}{a_0} \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 14r + 30 & \PS{1}{a_r} \cr
+L + 14r + 31 & \IF \ \R_1 = \Box \ \THEN \ L + 14r + 32 \cr
+\ & \ELSE \ L + 13r + 30 \ldots \cr
+\ & \OR \ L + 13r + 30 \cr
+\multicolumn{2}{c}{\vdots} \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + (r + 2)s + 12r + 28 & \PS{s}{a_0} \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + (r + 2)s + 13r + 28 & \PS{s}{a_r} \cr
+L + (r + 2)s + 13r + 29 & \IF \ \R_s = \Box \cr
+\ & \THEN \ L + (r + 2)s + 13r + 30 \cr
+\ & \ELSE \ L + (r + 2)s + 12r + 28 \ldots \cr
+\ & \OR \ L + (r + 2)s + 12r + 28 \cr
+L + (r + 2)s + 13r + 30 & \GOTO \ 5 \cr
+L + (r + 2)s + 13r + 31 & \HALT
+\end{array}
+\]
+(At labels $L + 10r + 21$ - $L + 10r + 22$, $\R_{s + 2}$ is used to indicate whether $\zeta \in W$: the content is $\Box$ if $\zeta \in W$, and is $a_0$ otherwise. And then $\R_0$ is recovered from $\R_{s + 1}$. If $\zeta \in W$, then it is printed out, at label $L + 13r + 28$. Registers $\R_1, \ldots, \R_{s + 2}$ are all cleared before going back to label 5 to begin the next iteration.)
+%%%
+\end{enumerate}
+\ \\
+\emph{The program $\p_{\mathcal{A}^\ast \setminus W}$.} It is obtained from $\p_W$ by replacing the instruction at label $L + 13r + 27$ with
+\[
+\begin{array}{rl}
+L + 13r + 27 & \IF \ \R_{s + 2} = \Box \ \THEN \ L + 13r + 29 \cr
+\ & \ELSE \ L + 13r + 28 \ldots \cr
+\ & \OR \ L + 13r + 28 \cr
+\end{array}
+\]
+(Interchange the labels corresponding to cases whether $\R_{s + 2} = \Box$.)\\
+\ \\
+On the other hand, given programs $\p_W$ and $\p_{\mathcal{A}^\ast \setminus W}$ that enumerate $W$ and $\mathcal{A}^\ast \setminus W$, respectively, we show how to construct the program $\p$, that decides $W$.\\
+\ \\
+The main idea is that, we set a timer for each computation of $\p_W$ and of $\p_{\mathcal{A}^\ast \setminus W}$, that is, the number of steps is no more than a given time bound in each computation. Everytime a print-instruction is to be executed, we compare the content in $\R_0$ against the input $\zeta$. If there is a match, we will know whether $\zeta \in W$ according to which of $\p_W$ and $\p_{\mathcal{A}^\ast \setminus W}$ that issued the print-instruction. If the timer set for $\p_W$ decreases to zero during the computation of $\p_W$, then $\p_W$ is aborted and it is the turn of $\p_{\mathcal{A}^\ast \setminus W}$ to begin computing, and vice versa. Finally, whenever a program is aborted, a greater time bound is given to the computation of the other.\\
+\ \\
+Likewise, for convenience we assume that there is exactly one print-instruction in $\p_W$ and in $\p_{\mathcal{A}^\ast \setminus W}$, that there are $L + 2$ and $L^\prime + 2$ instructions in $\p_W$ and in $\p_{\mathcal{A}^\ast \setminus W}$ respectively,\footnote{One for $\PRINT$, and one for $\HALT$.} and that the registers used in $\p_W$ and in $\p_{\mathcal{A}^\ast \setminus W}$ collectively are among $\R_0, \ldots, \R_s$.\\
+\ \\
+Let us pick the following registers for special purposes:
+\begin{enumerate}[1)]
+\item $\R_{s + 1}$ is used to record the input $\zeta$.
+%%%
+\item $\R_{s + 2}$ contains a copy of $\zeta$, and serves to recover $\R_{s + 1}$ after comparison (if necessary).
+%%%
+\item $\R_{s + 3}$ serves as a time bound, and is used to recover $\R_{s + 4}$ before every computation of $\p_W$ and of $\p_{\mathcal{A}^\ast \setminus W}$.
+%%%
+\item $\R_{s + 4}$ is the timer: It decreases by one after each step during every computation of $\p_W$ and of $\p_{\mathcal{A}^\ast \setminus W}$.
+%%%
+\item $\R_{s + 5}$ is used as a temporary storage for $\xi$, the content to be printed out by the print-instruction issued by $\p_W$ or $\p_{\mathcal{A}^\ast \setminus W}$.
+%%%
+\item $\R_{s + 6}$ is used as a temporary storage for $\xi$ to recover $\R_{s + 5}$ after comparison (if necessary).
+%%%
+\item $\R_{s + 7}$ indicates which of $\p_W$ and $\p_{\mathcal{A}^\ast \setminus W}$ is the running program: If $\R_{s + 7} = \Box$ then the running program is $\p_W$; if the content in it is $a_0$ then the running program is $\p_{\mathcal{A}^\ast \setminus W}$.
+\end{enumerate}
+\ \\
+There are $3(L + L^\prime) + (r + 2)s + 26r + 67$ instructions in it, where
+\begin{enumerate}[(1)]
+\item Instructions $0$ - $4r + 4$ are
+\[
+\begin{array}{rl}
+0 & \IF \ \R_0 = \Box \ \THEN \ 4r + 5 \ \ELSE \ 1 \ \OR \ldots \ 4k + 1 \ldots \cr
+\ & \OR \ 4r + 1 \cr
+1 & \PS{0}{a_0} \cr
+2 & \PA{s + 1}{a_0} \cr
+3 & \PA{s + 2}{a_0} \cr
+4 & \GOTO \ 0 \cr
+\multicolumn{2}{c}{\vdots} \cr
+4r + 1 & \PS{0}{a_r} \cr
+4r + 2 & \PA{s + 1}{a_r} \cr
+4r + 3 & \PA{s + 2}{a_r} \cr
+4r + 4 & \GOTO \ 0 \cr
+\end{array}
+\]
+(Move the content $\zeta$ in $\R_0$ to $\R_{s + 1}$ and $\R_{s + 2}$, in reverse order. Upon completion, $\R_0$ contains $\Box$, while $\R_{s + 1}$ and $\R_{s + 2}$ both contain $\zeta$ in reverse order.)
+%%%
+\item Instructions $4r + 5$ - $4r + 14$ are
+\[
+\begin{array}{rl}
+4r + 5 & \PA{s + 3}{a_0} \cr
+4r + 6 & \IF \ \R_{s + 3} = \Box \ \THEN \ 4r + 11 \ \ELSE \ 4r + 7 \ldots \cr
+\ & \OR \ 4r + 7 \cr
+4r + 7 & \PS{s + 3}{a_0} \cr
+4r + 8 & \PA{s + 4}{a_0} \cr
+4r + 9 & \PA{0}{a_0} \cr
+4r + 10 & \GOTO \ 4r + 6 \cr
+4r + 11 & \IF \ \R_0 = \Box \ \THEN \ 4r + 15 \ \ELSE \ 4r + 12 \ldots \cr
+\ & \OR \ 4r + 12 \cr
+4r + 12 & \PS{0}{a_0} \cr
+4r + 13 & \PA{s + 3}{a_0} \cr
+4r + 14 & \GOTO \ 4r + 11
+\end{array}
+\]
+(Increase the time bound (the content in $\R_{s + 3}$) by one. And then copy it, using $\R_0$ as a temporary storage, into $\R_{s + 4}$, which is the timer.)
+%%%
+\item Instruction $4r + 15$ is
+\[
+\begin{array}{rl}
+4r + 15 & \IF \ \R_{s + 7} = \Box \ \THEN \ 4r + 16 \ \ELSE \ 3L + 4r + 21 \ldots \cr
+\ & \OR \ 3L + 4r + 21
+\end{array}
+\]
+(If $\R_{s + 7} = \Box$, which means the program to run is $\p_W$, then jump to the starting point of $\p_W$ (the next part); otherwise, the program to run is $\p_{\mathcal{A}^\ast \setminus W}$, and jump to the starting point of $\p_{\mathcal{A}^\ast \setminus W}$.)
+%%%
+\item Instructions $4r + 16$ - $3L + 4r + 20$ are derived from $\p_W$: For $0 \leq l \leq L$,
+\begin{enumerate}[1)]
+\item the instruction at label $3l + 4r + 16$ is the one at label $l$ in $\p_W$ with all labels $l^\prime$ therein changed to $3l^\prime + 4r + 16$;
+%%%%
+\item instructions $3l + 4r + 17$ - $3l + 4r + 18$ are
+\[
+\begin{array}{rl}
+3l + 4r + 17 & \PS{s + 4}{a_0} \cr
+3l + 4r + 18 & \IF \ \R_{s + 4} = \Box \ \THEN \ 3(L + L^\prime) + 25r + 58 \cr
+\ & \ELSE \ 3l + 4r + 19 \ldots \cr
+\ & \OR \ 3l + 4r + 19
+\end{array}
+\]
+\end{enumerate}
+(Decrease the timer by one after each step of $\p_W$.)\\
+\ \\
+Instructions $3L + 4r + 19$ - $3L + 4r + 20$ are
+\[
+\begin{array}{rl}
+3L + 4r + 19 & \PA{0}{a_0} \cr
+3L + 4r + 20 & \GOTO \ 3(L + L^\prime) + (r + 2)s + 26r + 65
+\end{array}
+\]
+($\p_W$ is to halt, thus $\zeta \not\in W$.)\\
+\ \\
+Suppose in the resulting program fragment, the print-instruction is at label $L_0$, then it is replaced by
+\[
+\begin{array}{rl}
+L_0 & \GOTO \ 3(L + L^\prime) + 5r + 26
+\end{array}
+\]
+%%%
+\item Instructions $3L + 4r + 21$ - $3(L + L^\prime) + 5r + 25$ are derived from $\p_{\mathcal{A}^\ast \setminus W}$: For $0 \leq l \leq L^\prime$,
+\begin{enumerate}[1)]
+\item the instruction at label $3l + 3L + 4r + 21$ is the one at label $l$ in $\p_{\mathcal{A}^\ast \setminus W}$ with all labels $l^\prime$ therein changed to $3l^\prime + 3L + 4r + 21$;
+%%%%
+\item instructions $3l + 3L + 4r + 22$ - $3l + 3l + 4r + 23$ are
+\[
+\begin{array}{rl}
+3l + 3L + 4r + 22 & \PS{s + 4}{a_0} \cr
+3l + 3L + 4r + 23 & \IF \ \R_{s + 4} = \Box \ \THEN \ 3(L + L^\prime) + 25r + 58 \cr
+\ & \ELSE \ 3l + 3L + 4r + 24 \ldots \cr
+\ & \OR \ 3l + 3L + 4r + 24
+\end{array}
+\]
+\end{enumerate}
+(Decrease the timer by one after each step of $\p_{\mathcal{A}^\ast \setminus W}$.)\\
+\ \\
+Instructions $3(L + L^\prime) + 4r + 24$ - $3(L + L^\prime) + 5r + 25$ are
+\[
+\begin{array}{rl}
+3(L + L^\prime) + 4r + 24 & \PS{0}{a_0} \cr
+\multicolumn{2}{c}{\vdots} \cr
+3(L + L^\prime) + 5r + 24 & \PS{0}{a_r} \cr
+3(L + L^\prime) + 5r + 25 & \IF \ \R_0 = \Box \cr
+\ & \THEN \ 3(L + L^\prime) + (r + 2)s + 26r + 65 \cr
+\ & \ELSE \ 3(L + L^\prime) + 4r + 24 \ldots \cr
+\ & \OR \ 3(L + L^\prime) + 4r + 24
+\end{array}
+\]
+($\p_{\mathcal{A}^\ast \setminus W}$ is to halt, thus $\zeta \in W$.)\\
+\ \\
+Suppose in the resulting program fragment, the print-instruction is at label $L_1$, then it is replaced by
+\[
+\begin{array}{rl}
+L_1 & \GOTO \ 3(L + L^\prime) + 5r + 26
+\end{array}
+\]
+%%%
+\item $3(L + L^\prime) + 5r + 26$ - $3(L + L^\prime) + 9r + 30$ are
+\[
+\begin{array}{rl}
+3(L + L^\prime) + 5r + 26 & \IF \ \R_0 = \Box \ \THEN \ 3(L + L^\prime) + 9r + 31 \cr
+\ & \ELSE \ 3(L + L^\prime) + 5r + 27 \cr
+\ & \OR \ 3(L + L^\prime) + 5r + 4k + 27 \ldots \cr
+\ & \OR \ 3(L + L^\prime) + 9r + 27 \cr
+3(L + L^\prime) + 5r + 27 & \PS{0}{a_0} \cr
+3(L + L^\prime) + 5r + 28 & \PS{s + 5}{a_0} \cr
+3(L + L^\prime) + 5r + 29 & \PS{s + 6}{a_0} \cr
+3(L + L^\prime) + 5r + 30 & \GOTO \ 3(L + L^\prime) + 5r + 26 \cr
+\multicolumn{2}{c}{\vdots} \cr
+3(L + L^\prime) + 9r + 27 & \PS{0}{a_r} \cr
+3(L + L^\prime) + 9r + 28 & \PS{s + 5}{a_r} \cr
+3(L + L^\prime) + 9r + 29 & \PS{s + 6}{a_r} \cr
+3(L + L^\prime) + 9r + 30 & \GOTO \ 3(L + L^\prime) + 5r + 26
+\end{array}
+\]
+(Move the content $\xi$ in $\R_0$, which is to be printed out by $\p_W$ or $\p_{\mathcal{A}^\ast \setminus W}$, to $\R_{s + 5}$ and $\R_{s + 6}$, in reverse order. Upon completion, $\R_0 = \Box$, whereas $\R_{s + 5}$ and $\R_{s + 6}$ both contain $\xi$ in reverse order.)
+%%%
+\item Instructions $3(L + L^\prime) + 9r + 31$ - $3(L + L^\prime) + 13r + 39$ are
+\[
+\begin{array}{rl}
+3(L + L^\prime) + 9r + 31 & \IF \ \R_{s + 1} = \Box \cr
+\ & \THEN \ 3(L + L^\prime) + 9r + 32 \cr
+\ & \ELSE \ 3(L + L^\prime) + 9r + 36 \cr
+\ & \OR \ldots \ 3(L + L^\prime) + 9r + 4k + 36 \ldots \cr
+\ & \OR \ 3(L + L^\prime) + 13r + 36 \cr
+3(L + L^\prime) + 9r + 32 & \IF \ \R_{s + 5} = \Box \cr
+\ & \THEN \ 3(L + L^\prime) + 9r + 33 \cr
+\ & \ELSE \ 3(L + L^\prime) + 13r + 40 \ldots \cr
+\ & \OR \ 3(L + L^\prime) + 13r + 40 \cr
+
+3(L + L^\prime) + 9r + 33 & \IF \ \R_{s + 7} = \Box \cr
+\ & \THEN \ 3(L + L^\prime) + (r + 2)s + 26r + 65 \cr
+\ & \ELSE \ 3(L + L^\prime) + 9r + 34 \ldots \cr
+\ & \OR \ 3(L + L^\prime) + 9r + 34 \cr
+3(L + L^\prime) + 9r + 34 & \PA{0}{a_0} \cr
+3(L + L^\prime) + 9r + 35 & \GOTO \ 3(L + L^\prime) + (r + 2)s + 26r + 65 \cr
+\end{array}
+\]
+\[
+\begin{array}{rl}
+3(L + L^\prime) + 9r + 36 & \IF \ \R_{s + 5} = \Box \cr
+\ & \THEN \ 3(L + L^\prime) + 13r + 40 \cr
+\ & \ELSE \ 3(L + L^\prime) + 9r + 37 \cr
+\ & \mbox{\scriptsize$r$-times}\left\{\begin{array}{l}
+\OR \ 3(L + L^\prime) + 13r + 40 \cr
+\multicolumn{1}{c}{\vdots} \cr
+\OR \ 3(L + L^\prime) + 13r + 40
+\end{array}\right. \cr
+3(L + L^\prime) + 9r + 37 & \PS{s + 1}{0} \cr
+3(L + L^\prime) + 9r + 38 & \PS{s + 5}{0} \cr
+3(L + L^\prime) + 9r + 39 & \GOTO \ 3(L + L^\prime) + 9r + 31 \cr
+\multicolumn{2}{c}{\vdots} \cr
+3(L + L^\prime) + 9r + 4k + 36 & \IF \ \R_{s + 5} = \Box \cr
+\ & \THEN \ 3(L + L^\prime) + 13r + 40 \cr
+\ & \mbox{\scriptsize $k$-times}\left\{\begin{array}{l}
+\ELSE \ 3(L + L^\prime) + 13r + 40 \cr
+\multicolumn{1}{c}{\vdots} \cr
+\OR \ 3(L + L^\prime) + 13r + 40
+\end{array}\right. \cr
+\ & \OR \ 3(L + L^\prime) + 9r + 4k + 37 \cr
+\ & \mbox{\scriptsize $(r - k)$-times}\left\{\begin{array}{l}
+\OR \cr
+3(L + L^\prime) + 13r + 40 \cr
+\multicolumn{1}{c}{\vdots} \cr
+\OR \cr
+3(L + L^\prime) + 13r + 40
+\end{array}\right. \cr
+3(L + L^\prime) + 9r + 4k + 37 & \PS{s + 1}{a_k} \cr
+3(L + L^\prime) + 9r + 4k + 38 & \PS{s + 5}{a_k} \cr
+3(L + L^\prime) + 9r + 4k + 39 & \GOTO \ 3(L + L^\prime) + 9r + 31 \cr
+\multicolumn{2}{c}{\vdots} \cr
+3(L + L^\prime) + 13r + 36 & \IF \ \R_{s + 5} = \Box \cr
+\ & \THEN \ 3(L + L^\prime) + 13r + 40 \cr
+\ & \mbox{\scriptsize $r$-times}\left\{\begin{array}{l}
+\ELSE \ 3(L + L^\prime) + 13r + 40 \cr
+\multicolumn{1}{c}{\vdots} \cr
+\OR \ 3(L + L^\prime) + 13r + 40
+\end{array}\right. \cr
+3(L + L^\prime) + 13r + 37 & \PS{s + 1}{a_r} \cr
+3(L + L^\prime) + 13r + 38 & \PS{s + 5}{a_r} \cr
+3(L + L^\prime) + 13r + 39 & \GOTO \ 3(L + L^\prime) + 9r + 31
+\end{array}
+\]
+(Compare the content in $\R_{s + 1}$ against that in $\R_{s + 5}$, i.e. $\zeta$ in reverse order against $\xi$ in reverse order. If they match, then we have $\zeta \in W$ if $\R_{s + 7} = \Box$ and $\zeta \not\in W$ otherwise, and set $\R_0$ accordingly, then jump to the print-instruction. If they do not match, then both $\R_{s + 1}$ and $\R_{s + 5}$ are cleared in the next part.)
+%%%
+\item Instructions $3(L + L^\prime) + 13r + 40$ - $3(L + L^\prime) + 15r + 43$ are
+\[
+\begin{array}{rl}
+3(L + L^\prime) + 13r + 40 & \PS{s + 1}{a_0} \cr
+\multicolumn{2}{c}{\vdots} \cr
+3(L + L^\prime) + 14r + 40 & \PS{s + 1}{a_r} \cr
+3(L + L^\prime) + 14r + 41 & \IF \ \R_{s + 1} = \Box \ \THEN \ 3(L + L^\prime) + 14r + 42 \cr
+\ & \ELSE \ 3(L + L^\prime) + 13r + 40 \ldots \cr
+\ & \OR \ 3(L + L^\prime) + 13r + 40 \cr
+3(L + L^\prime) + 14r + 42 & \PS{s + 5}{a_0} \cr
+\multicolumn{2}{c}{\vdots} \cr
+3(L + L^\prime) + 15r + 42 & \PS{s + 5}{a_r} \cr
+3(L + L^\prime) + 15r + 43 & \IF \ \R_{s + 5} = \Box \ \THEN \ 3(L + L^\prime) + 15r + 44 \cr
+\ & \ELSE \ 3(L + L^\prime) + 14r + 42 \ldots \cr
+\ & \OR \ 3(L + L^\prime) + 14r + 42
+\end{array}
+\]
+(Clear $\R_{s + 1}$ and $\R_{s + 5}$.)
+%%%
+\item Instructions $3(L + L^\prime) + 15r + 44$ - $3(L + L^\prime) + 22r + 52$ are
+\[
+\begin{array}{rl}
+3(L + L^\prime) + 15r + 44 & \IF \ \R_{s + 2} = \Box \ \THEN \ 3(L + L^\prime) + 18r + 48 \cr
+\ & \ELSE \ 3(L + L^\prime) + 15r + 45 \cr
+\ & \OR \ldots \ 3(L + L^\prime) + 15r + 3k + 45 \ldots \cr
+\ & \OR \ 3(L + L^\prime) + 18r + 45 \cr
+3(L + L^\prime) + 15r + 45 & \PS{s + 2}{a_0} \cr
+3(L + L^\prime) + 15r + 46 & \PA{0}{a_0} \cr
+3(L + L^\prime) + 15r + 47 & \GOTO \ 3(L + L^\prime) + 15r + 44 \cr
+\multicolumn{2}{c}{\vdots} \cr
+3(L + L^\prime) + 18r + 45 & \PS{s + 2}{a_r} \cr
+3(L + L^\prime) + 18r + 46 & \PA{0}{a_r} \cr
+3(L + L^\prime) + 18r + 47 & \GOTO \ 3(L + L^\prime) + 15r + 44 \cr
+3(L + L^\prime) + 18r + 48 & \IF \ \R_0 = \Box \ \THEN \ 3(L + L^\prime) + 22r + 53 \cr
+\ & \ELSE \ 3(L + L^\prime) + 18r + 49 \cr
+\ & \OR \ldots \ 3(L + L^\prime) + 18r + 4k + 49 \ldots \cr
+\ & \OR \ 3(L + L^\prime) + 22r + 49 \cr
+3(L + L^\prime) + 18r + 49 & \PS{0}{a_0} \cr
+3(L + L^\prime) + 18r + 50 & \PA{s + 1}{a_0} \cr
+3(L + L^\prime) + 18r + 51 & \PA{s + 2}{a_0} \cr
+3(L + L^\prime) + 18r + 52 & \GOTO \ 3(L + L^\prime) + 18r + 48 \cr
+\multicolumn{2}{c}{\vdots} \cr
+3(L + L^\prime) + 22r + 49 & \PS{0}{a_r} \cr
+3(L + L^\prime) + 22r + 50 & \PA{s + 1}{a_r} \cr
+3(L + L^\prime) + 22r + 51 & \PA{s + 2}{a_r} \cr
+3(L + L^\prime) + 22r + 52 & \GOTO \ 3(L + L^\prime) + 18r + 48 \cr
+\end{array}
+\]
+(Recover $\R_{s + 1}$ from $\R_{s + 2}$, using $\R_0$ as a temporary storage. Upon completion, $\R_0 = \Box$, and both $\R_{s + 1}$ and $\R_{s + 2}$ contain $\zeta$ in reverse order.)
+%%%
+\item Instructions $3(L + L^\prime) + 22r + 53$ - $3(L + L^\prime) + 25r + 56$ are
+\[
+\begin{array}{rl}
+3(L + L^\prime) + 22r + 53 & \IF \ \R_{s + 6} = \Box \ \THEN \ 3(L + L^\prime) + 25r + 57 \cr
+\ & \ELSE \ 3(L + L^\prime) + 22r + 54 \cr
+\ & \OR \ldots \ 3(L + L^\prime) + 22r + 3k + 54 \ldots \cr
+\ & \OR \ 3(L + L^\prime) + 25r + 54 \cr
+3(L + L^\prime) + 22r + 54 & \PS{s + 6}{a_0} \cr
+3(L + L^\prime) + 22r + 55 & \PA{0}{a_0} \cr
+3(L + L^\prime) + 22r + 56 & \GOTO \ 3(L + L^\prime) + 22r + 53 \cr
+\multicolumn{2}{c}{\vdots} \cr
+3(L + L^\prime) + 25r + 54 & \PS{s + 6}{a_r} \cr
+3(L + L^\prime) + 25r + 55 & \PA{0}{a_r} \cr
+3(L + L^\prime) + 25r + 56 & \GOTO \ 3(L + L^\prime) + 22r + 53
+\end{array}
+\]
+(Recover $\R_0$ from $\R_{s + 6}$. Upon completion, $\R_0$ contains $\xi$, while $\R_{s + 5} = \Box$ and $\R_{s + 6} = \Box$.)
+%%%
+\item Instruction $3(L + L^\prime) + 25r + 57$ is
+\[
+\begin{array}{rl}
+3(L + L^\prime) + 25r + 57 & \IF \ \R_{s + 7} = \Box \ \THEN \ L_0 + 1 \cr
+\ & \ELSE \ L_1 + 1 \ldots \ \OR \ L_1 + 1 \cr
+\end{array}
+\]
+(Resume the program.)
+%%%
+\item Instructions $3(L + L^\prime) + 25r + 58$ - $3(L + L^\prime) + (r + 2)s + 26r + 64$ are
+\[
+\begin{array}{rl}
+3(L + L^\prime) + 25r + 58 & \PS{0}{a_0} \cr
+\multicolumn{2}{c}{\vdots} \cr
+3(L + L^\prime) + 26r + 58 & \PS{0}{a_r} \cr
+3(L + L^\prime) + 26r + 59 & \IF \ \R_0 = \Box \cr
+\ & \THEN \ 3(L + L^\prime) + 26r + 60 \cr
+\ & \ELSE \ 3(L + L^\prime) + 25r + 58 \ldots \cr
+\ & \OR \ 3(L + L^\prime) + 25r + 58 \cr
+\multicolumn{2}{c}{\vdots} \cr
+\multicolumn{2}{c}{\vdots} \cr
+3(L + L^\prime) + (r + 2)s + 25r + 58 & \PS{s}{a_0} \cr
+\multicolumn{2}{c}{\vdots} \cr
+3(L + L^\prime) + (r + 2)s + 26r + 58 & \PS{s}{a_r} \cr
+3(L + L^\prime) + (r + 2)s + 26r + 59 & \IF \ \R_s = \Box \cr
+\ & \THEN \cr
+\ & 3(L + L^\prime) + (r + 2)s + 26r + 60 \cr
+\ & \ELSE \cr
+\ & 3(L + L^\prime) + (r + 2)s + 25r + 58 \cr
+\ & \ldots \cr
+\ & \OR \cr
+\ & 3(L + L^\prime) + (r + 2)s + 25r + 58 \cr
+3(L + L^\prime) + (r + 2)s + 26r + 60 & \IF \ \R_{s + 7} = \Box \cr
+\ & \THEN \cr
+\ & 3(L + L^\prime) + (r + 2)s + 26r + 61 \cr
+\ & \ELSE \cr
+\ & 3(L + L^\prime) + (r + 2)s + 26r + 63 \cr
+\ & \ldots \cr
+\ & \OR \cr
+\ & 3(L + L^\prime) + (r + 2)s + 26r + 63 \cr
+3(L + L^\prime) + (r + 2)s + 26r + 61 & \PA{s + 7}{a_0} \cr
+3(L + L^\prime) + (r + 2)s + 26r + 62 & \GOTO \ 4r + 5 \cr
+3(L + L^\prime) + (r + 2)s + 26r + 63 & \PS{s + 7}{a_0} \cr
+3(L + L^\prime) + (r + 2)s + 26r + 64 & \GOTO \ 4r + 5
+\end{array}
+\]
+(Time is up. Clear registers $\R_0, \ldots, \R_s$, and run the other program and change $\R_{s + 7}$ accordingly.)
+%%%
+\item Instructions $3(L + L^\prime) + (r + 2)s + 26r + 65$ - $3(L + L^\prime) + (r + 2)s + 26r + 66$ are
+\[
+\begin{array}{rl}
+3(L + L^\prime) + (r + 2)s + 26r + 65 & \PRINT \cr
+3(L + L^\prime) + (r + 2)s + 26r + 66 & \HALT
+\end{array}
+\]\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+\end{enumerate}
+\textit{Remark.} $\mathcal{A}^\ast$ is also decidable, as shown by the program:
+\[
+\begin{array}{rl}
+0 & \PS{0}{a_0} \cr
+\multicolumn{2}{c}{\vdots} \cr
+r & \PS{0}{a_r} \cr
+r + 1 & \PII{0}{r + 2}{0}{k}{r} \cr
+r + 2 & \PRINT \cr
+r + 3 & \HALT
+\end{array}
+\]
+%
+\item \textbf{Solution to Exercise 2.11.} We prove that (a) and (b) are equivalent by showing that (a) implies (b) and that (b) implies (a). Let $\mathcal{A} = \{ a_0, \ldots, a_r \}$. In the following, the program that enumerates $W$ is denoted by $\p_W$.\\
+\ \\
+\emph{(a) implies (b).} Given the program $\p_W$, we show how to construct $\p$. The idea behind this construction is that, everytime the content in $\R_0$ is to be printed by $\p_W$, we compare it with the input $\zeta$: If they match, then we have that $\zeta \in W$ and $\p$ halts; otherwise, we go on to test the next string to be printed. It follows that if $\zeta \not\in W$, then $\p$ never halts.\\
+\ \\
+For convenience, let us assume that there are $L + 2$ instructions in $\p_W$ with $L \geq 0$,\footnote{One for $\PRINT$, and one for $\HALT$.} that there is exactly one print-instruction, and that the registers used in it are among $\R_0, \ldots, \R_s$.\\
+\ \\
+Then there are $L + 24r + 37$ instructions in $\p$, where
+\begin{enumerate}[(1)]
+\item Instructions $0$ - $4r + 4$ are
+\[
+\begin{array}{rl}
+0 & \IF \ \R_0 = \Box \ \THEN \ 4r + 5 \cr
+\ & \ELSE \ 1 \ \OR \ldots \ 4k + 1 \ldots \ \OR \ 4r + 1 \cr
+1 & \PS{0}{a_0} \cr
+2 & \PA{s + 1}{a_0} \cr
+3 & \PA{s + 2}{a_0} \cr
+4 & \GOTO \  0 \cr
+\multicolumn{2}{c}{\vdots} \cr
+4r + 1 & \PS{0}{a_r} \cr
+4r + 2 & \PA{s + 1}{a_r} \cr
+4r + 3 & \PA{s + 2}{a_r} \cr
+4r + 4 & \GOTO \ 0
+\end{array}
+\]
+(Move the content in $\R_0$, that is, the input $\zeta$, to $\R_{s + 1}$ and $\R_{s + 2}$ in reverse order. Upon completion, $\R_0$ contains $\Box$, whereas $\R_{s + 1}$ and $\R_{s + 2}$ both contain $\zeta$ in reverse order.)
+%%
+\item Instructions $4r + 5$ - $L + 4r + 6$ are derived from $\p_W$: For $0 \leq l \leq L + 1$, the instruction at label $l + 4r + 5$ is the one at label $l$ in $\p_W$, with all labels therein increased by $4r + 5$. Furthermore, suppose in the resulting program fragment the print-instruction is at label $L_0$, then it is replaced by
+\[
+\begin{array}{rl}
+L_0 & L + 4r + 7
+\end{array}
+\]
+(whenever the content $\xi$ in $\R_0$ is to be printed out, compare it with $\zeta$, in the next part)
+and the instruction at label $L + 4r + 6$ is replaced by
+\[
+\begin{array}{rl}
+L + 4r + 6 & \GOTO \ L + 4r + 6
+\end{array}
+\]
+($\zeta \not\in W$, thus loop forever)
+%%
+\item Instructions $L + 4r + 7$ - $L + 8r + 11$ are
+\[
+\begin{array}{rl}
+L + 4r + 7 & \IF \ \R_0 = \Box \ \THEN \ L + 8r + 12 \cr
+\ & \ELSE \ L + 4r + 8 \ \OR \ldots \ L + 4r + 4k + 8 \ldots \cr
+\ & \OR \ L + 8r + 8 \cr
+L + 4r + 8 & \PS{0}{a_0} \cr
+L + 4r + 9 & \PA{s + 3}{a_0} \cr
+L + 4r + 10 & \PA{s + 4}{a_0} \cr
+L + 4r + 11 & \GOTO \ L + 4r + 7 \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 8r + 8 & \PS{0}{a_r} \cr
+L + 8r + 9 & \PA{s + 3}{a_r} \cr
+L + 8r + 10 & \PA{s + 4}{a_r} \cr
+L + 8r + 11 & \GOTO \ L + 4r + 7
+\end{array}
+\]
+(Move the content $\xi$ in $\R_0$ to $\R_{s + 3}$ and $\R_{s + 4}$ in reverse order. Upon completion, $\R_0 = \Box$, while $\R_{s + 3}$ and $\R_{s + 4}$ both contain $\xi$ in reverse order.)
+%%
+\item Instructions $L + 8r + 12$ - $L + 12r + 17$ are
+\[
+\begin{array}{rl}
+L + 8r + 12 & \IF \ \R_{s + 1} = \Box \ \THEN \ L + 8r + 13 \cr
+\ & \ELSE \ L + 8r + 14 \ \OR \ldots \ L + 8r + k + 14 \ldots \cr
+\ & \OR \ L + 9r + 14 \cr
+L + 8r + 13 & \IF \ \R_{s + 3} = \Box \ \THEN \ L + 24r + 35 \cr
+\ & \ELSE \ L + 12r + 18 \ldots \ \OR \ L + 12r + 18 \cr
+L + 8r + 14 & \IF \ \R_{s + 3} = \Box \cr
+\ & \THEN \ L + 12r + 18 \ \ELSE \ L + 9r + 15 \cr
+\ & \underbrace{\OR \ L + 12r + 18 \ \OR \ldots \OR \ L + 12r + 18}_{\mbox{\scriptsize$r$-times}} \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 8r + k + 14 & \IF \ \R_{s + 3} = \Box \ \THEN \ L + 12r + 18 \cr
+\ & \underbrace{\ELSE \ L + 12r + 18 \ \OR \ldots \OR \ L + 12r + 18}_{\mbox{\scriptsize$k$-times}} \cr
+\ & \OR \ L + 9r + 3k + 15 \cr
+\ & \underbrace{\OR \ L + 12r + 18 \ \OR \ldots \OR \ L + 12r + 18}_{\mbox{\scriptsize $(r - k)$-times}} \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 9r + 14 & \IF \ \R_p = \Box \ \THEN \ L + 12r + 18 \cr
+\ & \underbrace{\ELSE \ L + 12r + 18 \ \OR \ldots \OR \ L + 12r + 18}_{\mbox{\scriptsize$r$-times}} \cr
+\ & \OR \ L + 12r + 15 \cr
+L + 9r + 15 & \PS{s + 1}{a_0} \cr
+L + 9r + 16 & \PS{s + 3}{a_0} \cr
+L + 9r + 15 & \GOTO \ L + 8r + 12 \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 12r + 15 & \PS{s + 1}{a_r} \cr
+L + 12r + 16 & \PS{s + 3}{a_r} \cr
+L + 12r + 17 & \GOTO \ L + 8r + 12
+\end{array}
+\]
+(Compare the content in $\R_{s + 1}$ against that in $\R_{s + 3}$, i.e. $\zeta$ in reverse order against $\xi$ in reverse order: If they match, then $\zeta \in W$, so jump to the print-instruction; otherwise, $\R_{s + 1}$ and $\R_{s + 3}$ are both cleared in the next part.)
+%%
+\item Instructions $L + 12r + 18$ - $L + 14r + 21$ are
+\[
+\begin{array}{rl}
+L + 12r + 18 & \PS{s + 1}{a_0} \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 13r + 18 & \PS{s + 1}{a_r} \cr
+L + 13r + 19 & \IF \ \R_{s + 1} = \Box \ \THEN \ L + 13r + 20 \cr
+\ & \ELSE \ L + 12r + 18 \ldots \ \OR \ L + 12r + 18 \cr
+L + 13r + 20 & \PS{s + 3}{a_0} \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 14r + 20 & \PS{s + 3}{a_r} \cr
+L + 14r + 21 & \IF \ \R_{s + 3} = \Box \ \THEN \ L + 14r + 22 \cr
+\ & \ELSE \ L + 13r + 20 \ldots \ \OR \ L + 13r + 20 \cr
+\end{array}
+\]
+(Clear $\R_{s + 1}$ and $\R_{s + 3}$.)
+%%
+\item Instructions $L + 14r + 22$ - $L + 17r + 25$ are
+\[
+\begin{array}{rl}
+L + 14r + 22 & \IF \ \R_{s + 2} = \Box \ \THEN \ L + 17r + 26 \cr
+\ & \ELSE \ L + 14r + 23 \ \OR \ldots \ L + 14r + 3k + 23 \ldots \cr
+\ & \OR \ L + 17r + 23 \cr
+L + 14r + 23 & \PS{s + 2}{a_0} \cr
+L + 14r + 24 & \PA{0}{a_0} \cr
+L + 14r + 25 & \GOTO \ L + 14r + 22 \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 17r + 23 & \PS{s + 2}{a_r} \cr
+L + 17r + 24 & \PA{0}{a_r} \cr
+L + 17r + 25 & \GOTO \ L + 14r + 22 \cr
+L + 17r + 26 & \IF \ \R_0 = \Box \ \THEN L + 21r + 31 \cr
+\ & \ELSE \ L + 17r + 27 \ \OR \ldots \ L + 17r + 4k + 27 \ldots \cr
+\ & \OR \ L + 21r + 27 \cr
+L + 17r + 27 & \PS{0}{a_0} \cr
+L + 17r + 28 & \PA{s + 1}{a_0} \cr
+L + 17r + 29 & \PA{s + 2}{a_0} \cr
+L + 17r + 30 & \GOTO \ L + 17r + 26 \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 21r + 27 & \PS{0}{a_r} \cr
+L + 21r + 28 & \PA{s + 1}{a_r} \cr
+L + 21r + 29 & \PA{s + 2}{a_r} \cr
+L + 21r + 30 & \GOTO \ L + 17r + 26
+\end{array}
+\]
+(Copy the content in $\R_{s + 2}$, that is, $\zeta$ in reverse order, into $\R_{s + 1}$, using $\R_0$ as a temporary register. Note that both on entrance to and exit from this part, $\R_0 = \Box$.)
+%%
+\item Instructions $L + 21r + 31$ - $L + 24r + 36$ are
+\[
+\begin{array}{rl}
+L + 21r + 31 & \IF \ \R_{s + 4} = \Box \ \THEN \ L_0 + 1 \cr
+\ & \ELSE \ L + 21r + 32 \ \OR \ldots \ L + 21r + 3k + 32 \ldots \cr
+\ & \OR \ L + 24r + 32 \cr
+L + 21r + 32 & \PS{s + 4}{a_0} \cr
+L + 21r + 33 & \PA{0}{a_0} \cr
+L + 21r + 34 & \GOTO \ L + 21r + 31 \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 24r + 32 & \PS{s + 4}{a_r} \cr
+L + 24r + 33 & \PA{0}{a_r} \cr
+L + 24r + 34 & \GOTO \ L + 21r + 31
+\end{array}
+\]
+(Recover $\xi$ in $\R_0$ from $\R_{s + 4}$. Upon completion, $\R_0$ contains $\xi$, whereas $\R_{s + 1}$ and $\R_{s + 2}$ both contain $\zeta$ in reverse order, and $\R_{s + 3} = \Box$ and $\R_{s + 4} = \Box$. Then go back to label $L_0 + 1$ to begin the next iteration.)
+%%
+\item Instructions $L + 24r + 35$ - $L + 24r + 36$ are
+\[
+\begin{array}{rl}
+L + 24r + 35 & \PRINT \cr
+L + 24r + 36 & \HALT
+\end{array}
+\]
+(Print the content $\Box$ in $\R_0$, and then halt.)
+\end{enumerate}
+\ \\
+\emph{(b) implies (a).} Conversely, given $\p$, we show how to construct the program $\p_W$ that enumerates the set $W$. The idea is that, we set a timer, and run $\p$ with each of the strings of length $\leq n$ over $\mathcal{A}$ in lexicographic order within the time bound $n$, for all $n \in \mathbb{N}$. If $\p : \zeta \to \Box$, then by definition $\zeta \in W$ and we print it out. Note that there will be infinitely many duplicates for each $\zeta \in W$, and hence $\p_W$ does not halt.\\
+\ \\
+Again, for convenience we assume that there are $L + 2$ instructions in $\p$ with $L \geq 0$,\footnote{One for $\PRINT$, and one for $\HALT$.} that there is exactly one print-instruction in it, and that the registers used in $\p$ are among $\R_0, \ldots, \R_s$ with $s \geq 0$. Furthermore, we keep the following registers for special purposes:
+\begin{enumerate}[1)]
+\item $\R_{s + 1}$ indicates the time bound.
+%%
+\item $\R_{s + 2}$ helps limit the number of strings with which $\p$ executes with each given time bound.
+%%
+\item $\R_{s + 3}$ is the timer; it can also tell whether $\zeta \in W$ after applying $\p$ to $\zeta$.
+%%
+\item $\R_{s + 4}$ is used as a temporary storage.
+\end{enumerate}
+Then there are $3L + (r + 2)s + 17r + 60$ instructions in $\p_W$, where
+\begin{enumerate}[(1)]
+\item Instructions $0$ - $9$ are
+\[
+\begin{array}{rl}
+0 & \PI{s + 1}{4}{1}{1} \cr
+1 & \PS{s + 1}{a_0} \cr
+2 & \PA{0}{a_0} \cr
+3 & \GOTO \ 0 \cr
+4 & \PI{0}{10}{5}{5} \cr
+5 & \PS{0}{a_0} \cr
+6 & \PA{s + 1}{a_0} \cr
+7 & \PA{s + 2}{a_0} \cr
+8 & \PA{s + 3}{a_0} \cr
+9 & \GOTO \ 4 \cr
+\end{array}
+\]
+(Copy the content in $\R_{s + 1}$, $\underbrace{a_0 \ldots a_0}_{n\mbox{\scriptsize-times}}$ for some $n \in \mathbb{N}$, to $\R_{s + 2}$ and $\R_{s + 3}$, using $\R_0$ as a temporary storage. Also note that on entrance to this part, $\R_0 = \Box$.)
+%%
+\item Instructions $10$ - $3r + 21$ are
+\[
+\begin{array}{rl}
+10 & \PI{1}{5r + 28}{11}{11} \cr
+11 & \PS{1}{a_0} \cr
+12 & \PA{0}{a_0} \cr
+13 & \GOTO \ 10 \cr
+14 & \IF \ \R_0 = \Box \ \THEN \ 15 \ \ELSE \ 19 \ \OR \ldots \ 3k + 19 \ldots \cr
+\  & \OR \ 3r + 19 \cr
+15 & \PI{s + 2}{3r + 22}{16}{16} \cr
+16 & \PS{s + 2}{a_0} \cr
+17 & \PA{0}{a_0} \cr
+18 & \GOTO \ 10 \cr
+19 & \PS{0}{a_0} \cr
+20 & \PA{0}{a_1} \cr
+21 & \GOTO \ 10 \cr
+\multicolumn{2}{c}{\vdots} \cr
+3k + 19 & \PS{0}{a_k} \cr
+3k + 20 & \PA{0}{a_{k + 1}} \cr
+3k + 21 & \GOTO \ 10 \cr
+\multicolumn{2}{c}{\vdots} \cr
+3r + 19 & \PS{0}{a_r} \cr
+3r + 20 & \PA{1}{a_0} \cr
+3r + 21 & \GOTO \ 14 \cr
+\end{array}
+\]
+(Apply $\p$ to all strings of length $\leq n$ with the timer $\R_{s + 1}$, the content in which is $\underbrace{a_0 \ldots a_0}_{n\mbox{\scriptsize-times}}$: For each such string $\zeta$, jump to part (5) to check whether $\p : \zeta \to \Box$ within the time bound.)
+%%
+\item Instructions $3r + 22$ - $5r + 25$ are
+\[
+\begin{array}{rl}
+3r + 22 & \PS{1}{a_0} \cr
+\multicolumn{2}{c}{\vdots} \cr
+4r + 22 & \PS{1}{a_r} \cr
+4r + 23 & \PI{1}{4r + 24}{3r + 22}{3r + 22} \cr
+4r + 24 & \PS{s + 3}{a_0} \cr
+\multicolumn{2}{c}{\vdots} \cr
+5r + 24 & \PS{s + 3}{a_r} \cr
+5r + 25 & \PI{s + 3}{5r + 26}{4r + 24}{4r + 24}
+\end{array}
+\]
+(Clear $\R_1$, $\R_{s + 3}$.)
+%%
+\item Instructions $5r + 26$ - $5r + 27$ are
+\[
+\begin{array}{rl}
+5r + 26 & \PA{s + 1}{a_0} \cr
+5r + 27 & \GOTO \ 0
+\end{array}
+\]
+(Increase $\R_{s + 1}$ by one, and then start a new iteration with a greater time bound and, of course, with more strings. This part and the previous ones together constitude the main body of $\p_W$.)
+%%
+\item Instructions $5r + 28$ - $12r + 36$ are
+\[
+\begin{array}{rl}
+5r + 28 & \IF \ \R_0 = \Box \ \THEN \ 9r + 33 \ \ELSE \ 5r + 29 \cr
+\       & \OR \ldots \ 5r + 4k + 29 \ldots \ \OR \ 9r + 29 \cr
+5r + 29 & \PS{0}{a_0} \cr
+5r + 30 & \PA{1}{a_0} \cr
+5r + 31 & \PA{s + 4}{a_0} \cr
+5r + 32 & \GOTO \ 5r + 28 \cr
+\multicolumn{2}{c}{\vdots} \cr
+9r + 29 & \PS{0}{a_r} \cr
+9r + 30 & \PA{1}{a_r} \cr
+9r + 31 & \PA{s + 4}{a_r} \cr
+9r + 32 & \GOTO \ 5r + 28 \cr
+9r + 33 & \IF \ \R_1 = \Box \ \THEN \ 12r + 37 \ \ELSE \ 9r + 34 \cr
+\       & \OR \ldots \ 9r + 3k + 34 \ldots \ \OR \ 12r + 34 \cr
+9r + 34 & \PS{1}{a_0} \cr
+9r + 35 & \PA{0}{a_0} \cr
+9r + 36 & \GOTO \ 9r + 33 \cr
+\multicolumn{2}{c}{\vdots} \cr
+12r + 34 & \PS{1}{a_r} \cr
+12r + 35 & \PA{0}{a_r} \cr
+12r + 36 & \GOTO \ 9r + 33
+\end{array}
+\]
+(Copy the content $\zeta$ in $\R_0$ to $\R_{s + 4}$ in reverse order, using $\R_1$ as a temporary storage. Upon completion, the content in $\R_0$ is still $\zeta$, and the content in $\R_{s + 4}$ is $\zeta$ in reverse order. $\R_{s + 4}$ will be used to restore $\R_0$ later. Also note that on entrance to this part, $\R_1 = \Box$. This part and the remaining ones, except the last, serve to check whether $\p : \zeta \to \Box$ within the time bound.)
+%%
+\item Instructions $12r + 37$ - $3L + 12r + 39$ are derived from $\p$: For $0 \leq l \leq L$,
+\begin{enumerate}[1)]
+\item the instruction at label $3l + 12r + 37$ is the one at label $l$ in $\p$ with all labels $l^\prime$ therein replaced by $3l^\prime + 12r + 37$;
+%%%
+\item instruction $3l + 12r + 38$ - $3l + 12r + 39$ are
+\[
+\begin{array}{rl}
+3l + 12r + 38 & \PS{s + 3}{a_0} \cr
+3l + 12r + 39 & \IF \ \R_{s + 3} = \Box \ \THEN \ 3L + 12r + 40 \cr
+\             & \ELSE \ 3l + 12r + 40 \ldots \ \OR \ 3l + 12r + 40
+\end{array}
+\]
+\end{enumerate}
+Suppose in the resulting program fragment the print-instruction is at label $L_0$:
+\[
+\begin{array}{rl}
+L_0 & \PRINT
+\end{array}
+\]
+It is now replaced by a dummy operation:
+\[
+\begin{array}{rl}
+L_0 & \GOTO \ L_0 + 1
+\end{array}
+\]
+(This part checks whether $\p : \zeta \to \Box$ within the time bound. Actually, if $\zeta \in W$ then $\p : \zeta \to \halt$, otherwise $\p : \zeta \to \infty$. Therefore, it suffices to check whether $\p$ with input $\zeta$ reaches the halt-instrution within the time bound. That is why the print-instruction is \emph{disabled} and the halt-instruction is missing. If we arrive at the label where $\HALT$ should have been, which means that $\zeta \in W$, then $\R_{s + 3} \neq \Box$, and vice versa; conversely, if $\R_{s + 3} = \Box$ then we are not sure whether $\zeta \in W$ but only that \emph{time is up}, and the next iteration is to begin after all has been settled. Hence later in part (9), $\R_{s + 3}$ will be useful to decide whether to print out $\zeta$.)
+%%
+\item Instructions $3L + 12r + 40$ - $3L + (r + 2)s + 13r + 41$ are
+\[
+\begin{array}{rl}
+3L + 12r + 40 & \PS{0}{a_0} \cr
+\multicolumn{2}{c}{\vdots} \cr
+3L + 13r + 40 & \PS{0}{a_r} \cr
+3L + 13r + 41 & \IF \ \R_0 = \Box \ \THEN \ 3L + 13r + 42 \cr
+\ & \ELSE \ 3L + 12r + 40 \ldots \cr
+\ & \OR \ 3L + 12r + 40 \cr
+\multicolumn{2}{c}{\vdots} \cr
+\multicolumn{2}{c}{\vdots} \cr
+3L + (r + 2)s + 12r + 40 & \PS{s}{a_0} \cr
+\multicolumn{2}{c}{\vdots} \cr
+3L + (r + 2)s + 13r + 40 & \PS{s}{a_r} \cr
+3L + (r + 2)s + 13r + 41 & \IF \ \R_s = \Box \cr
+\ & \THEN \ 3L + (r + 2)s + 13r + 42 \cr
+\ & \ELSE \ 3L + (r + 2)s + 12r + 40 \ldots \cr
+\ & \OR \ 3L + (r + 2)s + 12r + 40 \cr
+\end{array}
+\]
+(Clear $\R_0, \ldots, \R_s$.)
+%%
+\item Instructions $3L + (r + 2)s + 13r + 42$ - $3L + (r + 2)s + 16r + 45$ are
+\[
+\begin{array}{rl}
+3L + (r + 2)s + 13r + 42 & \IF \ \R_{s + 4} = \Box \cr
+\ & \THEN \ 3L + (r + 2)s + 16r + 46 \cr
+\ & \ELSE \ 3L + (r + 2)s + 13r + 43 \cr
+\ & \OR \ldots \ 3L + (r + 2)s + 13r + 3k + 43 \ldots \cr
+\ & \OR \ 3L + (r + 2)s + 16r + 43 \cr
+3L + (r + 2)s + 13r + 43 & \PS{s + 4}{a_0} \cr
+3L + (r + 2)s + 13r + 44 & \PA{0}{a_0} \cr
+3L + (r + 2)s + 13r + 45 & \GOTO \ 3L + (r + 2)s + 13r + 42 \cr
+\multicolumn{2}{c}{\vdots} \cr
+3L + (r + 2)s + 16r + 43 & \PS{s + 4}{a_r} \cr
+3L + (r + 2)s + 16r + 44 & \PA{0}{a_r} \cr
+3L + (r + 2)s + 16r + 45 & \GOTO \ 3L + (r + 2)s + 13r + 42 \cr
+\end{array}
+\]
+(Recover $\R_0$ from $\R_{s + 4}$. Upon completion, the content in $\R_0$ is $\zeta$, and $\R_{s + 4} = \Box$.)
+%%
+\item Instructions $3L + (r + 2)s + 16r + 46$ - $3L + (r + 2)s + 16r + 47$ are
+\[
+\begin{array}{rl}
+3L + (r + 2)s + 16r + 46 & \IF \ \R_{s + 3} = \Box \cr
+\ & \THEN \ 3L + (r + 2)s + 16r + 48 \cr
+\ & \ELSE \ 3L + (r + 2)s + 16r + 47 \ldots \cr
+\ & \OR \ 3L + (r + 2)s + 16r + 47 \cr
+3L + (r + 2)s + 16r + 47 & \PRINT
+\end{array}
+\]
+(If $\R_{s + 3} \neq \Box$, which means that $\zeta \in W$, as discussed earlier in part (6), then print it out.)
+%%
+\item Instruction $3L + (r + 2)s + 16r + 48$ - $3L + (r + 2)s + 17r + 49$ are
+\[
+\begin{array}{rl}
+3L + (r + 2)s + 16r + 48 & \PS{s + 3}{a_0} \cr
+\multicolumn{2}{c}{\vdots} \cr
+3L + (r + 2)s + 17r + 48 & \PS{s + 3}{a_r} \cr
+3L + (r + 2)s + 17r + 49 & \IF \ \R_{s + 3} = \Box \cr
+\ & \THEN \ 3L + (r + 2)s + 17r + 50 \cr
+\ & \ELSE \ 3L + (r + 2)s + 16r + 48 \ldots \cr
+\ & \OR \ 3L + (r + 2)s + 16r + 48
+\end{array}
+\]
+(Clear $\R_{s + 3}$.)
+%%
+\item Instruction $3L + (r + 2)s + 17r + 50$ - $3L + (r + 2)s + 17r + 58$ are
+\[
+\begin{array}{rl}
+3L + (r + 2)s + 17r + 50 & \IF \ \R_{s + 1} = \Box \cr
+\ & \THEN \ 3L + (r + 2)s + 17r + 55 \cr
+\ & \ELSE \ 3L + (r + 2)s + 17r + 51 \ldots \cr
+\ & \OR \ 3L + (r + 2)s + 17r + 51 \cr
+3L + (r + 2)s + 17r + 51 & \PS{s + 1}{a_0} \cr
+3L + (r + 2)s + 17r + 52 & \PA{1}{a_0} \cr
+3L + (r + 2)s + 17r + 53 & \PA{s + 3}{a_0} \cr
+3L + (r + 2)s + 17r + 54 & \GOTO \ 3L + (r + 2)s + 17r + 50 \cr
+3L + (r + 2)s + 17r + 55 & \IF \ \R_1 = \Box \ \THEN \ 14 \cr
+\ & \ELSE \ 3L + (r + 2)s + 17r + 56 \ldots \cr
+\ & \OR \ 3L + (r + 2)s + 17r + 56 \cr
+3L + (r + 2)s + 17r + 56 & \PS{1}{a_0} \cr
+3L + (r + 2)s + 17r + 57 & \PA{s + 1}{a_0} \cr
+3L + (r + 2)s + 17r + 58 & \GOTO \ 3L + (r + 2)s + 17r + 55
+\end{array}
+\]
+(Restore the timer: Copy the content in $\R_{s + 1}$ to $\R_{s + 3}$, using $\R_1$ as a temporary storage. Upon completion, go back to label $14$ in part (2) to start a new iteration with the string next to $\zeta$ in lexicographic order.)
+%%
+\item Instruction $3L + (r + 2)s + 17r + 59$ is
+\[
+\begin{array}{rl}
+3L + (r + 2)s + 17r + 59 & \HALT
+\end{array}
+\]\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+%
+\item* \textbf{Solution to Exercise 2.12.} Let $\p$ be a program that decides the set $W$, and let $\p_W$ be a program that lexicographically enumerates $W$.\\
+\ \\
+We prove that $W$ is R-decidable if and only if $W$ is lexicographically R-enumerable by showing how to construct $\p_W$ from $\p$ and then $\p$ from $\p_W$ in the following.\\
+\ \\
+\emph{Construct $\p_W$ from $\p$.} The construction of $\p_W$ from $\p$ there in part (b) of Exercise 2.10 already proved this claim.\\
+\ \\
+\emph{Construct $\p$ from $\p_W$.} The idea is that, for $\zeta \in \mathcal{A}^\ast$, we decide whether $\zeta \in W$ by scanning the output list of $\p_W$. Since $\p_W$ lexicographically enumerates $W$, it is easy to check whether $\zeta$ occurs on the list: if there is some $\xi \in \mathcal{A}^\ast$ occurring on the list with $l(\xi) > l(\zeta)$ (cf. the proof of 1.5 for the definition of $l$) but $\zeta$ has not yet showed up, then we conclude that $\zeta$ does not occur on the list and hence $\zeta \not\in W$.\\
+\ \\
+Assume that in $\p_W$ there are $L + 2$ instructions where $L \geq 0$,\footnote{One for $\PRINT$, and one for $\HALT$.} that there is exactly one print-instruction in it, and that all registers used it are among $\R_0, \ldots, \R_s$.\\
+\ \\
+Let us preserve the following registers for special purposes:
+\begin{enumerate}[1)]
+\item $\R_{s + 1}$ contains a copy of the input $\zeta$, and is used to compare to the content $\xi$ in $\R_0$ when $\p_W$ issues $\PRINT$.
+%%
+\item $\R_{s + 2}$ serves as a temporary storage for $\zeta$ during comparisons of $\zeta$ against $\xi$, and is used to recover $\zeta$ if necessary.
+%%
+\item $\R_{s + 3}$ serves as a temporary storage for $\xi$ during comparisons of $\zeta$ against $\xi$, and is used to recover $\xi$ if necessary.
+\end{enumerate}
+\ \\
+There are $L + 30r + 45$ instructions in $\p$, where
+\begin{enumerate}[(1)]
+\item Instructions $0$ - $6r + 7$ are
+\[
+\begin{array}{rl}
+0 & \IF \ \R_0 = \Box \ \THEN \ 3r + 4 \ \ELSE \ 1 \ \OR \ldots \ 3k + 1 \ldots \cr
+\ & \OR \ 3r + 1 \cr
+1 & \PS{0}{a_0} \cr
+2 & \PA{1}{a_0} \cr
+3 & \GOTO \ 0 \cr
+\multicolumn{2}{c}{\vdots} \cr
+3r + 1 & \PS{0}{a_r} \cr
+3r + 2 & \PA{1}{a_r} \cr
+3r + 3 & \GOTO \ 0 \cr
+3r + 4 & \IF \ \R_1 = \Box \ \THEN \ 6r + 8 \ \ELSE \ 3r + 5 \cr
+\ & \OR \ldots \ 3r + 3k + 5 \ldots \ \OR \ 6r + 5 \cr
+3r + 5 & \PS{1}{a_0} \cr
+3r + 6 & \PA{s + 1}{a_0} \cr
+3r + 7 & \GOTO \ 3r + 4 \cr
+\multicolumn{2}{c}{\vdots} \cr
+6r + 5 & \PS{1}{a_r} \cr
+6r + 6 & \PA{s + 1}{a_r} \cr
+6r + 7 & \GOTO \ 3r + 4
+\end{array}
+\]
+(Move the input $\zeta$ into $\R_{s + 1}$, using $\R_1$ as a temporary storage. Upon completion, the content in $\R_0$ is $\Box$, and that in $\R_{s + 1}$ is $\zeta$.)
+%%
+\item Instructions $6r + 8$ - $L + 6r + 10$ are derived from $\p_W$: For $0 \leq l \leq L$, the instruction at label $l + 6r + 8$ is obtained from the one at label $l$ in $\p_W$ by increasing all labels in it by $6r + 8$.\\
+\ \\
+Instructions $L + 6r + 9$ - $L + 6r + 10$ are
+\[
+\begin{array}{rl}
+L + 6r + 9 & \PA{0}{a_0} \cr
+L + 6r + 10 & \GOTO \ L + 30r + 43
+\end{array}
+\]
+Suppose in the resulting program fragment the print-instruction is at label $L_0$:
+\[
+\begin{array}{rl}
+L_0 & \PRINT
+\end{array}
+\]
+Then it is replaced by
+\[
+\begin{array}{rl}
+L_0 & \GOTO \ L + 6r + 11
+\end{array}
+\]
+(Whenever $\p_W$ is about to print the content $\xi$ in $\R_0$, compare it against $\zeta$, which is the content in $\R_{s + 1}$, in the next part. If $\p_W$ is to halt, then $\zeta \not \in W$, hence the last two instructions in this part.)
+%%
+\item Instructions $L + 6r + 11$ - $L + 12 + 17$ are
+\[
+\begin{array}{rl}
+L + 6r + 11 & \IF \ \R_{s + 1} = \Box \ \THEN \ L + 30r + 43 \cr
+\ & \ELSE \ L + 6r + 12 \cr
+\ & \OR \ldots \ L + 6r + 6k + 12 \ldots \ \OR \ L + 12r + 12 \cr
+L + 6r + 12 & \IF \ \R_0 = \Box \ \THEN \ L + 24r + 36 \cr
+\ & \ELSE \ L + 6r + 13 \cr
+\ & \underbrace{\OR \ L + 18r + 26 \ldots \ \OR \ L + 18r + 26}_{r\mbox{\scriptsize-times}} \cr
+L + 6r + 13 & \PS{0}{a_0} \cr
+L + 6r + 14 & \PA{s + 2}{a_0} \cr
+L + 6r + 15 & \PS{s + 1}{a_0} \cr
+L + 6r + 16 & \PA{s + 3}{a_0} \cr
+L + 6r + 17 & \GOTO \ L + 6r + 11 \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 6r + 6k + 12 & \IF \ \R_0 = \Box \ \THEN \ L + 24r + 36 \cr
+\ & \ELSE \ \underbrace{L + 12r + 18 \ldots \OR \ L + 12r + 18}_{k\mbox{\scriptsize-times}} \cr
+\ & \OR \ L + 6r + 6k + 13 \cr
+\ & \underbrace{\OR \ L + 18r + 26 \ldots \ \OR \ L + 18r + 26}_{(r - k)\mbox{\scriptsize-times}} \cr
+L + 6r + 6k + 13 & \PS{0}{a_k} \cr
+L + 6r + 6k + 14 & \PA{s + 2}{a_k} \cr
+L + 6r + 6k + 15 & \PS{s + 1}{a_k} \cr
+L + 6r + 6k + 16 & \PA{s + 3}{a_k} \cr
+L + 6r + 6k + 17 & \GOTO \ L + 6r + 11 \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 12r + 12 & \IF \ \R_0 = \Box \ \THEN \ L + 24r + 36 \cr
+\ & \ELSE \ \underbrace{L + 12r + 18 \ldots \OR \ L + 12r + 18}_{r\mbox{\scriptsize-times}} \cr
+\ & \OR \ L + 12r + 13 \cr
+L + 12r + 13 & \PS{0}{a_r} \cr
+L + 12r + 14 & \PA{s + 2}{a_r} \cr
+L + 12r + 15 & \PS{s + 1}{a_r} \cr
+L + 12r + 16 & \PA{s + 3}{a_r} \cr
+L + 12r + 17 & \GOTO \ L + 6r + 11 \cr
+\end{array}
+\]
+(On entrance to this part, the content in $\R_{s + 1}$ is $\zeta$, while the content in $\R_0$ is, say, some $\xi \in \mathcal{A}^\ast$. Let us consider the following cases:
+\begin{enumerate}[1)]
+\item $\zeta = \Box$.
+\begin{enumerate}[1$^\circ$]
+\item $\xi = \Box$. The answer is ``yes'', so print out the content in $\R_0$.
+%%%%
+\item $\xi \neq \Box$. The answer is ``no'', so print out the content in $\R_0$.
+\end{enumerate}
+%%%
+\item $\zeta$ ends with some $a_i$.
+\begin{enumerate}[1$^\circ$]
+\item $\xi = \Box$. Go on to compare the next string on the output list against $\zeta$.
+%%%%
+\item $\xi$ ends with $a_i$. Go on to compare the substrings of $\xi$ and of $\zeta$ with their common last character $a_i$ deleted.
+%%%%
+\item $\xi$ ends with $a_j$, where $j < i$.
+\begin{itemize}
+\item[(a)] $l(\zeta) < l(\xi)$. The answer is ``no'', so print out the content in $\R_0$.
+%%%%%
+\item[(b)] $l(\zeta) \geq l(\xi)$. Go on to compare the next string on the output list against $\zeta$.
+\end{itemize}
+See part (4).
+%%%%
+\item $\xi$ ends with $a_j$, where $j > i$.
+\begin{itemize}
+\item[(a)] $l(\zeta) \leq l(\xi)$. The answer is ``no'', so print out the content in $\R_0$.
+%%%%%
+\item[(b)] $l(\zeta) > l(\xi)$. Go on to compare the next string on the output list against $\zeta$.
+\end{itemize}
+See part (5).
+\end{enumerate}
+\end{enumerate})
+%%
+\item Instructions $L + 12r + 18$ - $L + 18r + 25$ are
+\[
+\begin{array}{rl}
+L + 12r + 18 & \IF \ \R_{s + 1} = \Box \ \THEN \ L + 12r + 19 \cr
+\ & \ELSE \ L + 12r + 20 \cr
+\ & \OR \ldots \ L + 12r + 3k + 20 \ldots \cr
+\ & \OR \ L + 15r + 20 \cr
+L + 12r + 19 & \IF \ \R_0 = \Box \ \THEN \ L + 24r + 36 \cr
+\ & \ELSE \ L + 30r + 43 \ldots \cr
+\ & \OR \ L + 30r + 43 \cr
+L + 12r + 20 & \PS{s + 1}{a_0} \cr
+L + 12r + 21 & \PA{s + 3}{a_0} \cr
+L + 12r + 22 & \GOTO \ L + 15r + 22 \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 12r + 3k + 20 & \PS{s + 1}{a_k} \cr
+L + 12r + 21 & \PA{s + 3}{a_k} \cr
+L + 12r + 22 & \GOTO \ L + 15r + 22 \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 15r + 20 & \PS{s + 1}{a_r} \cr
+L + 15r + 21 & \PA{s + 3}{a_r} \cr
+L + 15r + 22 & \IF \ \R_0 = \Box \ \THEN \ L + 24r + 36 \cr
+\ & \ELSE \ L + 15r + 23 \cr
+\ & \OR \ldots \ L + 15r + 3k + 23 \ldots \cr
+\ & \OR \ L + 18r + 23 \cr
+L + 15r + 23 & \PS{0}{a_0} \cr
+L + 15r + 24 & \PA{s + 2}{a_0} \cr
+L + 15r + 25 & \GOTO \ L + 12r + 18 \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 18r + 23 & \PS{0}{a_r} \cr
+L + 18r + 24 & \PA{s + 2}{a_r} \cr
+L + 18r + 25 & \GOTO \ L + 12r + 18 \cr
+\end{array}
+\]
+(Compare the lengths of $\zeta$ and of $\xi$, where $\R_{s + 1} = \zeta$ and $\R_0 = \xi$. If $l(\zeta) < l(\xi)$, then go to the print-instruction with the answer ``no''; otherwise, recover the contents in $\R_0$ and in $\R_{s + 1}$ (see part (6)) before the next comparison.)
+%%
+\item Instructions $L + 18r + 26$ - $L + 24r + 34$ are
+\[
+\begin{array}{rl}
+L + 18r + 26 & \IF \ \R_{s + 1} = \Box \ \THEN \ L + 18r + 27 \cr
+\ & \ELSE \ L + 18r + 29 \cr
+\ & \OR \ldots \ L + 18r + 3k + 29 \ldots \cr
+\ & \OR \ L + 21r + 29 \cr
+L + 18r + 27 & \PA{0}{a_0} \cr
+L + 18r + 28 & \GOTO \ L + 30r + 43 \cr
+L + 18r + 29 & \PS{s + 1}{a_0} \cr
+L + 18r + 30 & \PA{s + 3}{a_0} \cr
+L + 18r + 31 & \GOTO \ L + 21r + 31 \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 18r + 3k + 29 & \PS{s + 1}{a_k} \cr
+L + 18r + 3k + 30 & \PA{s + 3}{a_k} \cr
+L + 18r + 3k + 31 & \GOTO \ L + 21r + 31 \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 21r + 29 & \PS{s + 1}{a_r} \cr
+L + 21r + 30 & \PA{s + 3}{a_r} \cr
+L + 21r + 31 & \IF \ \R_0 = \Box \ \THEN \ L + 24r + 35 \cr
+\ & \ELSE \ L + 21r + 32 \cr
+\ & \OR \ldots \  L + 21r + 3k + 32 \ldots \cr
+\ & \OR \ L + 24r + 32 \cr
+L + 21r + 32 & \PS{0}{a_0} \cr
+L + 21r + 33 & \PA{s + 2}{a_0} \cr
+L + 21r + 34 & \GOTO \ L + 18r + 26 \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 24r + 32 & \PS{0}{a_r} \cr
+L + 24r + 33 & \PA{s + 2}{a_r} \cr
+L + 24r + 34 & \GOTO \ L + 18r + 26 \cr
+\end{array}
+\]
+(Compare the lengths of $\zeta$ and of $\xi$, where $\R_{s + 1} = \zeta$ and $\R_0 = \xi$. If $l(\zeta) \leq l(\xi)$ then go to the print-instruction with the answer ``no''; otherwise, recover the contents in $\R_0$ and in $\R_{s + 1}$ (see next part) before the next comparison.)
+%%
+\item Instructions $L + 24r + 35$ - $L + 30r + 42$ are
+\[
+\begin{array}{rl}
+L + 24r + 35 & \IF \ \R_{s + 2} = \Box \ \THEN \ L + 27r + 39 \cr
+\ & \ELSE \ L + 24r + 36 \cr
+\ & \OR \ldots \ L + 24r + 3k + 36 \ldots \cr
+\ & \OR \ L + 27r + 36 \cr
+L + 24r + 36 & \PS{s + 2}{a_0} \cr
+L + 24r + 37 & \PA{0}{a_0} \cr
+L + 24r + 38 & \GOTO \ L + 24r + 35 \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 27r + 36 & \PS{s + 2}{a_r} \cr
+L + 27r + 37 & \PA{0}{a_r} \cr
+L + 27r + 38 & \GOTO \ L + 24r + 35 \cr
+L + 27r + 39 & \IF \ \R_{s + 3} = \Box \ \THEN \ L_0 + 1 \cr
+\ & \ELSE \ L + 27r + 40 \cr
+\ & \OR \ldots \ L + 27r + 3k + 40 \ldots \cr
+\ & \OR \ L + 30r + 40 \cr
+L + 27r + 40 & \PS{s + 3}{a_0} \cr
+L + 27r + 41 & \PA{s + 1}{a_0} \cr
+L + 27r + 42 & \GOTO \ L + 27r + 39 \cr
+\multicolumn{2}{c}{\vdots} \cr
+L + 30r + 40 & \PS{s + 3}{a_r} \cr
+L + 30r + 41 & \PA{s + 1}{a_r} \cr
+L + 30r + 42 & \GOTO \ L + 27r + 39 \cr
+\end{array}
+\]
+(Recover the contents of $\R_0$ and of $\R_{s + 1}$ from $\R_{s + 2}$ and from $\R_{s + 3}$, respectively. And then go back to $\p_W$.)
+%%
+\item Instruction $L + 30r + 43$ - $L + 30r + 44$ are
+\[
+\begin{array}{rl}
+L + 30r + 43 & \PRINT \cr
+L + 30r + 44 & \HALT
+\end{array}
+\]\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+%
+\item \textbf{Solution to Exercise 2.13.} We will reduce this \emph{computability} problem to the following \emph{decision} one:
+\begin{quote}
+There is no register program $\p^\prime$ over $\{ a_0, a_1 \}$, in this new setting, that decides the set $\{ \Box, a_0, a_1 \}$, i.e. the set of strings of length less than $2$.
+\end{quote}
+First we prove the above claim, and then use it to prove the one mentioned in this exercise.\\
+\ \\
+But before we argue that, it is helpful to define some term explicitly. Let us say that, for $k \in \mathbb{Z}^+$, a program, possibly with input, is \emph{at the $k$th step} if it has executed $k - 1$ instructions since it was started with that input (if any) and, has not yet reached the halt-instruction.\\
+\ \\
+Now let us return to our decision problem. Suppose the program $\p^\prime$ decides whether the length of a string is less than $2$. Then consider the four cases of inputs with which $\p^\prime$ is started: $a_0$, $a_1$, $a_0a_1$ and $a_1a_0$. By definition, we have
+\begin{center}
+\begin{tabular}{l}
+$\p^\prime : a_0 \to \Box$, \cr
+$\p^\prime : a_1 \to \Box$, \cr
+$\p^\prime : a_0a_1 \to \eta_0$ and \cr
+$\p^\prime : a_1a_0 \to \eta_1$,
+\end{tabular}
+\end{center}
+where $\eta_0 \neq \Box$ and $\eta_1 \neq \Box$. In particular, the $a_0$ (and $a_1$) in $\R_0$ must be deleted at some time during the computation of $\p^\prime$ with the input $a_0$ (and the input $a_1$, respectively).
+Thus, in $\p^\prime$ there must occur an instruction of the form
+\[
+\begin{array}{rl}
+L_0 & \PS{0}{a_0}
+\end{array}
+\]
+as it is the only way to delete an $a_0$ from $\R_0$. Likewise, in $\p^\prime$ there must be an instruction of the form
+\[
+\begin{array}{rl}
+L_1 & \PS{0}{a_1}
+\end{array}
+\]
+\ \\
+Let us say that $\p^\prime$ with input $a_0$ (and $a_1$) executes $L_0 \ \PS{0}{a_0}$ (and $L_1 \ \PS{0}{a_1}$, respectively) at the $k_0$th (and $k_1$th, respectively) step and, just prior to this step, the content in $\R_0$ is $a_0$ (and $a_1$, respectively); hence after executing that instruction, $\R_0 = \Box$. Pick $k := \min \{ k_0, k_1 \}$. It can be easily shown by induction that for all four cases, the program $\p^\prime$ executes the same instruction at each step before the $k$th and, the register machine suffers the same changes until $\p^\prime$ reaches the $k$th step.\\
+\ \\
+An absurdity is near: If $k = k_0$, then just after the $k$th step $\R_0 = a_1$ for both cases in which $\p^\prime$ is started with input $a_1$ and with input $a_1a_0$. Similarly, if $k = k_1$, then $\R_0 = a_0$ for both cases of $a_0$ and $a_0a_1$. In other words, $\p^\prime$ \emph{cannot} distinguish $a_0$ from $a_0a_1$, neither can it distinguish $a_1$ from $a_1a_0$, contrary to our previous assumption.\\
+\ \\
+Now we are ready to show that there is no program $\p$ with the behavior requested in this exercise. Suppose there were a program $\p$ such that $\p : \zeta \to \zeta\zeta$ for all $\zeta \in \{ a_0, a_1 \}^\ast$, then $\p^\prime$ could be obtained from $\p$: Without loss of generality, let us assume that there is exactly one print-instruction in $\p$.\footnote{It is easy to convert a program with multiple $\PRINT$'s to one with exactly one $\PRINT$.} If the print-instruction is at label $L$:
+\[
+\begin{array}{rl}
+L & \PRINT
+\end{array}
+\]
+Then replace it with
+\[
+\begin{array}{rl}
+L & \PS{0}{a_0} \cr
+L + 1 & \PS{0}{a_1} \cr
+L + 2 & \PS{0}{a_1} \cr
+L + 3 & \PS{0}{a_0} \cr
+L + 4 & \PRINT
+\end{array}
+\]
+and, of course, increase all labels $l$ in $\p$ which are greater than $L$ by the amount of $4$.\\
+\ \\
+Consider the 7 cases of input with which $\p^\prime$ is started: $\Box$, $a_0$, $a_1$, $a_0a_0$, $a_0a_1$, $a_1a_0$ and $a_1a_1$. Just before the execution of instruction $L$, the contents of $\R_0$ are, by definition, $\Box$, $a_0a_0$, $a_1a_1$, $a_0a_0a_0a_0$, $a_0a_1a_0a_1$, $a_1a_0a_1a_0$ and $a_1a_1a_1a_1$, respectively. (Recall the behavior of $\p$.) After executing instruction $L + 3$, they become $\Box$, $\Box$, $\Box$, $a_0a_0$, $a_0a_1$, $a_1$ and $a_1a_1$. In detail, we list below the contents of $\R_0$ after executing each of instructions $L$ - $L + 3$ for each case.
+\begin{center}
+\begin{tabular}{l||lllll}
+7 cases of input & just before $L$   & $L$            & $L + 1$     & $L + 2$     & $L + 3$  \cr\hline
+$\Box$           & $\Box$         & $\Box$         & $\Box$      & $\Box$      & $\Box$   \cr
+$a_0$            & $a_0a_0$       & $a_0$          & $a_0$       & $a_0$       & $\Box$   \cr
+$a_1$            & $a_1a_1$       & $a_1a_1$       & $a_1$       & $\Box$      & $\Box$   \cr
+$a_0a_0$         & $a_0a_0a_0a_0$ & $a_0a_0a_0$    & $a_0a_0a_0$ & $a_0a_0a_0$ & $a_0a_0$ \cr
+$a_0a_1$         & $a_0a_1a_0a_1$ & $a_0a_1a_0a_1$ & $a_0a_1a_0$ & $a_0a_1a_0$ & $a_0a_1$ \cr
+$a_1a_0$         & $a_1a_0a_1a_0$ & $a_1a_0a_1$    & $a_1a_0$    & $a_1a_0$    & $a_1$    \cr
+$a_1a_1$         & $a_1a_1a_1a_1$ & $a_1a_1a_1a_1$ & $a_1a_1a_1$ & $a_1a_1$    & $a_1a_1$
+\end{tabular}
+\end{center}
+For all $\zeta \in \mathcal{A}^\ast$ of length no less than $2$, on the other hand, it is clear that $\p^\prime : \zeta \to \eta$ for some $\eta \neq \Box$. It follows that $\p^\prime$ decides whether the length of a given string is less than $2$, a contradiction.\nolinebreak\hfill$\talloblong$\\
+\ \\
+\textit{Remark.} If $\mathcal{A} = \{ a_0 \}$, however, the function $f : \mathcal{A}^\ast \to \mathcal{A}^\ast$, $f(\zeta) = \zeta\zeta$ is actually R-computable:
+\[
+\begin{array}{rl}
+0 & \IF \ \R_0 = \Box \ \THEN \ 5 \ \ELSE \ 1 \cr
+1 & \PS{0}{a_0} \cr
+2 & \PA{1}{a_0} \cr
+3 & \PA{2}{a_0} \cr
+4 & \GOTO \ 0 \cr
+5 & \IF \ \R_1 = \Box \ \THEN \ 9 \ \ELSE \ 6 \cr
+6 & \PS{1}{a_0} \cr
+7 & \PA{0}{a_0} \cr
+8 & \GOTO \ 5 \cr
+9 & \IF \ \R_2 = \Box \ \THEN \ 13 \ \ELSE \ 10 \cr
+10 & \PS{2}{a_0} \cr
+11 & \PA{0}{a_0} \cr
+12 & \GOTO \ 9 \cr
+13 & \PRINT \cr
+14 & \HALT
+\end{array}
+\]
+\end{enumerate}
+%End of Section X.2--------------------------------------------------------------------------------
+\
+\\
+\\
+%Section X.3---------------------------------------------------------------------------------------
+{\large \S3. The Halting Problem for Register Machines}
+\begin{enumerate}[1.]
+\item \textbf{Note to the 5th Paragraph on Page 166.} A brief explanation for ``the set $\Pi$ of register programs lies in $\mathcal{P}$'' is given as follows: Recall that $\mathcal{A} = \{ a_0, \ldots, a_r \}$ and
+\[
+\mathcal{B} := \mathcal{A} \cup \{ A, B, C, \ldots, X, Y, Z \} \cup \{ 0, 1, \ldots, 8, 9 \} \cup \{ =, +, -, \Box, \S \}.
+\]
+Hence the size of $\mathcal{B}$ is $(r + 42)$.\\
+\ \\
+Given $\zeta = \underbrace{a_0 \ldots a_0}_{n\mbox{\scriptsize-times}}$, if $n = 0$ then $\zeta \not\in \Pi$ (trivial). If $n > 0$, then we determine the integer $m$ such that
+\[
+\frac{(r + 42)^{m + 1} - 1}{r + 41} \leq n < \frac{(r + 42)^{m + 2} - 1}{r + 41},
+\]
+where the leftmost term in the above inequality is the sum of the summation
+\[
+1 + (r + 42) + \ldots + (r + 42)^m,
+\]
+let us denote it by $s$. Then identify the $(n - s)$th word in the lexicographic ordering on the set of strings of length $(m + 1)$ over $\mathcal{B}$. It is straightforward to check whether that word is the encoding (in $\mathcal{B}^\ast$) of a register program over $\mathcal{A}$. In summary, it is conceivable that the above procedure can be carried out in polynomial time.
+%
+\item \textbf{Note to the First Paragraph on Page 167.} ``$\mathrm{SAT} \not\in \mathcal{P}$ if and only if $\mathcal{P} \neq \mathcal{NP}$'' is the famous \emph{Cook's Theorem}.
+%
+\item \textbf{Solution to Exercise 3.5.}
+\begin{enumerate}[(a)]
+\item Suppose there is an $a \in M$ such that $D = M_a$. Then consider the membership of $a$ to $D$: If $a \in D$, i.e. not $Raa$, then by the definition of $M_a$ we have $a \not\in M_a = D$; however, if $a \not\in D$, i.e. $Raa$, then we have $a \in M_a = D$. Either way we arrive at a contradiction.
+%%
+\item For $\xi \in M$ let $M_\xi := \{ \eta \ | \ R\xi\eta \}$. If there is a program $\p$, of which the G\"{o}del number is $\xi_\p$, that enumerates $D$, then we have $D = M_{\xi_\p}$ by definition, but that contradicts the result we obtained from part (a).
+%%
+\item If $W \subset \mathcal{A}^\ast$ is R-decidable, then from part (b) of Exercise 2.10 it follows that $\mathcal{A}^\ast \setminus W$ is R-enumerable; and furthermore by part (b) of Exercise 2.11, there is a program $\p$ such that $\p: \eta \to \infty$ if and only if $\eta \in W$. Take the G\"{o}del number $\xi_\p$ of $\p$, we have
+\begin{center}
+for all $\eta \in \mathcal{A}^\ast$, $\eta \in W$ if and only if $R\xi_\p\eta$,
+\end{center}
+i.e. $W = M_{\xi_\p}$.\\
+\ \\
+On the other hand,
+\[
+\begin{array}{lll}
+D & = & \{ \xi \in M \ |\ \mbox{not $R\xi\xi$} \} \cr
+\ & = & \{ \xi \in \mathcal{A}^\ast \ |\ \mbox{$\xi$ is the G\"{o}del number of a program $\p$}\cr
+\ & \ & \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{with $\p: \xi \to \halt$} \} \cr
+\ & = & \{ \xi_\p \ |\ \mbox{$\p$ is a program over $\mathcal{A}$ and $\p: \xi_\p \to \halt$} \} \cr
+\ & = & \Pi_\scripttext{halt}^\prime.
+\end{array}
+\]\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+\textit{Remark.} In part (c), for $\xi \in \mathcal{A}^\ast$ that is not the G\"{o}del number of any program,
+\begin{center}
+$R\xi\eta$ for all $\eta \in \mathcal{A}^\ast$,
+\end{center}
+and thus $M_\xi = \mathcal{A}^\ast$.\\
+\ \\
+In fact, we could have defined the binary relation $R$ as
+\begin{center}
+\begin{tabular}{lll}
+$R\xi\eta$ & :iff & $\xi$ is the G\"{o}del number of a program $\p$ with $\p : \eta \to \halt$,
+\end{tabular}
+\end{center}
+and we would obtain the same result: Let $W \subset \mathcal{A}^\ast$ be R-decidable. By part (b) of Exercise 2.10, $W$ is R-enumerable; further by part (b) of Exercise 2.11, there is a program $\p$ such that $\p : \eta \to \halt$ if and only if $\eta \in W$. Thus we have
+\[
+W = M_{\xi_\p},
+\]
+where $\xi_\p$ is the G\"{o}del number of $\p$.\\
+\ \\
+On the other hand,
+\[
+\begin{array}{lll}
+D & = & \{ \xi \in M \ | \ \mbox{not $R\xi\xi$} \} \cr
+\ & = & \{ \xi \in \mathcal{A}^\ast \ | \ \mbox{$\xi$ is \emph{not} the G\"{o}del number of a program $\p$} \cr
+\ & \ & \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{with $\p: \xi \to \halt$} \} \cr
+\ & = & \mathcal{A}^\ast \setminus \{ \xi \in \mathcal{A}^\ast \ | \ \mbox{$\xi$ is the G\"{o}del number of a program $\p$} \cr
+\ & \ & \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{with $\p : \xi \to \halt$} \} \cr
+\ & = & \mathcal{A}^\ast \setminus \{ \xi_\p \ |\ \mbox{$\p$ is a program over $\mathcal{A}$ and $\p: \xi_\p \to \halt$} \} \cr
+\ & = & \mathcal{A}^\ast \setminus \Pi^\prime_\scripttext{halt}
+\end{array}
+\]
+From part (a) we have that $\mathcal{A}^\ast \setminus \Pi^\prime_\scripttext{halt}$ is R-undecidable and, much more importantly,
+\begin{center}
+$\Pi^\prime_\scripttext{halt}$ is R-undecidable,
+\end{center}
+cf. Exercise 2.9.
+\end{enumerate}
+%End of Section X.3--------------------------------------------------------------------------------
+\
+\\
+\\
+%Section X.4---------------------------------------------------------------------------------------
+{\large \S4. The Undecidability of First-Order Logic}
+\begin{enumerate}[1.]
+\item \textbf{Note to the Proof of 4.1 on Page 169.} Note that if $\p : \Box \to \halt$, then it runs for $(s_\p + 1)$ steps, where $s_\p \geq 0$. Furthermore, when we talk about ``the configuration of $\p$ after $s$ steps'', note that $0 \leq s \leq s_\p$; on the other hand, its definition should be refined such that $\p$ runs for at least \emph{$(s + 1)$ steps}, instead of $s$ steps, after started with $\Box$. \\
+\ \\
+Also note that $\mathfrak{A}_\p \models R \overline{s_\p} \overline{k} \overline{m_0} \ldots \overline{m_n}$ if and only if $\p : \Box \to \halt$. However, for an $S$-structure $\mathfrak{A}$ with $\mathfrak{A} \models \psi_\p$, $\mathfrak{A} \models R \overline{s} \overline{L} \overline{m_0} \ldots \overline{m_n}$ does \emph{not} necessarily imply that $(L, m_0, \ldots, m_n)$ is the configuration of $\p$ after $s$ steps.\\
+\ \\
+On the other hand, in $\psi_0$, ``$<$ is an ordering'' is the conjunction of sentences in $\Phi_\scripttext{ord}$ from III.6.4.
+%
+\item \textbf{Corollaries to 4.1.} 
+\begin{enumerate}[(a)]
+\item Since for $\varphi \in L_0^{S_\infty}$,
+\begin{center}
+$\models \varphi$ \ \ \ iff \ \ \ not $\sat \neg \varphi$,
+\end{center}
+we have that the set of unsatisfiable $S_\infty$-sentences is R-undecidable, for otherwise we could decide whether $\models \varphi$ by deciding whether $\neg \varphi$ is unsatisfiable.
+%%
+\item The problem ``Given $\Phi \subset L_0^{S_\infty}$ and $\varphi \in L_0^{S_\infty}$, whether $\Phi \models \varphi$'' is R-undecidable.
+%%
+\item The problem ``Given $\Phi \subset L_0^{S_\infty}$, whether $\con \Phi$'' is R-undecidable, because
+\begin{center}
+$\Phi \models \varphi$ \ \ \ iff \ \ \ $\inc \Phi \cup \{ \neg\varphi \}$.
+\end{center}
+\end{enumerate}
+%
+\item \textbf{Solution to Exercise 4.2.} We first prove the base case, in which $s = 0$: By definition, $(0 , \ldots, 0)$ is the configuration after $0$ steps or, the initial configuration. Let us suppose that $\mathfrak{A}$ is an $S$-structure with $\mathfrak{A} \models \psi_\p$. Then it is vacuously true that $\overline{0}^\mathfrak{A}$ \emph{is pairwise distinct}, and by definition $\mathfrak{A} \models R\overline{0}\ldots \overline{0}$ holds.\\
+\ \\
+Induction step: Suppose that (2)(b) has been proved for $s = r$. It then suffices to show that $\mathfrak{A} \models R \, \overline{r + 1} \, \overline{L^+} \, \overline{m_0^+} \ldots \overline{m_n^+}$, and that $\overline{0}^\mathfrak{A}, \overline{1}^\mathfrak{A}, \ldots, \overline{r}^\mathfrak{A}, \overline{r + 1}^\mathfrak{A}$ are pairwise distinct, provided that $\mathfrak{A}$ is an $S$-structure with $\mathfrak{A} \models \psi_\p$, that $(L^+, m_0^+, \ldots, m_n^+)$ is the configuration after $(r + 1)$ steps, and the induction hypothesis:\\
+\begin{tabular}{ll}
+(+) & \begin{tabular}{l}
+if $(L, m_0, \ldots, m_n)$ is the configuration after $r$ steps, then \cr
+$\overline{0}^\mathfrak{A}, \overline{1}^\mathfrak{A}, \ldots, \overline{r}^\mathfrak{A}$ are pairwise distinct and $\mathfrak{A} \models R \overline{r} \overline{L} \overline{m_0} \ldots \overline{m_n}$.
+\end{tabular}
+\end{tabular}\\
+\ \\
+For this purpose, let us consider the instruction executed at step $(r + 1)$:
+\begin{enumerate}[1)]
+\item If it is an add-instruction, say $L \ \PA{i}{|}$, then we have $L = L^+ - 1$, and the configuration after $r$ steps is $(L^+ - 1, m_0^+, \ldots, m_i^+ - 1, \ldots, m_n^+)$. By hypothesis, $\mathfrak{A} \models R \, \overline{r} \, \overline{L^+ - 1} \, \overline{m_0^+} \ldots \overline{m_i^+ - 1} \ldots \overline{m_n^+}$ and $\overline{0}^\mathfrak{A}, \overline{1}^\mathfrak{A}, \ldots, \overline{r}^\mathfrak{A}$ are pairwise distinct. Note that the notations $\overline{L^+ - 1}$ and $\overline{m_i^+ - 1}$ are both well-defined: Since in this case $L^+ > 0$ and $m_i^+ > 0$, $\overline{L^+ - 1}$ and $\overline{m_i^+ - 1}$ are just, respectively, $\overline{L^+}$ and $\overline{m^+}$ with $f$ applied once less.\\
+\ \\
+As $\mathfrak{A} \models \psi_\p$ and, in particular, $\mathfrak{A} \models \psi_{\alpha_{L^+ - 1}}$, we have
+\[
+\overline{r}^\mathfrak{A} <^\mathfrak{A} \overline{r + 1}^\mathfrak{A}
+\]
+and
+\[
+\mathfrak{A} \models R \, \overline{r + 1} \, \overline{L^+} \, \overline{m_0^+} \ldots \overline{m_n^+}.
+\]
+Notice that the first result leads to that $\overline{0}^\mathfrak{A}, \overline{1}^\mathfrak{A}, \ldots, \overline{r}^\mathfrak{A}, \overline{r + 1}^\mathfrak{A}$ are pairwise distinct.
+%%
+\item If it is the instruction $L \ \PS{i}{|}$, then we have $L = L^+ - 1$, and the configuration after $r$ steps is $(L^+ - 1, m_0^+, \ldots, m_i^\prime, \ldots, m_n^+)$, where $m_i^\prime = m_i^+ + 1$ if $m_i^+ > 0$, and if $m_i^+ = 0$ then $m_i^\prime$ may be either $0$ or $1$. By hypothesis, $\mathfrak{A} \models R \, \overline{r} \, \overline{L^+ - 1} \, \overline{m_0^+} \ldots \overline{m_i^\prime} \ldots \overline{m_n^+}$ and $\overline{0}^\mathfrak{A}, \overline{1}^\mathfrak{A}, \ldots, \overline{r}^\mathfrak{A}$ are pairwise distinct.\\
+\ \\
+From $\mathfrak{A} \models \psi_\p$ and hence $\mathfrak{A} \models \psi_{\alpha_{L^+ - 1}}$, it follows that
+\[
+\overline{r}^\mathfrak{A} <^\mathfrak{A} \overline{r + 1}^\mathfrak{A}
+\]
+and
+\[
+\mathfrak{A} \models R \, \overline{r + 1} \, \overline{L^+} \, \overline{m_0^+} \ldots \overline{m_n^+}.
+\]
+The first result leads to that $\overline{0}^\mathfrak{A}, \overline{1}^\mathfrak{A}, \ldots, \overline{r}^\mathfrak{A}, \overline{r + 1}^\mathfrak{A}$ are pairwise distinct.
+%%
+\item If it is the instruction $L \ \IF \ \R_i = \Box \ \THEN \ L^\prime \ \ELSE \ L_0$, then we have
+\[
+L^+ = \begin{cases}
+L^\prime,  & \mbox{if \(m_i^+ = 0\)}; \cr
+L_0,       & \mbox{otherwise}.
+\end{cases}
+\]
+And the configuration after $r$ steps is $(L, m_0^+, \ldots, m_n^+)$. By hypothesis, $\mathfrak{A} \models R \, \overline{r} \, \overline{L} \, \overline{m_0^+} \ldots \overline{m_n^+}$ and $\overline{0}^\mathfrak{A}, \overline{1}^\mathfrak{A}, \ldots, \overline{r}^\mathfrak{A}$ are pairwise distinct.\\
+\ \\
+As $\mathfrak{A} \models \psi_\p$ and furthermore $\mathfrak{A} \models \psi_{\alpha_L}$, we have
+\[
+\overline{r}^\mathfrak{A} <^\mathfrak{A} \overline{r + 1}^\mathfrak{A}
+\]
+and
+\[
+\mathfrak{A} \models R \, \overline{r + 1} \, \overline{L^+} \, \overline{m_0^+} \ldots \overline{m_n^+}.
+\]
+We also have that $\overline{0}^\mathfrak{A}, \overline{1}^\mathfrak{A}, \ldots, \overline{r}^\mathfrak{A}, \overline{r + 1}^\mathfrak{A}$ are pairwise distinct.
+%%
+\item Finally, if it is $L \ \PRINT$, then we have $L = L^+ - 1$, and the configuration after $r$ steps is $(L^+ - 1, m_0^+, \ldots, m_n^+)$. By hypothesis, $\mathfrak{A} \models R \, \overline{r} \, \overline{L^+ - 1} \, \overline{m_0^+} \ldots \overline{m_n^+}$ and $\overline{0}^\mathfrak{A}, \overline{1}^\mathfrak{A}, \ldots, \overline{r}^\mathfrak{A}$ are pairwise distinct.\\
+\ \\
+Since $\mathfrak{A} \models \psi_\p$, and hence $\mathfrak{A} \models \psi_{\alpha_{L^+ - 1}}$, it follows that
+\[
+\overline{r}^\mathfrak{A} <^\mathfrak{A} \overline{r + 1}^\mathfrak{A}
+\]
+and
+\[
+\mathfrak{A} \models R \, \overline{r + 1} \, \overline{L^+} \, \overline{m_0^+} \ldots \overline{m_n^+}.
+\]
+And from the first result we obtain that $\overline{0}^\mathfrak{A}, \overline{1}^\mathfrak{A}, \ldots, \overline{r}^\mathfrak{A}, \overline{r + 1}^\mathfrak{A}$ are pairwise distinct.\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+%
+\item \textbf{Solution to Exercise 4.3.} First note that 
+\[
+\{ \varphi \in L_0^{S_\infty} \ | \ \models \neg\varphi \}
+\]
+is the set of \emph{unsatisfiable} $S_\infty$-sentences, every element in which is the negation of a valid $S_\infty$-sentence. Hence it is enumerable and undecidable, as is the set of valid $S_\infty$-sentences (cf. 1.6 and the remark below the statement of 4.1).\\
+\ \\
+Suppose that the set
+\[
+L_0^{S_\infty} \setminus \{ \varphi \in L_0^{S_\infty} \ | \ \models \neg\varphi \}
+\]
+of satisfiable $S_\infty$-sentences were R-enumerable, then by Church's Thesis it would be enumerable. As the set $L_0^{S_\infty}$ of $S_\infty$-sentences is decidable (cf. part (b) of Exercise 1.3), the set of unsatisfiable $S_\infty$-sentences would be decidable (cf. Exercise 1.9), a contradiction.\nolinebreak\hfill$\talloblong$
+%
+\item \textbf{Solution to Exercise 4.4.} In the proof of 4.1, leave out $<$ entirely. So $S$ becomes $\{ R, f, c \}$. Note that (1) also holds in this new setting. Similarly, we provide an $S$-sentence $\psi_\p$ which describes the operations of $\p$ on $\Box$; we abbreviate $c, fc, ffc, \ldots$ by $\overline{0}, \overline{1}, \overline{2}, \ldots$, respectively.\\
+\ \\
+In contrary to (2) in the proof, here the following holds instead:\\
+\begin{tabular}{ll}
+(2)$^\prime$ & (a) \ $\mathfrak{A}_\p \models \psi_\p$. \cr
+\ & (b) \ If $\mathfrak{A}$ is an $S$-structure with $\mathfrak{A} \models \psi_\p$ and $(L, m_0, \ldots, m_n)$ is \cr
+\ & the configuration of $\p$ after $s$ steps, then $\mathfrak{A} \models R \overline{s} \overline{L} \overline{m_0} \ldots \overline{m_n}$.
+\end{tabular}\\
+Notice now in (2)$^\prime$(b) we are no longer sure of whether $\overline{0}^\mathfrak{A}, \overline{1}^\mathfrak{A}, \ldots, \overline{s}^\mathfrak{A}$ are pairwise distinct even if the premise holds.\\
+\ \\
+We set
+\[
+\psi_\p := R \overline{0} \ldots \overline{0} \land \psi_{\alpha_0} \land \ldots \land \psi_{\alpha_{k - 1}}.
+\]
+For $\alpha = \alpha_0, \ldots, \alpha_{k - 1}$, the sentence $\psi_\alpha$ describes the operation corresponding to instruction $\alpha$. $\psi_\alpha$ is defined in the following:\\
+If $\alpha$ is the instruction $L \ \PA{i}{|}$, then let
+\[
+\begin{array}{rr}
+\psi_\alpha := & \multicolumn{1}{l}{\forall x \forall y_0 \ldots \forall y_n (R x \overline{L} y_0 \ldots y_n \rightarrow R fx \overline{L + 1} y_0 \ldots y_{i - 1} fy_i y_{i + 1} \ldots y_n).}
+\end{array}
+\]
+If $\alpha$ is the instruction $L \ \PS{i}{|}$, then let
+\[
+\begin{array}{rr}
+\psi_\alpha := & \multicolumn{1}{l}{\forall x \forall y_0 \ldots \forall y_{i - 1} \forall y_{i + 1} \ldots \forall y_n (R x \overline{L} y_0 \ldots y_{i - 1} \overline{0} y_{i + 1} \ldots y_n \rightarrow} \cr
+\ & R fx \overline{L + 1} y_0 \ldots y_{i - 1} \overline{0} y_{i + 1} \ldots y_n) \land \cr
+\ & \multicolumn{1}{l}{\forall x \forall y_0 \ldots \forall y_n (R x \overline{L} y_0 \ldots y_{i - 1} fy_i y_{i + 1} \ldots y_n \rightarrow R fx \overline{L + 1} y_0 \ldots y_n).}
+\end{array}
+\]
+If $\alpha$ is the instruction $L \ \IF \ \R_i = \Box \ \THEN \ L^\prime \ \ELSE \ L_0$, then let
+\[
+\begin{array}{rr}
+\psi_\alpha := & \multicolumn{1}{l}{\forall x \forall y_0 \ldots \forall y_{i - 1} \forall y_{i + 1} \ldots \forall y_n (R x \overline{L} y_0 \ldots y_{i - 1} \overline{0} y_{i + 1} \ldots y_n \rightarrow \ \ \ } \cr
+\ & R fx \overline{L^\prime} y_0 \ldots y_{i - 1} \overline{0} y_{i + 1} \ldots y_n) \land \cr
+\ & \multicolumn{1}{l}{\forall x \forall y_0 \ldots \forall y_n (R x \overline{L} y_0 \ldots y_{i - 1} fy_i y_{i + 1} \ldots y_n \rightarrow} \cr
+\ & R fx \overline{L_0} y_0 \ldots y_{i - 1} fy_i y_{i + 1} \ldots y_n).
+\end{array}
+\]
+Finally for $\alpha = L \ \PRINT$, let
+\[
+\begin{array}{rr}
+\psi_\alpha := & \multicolumn{1}{l}{\forall x \forall y_0 \ldots \forall y_n (R x \overline{L} y_0 \ldots y_n \rightarrow R fx \overline{L + 1} y_0 \ldots y_n).}
+\end{array}
+\]
+Now set
+\[
+\varphi_\p := \psi_\p \rightarrow \exists x \exists y_0 \ldots \exists y_n \, R x \overline{k} y_0 \ldots y_n.
+\]
+Then we can argue that
+\begin{center}
+$\models \varphi_\p$ \ iff \ $\p : \Box \to \halt$
+\end{center}
+in the same way as we did in the proof.\\
+\ \\
+Note that if we take $\psi := \psi_\p$ and $\chi := \exists x \exists y_0 \ldots \exists y_n \, R x \overline{k} y_0 \ldots y_n$, then $\psi, \chi \in L_0^{S_\infty}$, they do not contain the equality symbol, and $\psi$ is a universal Horn sentence. Hence the set mentioned in this exercise is not R-decidable, for otherwise we could decide whether $\models \psi \rightarrow \chi$ (i.e. whether $\models \varphi_\p$), by deciding whether $(\psi, \chi)$ is in this set, and hence whether $\p : \Box \to \halt$.\\
+\ \\
+It remains to show (2)$^\prime$(b) holds. This can be done by induction on $s$:\\
+$s = 0$: By definition, $(0, \ldots, 0)$ is the configuration after $0$ steps; and if $\mathfrak{A}$ is an $S$-structure with $\mathfrak{A} \models \psi_\p$ then, again by definition, we have $R \overline{0} \ldots \overline{0}$.\\
+\ \\
+It then suffices to show $\mathfrak{A} \models R \, \overline{r + 1} \, \overline{L^+} \, \overline{m_0^+} \ldots \overline{m_n^+}$, provided that $\mathfrak{A}$ is an $S$-structure with $\mathfrak{A} \models \psi_\p$, that $(L^+, m_0^+, \ldots, m_n^+)$ is the configuration after $(r + 1)$ steps, and the induction hypothesis:
+\begin{center}
+\begin{tabular}{ll}
+(+) & if $(L, m_0, \ldots, m_n)$ is the configuration after $r$ steps, \cr
+\ & $\mathfrak{A} \models R \overline{r} \overline{L} \overline{m_0} \ldots \overline{m_n}$.
+\end{tabular}
+\end{center}
+\ \\
+For this purpose, let us consider the instruction executed at step $(r + 1)$:
+\begin{enumerate}[1)]
+\item If it is an add-instruction, say $L \ \PA{i}{|}$, then we have $L = L^+ - 1$, and the configuration after $r$ steps is $(L^+ - 1, m_0^+, \ldots, m_i^+ - 1, \ldots, m_n^+)$. By hypothesis, $\mathfrak{A} \models R \, \overline{r} \, \overline{L^+ - 1} \, \overline{m_0^+} \ldots \overline{m_i^+ - 1} \ldots \overline{m_n^+}$. Note that the notations $\overline{L^+ - 1}$ and $\overline{m_i^+ - 1}$ are both well-defined: Since in this case $L^+ > 0$ and $m_i^+ > 0$, $\overline{L^+ - 1}$ and $\overline{m_i^+ - 1}$ are just, respectively, $\overline{L^+}$ and $\overline{m^+}$ with $f$ applied once less.\\
+\ \\
+As $\mathfrak{A} \models \psi_\p$ and, in particular, $\mathfrak{A} \models \psi_{\alpha_{L^+ - 1}}$, we have
+\[
+\mathfrak{A} \models R \, \overline{r + 1} \, \overline{L^+} \, \overline{m_0^+} \ldots \overline{m_n^+}.
+\]
+%%
+\item If it is the instruction $L \ \PS{i}{|}$, then we have $L = L^+ - 1$, and the configuration after $r$ steps is $(L^+ - 1, m_0^+, \ldots, m_i^\prime, \ldots, m_n^+)$, where $m_i^\prime = m_i^+ + 1$ if $m_i^+ > 0$, and if $m_i^+ = 0$ then $m_i^\prime$ may be either $0$ or $1$. By hypothesis, $\mathfrak{A} \models R \, \overline{r} \, \overline{L^+ - 1} \, \overline{m_0^+} \ldots \overline{m_i^\prime} \ldots \overline{m_n^+}$.\\
+\ \\
+From $\mathfrak{A} \models \psi_\p$ and hence $\mathfrak{A} \models \psi_{\alpha_{L^+ - 1}}$, it follows that
+\[
+\mathfrak{A} \models R \, \overline{r + 1} \, \overline{L^+} \, \overline{m_0^+} \ldots \overline{m_n^+}.
+\]
+%%
+\item If it is the instruction $L \ \IF \ \R_i = \Box \ \THEN \ L^\prime \ \ELSE \ L_0$, then we have
+\[
+L^+ = \begin{cases}
+L^\prime,  & \mbox{if \(m_i^+ = 0\)}; \cr
+L_0,       & \mbox{otherwise}.
+\end{cases}
+\]
+And the configuration after $r$ steps is $(L, m_0^+, \ldots, m_n^+)$. By hypothesis, $\mathfrak{A} \models R \, \overline{r} \, \overline{L} \, \overline{m_0^+} \ldots \overline{m_n^+}$.\\
+\ \\
+As $\mathfrak{A} \models \psi_\p$ and furthermore $\mathfrak{A} \models \psi_{\alpha_L}$, we have
+\[
+\mathfrak{A} \models R \, \overline{r + 1} \, \overline{L^+} \, \overline{m_0^+} \ldots \overline{m_n^+}.
+\]
+%%
+\item Finally, if it is $L \ \PRINT$, then we have $L = L^+ - 1$, and the configuration after $r$ steps is $(L^+ - 1, m_0^+, \ldots, m_n^+)$. By hypothesis, $\mathfrak{A} \models R \, \overline{r} \, \overline{L^+ - 1} \, \overline{m_0^+} \ldots \overline{m_n^+}$.\\
+\ \\
+Since $\mathfrak{A} \models \psi_\p$, and hence $\mathfrak{A} \models \psi_{\alpha_{L^+ - 1}}$, it follows that
+\begin{center}
+\phantom{a} \hfill $\mathfrak{A} \models R \, \overline{r + 1} \, \overline{L^+} \, \overline{m_0^+} \ldots \overline{m_n^+}.$ \hfill $\talloblong$
+\end{center}
+\end{enumerate}
+\textit{Remark.} This result also leads to the undecidability of first-order logic, that is to say, we have just proved Theorem 4.1 in another way: If the set $\{ \varphi \in L_0^{S_\infty} \ | \ \models \varphi \}$ were decidable, then we could decide the set mentioned in this exercise by deciding whether $\models \psi \to \chi$ for a given pair $(\psi, \chi)$, where $\psi, \chi \in L_0^{S_\infty}$ do not contain the equality symbol, and where $\psi$ is a universal Horn sentence and $\chi$ is of the form $\exists x_1 \ldots \exists x_n \chi_0$ with atomic $\chi_0$. Note that, as hint suggested, we leave out the ordering $<$ in the proof here, since it is unnecessary for this purpose (cf. the foot note on page 168).
+\end{enumerate}
+%End of Section X.4--------------------------------------------------------------------------------
+\
+\\
+\\
+%Section X.5---------------------------------------------------------------------------------------
+{\large \S5. Trahtenbrot's Theorem and the Incompleteness of Second-Order Logic}
+\begin{enumerate}[1.]
+\item \textbf{Note to Definition 5.1.} From the definition, we immdiately have
+\[
+\{ \varphi \in L_0^{S_\infty} \ | \ \models \varphi \} \subset \Phi_\scripttext{fv} \subset \Phi_\scripttext{fs} \subset \{ \varphi \in L_0^{S_\infty} \ | \ \sat \varphi \} \subset L_0^{S_\infty}
+.
+\]
+%
+\item \textbf{Note to the Paragraph Below Theorem 5.5.} From the failure of the Compactness Theorem, what we claimed to fail as well for any correct sequent calculus for $\mathcal{L}_\scripttext{II}$ in IX.1 is indeed the \emph{Completeness Theorem}: For all sets $\Phi \subset L^S_\scripttext{II}$ and all second-order $S$-formulas $\varphi$, 
+\begin{center}
+if $\Phi \models \varphi$ then $\Phi \vdash \varphi$;
+\end{center}
+instead of the \emph{completeness} for those calculi: For all sequents $\Gamma \subset L^S_\scripttext{II}$ and all second-order $S$-formulas $\varphi$,
+\begin{center}
+if $\Gamma \models \varphi$ then $\Gamma \vdash \varphi$.
+\end{center}
+There we were not sure whether it holds. However, Theorem 5.5 also leads to the failure of the completeness just stated: If the completeness did hold for a correct proof calculus, then we could apply it (with the help of the correctness) to the case in which $\Gamma = \emptyset$ (i.e. the empty sequent) and thus enumerate all valid second-order $S$-formulas, contrary to Theorem 5.5.
+%
+\item \textbf{Incompleteness of Weak Second-Order Logic.} To apply the argument for Theorem 5.5 given in text to weak second-order logic, we choose $\varphi_\mathrm{fin}$ to be the second-order sentence
+\[
+\varphi_\mathrm{fin} \colonequals \exists X \forall x \, Xx,
+\]
+where $X$ is a unary relation variable. Then it is clear (cf. Exercise XI.1.7) that for all $\struct{A}$,
+\begin{center}
+$\struct{A} \models \varphi_\mathrm{fin}$ \ \ \ iff \ \ \ $A$ is finite.
+\end{center}
+%
+\item \textbf{Note to the Paragraph before Exercise 5.6.} (INCOMPLETE) Recall that to obtain Theorem 4.1 and other results in X.4 and X.5, we only used the 4 symbols $R$ ($(n + 3)$-ary), $<$ (binary), $f$ (unary) and $c$. It is conceivable that to obtain those results, it suffices for a symbol set $S$ to be effectively given and contain the 4 symbols.\\
+\ \\
+$[$INCOMPLETE: Show that it is even sufficient for $S$ to contain only one binary relation symbol to describe the execution of register programs.$]$
+%
+\item \textbf{Solution to Exercise 5.6.} Recall that a symbol set is called relational if it contains only relation symbols (cf. VIII.1). And we obtained in part (1) of \textbf{More on Syntactic Properties of $\mathcal{L}_\mathrm{II}$} in notes to Chapter IX that for any $\varphi \in \LII^S$,\footnote{Without loss of generality, $S$ is assumed to be \emph{finite}.}
+\begin{center}
+$\models \varphi$ \ \ \ iff \ \ \ $\models (\chi \rightarrow \varphi^r)$,
+\end{center}
+where $S^r$ is the corresponding relational symbol set and $\chi \in L^{S^r}$ states that the new relation symbols are the counterparts of the function and constant symbols in $S$, and where $\varphi^r$ essentially states in $\LII^{S^r}$ the same as does $\varphi$ in $\LII^S$.\\
+\ \\
+Therefore, it suffices to show that for every second-order $S$-sentence $\varphi$ with $S$ relational and finite, there is a second-order $\emptyset$-sentence $\varphi^\prime$ such that
+\begin{center}
+$\models \varphi$ \ \ \ iff \ \ \ $\models \varphi^\prime$.
+\end{center}
+Then we are done: If the set of valid second-order $\emptyset$-sentences were R-enumerable, we could enumerate the set of valid second-order $S_\infty$-sentences (contrary to 5.5) as follows: For a string $\zeta$ over $\mathcal{A}_0$, decide whether $\zeta$ is a second-order $S_\infty$-sentence.\footnote{This can achieved by extending the decision procedure given in part (b) of Exercise 1.3 according to the formation rules for $\mathcal{L}_\scripttext{II}$ in IX.1.1.} If so, let $S_0$ be a \emph{finite} symbol set such that $\zeta$ is a second-order $S_0$-sentence $\varphi$. Effectively take the corresponding second-order $S^r_0$-sentence $(\chi \rightarrow \varphi^r)$, and then generate the second-order $\emptyset$-sentence $(\chi \rightarrow \varphi^r)^\prime$. Print out $\zeta$ if $(\chi \rightarrow \varphi^r)^\prime$ ever appears as an output of an enumeration procedure for the set of valid second-order $\emptyset$-sentences.\\
+\ \\
+Let $S = \{ R_0, \ldots, R_n \}$ be a relational symbol set in which the arity of $R_i$ is $r_i$ for $0 \leq i \leq n$, and $\varphi \in L^S_\scripttext{II}$ a sentence. We shall denote by $(A, C_0, \ldots, C_n)$ an $S$-structure with domain $A$ and with $R_i^A = C_i$ for $0 \leq i \leq n$, and denote by $(A, C_0, \ldots, C_n, \gamma)$ the corresponding $S$-interpretation with the second-order assignment $\gamma$. We designate the second-order \emph{$\emptyset$-formula} $\psi$ with its free \emph{relation} variables among $X_0, \ldots, X_n$ such that $\varphi = \psi \displaystyle\frac{R_0 \ldots R_n}{X_0 \ldots X_n}$. Then
+\begin{center}
+\begin{tabular}{lll}
+$\models \varphi$ & iff & For all $S$-interpretations $\mathfrak{I}$, $\mathfrak{I} \models \varphi$ \cr
+\ & iff & For all nonempty sets $A$, all $C_0 \subset A^{r_0}, \ldots, C_n \subset A^{r_n}$, \cr
+\ & \ & and all second-order assignments $\gamma$, the $S$-interpretation \cr
+\ & \ & $(A, C_0, \ldots, C_n, \gamma) \models \psi \displaystyle\frac{R_0 \ldots R_n}{X_0 \ldots X_n}$ \cr
+\ & \ & (here we ``expand'' the $S$-interpretation $\mathfrak{I}$) \cr
+\ & iff & For all nonempty sets $A$, all $C_0 \subset A^{r_0}, \ldots, C_n \subset A^{r_n}$, \cr
+\ & \ & and all second-order assignments $\gamma$, \cr
+\ & \ & $(A, C_0, \ldots, C_n, \gamma) \displaystyle\frac{C_0 \ldots C_n}{X_0 \ldots X_n} \models \psi$ \cr
+\ & \ & (by the Substitution Lemma for $\mathcal{L}_\scripttext{II}$; note that for $0 \leq i \leq n$, \cr
+\ & \ & $(A, C_0, \ldots, C_n, \gamma)(R_i) = C_i$) \cr
+\ & iff & For all $S$-interpretations $\mathfrak{I}$ with domain $A$, \cr
+\ & \ & and all $C_0 \subset A^{r_0}, \ldots, C_n \subset A^{r_n}$, $\mathfrak{I} \displaystyle\frac{C_0 \ldots C_n}{X_0 \ldots X_n} \models \psi$ \cr
+\ & \ & (by the Coincidence Lemma for $\mathcal{L}_\scripttext{II}$) \cr
+\ & iff & For all $S$-interpretations $\mathfrak{I}$, $\mathfrak{I} \models \forall X_0 \ldots \forall X_n \psi$ \cr
+\ & iff & $\models \forall X_0 \ldots \forall X_n \psi$.
+\end{tabular}
+\end{center}
+Clearly $\forall X_0 \ldots \forall X_n \psi$ is a second-order \emph{$\emptyset$-sentence.}\\
+\ \\
+Finally, take\\
+\phantom{a} \hfill $\varphi^\prime := \forall X_0 \ldots \forall X_n \psi.$ \hfill $\talloblong$
+\end{enumerate}
+%End of Section X.5--------------------------------------------------------------------------------
+\
+\\
+\\
+%Section X.6---------------------------------------------------------------------------------------
+{\large \S6. Theories and Decidability}
+\begin{enumerate}[1.]
+\item \textbf{Note on Definition 6.1 and the Remark Thereof.} In short, $T \subset L^S_0$ is a theory if and only if
+\[
+\sat T
+\]
+and for all $\varphi \in L^S_0$,
+\begin{center}
+$\varphi \in T$ \ \ \ iff \ \ \ $T \models \varphi$.
+\end{center}
+Naturally, in the latter condition, the lefthand side implies the right. Hence when examining a set of sentences whether it is a theory, it suffices to provide a model for it and show that every sentence which is a consequence of it is a member of it.\\
+\ \\
+For every $S$-structure $\mathfrak{A}$, the set $\thr{\struct{A}}$ is a theory: First, $\struct{A} \models \thr{\struct{A}}$ by defintion. Next, suppose $\varphi \in L^S_0$ and $\thr{\struct{A}} \models \varphi$, then by definition we have $\struct{A} \models \varphi$ as $\struct{A} \models \thr{\struct{A}}$; therefore $\varphi \in \thr{\struct{A}}$.\\
+\ \\
+There is a typo in the second paragraph below 6.1: ``$\Phi \in L^S_0$'' should be replaced with ``$\Phi \subset L^S_0$''.\\
+\ \\
+One should note that, $\Phi_\pa$ does \emph{not} characterize $\mathfrak{N}$ up to isomorphism (cf. VI.2.4): Intuitively, the induction schema ($*$) contains only properties definable in first-order logic, which are countable in total; whereas the induction axiom in Peano axioms applies to all properties of $\mathfrak{N}$, i.e. all $n$-ary relations over $\mathbb{N}$ for every $n \in \mathbb{Z}^+$, which are, in contrast, uncountable in total.
+%
+\item \textbf{Note on Consequence Closures Concerning Relativization.} Recall the relativization operation introduced in \reftitle{VIII.1}, for a symbol set $S$ and an $S$-formula $\varphi$ we write $\relational{S}$ and $\relational{\varphi}$ for their respective relational counterparts. Also, given $\Psi \subset \fstordlang[0]{S}$ we shall denote $\relational{\Psi} \colonequals \setm{\relational{\psi}}{\psi \in \Psi}$.
+Then we have:\medskip\\
+\begin{theorem}{Claim}
+If $\consqn{\Psi} = \Psi$, then $\consqn{(\relational{\Psi})} = \relational{\Psi}$.
+\end{theorem}
+\begin{proof}
+If $S$ is itself relational, then the claim trivially holds. Thus, we shall assume that $S$ is not relational.\bigskip\\
+Assuming the hypothesis, it suffices to prove the nontrivial direction: $\consqn{(\relational{\Psi})} \subset \relational{\Psi}$. We prove it in two steps below.\bigskip\\
+First, we have\smallskip\\
+\begin{bquoteno}{60ex}{($\ast$)}
+for every $\relational{S}$-sentence $\varphi$: if $\relational{\Psi} \models \varphi$, then $\Psi \models \invrelational{\varphi}$.
+\end{bquoteno}\smallskip\\
+This can be argued: Suppose $\relational{\Psi} \models \varphi$ and $\struct{A}$ is an $S$-structure with $\struct{A} \models \Psi$. By \reftitle{VIII.1.3(a)} we obtain $\relational{\struct{A}} \models \relational{\Psi}$; so $\relational{\struct{A}} \models \varphi$ by premise. Using \reftitle{VIII.1.3(b)}, we further get $\struct{A} \models \invrelational{\varphi}$. It follows that $\Psi \models \invrelational{\varphi}$.\bigskip\\
+Then, we conclude by showing\smallskip\\
+\centerline{for every $\relational{S}$-sentence $\varphi$: if $\varphi \in \consqn{(\relational{\Psi})}$, then $\varphi \in \relational{\Psi}$.}\smallskip\\
+Suppose $\varphi \in \consqn{(\relational{\Psi})}$, i.e.\ $\relational{\Psi} \models \varphi$. By ($\ast$) we have $\Psi \models \invrelational{\varphi}$ and hence $\invrelational{\varphi} \in \Psi$ because $\consqn{\Psi} = \Psi$. It follows that $\varphi \in \relational{\Psi}$ (note that $\relational{(\invrelational{\varphi})} = \varphi$ because $\invrelational{\varphi}$ is already term-reduced, cf.\ \reftitle{VIII.1}).
+\end{proof}
+%
+\item \textbf{Note to the Remark after 6.2.} (INCOMPLETE) Show that $\Th_\pa$ and $\Th_\zfc$ are not finitely axiomatizable.
+%
+\item \textbf{Note to Definition 6.4.} If $T$ is complete, then by definition for every sentence $\varphi$, either $\varphi \in T$ or $\neg\varphi \in T$, and hence either $T \models \varphi$ or $T \models \neg\varphi$.
+%
+\item \textbf{Solution to Exercise 6.6.} Let $\varphi_0, \varphi_1, \ldots$ be an enumeration of $\Phi$. For $n \in \nat$, pick
+\[
+\psi_n := \begin{cases}
+\varphi_0                      & \mbox{if \(n = 0\)} \cr
+(\psi_{n - 1} \land \varphi_n) & \mbox{if \(n > 0\)};
+\end{cases}
+\]
+and let $\Psi := \{ \psi_n \ | \ n \in \nat \}$. Obviously the list $\psi_0, \psi_1, \ldots$ enumerates $\Psi$ in increasing length and hence \emph{in lexicographic order}. As a result, $\Psi$ is R-decidable (cf. Exercise 2.12). It remains to show $T = \Psi^{\models}$.\\
+\ \\
+For a sentence $\chi \in T$, we have $\Phi \models \chi$; then by the Compactness Theorem there is a finite subset $\Phi_n := \{ \varphi_0, \ldots, \varphi_n \} \subset \Phi$ such that $\Phi_n \models \chi$. Clearly $\Psi_n := \{ \psi_0, \ldots, \psi_n \} \models \chi$ (as $\Phi_n$ and $\Psi_n$ are logically equivalent) and further $\Psi \models \chi$, or $\chi \in \Psi^{\models}$. Thus $T \subset \Psi^{\models}$.\\
+\ \\
+On the other hand, for a sentence $\chi \in \Psi^{\models}$, we have $\Psi \models \chi$. Again by the Compactness Theorem, there is a finite subset $\Psi_n \subset \Psi$ such that $\Psi_n \models \chi$. Trivially $\Phi_n \models \chi$ and also $\Phi \models \chi$, or $\chi \in \Phi^{\models} = T$. Therefore, $\Psi^{\models} \subset T$.\nolinebreak\hfill$\talloblong$\\
+\ \\
+\textit{Remark.} According to the argument above, we have that for every R-enumerable $\Phi$, there is an R-decidable $\Psi$ such that, for every formula $\varphi$,
+\begin{center}
+$\Phi \vdash \varphi$ \ \ \ iff \ \ \ $\Psi \vdash \varphi$.
+\end{center}
+%
+\item* \textbf{Solution to Exercise 6.7.} (a) Suppose $T$ is incomplete, i.e. there is an $S$-sentence $\varphi$ such that neither $\varphi \in T$ nor $\neg\varphi \in T$; in other words, neither $T \models \varphi$ nor $T \models \neg\varphi$ holds, and further by III.4.4,
+\begin{center}
+$\sat T \cup \{ \varphi \}$ \ \ \ and \ \ \ $\sat T \cup \{ \neg\varphi \}$.
+\end{center}
+As $T$ is countable (since $\{ \varphi \in L^S_0 \ | \ \models \varphi \} \subset T \subset L^S_0$), so are $T \cup \{ \varphi \}$ and $T \cup \{ \neg\varphi \}$. By premise, both $T \cup \{ \varphi \}$ and $T \cup \{ \neg\varphi \}$ have only infinite models, for otherwise $T$ would have finite models.\\
+\ \\
+From the Theorem of L\"{o}wenheim, Skolem and Tarski (cf. VI.2.4) and the premise, it follows that there are two $S$-structures $\struct{A}$ and $\struct{B}$ with cardinality $\kappa$ (hence $\struct{A} \cong \struct{B}$) such that $\struct{A} \models T \cup \{ \varphi \}$ and $\struct{B} \models T \cup \{ \neg\varphi \}$, respectively. In particular,
+\begin{center}
+$\struct{A} \models \varphi$ \ \ \ and \ \ \ $\struct{B} \models \neg\varphi$.
+\end{center}
+On the other hand, however, since $\struct{A} \cong \struct{B}$ we have by Isomorphism Lemma (cf. III.5.2) that
+\begin{center}
+$\struct{A} \models \varphi$ \ \ \ iff \ \ \ $\struct{B} \models \varphi$,
+\end{center}
+a contradiction.\\
+\ \\
+(b) ??
+%
+\item \textbf{Note to Lemma 6.8.} According to the remarks after 2.7, we can think of $\chi_\p
+ [l_0, \ldots, l_n, L, m_0, \ldots, m_n]$ as stating
+\begin{quote}
+``$\p$ reaches the configuration $(L, m_0, \ldots, m_n)$ in finitely many steps after \emph{being started with the the $n$ inputs $l_0, \ldots, l_n$}''
+\end{quote}
+\ \\
+As for the proof, in statement (2) the length of the sequence is $(s + 1) \cdot (n + 2)$. However, what $\chi_\p$ actually formalizes is instead the statement\\
+\ \\
+``There is an $s \in \nat$ and an (arbitrary) sequence of which the \emph{prefix} is
+$(a_0, \ldots, a_{n + 1}, a_{n + 2}, \ldots, a_{(n + 2) + (n + 1)}, \ldots, a_{s \cdot (n + 2)}, \ldots, a_{s \cdot (n + 2) + (n + 1)}),$ where $a_0 = 0, a_1 = x_0, \ldots, a_{n + 1} = x_n$,\\ $a_{s \cdot (n + 2)} = z, a_{s \cdot (n + 2) + 1} = y_0, \ldots, a_{s \cdot (n + 2) + (n + 1)} = y_n$,\\
+and for all $i < s$:\\
+$(a_{i \cdot (n + 2)}, \ldots, a_{i \cdot (n + 2) + (n + 1)}) \begin{array}{c} \ \cr \rightarrow \cr \p \end{array} (a_{(i + 1) \cdot (n + 2)}, \ldots, a_{(i + 1) \cdot (n + 2) + (n + 1)})$.''\\
+\ \\
+Here we acquire no information about the length of the sequence; only the particular prefix is specified. It should be clear that, if the sequence of the aforementioned statement does exist, then the particular prefix must satisfy statement (2); conversely, if (2) holds, then the sequence thereof must satisfy the statement here.\\
+\ \\
+In other words, for our purpose of formalizing statement (2) it suffices to \emph{embed} the computation of the register program $\p$ (more precisely, beginning with the configuration $(0, x_0, \ldots, x_n)$, and reaching the configuration $(z, y_0, \ldots, y_n)$ in finitely many steps) into the prefix of any sufficient long sequence, and hence the statement above.\\
+\ \\
+Because of this, the two numbers $t$ and $p$ mentioned in 6.11 are \emph{not} unique, for they could encode a longer sequence in which $(a_0, \ldots, a_r)$ is a \emph{proper} prefix.\footnote{We say the sequence $s_1$ is a proper prefix of the sequence $s_2$ if $s_1$ is a prefix of $s_2$ and $s_1$ is shorter than $s_2$.} However, the $t$ and $p$ in the proof of 6.11 do encode $(a_0, \ldots, a_r)$ and thus they are the smallest suitable pairs of numbers that serve the purpose.\\
+\ \\
+Now, let us complete the definition of the $S_\ar$-formulas $\psi_j$:\\
+If $\alpha_j$ is an add-instruction
+\[
+\begin{array}{ll}
+j & \PA{e}{|}
+\end{array}
+\]
+then
+\[
+\begin{array}{lll}
+\psi_j & := & u \equiv \mbf{j} \rightarrow (u^\prime \equiv u + 1 \cr
+\ & \ & \land u^\prime_0 \equiv u_0 \land \ldots \land u^\prime_{e - 1} \equiv u_{e - 1} \cr
+\ & \ & \land u^\prime_e \equiv u_e + 1 \cr
+\ & \ & \land u^\prime_{e + 1} \equiv u_{e + 1} \land \ldots \land u^\prime_n \equiv u_n).
+\end{array}
+\]
+If $\alpha_j$ is a sub-instruction
+\[
+\begin{array}{ll}
+j & \PS{e}{|}
+\end{array}
+\]
+then
+\[
+\begin{array}{lll}
+\psi_j & := & u \equiv \mbf{j} \rightarrow (u^\prime \equiv u + 1 \cr
+\ & \ & \land u^\prime_0 \equiv u_0 \land \ldots \land u^\prime_{e - 1} \equiv u_{e - 1} \cr
+\ & \ & \land (u_e \equiv 0 \rightarrow u^\prime_e \equiv 0) \land (\neg u_e \equiv 0 \rightarrow u_e \equiv u_e^\prime + 1) \cr
+\ & \ & \land u^\prime_{e + 1} \equiv u_{e + 1} \land \ldots \land u^\prime_n \equiv u_n).
+\end{array}
+\]
+If $\alpha_j$ is a jump-instruction
+\[
+\begin{array}{ll}
+j & \IF \ \R_e = \Box \ \THEN \ j^\prime \ \ELSE \ j_0
+\end{array}
+\]
+then
+\[
+\begin{array}{lll}
+\psi_j & := & u \equiv \mbf{j} \rightarrow ((u_e \equiv 0 \rightarrow u^\prime \equiv \mbf{j^\prime}) \land (\neg u_e \equiv 0 \rightarrow u^\prime \equiv \mbf{j_0}) \cr
+\ & \ & \land u^\prime_0 \equiv u_0 \land \ldots \land u^\prime_n \equiv u_n).
+\end{array}
+\]
+If $\alpha_j$ is a print-instruction
+\[
+\begin{array}{ll}
+j & \PRINT
+\end{array}
+\]
+then
+\[
+\begin{array}{lll}
+\psi_j & := & u \equiv \mbf{j} \rightarrow (u^\prime \equiv u + 1 \cr
+\ & \ & \land u_0^\prime \equiv u_0 \land \ldots \land u^\prime_0 \equiv u_n).
+\end{array}
+\]
+\ \\
+Finally, note that the binary relation symbol `$<$' is not in $S_\ar$. Therefore $\chi_\p$ given in text is not an $S_\ar$-formula because of the fragment ``$i < s$''; nevertheless, we may regard that fragment as an abbreviation for
+\[
+\exists h (\neg h \equiv 0 \land i + h \equiv s),
+\]
+and hence $\chi_\p$ as an $S_\ar$-formula. Also, there is a typo in the definition of $\chi_\p$ on page 179: The third argument of the second $\varphi_\beta$ in line 3 is $s \cdot (\mbf{n + 2}) + 1$ instead of $s \cdot ((\mbf{n + 2}) + 1)$.
+%
+\item \textbf{Note to Corollary 6.10.} A direct consequence of $\Phi_\pa^{\models} \subsetneq \thr{\natstr}$ is that $\Phi_\pa^{\models}$ is not complete.
+%
+\item \textbf{Note to the Proof of $\beta$-Function Lemma 6.11.} First let us verify that $b_0 < b_1$ with
+\[
+\begin{array}{lll}
+b_0 & := & 1 \cdot p^0 + \ldots + a_{i - 1} p^{2i - 1}, \cr
+b_1 & := & p^{2i}.
+\end{array}
+\]
+Since the prime $p$ is chosen to be larger than $a_0, \ldots, a_r, r + 1$, if we pick
+\[
+c := \max \{ a_0, \ldots, a_r, r + 1 \},
+\]
+then we immediately have $p \geq c + 1$, or $c \leq p - 1$. Therefore,
+\[
+\begin{array}{ll}
+\    & b_0 \cr
+=    & \displaystyle \sum_{j = 0}^{i - 1} \left[ (j + 1)p^{2j} + a_j p^{2j + 1} \right] \cr
+\leq & c (1 + p \ldots + p^{2i - 1}) \cr
+=    & \displaystyle c \cdot \frac{p^{2i} - 1}{p - 1} \cr
+<    & \displaystyle \frac{cp^{2i}}{p - 1} \cr
+\leq & \displaystyle \frac{(p - 1)p^{2i}}{p - 1} \cr
+=    & p^{2i} \cr
+=    & b_1.
+\end{array}
+\]
+\ \\
+On the other hand, according to the proof of this lemma, we may define $\varphi_\beta (v_0, v_1, v_2, v_3)$ as follows:
+\[
+\begin{array}{lll}
+\varphi_\beta (v_0, v_1, v_2, v_3) & := & (\exists v_4 \psi (v_0, v_1, v_2, v_4) \rightarrow \cr
+\ & \ & \phantom{(} (\psi (v_0, v_1, v_2, v_3) \land \cr
+\ & \ & \phantom{)(} \forall v_5 (\exists v_6 (\neg v_6 \equiv 0 \land v_5 + v_6 \equiv v_3) \rightarrow \cr
+\ & \ & \phantom{)(\forall v_5)} \neg\psi (v_0, v_1, v_2, v_5) \cr
+\ & \ & \phantom{(\forall v_5)} ) \cr
+\ & \ & \phantom{(} ) \cr
+\ & \ & )\land \cr
+\ & \ & (\forall v_4 \neg\psi (v_0, v_1, v_2, v_4) \rightarrow v_3 \equiv 0),
+\end{array}
+\]
+in which $\psi (v_0, v_1, v_2, v_4)$ says that ``(i)-(iii) and (iv)$^\prime$ hold for $u = v_0$, $q = v_1$, $j = v_2$ and $a = v_4$'':
+\[
+\begin{array}{lll}
+\psi (v_0, v_1, v_2, v_4) & := & \exists b_0 \exists b_1 \exists b_2 ( v_0 \equiv b_0 + \cr
+\ & \ & \phantom{\exists b_0 \exists b_1 \exists b_2 (} b_1 \cdot ((v_2 + 1) + v_4 \cdot v_1 + b_2 \cdot v_1 \cdot v_1) \land \cr
+\ & \ & \phantom{\exists b_0 \exists b_1 \exists b_2 (} \exists v_5 (\neg v_5 \equiv 0 \land v_4 + v_5 \equiv v_1) \land \cr
+\ & \ & \phantom{\exists b_0 \exists b_1 \exists b_2 (} \exists v_5 (\neg v_5 \equiv 0 \land b_0 + v_5 \equiv b_1) \land \cr
+\ & \ & \phantom{\exists b_0 \exists b_1 \exists b_2 (} \exists v_5 b_1 \equiv v_5 \cdot v_5 \land \cr
+\ & \ & \phantom{\exists b_0 \exists b_1 \exists b_2 (} \forall v_5 ((\neg v_5 \equiv 1 \land \exists v_6 v_5 \cdot v_6 \equiv b_1) \rightarrow \cr
+\ & \ & \phantom{\exists b_0 \exists b_1 \exists b_2 (\forall v_5)} \exists v_7 v_1 \cdot v_7 \equiv v_5 \cr
+\ & \ & \phantom{\exists b_0 \exists b_1 \exists b_2 (\forall v_5} ) \cr
+\ & \ & \phantom{\exists b_0 \exists b_1 \exists b_2 } ).
+\end{array}
+\]
+\ \\
+Next, notice that by the choice of $t$ in the proof, the conditions on the righthand-side of $(**)$, namely (i) - (iv), hold only for $0 \leq i \leq r$; thus, if $a \in \nat$ satisfies (i) - (iv), then $a \in \{ a_i \ | \ 0 \leq i \leq r \}$. In addition, as remarked in \textbf{Note to the Proof of Lemma 6.8}, the $t$ and $p$ can be chosen to encode any sequence that contains $(a_0, \ldots, a_r)$ as a prefix; in this situation $(**)$ still holds for $0 \leq i \leq r$.\\
+\ \\
+Finally, notice that $t$ can be alternatively represented in $q$-adic with any $q \in \nat$ larger than $a_0, \ldots, a_r, r + 1$; $q$ is not even necessarily a prime. However, the choice of $p$ as a prime leads to the equivalence between (iv) and (iv)$^\prime$; (iv)$^\prime$ in place of (iv) facilitates the formalization.
+%
+\item$^*$ \textbf{Yet Another Method to Encode Finite Sequences.} The sequence $(a_0, \ldots, a_r)$ can be encoded by the number
+\[
+\left(\prod^{r - 1}_{i = 0} p_i^{a_i}\right) \cdot p_r^{a_r + 1} - 2= 2^{a_0}3^{a_1}5^{a_2} \cdots p_r^{a_r + 1} - 2,
+\]
+where $p_i$ is the $i$th prime. (Using Unique Factorization of natural numbers.)
+%
+\item \textbf{Cantor's Pairing Function $\pi$.} The \emph{pairing function} $\pi : \nat^2 \to \nat$ is defined as
+\[
+\pi(m, n) := \left(\sum^{m + n}_{k = 1} k \right) + m = \frac{1}{2}(m + n)(m + n + 1) + m,
+\]
+it encodes pairs over $\nat$ as natural numbers.\\
+\ \\
+$\pi$ enumerates pairs over $\nat$ in this fashion:
+\[
+\begin{array}{llll}
+(0, 0), & \ & \ & \ \cr
+(0, 1), & (1, 0), & \ & \ \cr
+(0, 2), & (1, 1), & (2, 0), & \ \cr
+(0, 3), & (1, 2), & (2, 1), & (3, 0), \cr
+\multicolumn{4}{c}{\vdots}
+\end{array}
+\]
+Some initial values are
+\[
+\begin{array}{c||c|c|c|c|c|c|c}
+(m, n) & (0, 0) & (0, 1) & (1, 0) & (0, 2) & (1, 1) & (2, 0) & (0, 3) \cr\hline
+\pi (m, n) & 0 & 1 & 2 & 3 & 4 & 5 & 6 \cr
+\end{array}
+\]
+\ \\
+It can be easily verified that $\pi$ is bijective. Also note that for all $n, n_1, n_2 \in \nat$,
+\begin{center}
+if $\pi(n_1, n_2) = n$, then $n_1 \leq n$ and $n_2 \leq n$.
+\end{center}
+Thus, we can conversely decode natural numbers into pairs over $\nat$. To be precise, let $\pi_1, \pi_2 : \nat \to \nat$ be defined as
+\begin{center}
+\begin{tabular}{lll}
+$\pi_1 (n)$ & $\colonequals$ & the unique (hence the smallest) pair $(n_1, n_2)$ with $n_1 \leq n$ \cr
+\ & \ & and $n_2 \leq n$ such that $\pi (n_1, n_2) = n$; \cr
+$\pi_2 (n)$ & $\colonequals$ & the unique (hence the smallest) pair $(n_1, n_2)$ with $n_1 \leq n$ \cr
+\ & \ & and $n_2 \leq n$ such that $\pi (n_1, n_2) = n$,
+\end{tabular}
+\end{center}
+for $n \in \nat$. Then we have for all $n, n_1, n_2 \in \nat$,
+\begin{enumerate}[(1)]
+\item $\pi (\pi_1 (n), \pi_2 (n)) = n$;
+%%
+\item $\pi_1 (\pi (n_1, n_2)) = n_1$, $\pi_2 (\pi (n_1, n_2)) = n_2$.
+\end{enumerate}
+%
+\item \textbf{Encoding Finite Sequences Over $\nat$.} There are various ways to achieve this. We introduce two of them:
+\begin{enumerate}[(1)]
+\item \textit{Use Cantor's pairing function $\pi$.} The function $\sigma_0 : \{ \Box \} \cup \bigcup_{n \in \zah^+} \nat^n \to \nat$ is defined recursively as
+\[
+\begin{array}{lll}
+\sigma_0 ( \Box ) & \colonequals & 0; \cr
+\sigma_0 (a_0, \ldots, a_r) & \colonequals & \pi (a_0, \sigma_0 (a_1, \ldots, a_r)) + 1,
+\end{array}
+\]
+where the subsequence $(a_1, \ldots, a_r) = \Box$ if $r = 0$.\\
+\ \\
+For example,
+\[
+\begin{array}{ll}
+\ & \sigma_0 (0, 1, 2, 3) \cr
+= & \pi (0, \sigma_0 (1, 2, 3)) + 1 \cr
+\multicolumn{2}{c}{\cdots} \cr
+= & \pi (0, \pi (1, \pi (2, \pi (3, \sigma_0 ( \Box )) + 1) + 1) + 1) + 1 \cr
+= & \pi (0, \pi (1, \pi (2, \pi (3, 0) + 1) + 1) + 1) + 1 \cr
+\multicolumn{2}{c}{\cdots} \cr
+= & 5\,798\,716.
+\end{array}
+\]
+It is easy to verify that $\sigma_0$ is bijective.
+%%
+\item \textit{Use G\"{o}del's $\beta$-function with Cantor's pairing function $\pi$.} The function $\sigma : \{ \Box \} \cup \bigcup_{n \in \zah^+} \nat^n \to \nat$ is defined as
+\begin{center}
+\begin{tabular}{lll}
+$\sigma ( \Box )$ & $\colonequals$ & $0$; \cr
+$\sigma (a_0, \ldots, a_r)$ & $\colonequals$ & $\pi (r, \pi (t, p))$, where $t$ and $p$ is defined as in ($*$) \cr
+\ & \ & in the proof of Lemma 6.11,
+\end{tabular}
+\end{center}
+where the subsequence $(a_1, \ldots, a_r) = \Box$ if $r = 0$. $\sigma$ is injective but not surjective. Noteworthy is that $\sigma (s) \neq 0$ for any nonempty sequence $s$.
+\end{enumerate}
+We will adopt the latter in our discussions since it can be represented by a comparatively simple formula.
+%
+\item \textbf{Encoding Finite Subsets of $\nat$.} If we identify the empty set $\emptyset$ with the empty sequence $\Box$, and any subset $\{ a_0, \ldots, a_n \} \subset \nat$ with the sequence $(a_0, \ldots, a_n)$,\footnote{There is a problem with this identification: While a set is considered as a collection of objects (that is, the order in which its elements appear does not matter), sequences with same elements appearing in different orders are considered different. Fortunately, for our discussions later we will not concern ourselves with orders of sequences, therefore we will ignore this problem. We will also assume in this identification that sequences consist of pairwise distinct elements.} then we already obtain an encoding method for finite subsets of $\nat$ (cf. \textbf{Encoding Finite Sequences Over $\nat$}).\\
+\ \\
+Let $m_1, m_2 \in \nat$ encode two (possibly empty) finite subsets $s_1$ and $s_2$.
+\begin{enumerate}[(1)]
+\item \textit{Membership.} If $m_1 \neq 0$, then for $n \in \nat$, $n \in s_1$ iff there is $k \leq \pi_1 (m_1)$ such that $\beta ( \pi_1 (\pi_2 (m_1)), \pi_2 (\pi_2 (m_1)), k) = n$.
+%%
+\item \textit{Maximum.} If $m_1 \neq 0$, then for $n \in \nat$, $n$ is the maximum of $s_1$ iff $n \in s_1$ and for $k \leq \pi_1 (m_1)$, $\beta ( \pi_1 ( \pi_2 (m_1)), \pi_2 ( \pi_2 (m_1)), k) \leq n$.
+%%
+\item \textit{(Nonempty) Subset.} $s_1 \subset s_2$ iff one of the following situations is the case
+\begin{enumerate}[(1)]
+\item $m_1 = 0$.
+%%%
+\item $m_1 = m_2$.
+%%%
+\item $m_1 \neq 0$, $m_2 \neq 0$, $\pi_1 (m_1) < \pi_1 (m_2)$, and for all $k \leq \pi_1 (m_1)$ there is $k^\prime \leq \pi_1 (m_2)$ such that
+\[
+\beta (\pi_1 (\pi_2 (m_2)), \pi_2 ( \pi_2 (m_2)), k^\prime) = \beta (\pi_1 (\pi_2 (m_1)), \pi_2 (\pi_2 (m_1)), k).
+\]
+\end{enumerate}
+%%
+\item \textit{Union.} For $m \in \nat$, $m$ encodes $s_1 \cup s_2$ iff one of the following situations is the case:
+\begin{enumerate}[(a)]
+\item If $m_1 = m_2 = 0$, then $m = 0$.
+%%%
+\item If $m_1 \neq 0$ and $m_2 = 0$, then $m = m_1$.
+%%%
+\item If $m_1 = 0$ and $m_2 \neq 0$, then $m = m_2$.
+%%%
+\item If $m_1 \neq 0$ and $m_2 \neq 0$, then $m$ is the smallest $m^\prime$ such that
+\begin{enumerate}[1$^\circ$]
+\item $\pi_1 ( m^\prime ) \leq \pi_1 (m_1) + \pi_1 (m_2) + 1$;
+%%%%
+\item for $k \leq \pi_1 (m_1)$, there is $k^\prime \leq \pi_1 ( m^\prime )$ such that
+\[
+\beta ( \pi_1 ( \pi_2 ( m^\prime )), \pi_2 ( \pi_2 ( m^\prime )), k^\prime) = \beta ( \pi_1 ( \pi_2 (m_1)), \pi_2 ( \pi_2 (m_1)), k);
+\]
+and
+%%%%
+\item for $k \leq \pi_1 (m_2)$, there is $k^\prime \leq \pi_1 ( m^\prime )$ such that
+\[
+\beta ( \pi_1 ( \pi_2 ( m^\prime )), \pi_2 ( \pi_2 ( m^\prime )), k^\prime) = \beta ( \pi_1 ( \pi_2 (m_2)), \pi_2 ( \pi_2 (m_2)), k).
+\]
+\end{enumerate}
+\end{enumerate}
+%%
+\item \textit{Exclusion.} For $n \in \nat$, $s_1 = s_2 \setminus \{ n \}$ iff one of the following situations is the case:
+\begin{enumerate}[(a)]
+\item If $m_2 = 0$, then $m_1 = 0$.
+%%%
+\item If $m_2 \neq 0$, $\pi_1 (m_2) = 0$ and $n \in s_2$, then $m_1 = 0$.
+%%%
+\item If $m_2 \neq 0$, $\pi_1 (m_2) = 0$ and $n \not\in s_2$, then $m_1 = m_2$.
+%%%
+\item If $m_2 \neq 0$ and $\pi_1 (m_2) \neq 0$, then $m_1$ is the smallest $m^\prime$ with
+\begin{enumerate}[1$^\circ$]
+\item $\pi_1 ( m^\prime ) \leq \pi_1 (m_2)$;
+%%%%
+\item for $k \leq \pi_1 (m_2)$, if $\beta (\pi_1 (\pi_2 (m_2)), \pi_2 (\pi_2 (m_2)), k) \neq n$ then there is $k^\prime \leq \pi_1 ( m^\prime )$ such that
+\[
+\beta (\pi_1 (\pi_2 ( m^\prime )), \pi_2 (\pi_2 ( m^\prime )), k^\prime) = \beta (\pi_1 (\pi_2 (m_2)), \pi_2 (\pi_2 (m_2)), k).
+\]
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+%
+\item \textbf{Note to Lemma 6.12.} According to the remark after 2.7, the notions of R-decidability and of R-computability can be directly generalized to $n$-ary relations and $n$-ary functions; thus a program may take $n$ arguments in the first $n$ registers, and then starts computations with such a configuration.
+%
+\item \textbf{Solution to Exercise 6.13.} With the syntactic interpretation $I : S_\ar \to S_\ar$ given in part (a) of \textbf{Solution to Exercise 2.7} in notes to Chapter VIII, we have $\zahstr^{-I} = \natstr$ and for all $\varphi \in L_0^{S_\ar}$,
+\begin{center}
+$\natstr \models \varphi$ \ \ \ iff \ \ \ $\zahstr \models \varphi^I$.
+\end{center}
+Since $\thr{\natstr}$ is R-undecidable (cf. 6.9), so is $\thr{\zahstr}$.\nolinebreak\hfill$\talloblong$
+\end{enumerate}
+%End of Section X.6--------------------------------------------------------------------------------
+\
+\\
+\\
+%Section X.7---------------------------------------------------------------------------------------
+{\large \S7. Self-Referential Statements and G\"{o}del's Incompleteness Theorems}
+\begin{enumerate}[1.]
+\item \textbf{Note to Definition 7.1.} It immediately follows from this definition that the set of all arithmetical (cf. the remark after 6.12) relations and functions over $\nat$ coincides with the set of all those representable in $\thr{\natstr}$.\\
+\ \\
+On the other hand, if an $r$-ary \emph{relation} $\mathfrak{Q}$ is representable in $\emptyset$, then $\mathfrak{Q} = \nat^r$, i.e. the set of all $r$-tuples over $\nat$: Suppose that $\mathfrak{Q}$ is representable in $\emptyset$ and that $\mathfrak{Q}$ holds for some $n_0, \ldots, n_{r - 1} \in \nat$, then there is an $S_\ar$-formula $\varphi(v_0, \ldots, v_{r - 1})$ such that
+\[
+\emptyset \vdash \varphi(\mbf{n_0}, \ldots, \mbf{n_{r - 1}}).
+\]
+From the discussion in Remark (b) to \textbf{Solution to Exercise 4.5} in the notes to Chapter IV (cf. the sequent rule $(\cdot)$), we have
+\[
+\emptyset \vdash \forall v_0 \ldots \forall v_{r - 1} \varphi,
+\]
+thus $\mathfrak{Q}$ holds for \emph{all} $n_0, \ldots, n_{r - 1} \in \nat$ and $\mathfrak{Q} = \nat^r$.\\
+\ \\
+Following the same argument we have, however, that any function $F : \nat^r \to \nat$ is \emph{not} representable in $\emptyset$; for any $S_\ar$-formula $\varphi (v_0, \ldots, v_r)$, if there are some $n_0, \ldots, n_r \in \nat$ such that $\emptyset \vdash \varphi (\mbf{n_0}, \ldots, \mbf{n_r})$, then $\emptyset \vdash \forall v_r \varphi (\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, v_r)$ (cf. the sequent rule $(\circ)$ in Remark (b) to \textbf{Solution to Exercise 4.5} in the notes to Chapter IV), thus
+\begin{center}
+not $\emptyset \vdash \exists^{= 1} v_r \varphi (\mbf{n_0}, \ldots, \mbf{n_{r - 1}}, v_r)$,
+\end{center}
+for otherwise we would have $\emptyset \vdash \forall v_0 \forall v_1 \ v_0 \equiv v_1$.\\
+\ \\
+Finally, let us consider the case of $\Phi_\pa$. For every program $\p$ in which the registers mentioned are among $\R_0, \ldots, \R_r$ and of which the last instruction is $\alpha_k$, consider the $(r + 1)$-ary relation $\mathfrak{Q}_\p$: for all $n_0, \ldots, n_r \in \nat$,
+\begin{center}
+\begin{tabular}{lll}
+$\mathfrak{Q}_\p n_0 \ldots n_r$ & iff & $\p$, beginning with the configuration $(0, n_0, \ldots, n_r)$, \cr
+\ & \ & eventually halts.
+\end{tabular}
+\end{center}
+Pick the $S_\ar$-formula
+\[
+\psi_\p (v_0, \ldots, v_r) := \exists v_{r + 1} \ldots \exists v_{2r + 1} \chi_\p (v_0, \ldots, v_r, \mbf{k}, v_{r + 1}, \ldots, v_{2r + 1}).
+\]
+(cf. the proof of 6.8 for the construction of $\chi_\p$.) It turns out that $\mathfrak{Q}_\p$ is arithmetical: For $n_0, \ldots, n_r \in \nat$,
+\begin{center}
+$\mathfrak{Q}_\p n_0 \ldots n_r$ \ \ \ iff \ \ \ $\natstr \models \psi_\p (\mbf{n_0}, \ldots, \mbf{n_r})$.
+\end{center}
+In particular,
+\begin{center}
+\begin{tabular}{lll}
+$\mathfrak{Q}_\p 0 \ldots 0$ & iff & $\natstr \models \psi_\p (\mbf{0}, \ldots, \mbf{0})$ \cr
+\                            & iff & $\p : \Box \to \halt$.
+\end{tabular}
+\end{center}
+Therefore, \emph{there is an arithmetical relation not representable in $\Phi_\pa$}; otherwise, for every program $\p$ the relation $\mathfrak{Q}_\p$ would be representable in $\Phi_\pa$. And since $\Phi_\pa$ is consistent, for any particular program $\p$ either $\Phi_\pa \vdash \psi_\p (0, \ldots, 0)$ or $\Phi_\pa \vdash \neg \psi_\p (0, \ldots, 0)$ is the case. Moreover, as $\Phi_\pa^{\models}$ is R-enumerable (cf. 6.3), we would obtain the following procedure to decide $\Pi_\halt$ (a contradiction): For any program $\p$, effectively generate $\psi_\p$, then start enumerating $\Phi_\pa^{\models}$. We can check which one of $\psi_\p (0, \ldots, 0)$ and $\neg \psi_\p (0, \ldots, 0)$ occurs on the enumeration list (by the Adequacy Theorem), and hence obtain an answer to whether $\p : \Box \to \halt$.
+%
+\item* \textbf{Note to Part (c) of Lemma 7.2.} Note that in the proof, the set $\{ \psi \in L_0^{S_\ar} \ | \ \Phi \vdash \psi \}$ is R-enumerable provided that $\Phi$ is R-decidable; indeed this set is $\Phi^{\models}$ (cf. V.4.2). Its R-enumerability was already verified in 6.3.\\
+%
+\item \textbf{Note on Theorem 7.4.} (INCOMPLETE) We shall give a complete proof in Appendix A.\\
+\ \\
+On the other hand, this theorem, together with 7.2 (c), yields\\
+\ \\
+\begin{theorem}{Theorem}
+The set of all R-decidable relations and R-computable functions over $\nat$ coincides with the set of all relations and functions representable in $\Phi_\pa$.\qed
+\end{theorem}
+%
+\item \textbf{Corollary.} \emph{Any set $\Phi \supset \Phi_\pa$ allows representations.}
+%
+\item *\textbf{Corollary.} \emph{There is an R-undecidable arithmetical relation.}
+%
+\item \textbf{A Bijective G\"{o}del Numbering for $T^{S_\ar}$.} With the function $\pi$ introduced in \textbf{Cantor's Pairing Function $\pi$}, we state the numbering rules below:
+\begin{enumerate}[(1)]
+\item For $n \in \nat$, the variable $v_n$ is assigned the number $3n$.
+%%
+\item The constant symbol $0$ is assigned the number $1$.
+%%
+\item The constant symbol $1$ is assigned the number $2$.
+%%
+\item If the terms $t_1$ and $t_2$ are assigned respectively the numbers $m$ and $n$, then $t_1 + t_2$ is assigned the number $3\pi(m, n) + 4$.
+%%
+\item If the terms $t_1$ and $t_2$ are assigned respectively the numbers $m$ and $n$, then $t_1 \cdot t_2$ is assigned the number $3\pi(m, n) + 5$.
+\end{enumerate}
+For example, $v_0 \cdot v_1 + \mbf{2} \cdot (v_2 + 0)$ is assigned the number\footnote{Recall that for $n > 1$, the notation $\mbf{n}$ is a shorthand for $\underbrace{1 + \cdots + 1}_{n\mbox{\tiny-times}}$.}
+\[
+\begin{array}{ll}
+\ & 3\pi (3\pi (0, 3) + 5, 3\pi (3\pi (2, 2) + 4, 3\pi (6, 1) + 4) + 5) + 4 \cr
+= & 3\pi (23, 3\pi (40 , 106) + 5) + 4 \cr
+= & 3\pi (23, 32318) + 4 \cr
+= & 1\,569\,055\,960.
+\end{array}
+\]
+Here are some initial values of this numbering:
+\begin{center}
+\begin{tabular}{l||c|c|c|c|c|c|c|c}
+G\"{o}del numbers & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 \cr\hline
+$S_\ar$-terms & $v_0$ & $0$ & $1$ & $v_1$ & $v_0 + v_0$ & $v_0 \cdot v_0$ & $v_2$ & $v_0 + v_1$
+\end{tabular}
+\end{center}
+%
+\item \textbf{A Bijective G\"{o}del Numbering for $L^{S_\ar}$.} With the function $\pi$ introduced in \textbf{Cantor's Pairing Function $\pi$} and a bijective G\"{o}del numbering $G_T$ ($G_T$ means \emph{G\"{o}del numbering for terms}) for $T^{S_\ar}$,\footnote{For example, the one given in \textbf{A Bijective G\"{o}del Numbering for $T^{S_\ar}$}.} we state the numbering rules below:
+\begin{enumerate}[(1)]
+\item For $t_1, t_2 \in T^{S_\ar}$, the atomic formula $t_1 \equiv t_2$ is assigned the number $4\pi (G_T(t_1), G_T(t_2))$.
+%%
+\item If the formula $\varphi$ is assigned the number $n$, then $\neg\varphi$ is assigned the number $4n + 1$.
+%%
+\item If the formulas $\varphi$ and $\psi$ are assigned respectively the numbers $m$ and $n$, then $(\varphi \lor \psi)$ is assigned the number $4\pi (m, n) + 2$.
+%%
+\item If the formula $\varphi$ is assigned the number $n$, then for all $m \in \nat$, $\exists v_m \varphi$ is assigned the number $4\pi (m, n) + 3$.
+\end{enumerate}
+For example, $\forall v_0 \ v_0 + 0 \equiv v_0$ is assigned the number\footnote{Recall that $\forall v_n$ is an abbreviation of $\neg\exists v_n \neg$.}
+\[
+\begin{array}{ll}
+\ & 4(4\pi (0, 4 \cdot 4\pi (3\pi (0, 1) + 4, 0) + 1) + 3) + 1 \cr
+= & 4(4\pi (0, 4 \cdot 4\pi (7, 0) + 1) + 3) + 1 \cr
+= & 4(4\pi (0, 561) + 3) + 1 \cr
+= & 2\,522\,269. \cr
+\end{array}
+\]
+Here are some initial values of this numbering:\\
+\ \\
+\begin{tabular}{l||c|c|c|c}
+G\"{o}del numbers & 0 & 1 & 2 & 3 \cr\hline
+$S_\ar$-formulas & $v_0 \equiv v_0$ & $\neg v_0 \equiv v_0$ & $(v_0 \equiv v_0 \lor v_0 \equiv v_0)$ & $\exists v_0 \ v_0 \equiv v_0$
+\end{tabular}
+\\
+\ \\
+\ \\
+\begin{tabular}{c|c|c|c|c}
+ & 4 & 5 & 6 & 7 \cr\hline
+ & $v_0 \equiv v_1$ & $\neg v_0 \equiv v_1$ & $(v_0 \equiv v_0 \lor \neg v_0 \equiv v_0)$ & $\exists v_0 \neg v_0 \equiv v_0$
+\end{tabular}
+%
+\item* \textbf{Note to the Proof of Fixed Point Theorem 7.5.} Our objective is to find a formula $\beta(x) \in L_1^{S_\ar}$ such that, for $\chi(x) \in L_1^{S_\ar}$ the sentence $\beta( \mbf{n}^{\chi(x)} )$ says 
+\begin{quote}
+``the G\"{o}del number of $\chi(\mbf{n}^{\chi(x)})$ satisfies the property $\psi$,''
+\end{quote}
+i.e. $\psi( \mbf{n}^{\chi(\mbf{n}^{\chi(x)})} )$. In particular, for $\chi = \beta$, the sentence $\beta( \mbf{n}^\beta )$ says
+\begin{quote}
+``the G\"{o}del number of $\beta( \mbf{n}^\beta )$ satisfies the property $\psi$,''
+\end{quote}
+i.e. $\psi( \mbf{n}^{ \beta( \mbf{n}^\beta ) } )$, which is a \emph{self-referential statement} ``I have the property $\psi$''; thus it suffices to set $\varphi \colonequals \beta ( \mbf{n}^\beta )$.\\
+\ \\
+Since $\alpha$ represents $F$, it is straightforward to derive the formalization of $\beta(x)$ (below we write $\mbf{F(n^{\chi(x)}, n^{\chi(x)})}$ for the $S_\ar$-term corresponding to $F(n^{\chi(x)}, n^{\chi(x)})$):
+\begin{center}
+\begin{tabular}{l}
+$\psi(\mbf{F(n^{\chi(x)}, n^{\chi(x)})})$; \cr
+$\forall z ( \mbf{F(n^{\chi(x)}, n^{\chi(x)})} \equiv z \rightarrow \psi (z) )$; and finally \cr
+$\forall z ( \alpha (x, x, z) \rightarrow \psi (z) )$.
+\end{tabular}
+\end{center}
+We set
+\[
+\beta (x) \colonequals \forall z ( \alpha (x, x, z) \rightarrow \psi (z) ).
+\]
+\ \\
+Below we provide derivations for $\Phi \vdash \varphi \rightarrow \psi (\mbf{n}^\varphi)$ and for $\Phi \vdash \psi (\mbf{n}^\varphi) \rightarrow \varphi$, assuming $\Gamma \vdash \alpha ( \mbf{n}^\beta, \mbf{n}^\beta, \mbf{n}^\varphi )$ and $\Gamma \vdash \exists^{=1} z \alpha ( \mbf{n}^\beta, \mbf{n}^\beta, z )$ for some sequent $\Gamma \subset \Phi$:
+\begin{enumerate}[(a)]
+\item $\Phi \vdash \varphi \rightarrow \psi ( \mbf{n}^\varphi )$.
+\[
+\begin{array}{lllll}
+1. & \Gamma & \ & \alpha ( \mbf{n}^\beta, \mbf{n}^\beta, \mbf{n}^\varphi ) & \mbox{premise} \cr
+2. & \Gamma & \varphi & \alpha ( \mbf{n}^\beta, \mbf{n}^\beta, \mbf{n}^\varphi ) & \mbox{(Ant) applied to 1.} \cr
+3. & \Gamma & \varphi & \varphi & \mbox{(Assm)} \cr
+4. & \Gamma & \varphi & \alpha ( \mbf{n}^\beta, \mbf{n}^\beta, \mbf{n}^\varphi ) \rightarrow \psi ( \mbf{n}^\varphi ) & \mbox{IV.5.5 (a1) applied to 3. with} \cr
+\  & \      & \       & \ & t = \mbf{n}^\varphi \cr
+5. & \Gamma & \varphi & \psi ( \mbf{n}^\varphi ) & \mbox{IV.3.5 applied to 4. and 2.} \cr
+6. & \Gamma & \ & \varphi \rightarrow \psi ( \mbf{n}^\varphi ) & \mbox{IV.3.6 (c) applied to 5.}
+\end{array}
+\]
+%%
+\item $\Phi \vdash \psi (\mbf{n}^\varphi) \rightarrow \varphi$. We write
+\begin{center}
+\begin{enumerate}[1$^\circ$]
+\item $\exists z (\alpha(\mbf{n}^\beta, \mbf{n}^\beta, z) \land \forall u (\alpha(\mbf{n}^\beta, \mbf{n}^\beta, u) \rightarrow z \equiv u))$ for $\exists^{=1} z \alpha(\mbf{n}^\beta, \mbf{n}^\beta, z)$,
+%%%
+\item $\gamma$ for $\forall u (\alpha(\mbf{n}^\beta, \mbf{n}^\beta, u) \rightarrow v \equiv u)$, and
+%%%
+\item $\delta$ for $\alpha(\mbf{n}^\beta, \mbf{n}^\beta, v) \land \gamma$,
+\end{enumerate}
+\end{center}
+where $v \neq z$ is chosen not to be free in $\Gamma \ \exists^{=1} z \alpha( \mbf{n}^\beta, \mbf{n}^\beta, z)$ or $\psi(z)$.\newpage
+\[
+\begin{array}{rlll}
+1. & \Gamma & \alpha(\mbf{n}^\beta, \mbf{n}^\beta, \mbf{n}^\varphi) & \mbox{premise} \cr
+2. & \Gamma & \exists^{=1} z \alpha(\mbf{n}^\beta, \mbf{n}^\beta, z) & \mbox{premise} \cr
+3. & \Gamma & \delta \ \delta & \mbox{(Assm)} \cr
+4. & \Gamma & \delta \ \gamma & \mbox{IV.3.6(d2) applied} \cr
+\ & \ & \ & \mbox{to 3.} \cr
+5. & \Gamma & \delta \ \alpha(\mbf{n}^\beta, \mbf{n}^\beta, \mbf{n}^\varphi) \rightarrow v \equiv \mbf{n}^\varphi & \mbox{IV.5.5(a1) applied} \cr
+\ & \ & \ & \mbox{to 4. with $t = \mbf{n}^\varphi$} \cr
+6. & \Gamma & \delta \ \alpha(\mbf{n}^\beta, \mbf{n}^\beta, \mbf{n}^\varphi) & \mbox{(Ant) applied to 1.} \cr
+7. & \Gamma & \delta \ v \equiv \mbf{n}^\varphi & \mbox{IV.3.5 applied to 5.} \cr
+\ & \ & \ & \mbox{and 6.} \cr
+8. & \Gamma & \delta \ v \equiv \mbf{n}^\varphi \ \gamma \df{\mbf{n}^\varphi}{v} & \mbox{(Sub) applied to 4.} \cr
+9. & \Gamma & \delta \ \gamma \df{\mbf{n}^\varphi}{v} & \mbox{(Ch) applied to 7.} \cr
+\ & \ & \ & \mbox{and 8.} \cr
+10. & \Gamma & \exists^{=1} z \alpha(\mbf{n}^\beta, \mbf{n}^\beta, z) \ \gamma \df{\mbf{n}^\varphi}{v} & \mbox{($\exists$A) applied to 9.} \cr
+11. & \Gamma & \gamma \df{\mbf{n}^\varphi}{v} & \mbox{(Ch) applied to 2.} \cr
+\ & \ & \ & \mbox{and 10.} \cr
+12. & \Gamma & \alpha ( \mbf{n}^\beta, \mbf{n}^\beta, v) \rightarrow \mbf{n}^\varphi \equiv v & \mbox{IV.5.5(a1) applied} \cr
+\ & \ & \ & \mbox{to 11.} \cr
+13. & \Gamma & \alpha ( \mbf{n}^\beta, \mbf{n}^\beta, v) \ \alpha ( \mbf{n}^\beta, \mbf{n}^\beta, v) \rightarrow \mbf{n}^\varphi \equiv v & \mbox{(Ant) applied to 12.} \cr
+14. & \Gamma & \alpha ( \mbf{n}^\beta, \mbf{n}^\beta, v) \ \alpha ( \mbf{n}^\beta, \mbf{n}^\beta, v) & \mbox{(Assm)} \cr
+15. & \Gamma & \alpha ( \mbf{n}^\beta, \mbf{n}^\beta, v) \ \mbf{n}^\varphi \equiv v & \mbox{IV.3.5 applied to 13.} \cr
+\ & \ & \ & \mbox{and 14.} \cr
+16. & \Gamma & \alpha ( \mbf{n}^\beta, \mbf{n}^\beta, v) \ v \equiv \mbf{n}^\varphi & \mbox{IV.5.3(a) applied} \cr
+\ & \ & \ & \mbox{to 15.} \cr
+17. & \Gamma & \alpha ( \mbf{n}^\beta, \mbf{n}^\beta, v) \rightarrow v \equiv \mbf{n}^\varphi & \mbox{IV.3.6(c) applied} \cr
+\ & \ & \ & \mbox{to 16.} \cr
+18. & \Gamma & \forall z (\alpha ( \mbf{n}^\beta, \mbf{n}^\beta, z) \rightarrow z \equiv \mbf{n}^\varphi) & \mbox{IV.5.5(b2) applied} \cr
+\ & \ & \ & \mbox{to 17.} \cr
+19. & \Gamma & \psi(\mbf{n}^\varphi) \ \alpha(\mbf{n}^\beta, \mbf{n}^\beta, v) \ \psi(\mbf{n}^\varphi) & \mbox{(Assm)} \cr
+20. & \Gamma & \psi(\mbf{n}^\varphi) \ \alpha(\mbf{n}^\beta, \mbf{n}^\beta, v) \ \mbf{n}^\varphi \equiv v & \mbox{(Ant) applied to 15.} \cr
+21. & \Gamma & \psi(\mbf{n}^\varphi) \ \alpha(\mbf{n}^\beta, \mbf{n}^\beta, v) \ \mbf{n}^\varphi \equiv v \ \psi(v) & \mbox{($\equiv$) applied to 19.} \cr
+22. & \Gamma & \psi(\mbf{n}^\varphi) \ \alpha(\mbf{n}^\beta, \mbf{n}^\beta, v) \ \psi(v) & \mbox{(Ch) applied to 20.} \cr
+\ & \ & \ & \mbox{and 21.} \cr
+23. & \Gamma & \psi(\mbf{n}^\varphi) \ \alpha(\mbf{n}^\beta, \mbf{n}^\beta, v) \rightarrow \psi(v) & \mbox{IV.3.6(c) applied} \cr
+\ & \ & \ & \mbox{to 22.} \cr
+24. & \Gamma & \psi(\mbf{n}^\varphi) \ \forall z ( \alpha ( \mbf{n}^\beta, \mbf{n}^\beta, z ) \rightarrow \psi(z) ) & \mbox{IV.5.5(b2) applied} \cr
+\ & \ & \ & \mbox{to 23.} \cr
+25. & \Gamma & \psi(\mbf{n}^\varphi) \rightarrow \forall z ( \alpha ( \mbf{n}^\beta, \mbf{n}^\beta, z ) \rightarrow \psi(z) ) & \mbox{IV.3.6(c) applied} \cr
+\ & \ & \ & \mbox{to 24.}
+\end{array}
+\]
+\end{enumerate}
+The sequent at line 18 corresponds to the subgoal $\Phi \vdash \forall z ( \alpha ( \mbf{n}^\beta, \mbf{n}^\beta, z ) \rightarrow z \equiv \mbf{n}^\varphi )$;\footnote{A derivation for the ultimate goal only can be obtained by eliminating lines 16 - 18.} the succedent $\psi(\mbf{n}^\varphi) \rightarrow \forall z ( \alpha ( \mbf{n}^\beta, \mbf{n}^\beta, z ) \rightarrow \psi(z) )$ of the sequent at line 25 is $\varphi$.\\
+\ \\
+Also note that we could have chosen in the proof the function $F : \nat \to \nat$,
+\[
+F(m) = \begin{cases}
+n^{\chi (\mbf{m}) }, & \mbox{if \(m = n^\chi\) for some \(\chi \in L_1^{S_\ar}\)}; \cr
+0,                   & \mbox{otherwise}.
+\end{cases}
+\]
+This way we would obtain the same result.\\
+\ \\
+\textit{Remark.} The choice of $\beta (x)$ mentioned earlier somehow reminds me of Russel's paradox: For the set $S \colonequals \{ \mbox{\begin{math}x\end{math} is a set} \ | \ x \not\in x \}$, we have for all sets $x$,
+\begin{center}
+$x \in S$ \ \ \ iff \ \ \ $x \not\in x$.
+\end{center}
+In particular, for $x = S$,
+\begin{center}
+$S \in S$ \ \ \ iff \ \ \ $S \not\in S$.
+\end{center}
+[IMCOPLETE: Consider the relation between 7.5 and halting problem.]
+%
+\item \textbf{Note to Lemma 7.6.} It immediately follows that, for any consistent set $\Phi \subset L_0^{S_\ar}$ which allows representations, the set $\Phi^\vdash$ is R-undecidable.\\
+\ \\
+Following the same argument in the proof, we obtain that for any consistent set $\Phi \subset L_0^{S_\ar}$ which allows representations, the set $\Psi \colonequals \{ \psi \in L^{S_\ar} \ | \ \Phi \vdash \psi \}$ is not representable in $\Phi$ and hence is also R-undecidable.
+%
+\item* \textbf{Note to G\"{o}del's First Incompleteness Theorem 7.8.} Note that $\Phi^\vdash = \Phi^{\models}$, it is a theory.\\
+\ \\
+As a corollary to this theorem, there is an $S_\ar$-sentence $\varphi$, such that neither $\Phi_\pa \vdash \varphi$ nor $\Phi_\pa \vdash \varphi$.\\
+\ \\
+On the other hand, the notion of \emph{completeness} mentioned here is quite different from the one mentioned in Chapter V: The completeness mentioned in Chapter V, together with the correctness, states that the notion of consequence (which is semantical) coincides with the notion of theorem (which is syntactical), respectively; whereas the completeness here concerns a system of axioms and a sentence in regard of derivability, it differs from the negation completeness mentioned in part (a) of V.1.8 only in that here it restricts to the case of \emph{sentences}, and it is basically symmetrical to the completeness defined in 6.4\footnote{Interestingly, from the Completeness Theorem proved in Chapter V (together with the Correctness Theorem), it follows that these two terms coincide.} (which amounts to concerning consequence relation between a system of axioms and a sentence).\\
+\ \\
+Moreover, following the argument in Exercise 6.6, this theorem can be generalized to the case in which $\Phi$ is consistent, \emph{R-enumerable}, and allows representations.
+%
+\item* \textbf{Formulating Predicates Over $\nat$ for Deriving L\"{o}b's Axioms.} We will, throughout this note, use $\tau$ with subscripts to abbreviate some particular terms in $T^{S_\ar}$, and $\chi$ with subscripts some particular formulas in $L^{S_\ar}$; the subscripts are self-explanatory.\\
+\ \\
+The formula (should use bounded quantifiers!)
+\[
+\begin{array}{l}
+\chi_\sbt (v_0, v_1, v_2, v_3) \colonequals \cr
+\phantom{\land} (v_0 \equiv 1 \rightarrow v_3 \equiv 0) \cr
+\land (v_0 \equiv \mathbf{2} \rightarrow v_3 \equiv 1) \cr
+\land (\exists v_4(v_0 \equiv \mathbf{3} \cdot v_4  \land v_1 \equiv v_4) \rightarrow v_3 \equiv v_2) \cr
+\land (\exists v_4(v_0 \equiv \mathbf{3} \cdot v_4 \land \neg v_1 \equiv v_4) \rightarrow v_3 \equiv v_0) \cr
+\land (\exists v_4 \exists v_5 \mathbf{3} \cdot (v_4 + v_5) \cdot (v_4 + v_5) + \mathbf{9} \cdot v_4 + \mathbf{3} \cdot v_5 + \mathbf{2} \equiv \mathbf{2} \cdot v_0 \cr
+\phantom{\land(} \rightarrow \forall v_6 \forall v_7 ((\chi_\sbt (v_4, v_1, v_2, v_6) \land \chi_\sbt (v_5, v_1, v_2, v_7)) \cr
+\phantom{\land(\rightarrow \forall v_6 \forall v_7)} \rightarrow \mathbf{3} \cdot (v_6 + v_7) \cdot (v_6 + v_7) + \mathbf{9} \cdot v_6 + \mathbf{3} \cdot v_7 + \mathbf{2} \equiv \mathbf{2} \cdot v_3 \cr
+\phantom{\land(\rightarrow \forall v_6 \forall v_7} ) \cr
+\phantom{\land} ) \cr
+\land (\exists v_4 \exists v_5 \mathbf{3} \cdot (v_4 + v_5) \cdot (v_4 + v_5) + \mathbf{9} \cdot v_4 + \mathbf{3} \cdot v_5 + \mathbf{4} \equiv \mathbf{2} \cdot v_0 \cr
+\phantom{\land(} \rightarrow \forall v_6 \forall v_7 ((\chi_\sbt (v_4, v_1, v_2, v_6) \land \chi_\sbt (v_5, v_1, v_2, v_7)) \cr
+\phantom{\land(\rightarrow \forall v_6 \forall v_7)} \rightarrow 
+\mathbf{3} \cdot (v_6 + v_7) \cdot (v_6 + v_7) + \mathbf{9} \cdot v_6 + \mathbf{3} \cdot v_7 + \mathbf{4} \equiv \mathbf{2} \cdot v_3 \cr
+\phantom{\land(\rightarrow \forall v_6 \forall v_7} ) \cr
+\phantom{\land} )
+\end{array}
+\]
+formulates that $v_3$ encodes the term encoded by $v_0$ in which all the occurrences of the variable encoded by $3v_1$ is substituted by those of the term encoded by $v_2$.\\
+\ \\
+The formulas
+\[
+\begin{array}{lll}
+\chi_\atm (v_0) & \colonequals & \exists v_1 \ v_0 \equiv \mathbf{4} \cdot v_1, \cr
+\chi_\ngt (v_0) & \colonequals & \exists v_1 \ v_0 \equiv \mathbf{4} \cdot v_1 + 1, \cr
+\chi_\dsj (v_0) & \colonequals & \exists v_1 \exists v_2 \ v_0 \equiv \mathbf{2} \cdot (v_1 + v_2) \cdot (v_1 + v_2) + \mathbf{6} \cdot v_1 + \mathbf{2} \cdot v_2 + \mathbf{2}, \cr
+\chi_\ext (v_0) & \colonequals & \exists v_1 \exists v_2 \ v_0 \equiv \mathbf{2} \cdot (v_1 + v_2) \cdot (v_1 + v_2) + \mathbf{6} \cdot v_1 + \mathbf{2} \cdot v_2 + \mathbf{3}
+\end{array}
+\]
+formulate that the formula encoded by $v_0$ is atomic, is a negation, is a disjunction, and begins with an (existential) quantifier, respectively.\\
+\ \\
+The formula
+\[
+\chi_\sbf (v_0, v_1, v_2, v_3) \colonequals
+\]
+
+Define the function $f : \nat \to \nat$ as
+\[
+f(n) \colonequals \begin{cases}
+n & \mbox{if \(\chi_\drn (n)\)}; \cr
+7 & \mbox{otherwise},
+\end{cases}
+\]
+in which $7$ encodes the derivation
+\[
+\begin{array}{lll}
+1. & v_0 \equiv v_0 & \mbox{$\eq$}
+\end{array}
+\]
+In other words, if $n \in \nat$ encodes some derivation, then it remains unchanged under the mapping $f$; otherwise it is mapped to (the encoding of) the simple derivation above.\\
+\ \\
+$f$ is represented by a $\Delta_0$-formula
+\[
+\chi_f.
+\]
+\ \\
+Finally, we can take $\varphi_H$ as
+\[
+\varphi_H (v_0, v_1) \colonequals \exists^{=1} v_2 (\chi_f (v_1, v_2) \land \chi (v_2, v_0) ),
+\]
+where $\chi (v_2, v_0)$ formulates ``$v_0$ encodes the the succedent of the last sequent of the derivation encoded by $v_2$.''
+%
+\item* \textbf{Identifying Derivations From $\Phi_\pa$ with Natural Numbers.} As was stated in IV.1, a derivation is a nonempty sequence of sequents; whereas a sequent is a nonempty sequence of formulas, consisting of a (possibly empty) sequence of formulas called the antecedent and a single formula called the succedent.\\
+\ \\
+For the sake of our discussion on Theorem 7.10, we will pose the restriction on sequents that if the antecedent is nonempty, then it consists of different formulas, that is, repititions of formulas are not allowed; moreover, the formulas therein are sorted in the order of increasing G\"{o}del numbers. For example, the antecedent of the sequent
+\[
+\begin{array}{lll}
+v_0 \equiv v_0 & \neg v_0 \equiv v_0 & (v_0 \equiv v_0 \lor v_0 \equiv v_0)
+\end{array}
+\]
+is
+\[
+\begin{array}{ll}
+v_0 \equiv v_0 & \neg v_0 \equiv v_0,
+\end{array}
+\]
+and the two formulas above have G\"{o}del numbers $0$ and $1$, respectively.\\
+\ \\
+Next, we encode sequents as natural numbers. More precisely, given an arbitrary sequent $\varphi_0 \ldots \varphi_n$, the antecedent is encoded as
+\[
+S(a_0, \ldots, a_{n - 1}),
+\]
+(cf. \textbf{Encoding Finite Sequences Over $\nat$ with Cantor's Pairing Function} for the definition of $S$) where
+\begin{enumerate}[(1)]
+\item $a_0 = G_F(\varphi_0)$, the G\"{o}del number of $\varphi_0$ ($G_F$ for \emph{G\"{o}del numbering for formulas});
+%%
+\item $a_{k + 1} = G_F(\varphi_{k + 1}) - G_F(\varphi_k) - 1$ for $0 \leq k < n - 1$.
+\end{enumerate}
+If the antecedent is empty (i.e. $n = 0$), then naturally it is encoded as $S(\Box) = 0$. Take the sequent given in the previous paragraph as an example, the antecedent is encoded as
+\[
+\begin{array}{ll}
+\ & S(0, 1 - 0 - 1) \cr
+= & S(0, 0) \cr
+= & P(0, P(0, 0) + 1) + 1 \cr
+= & P(0, 1) + 1 \cr
+= & 1 + 1 \cr
+= & 2.
+\end{array}
+\]
+And then the whole sequent is encoded as
+\[
+P(S(a_0, \ldots, a_{n - 1}), G_F(\varphi_n)),
+\]
+where $S(a_0, \ldots, a_{n - 1})$ encodes the antecedent. Obviously the mapping from sequents to $\nat$ is bijective if $G_F$ is.\\
+\ \\
+We further encode sequences of sequents in a usual way: $S(a_0, \ldots, a_n)$ encodes a (nonempty) sequence of sequents in which $a_{k - 1}$ encodes the $k$th sequent for $0 \leq k \leq n$.\\
+\ \\
+Certainly not all natural numbers encode a derivation. Derivations are those (nonempty) sequences of sequents satisfying some conditions. [INCOMPLETE.]
+%
+\item \textbf{Note to Lemma 7.9 and the Arguments around It.} Recall that in the proof of 1.6, a procedure for enumerating all derivations for the symbol set $S_\infty$ was given. A procedure for enumerating all derivations in the sequent calculus associated with $S_\ar$ is essentially the same.\\
+\ \\
+The relation $H$ stated in text is representable in $\Phi$; the $S_\ar$-formula $\varphi_H (v_0, v_1)$ represents it. Given any $n, m \in \nat$, if $H n m$ holds then $\Phi \vdash \varphi_H (\mbf{n}, \mbf{m})$, otherwise $\Phi \vdash \neg\varphi_H (\mbf{n}, \mbf{m})$.\\
+\ \\
+It is, however, not the case for $\Phi \vdash \delta$: The formula $\Der{\Phi}(v_0)$ does \emph{not} represent it. As was demonstrated by 6.6, the set $\Phi^\vdash$ is not representable in $\Phi$; furthermore, the set $\Psi \colonequals \{ \psi \in L^{S_\ar} \ | \ \Phi \vdash \psi \}$ is also not representable in $\Phi$. (cf. \textbf{Note to Lemma 7.6}) That is to say, we do \emph{not} have for every $\delta \in L^{S_\ar}$,
+\begin{center}
+if not $\Phi \vdash \delta$ then $\Phi \vdash \neg\Der{\Phi}(\mbf{n}^\delta)$,
+\end{center}
+provided that $\Phi$ is consistent;\footnote{We may have $\neg\varphi_H(\mbf{n}^\delta, \mbf{m})$ for all $m \in \nat$ (i.e. not $\Phi \vdash \delta$) but $\Phi \vdash \Der{\Phi}(\mbf{n}^\delta)$, even if $\Phi$ is consistent. $\neg\Der{\Phi}(\mbf{n}^\varphi)$ says more than just ``$\varphi$ is not derivable from $\Phi$.''} though $\Phi \vdash \varphi_H (\mbf{n}^\delta, \mbf{m})$ for some $m \in \nat$ and hence $\Phi \vdash \Der{\Phi}(\mbf{n}^\delta)$ if $\Phi \vdash \delta$. Moreover, suppose $\Phi$ is consistent, if $\Phi \vdash \neg\Der{\Phi}(\mbf{n}^\delta)$ then not $\Phi \vdash \delta$. In summary,
+\begin{enumerate}[(1)]
+\item ``$\Phi \vdash \delta$'' necessarily implies ``$\Phi \vdash \Der{\Phi}(\mbf{n}^\delta)$''; if in addition $\Phi$ is consistent, then ``$\Phi \vdash \neg\Der{\Phi}(\mbf{n}^\delta)$'' necessarily implies ``not $\Phi \vdash \delta$'';
+%%
+\item ``not $\Phi \vdash \delta$'' does not imply ``$\Phi \vdash \neg\Der{\Phi}(\mbf{n}^\delta)$''.
+\end{enumerate}
+\ \\
+Also note that the terms here are only slightly different from those in the proof of 6.6. To be precise, see the following comparisons:
+\begin{center}
+\begin{tabular}{lll}
+$\psi(v_0) \colonequals \neg\gamma(v_0)$ & $\psi(\mbf{n}^\delta) = \neg\chi(\mbf{n}^\delta)$ (cf. 6.6) & $\psi = \neg\Der{\Phi}(\mbf{n}^\delta)$ \cr \hline\hline
+\textsc{meaning} & $\delta$ is a \emph{sentence} not & $\exists v_1 \varphi_H$ is not true for the \cr
+\                & derivable from $\Phi$          & \emph{formula} $\delta$ \cr
+\                & \                              & (hence $\neg\varphi_H(\mbf{n}^\delta, \mbf{m})$ for all \cr
+\                & \                              & $m \in \nat$; not $\Phi \vdash \delta$) \cr
+\ & \ & \ \cr
+\textsc{what the} & ``I am a \emph{sentence} & ``I am a \emph{formula} \cr
+\textsc{fixed point} & not derviable from $\Phi$'' & not derivable from $\Phi$'' \cr
+$\varphi$ \textsc{means} & \ & (More precisely: ``$\exists v_1 \varphi_H$ \cr
+\ & \ & does not hold for me'') \cr
+\ & \ & \ \cr
+$\gamma$ \textsc{represents} & No & No \cr
+\textsc{$\Phi \vdash \delta$?} & \ & \ \cr\hline
+\end{tabular}
+\end{center}
+The formula $\chi(v_0)$ mentioned in 6.6 is logically equivalent to a formula involving $\Der{\Phi}(v_0)$: Since the set of all $S_\ar$-sentences is R-decidable (cf. essentially Exercise 1.3(b)) and so is $\Delta \colonequals \{ \mbf{n}^\delta \ | \ \delta \in L_0^{S_\ar} \}$, there is an $S_\ar$-formula $\delta_0(v_0)$ that represents $\Delta$ in $\Phi$. $\chi(v_0)$ is logically equivalent to $\Der{\Phi}(v_0) \land \delta_0(v_0)$.\\
+\ \\
+Finally, according to the discussion above, if $\Phi$ is consistent, then
+\[
+\Phi \vdash \consis{\Phi}
+\]
+implies
+\begin{center}
+not $\Phi \vdash \neg 0 \equiv 0$.
+\end{center}
+However, we cannot conclude the consistency of $\Phi$ by merely observing $\Phi \vdash \consis{\Phi}$, since for an inconsistent $\Phi$ we still have $\Phi \vdash \consis{\Phi}$; on the other hand, we may have $\Phi \vdash \Der{\Phi}(\mbf{n}^{\neg 0 \equiv 0})$ even though $\Phi$ is consistent.\\
+\ \\
+The situation is quite different for those sets $\Phi \subset L_0^{S_\ar}$ such that its theory $\Phi^{\models}$ is \emph{$\omega$-consistent} (cf. \cite{Dirk_van_Dalen}). A theory $T$ is $\omega$-consistent if for every $\psi(x) \in L_1^{S_\ar}$, $\psi(\mbf{n}) \in T$ for some $n \in \nat$ whenever $\exists x \psi(x) \in T$. Intuitively, $T$ being $\omega$-consistent says that there is a witness for every existential sentence that is a consequence of $T$. If $\Phi^{\models}$ is $\omega$-consistent, then $\Phi$ is consistent; the converse does not hold. Trivially, for $\omega$-consistent $\Phi^{\models}$, we do not have
+\[
+\Phi \vdash \Der{\Phi}(\mbf{n}^{\neg 0 \equiv 0});
+\]
+furthermore, for the fixed point $\varphi$ of $\neg\Der{\Phi}(x)$, we have
+\begin{center}
+not $\Phi \vdash \neg\varphi$,
+\end{center}
+for otherwise we would have $\Phi \vdash \Der{\Phi}(\mbf{n}^\varphi)$ and hence $\Phi \vdash \varphi$, which contradicts $\Phi$ being consistent (or equivalently, $\Phi^{\models}$ being $\omega$-consistent). In such a case, $\varphi$ serves as a concrete evidence for $\Phi$ being incomplete (cf. 7.9), in regard of 7.8. Clearly, for any arbitrary set $\Phi \subset L_0^{S_\ar}$ such that $\natstr \in \modelclass{S_\ar}{\Phi}$ (i.e. $\natstr$ is a model of $\Phi$), $\Phi^{\models}$ is $\omega$-consistent. In particular, $\Th_\pa$ is $\omega$-consistent.\\
+\ \\
+Thus, if $\Phi$ is R-decidable and allows representations such that $\natstr \in \modelclass{S_\ar}{\Phi}$, then for the fixed point $\varphi$ of $\neg\Der{\Phi}(x)$ we have
+\begin{center}
+neither $\Phi \vdash \varphi$ nor $\Phi \vdash \neg\varphi$.
+\end{center}
+However, it is true that $\natstr \models \varphi$: First of all, we have
+\begin{center}
+either $\natstr \models \varphi$ or $\natstr \models \neg\varphi$,
+\end{center}
+thus it suffices to show that $\natstr \models \neg\varphi$ is impossible. For the sake of contradiction, let us assume that $\natstr \models \neg\varphi$. Then we have $\natstr \models \Der{\Phi}(\mbf{n}^\varphi)$, or $\natstr \models \exists y \varphi_H(\mbf{n}^\varphi, y)$. It follows that there is some $m \in \nat$ such that $\natstr \models \varphi_H(\mbf{n}^\varphi, \mbf{m})$ and also $\Phi \vdash \varphi_H(\mbf{n}^\varphi, \mbf{m})$, hence $\Phi \vdash \varphi$ or $\nat \models \varphi$, a contradiction. The sentence $\varphi$ is traditionally called a \emph{G\"{o}del sentence} of $\Phi$, a sentence true of $\natstr$ and nevertheless underivable from $\Phi$. It is easy to verify that for any R-decidable $\Phi$ that allows representations with $\natstr \in \modelclass{S_\ar}{\Phi}$, there always exists such a G\"{o}del sentence $\varphi$.\\
+\ \\
+$[$INCOMPLETE: The ($***$) in text would be directly obtained if we added the following 5 sentences to $\Phi$:
+\begin{enumerate}[(1)]
+\item $(\Der{\Phi}(\mbf{n}^{(\varphi \land \neg\varphi)}) \rightarrow \Der{\Phi}(\mbf{n}^{\neg 0 \equiv 0}))$;
+%%
+\item $(\Der{\Phi}(\mbf{n}^\varphi) \rightarrow \Der{\Phi}(\mbf{n}^{(\neg\varphi \rightarrow (\varphi \land \neg\varphi))}))$;
+%%
+\item $((\Der{\Phi}(\mbf{n}^{\neg\varphi}) \land \Der{\Phi}(\mbf{n}^{(\neg\varphi \rightarrow (\varphi \land \neg\varphi))})) \rightarrow \Der{\Phi}(\mbf{n}^{(\varphi \land \neg\varphi)}))$;
+%%
+\item $(\Der{\Phi}(\mbf{n}^{\Der{\Phi}(\mbfs{n}^\varphi)}) \rightarrow \Der{\Phi}(\mbf{n}^{\neg\varphi}))$; and
+%%
+\item $(\Der{\Phi}(\mbf{n}^\varphi) \rightarrow \Der{\Phi}(\mbf{n}^{\Der{\Phi}(\mbfs{n}^\varphi)}))$.
+\end{enumerate}
+where $\varphi$ is the fixed point of $\Der{\Phi}(x)$, i.e. $\Phi \vdash \varphi \leftrightarrow \neg\Der{\Phi}(\mbf{n}^\varphi)$.$]$
+%
+\item \textbf{Note to G\"{o}del's Second Incompleteness Theorem 7.10.} If $\Phi \supset \Phi_\pa$, then $\Phi$ allows representations (cf. 7.2(b) and 7.4).
+%
+\item* \textbf{Solution to Exercise 7.12.} As suggested by the hint, we first prove
+\begin{center}
+\begin{tabular}{ll}
+(D1) & for all $\varphi, \psi \in L^S$, $\Phi \vdash (\der{\varphi} \land \der{\psi} \rightarrow \der{(\varphi \land \psi)})$; and \cr
+(D2) & $\Phi \vdash (\der{\varphi_0} \rightarrow \der{\neg\varphi_0})$,
+\end{tabular}
+\end{center}
+provided that the formula $\mathrm{der}(v_0)$ for $\Phi$ satisfies (L1) - (L3).\\
+\ \\
+(D1). Let $\varphi, \psi \in L^S$ be given. Since $\vdash (\varphi \rightarrow (\psi \rightarrow (\varphi \land \psi)))$:
+\[
+\begin{array}{lllll}
+1. & \varphi & \psi & \varphi & \mbox{(Assm)} \cr
+2. & \varphi & \psi & \psi    & \mbox{(Assm)} \cr
+3. & \varphi & \psi & (\varphi \land \psi) & \mbox{IV.3.6(b) applied to 1. and 2.} \cr
+4. & \varphi & \    & (\psi \rightarrow (\varphi \land \psi)) & \mbox{IV.3.6(c) applied to 3.} \cr
+5. & \       & \    & (\varphi \rightarrow (\psi \rightarrow (\varphi \land \psi))) & \mbox{IV.3.6(c) applied to 4.}
+\end{array}
+\]
+we have that $\Phi \vdash (\varphi \rightarrow (\psi \rightarrow (\varphi \land \psi)))$, and further by (L1) that\\
+\begin{tabular}{ll}
+(1) & $\Phi \vdash \der{(\varphi \rightarrow (\psi \rightarrow (\varphi \land \psi)))}$.
+\end{tabular}
+\\
+In addition, by (L2) and (L3) we have, respectively, that\\
+\begin{tabular}{ll}
+(2) & $\Phi \vdash (\der{\varphi} \land \der{(\varphi \rightarrow (\psi \rightarrow (\varphi \land \psi)))} \rightarrow \der{(\psi \rightarrow (\varphi \land \psi))})$; and that \cr
+(3) & $\Phi \vdash (\der{\psi} \land \der{(\psi \rightarrow (\varphi \land \psi))} \rightarrow \der{(\varphi \land \psi)})$.
+\end{tabular}
+\\
+We can pick a sequent $\Gamma_1 \subset \Phi$ such that (1) - (3) holds; or more precisely, the following hold:
+\begin{center}
+\begin{tabular}{l}
+$\Gamma_1 \vdash \der{(\varphi \rightarrow (\psi \rightarrow (\varphi \land \psi)))}$; \cr
+$\Gamma_1 \vdash (\der{\varphi} \land \der{(\varphi \rightarrow (\psi \rightarrow (\varphi \land \psi)))} \rightarrow \der{(\psi \rightarrow (\varphi \land \psi))})$; and \cr
+$\Gamma_1 \vdash (\der{\psi} \land \der{(\psi \rightarrow (\varphi \land \psi))} \rightarrow \der{(\varphi \land \psi)})$.
+\end{tabular}
+\end{center}
+A derivation for $\Phi \vdash (\der{\varphi} \land \der{\psi} \rightarrow \der{(\varphi \land \psi)})$ is given below (we write $\delta_0$ for $(\der{\varphi} \land \der{\psi} \rightarrow \der{(\varphi \land \psi)}$, $\delta_1$ for $\der{(\varphi \rightarrow (\psi \rightarrow (\varphi \land \psi)))}$, $\delta_2$ for $(\der{\varphi} \land \der{(\varphi \rightarrow (\psi \rightarrow (\varphi \land \psi)))} \rightarrow \der{(\psi \rightarrow (\varphi \land \psi))})$, $\delta_3$ for $(\der{\psi} \land \der{(\psi \rightarrow (\varphi \land \psi))} \rightarrow \der{(\varphi \land \psi)})$, and $\delta_4$ for $(\der{\psi} \land \der{(\psi \rightarrow (\varphi \land \psi))})$, respectively):
+\[
+\begin{array}{lllll}
+1. & \Gamma_1 & \ & \delta_1 & \mbox{premise} \cr
+2. & \Gamma_1 & \ & \delta_2 & \mbox{premise} \cr
+3. & \Gamma_1 & \ & \delta_3 & \mbox{premise} \cr
+4. & \Gamma_1 & (\der{\varphi} \land \der{\psi}) & (\der{\varphi} \land \der{\psi}) & \mbox{(Assm)} \cr
+5. & \Gamma_1 & (\der{\varphi} \land \der{\psi}) & \der{\varphi} & \mbox{IV.3.6(d1) applied} \cr
+\  & \      & \                                & \             & \mbox{to 4.} \cr
+6. & \Gamma_1 & (\der{\varphi} \land \der{\psi}) & \der{\psi} & \mbox{IV.3.6(d2) applied} \cr
+\  & \      & \                                & \          & \mbox{to 4.} \cr
+7. & \Gamma_1 & (\der{\varphi} \land \der{\psi}) & \delta_1 & \mbox{(Ant) applied to 1.} \cr
+8. & \Gamma_1 & (\der{\varphi} \land \der{\psi}) & \delta_2 & \mbox{(Ant) applied to 2.} \cr
+9. & \Gamma_1 & (\der{\varphi} \land \der{\psi}) & \delta_3 & \mbox{(Ant) applied to 3.} \cr
+10. & \Gamma_1 & (\der{\varphi} \land \der{\psi}) & (\der{\varphi} \land \delta_1) & \mbox{IV.3.6(b) applied} \cr
+\   & \      & \                                & \                              & \mbox{to 5. and 7.} \cr
+11. & \Gamma_1 & (\der{\varphi} \land \der{\psi}) & \der{(\psi \rightarrow (\varphi \land \psi))} & \mbox{IV.3.5 applied to 8.} \cr
+\   & \      & \                                & \                                             & \mbox{and 10.} \cr
+12. & \Gamma_1 & (\der{\varphi} \land \der{\psi}) & \delta_4 & \mbox{IV.3.6(b) applied} \cr
+\   & \      & \                                & \ & \mbox{to 6. and 11.} \cr
+13. & \Gamma_1 & (\der{\varphi} \land \der{\psi}) & \der{(\varphi \land \psi)} & \mbox{IV.3.5 applied} \cr
+\ & \ & \ & \ & \mbox{to 9. and 12.} \cr
+14. & \Gamma_1 & \ & \delta_0 & \mbox{IV.3.6(c) applied} \cr
+\ & \ & \ & \ & \mbox{to 13.}
+\end{array}
+\]
+\ \\
+(D2). According to the premise $\Phi \vdash (\varphi_0 \leftrightarrow \neg\der{\varphi_0})$, we have that $\Phi \vdash (\der{\varphi_0} \rightarrow \neg\varphi_0)$: Let $\Gamma_2^\prime \subset \Phi$ be a sequent such that $\Gamma_2^\prime \vdash (\varphi_0 \leftrightarrow \neg\der{\varphi_0})$, then the derivation:
+\[
+\begin{array}{lllll}
+1. & \Gamma_2^\prime & \ & (\varphi_0 \leftrightarrow \neg\der{\varphi}) & \mbox{premise} \cr
+2. & \Gamma_2^\prime & \varphi_0 & \varphi_0 & \mbox{(Assm)} \cr
+3. & \Gamma_2^\prime & \varphi_0 & (\varphi_0 \leftrightarrow \neg\der{\varphi}) & \mbox{(Ant) applied to 1.} \cr
+4. & \Gamma_2^\prime & \varphi_0 & (\varphi_0 \lor \neg\der{\varphi_0}) & \mbox{($\lor$S) applied to 2.} \cr
+5. & \Gamma_2^\prime & \varphi_0 & (\varphi_0 \land \neg\der{\varphi_0}) & \mbox{IV.3.5 applied to 1. and 4.} \cr
+6. & \Gamma_2^\prime & \varphi_0 & \neg\der{\varphi_0} & \mbox{IV.3.6(d2) applied to 5.} \cr
+7. & \Gamma_2^\prime & \der{\varphi_0} & \neg\varphi_0 & \mbox{(Cp)(d) applied to 6.} \cr
+8. & \Gamma_2^\prime & \ & (\der{\varphi_0} \rightarrow \neg\varphi_0) & \mbox{IV.3.6(c) applied to 7.}
+\end{array}
+\]
+demonstrates that $\Phi \vdash (\der{\varphi_0} \rightarrow \neg\varphi_0)$.\\
+\ \\
+From (L1) it follows that\\
+\begin{tabular}{ll}
+(4) & $\Phi \vdash \der{(\der{\varphi_0} \rightarrow \neg\varphi_0)}$.
+\end{tabular}
+\\
+Moreover, by (L2) and (L3) we have, respectively, that\\
+\begin{tabular}{ll}
+(5) & $\Phi \vdash (\der{\der{\varphi_0}} \land \der{(\der{\varphi_0} \rightarrow \neg\varphi_0)} \rightarrow \der{\neg\varphi_0})$; and \cr
+(6) & $\Phi \vdash (\der{\varphi_0} \rightarrow \der{\der{\varphi_0}})$.
+\end{tabular}
+\\
+\ \\
+Then we can choose a sequent $\Gamma_2 \subset \Phi$ such that (4) - (6) hold, i.e.
+\begin{center}
+\begin{tabular}{l}
+$\Gamma_2 \vdash \der{(\der{\varphi_0} \rightarrow \neg\varphi_0)}$; \cr
+$\Gamma_2 \vdash (\der{\der{\varphi_0}} \land \der{(\der{\varphi_0} \rightarrow \neg\varphi_0)} \rightarrow \der{\neg\varphi_0})$; and \cr
+$\Gamma_2 \vdash (\der{\varphi_0} \rightarrow \der{\der{\varphi_0}})$.
+\end{tabular}
+\end{center}
+The derivation below shows that $\Phi \vdash (\der{\varphi_0} \rightarrow \der{\neg\varphi_0})$ (we write $\varepsilon_1$ for $\der{(\der{\varphi} \rightarrow \neg\varphi_0)}$, $\varepsilon_2$ for $(\der{\der{\varphi_0}} \land \der{(\der{\varphi_0} \rightarrow \neg\varphi_0)} \rightarrow \der{\neg\varphi_0})$, and $\varepsilon_3$ for $(\der{\varphi_0} \rightarrow \der{\der{\varphi_0}})$):
+\[
+\begin{array}{lllll}
+1. & \Gamma_2 & \ & \varepsilon_1 & \mbox{premise} \cr
+2. & \Gamma_2 & \ & \varepsilon_2 & \mbox{premise} \cr
+3. & \Gamma_2 & \ & \varepsilon_3 & \mbox{premise} \cr
+4. & \Gamma_2 & \der{\varphi_0} & \varepsilon_1 & \mbox{(Ant) applied to 1.} \cr
+5. & \Gamma_2 & \der{\varphi_0} & \varepsilon_2 & \mbox{(Ant) applied to 2.} \cr
+6. & \Gamma_2 & \der{\varphi_0} & \varepsilon_3 & \mbox{(Ant) applied to 3.} \cr
+7. & \Gamma_2 & \der{\varphi_0} & \der{\varphi_0} & \mbox{(Assm)} \cr
+8. & \Gamma_2 & \der{\varphi_0} & \der{\der{\varphi_0}} & \mbox{IV.3.5 applied to 6. and 7.} \cr
+9. & \Gamma_2 & \der{\varphi_0} & (\der{\der{\varphi_0}} \land \varepsilon_1) & \mbox{IV.3.6(b) applied to 8.} \cr
+\ & \ & \ & \ & \mbox{and 4.} \cr
+10. & \Gamma_2 & \der{\varphi_0} & \der{\neg\varphi_0} & \mbox{IV.3.5 applied to 5. and 9.} \cr
+11. & \Gamma_2 & \ & (\der{\varphi_0} \rightarrow \der{\neg\varphi_0}) & \mbox{IV.3.6(c) applied to 10.}
+\end{array}
+\]
+\ \\
+Next, observe that $\vdash (\varphi_0 \land \neg\varphi_0 \rightarrow \neg\underline{0} \equiv \underline{0})$:
+\[
+\begin{array}{llll}
+1. & (\varphi_0 \land \neg\varphi_0) & (\varphi_0 \land \neg\varphi_0) & \mbox{(Assm)} \cr
+2. & (\varphi_0 \land \neg\varphi_0) & \varphi_0 & \mbox{IV.3.6(d1) applied to 1.} \cr
+3. & (\varphi_0 \land \neg\varphi_0) & \neg\varphi_0 & \mbox{IV.3.6(d2) applied to 1.} \cr
+4. & (\varphi_0 \land \neg\varphi_0) & \neg\underline{0} \equiv \underline{0} & \mbox{(Ctr$^\prime$) applied to 2. and 3.} \cr
+5. & \ & (\varphi_0 \land \neg\varphi_0 \rightarrow \neg\underline{0} \equiv \underline{0}) & \mbox{IV.3.6(c) applied to 4.}
+\end{array}
+\]
+therefore $\Phi \vdash (\varphi_0 \land \neg\varphi_0 \rightarrow \neg\underline{0} \equiv \underline{0})$. From this and (L1) it follows that\\
+\begin{tabular}{ll}
+(7) & $\Phi \vdash \der{(\varphi_0 \land \neg\varphi_0 \rightarrow \neg\underline{0} \equiv \underline{0})}$.
+\end{tabular}
+\\
+Also, by (L2), (D1) and (D2), respectively, we get\\
+\begin{tabular}{ll}
+(8) & $\Phi \vdash (\der{(\varphi_0 \land \neg\varphi_0)} \land \der{(\varphi_0 \land \neg\varphi_0 \rightarrow \neg\underline{0} \equiv \underline{0})} \rightarrow \der{\neg\underline{0} \equiv \underline{0}})$; \cr
+(9) & $\Phi \vdash (\der{\varphi_0} \land \der{\neg\varphi_0} \rightarrow \der{(\varphi_0 \land \neg\varphi_0)})$; and \cr
+(10) & $\Phi \vdash (\der{\varphi_0} \rightarrow \der{\neg\varphi_0})$.
+\end{tabular}
+\\
+\ \\
+Hence we can pick a sequent $\Gamma \subset \Phi$ such that (7) - (10) hold:
+\begin{center}
+\begin{tabular}{l}
+$\Gamma \vdash \der{(\varphi_0 \land \neg\varphi_0 \rightarrow \neg\underline{0} \equiv \underline{0})}$; \cr
+$\Gamma \vdash (\der{(\varphi_0 \land \neg\varphi_0)} \land \der{(\varphi_0 \land \neg\varphi_0 \rightarrow \neg\underline{0} \equiv \underline{0})} \rightarrow \der{\neg\underline{0} \equiv \underline{0}})$; \cr
+$\Gamma \vdash (\der{\varphi_0} \land \der{\neg\varphi_0} \rightarrow \der{(\varphi_0 \land \neg\varphi_0)})$; and \cr
+$\Gamma \vdash (\der{\varphi_0} \rightarrow \der{\neg\varphi_0})$.\cr
+\end{tabular}
+\end{center}
+The derivation below shows that $\Phi \vdash (\neg\der{\neg\underline{0} \equiv \underline{0}} \rightarrow \neg\der{\varphi_0})$ (we write $\chi_1$ for $\der{(\varphi_0 \land \neg\varphi_0)}$, $\chi_2$ for $\der{(\varphi_0 \land \neg\varphi_0 \rightarrow \neg\underline{0} \equiv \underline{0})}$, and $\chi_3$ for $(\der{\varphi_0} \land \der{\neg\varphi_0})$, respectively):
+\[
+\begin{array}{lllll}
+1. & \Gamma & \ & \chi_2 & \mbox{premise} \cr
+2. & \Gamma & \ & (\chi_1 \land \chi_2 \rightarrow \der{\neg\underline{0} \equiv \underline{0}}) & \mbox{premise} \cr
+3. & \Gamma & \ & (\chi_3 \rightarrow \chi_1) & \mbox{premise} \cr
+4. & \Gamma & \ & (\der{\varphi_0} \rightarrow \der{\neg\varphi_0}) & \mbox{premise} \cr
+5. & \Gamma & \der{\varphi_0} & \chi_2 & \mbox{(Ant) applied to 1.} \cr
+6. & \Gamma & \der{\varphi_0} & (\chi_1 \land \chi_2 \rightarrow \der{\neg\underline{0} \equiv \underline{0}}) & \mbox{(Ant) applied to 2.} \cr
+7. & \Gamma & \der{\varphi_0} & (\chi_3 \rightarrow \chi_1) & \mbox{(Ant) applied to 3.} \cr
+8. & \Gamma & \der{\varphi_0} & (\der{\varphi_0} \rightarrow \der{\neg\varphi_0}) & \mbox{(Ant) applied to 4.} \cr
+9. & \Gamma & \der{\varphi_0} & \der{\varphi_0} & \mbox{(Assm)} \cr
+10. & \Gamma & \der{\varphi_0} & \der{\neg\varphi_0} & \mbox{IV.3.5 applied to 8.} \cr
+\ & \ & \ & \ & \mbox{and 9.} \cr
+11. & \Gamma & \der{\varphi_0} & \chi_3 & \mbox{IV.3.6(b) applied} \cr
+\ & \ & \ & \ & \mbox{to 9. and 10.} \cr
+12. & \Gamma & \der{\varphi_0} & \chi_1 & \mbox{IV.3.5 applied to 7.} \cr
+\ & \ & \ & \ & \mbox{and 11.} \cr
+13. & \Gamma & \der{\varphi_0} & (\chi_1 \land \chi_2) & \mbox{IV.3.6(b) applied} \cr
+\ & \ & \ & \ & \mbox{to 12. and 5.} \cr
+14. & \Gamma & \der{\varphi_0} & \der{\neg\underline{0} \equiv \underline{0}} & \mbox{IV.3.5 applied to 6.} \cr
+\ & \ & \ & \ & \mbox{and 13.} \cr
+15. & \Gamma & \neg\der{\neg\underline{0} \equiv \underline{0}} & \neg\der{\varphi_0} & \mbox{(Cp)(a) applied} \cr
+\ & \ & \ & \ & \mbox{to 14.} \cr
+16. & \Gamma & \ & (\neg\der{\neg\underline{0} \equiv \underline{0}} \rightarrow \neg\der{\varphi_0}) & \mbox{IV.3.6(c) applied} \cr
+\ & \ & \ & \ & \mbox{to 15.}
+\end{array}
+\]
+\ \\
+Finally, from the following argument we conclude that
+\begin{center}
+not $\Phi \vdash \neg\der{\neg\underline{0} \equiv \underline{0}}$.
+\end{center}
+If $\Phi \vdash \neg\der{\neg\underline{0} \equiv \underline{0}}$, then we could choose a sequent $\Gamma_0 \subset \Phi$ with
+\begin{center}
+\begin{tabular}{l}
+$\Gamma_0 \vdash (\varphi_0 \leftrightarrow \neg\der{\varphi_0})$; \cr
+$\Gamma_0 \vdash (\neg\der{\neg\underline{0} \equiv \underline{0}} \rightarrow \neg\der{\varphi_0})$; and \cr
+$\Gamma_0 \vdash \neg\der{\neg\underline{0} \equiv \underline{0}}$,
+\end{tabular}
+\end{center}
+and obtain from the derivation:
+\[
+\begin{array}{lllll}
+1. & \Gamma_0 & \ & (\varphi_0 \leftrightarrow \neg\der{\varphi_0}) & \mbox{premise} \cr
+2. & \Gamma_0 & \ & (\neg\der{\neg\underline{0} \equiv \underline{0}} \rightarrow \neg\der{\varphi_0}) & \mbox{premise} \cr
+3. & \Gamma_0 & \ & \neg\der{\neg\underline{0} \equiv \underline{0}} & \mbox{premise} \cr
+4. & \Gamma_0 & \ & \neg\der{\varphi_0} & \mbox{IV.3.5 applied to 2.} \cr
+\ & \ & \ & \ & \mbox{and 3.} \cr
+5. & \Gamma_0 & \neg\der{\varphi_0} & \neg\der{\varphi_0} & \mbox{(Assm)} \cr
+6. & \Gamma_0 & \neg\der{\varphi_0} & (\varphi_0 \leftrightarrow \neg\der{\varphi_0}) & \mbox{(Ant) applied to 1.} \cr
+7. & \Gamma_0 & \neg\der{\varphi_0} & (\varphi_0 \lor \neg\der{\varphi_0}) & \mbox{($\lor$S) applied to 5.} \cr
+8. & \Gamma_0 & \neg\der{\varphi_0} & (\varphi_0 \land \neg\der{\varphi_0}) & \mbox{IV.3.5 applied to 6.} \cr
+\ & \ & \ & \ & \mbox{and 7.} \cr
+9. & \Gamma_0 & \neg\der{\varphi_0} & \varphi_0 & \mbox{IV.3.6(d1) applied} \cr
+\ & \ & \ & \ & \mbox{to 8.} \cr
+10. & \Gamma_0 & \ & \varphi_0 & \mbox{(Ch) applied to 4.} \cr
+\ & \ & \ & \ & \mbox{and 9.}
+\end{array}
+\]
+that
+\begin{center}
+($*$) \hfill $\Phi \vdash \neg\der{\varphi_0}$,\hfill (line 4 of the derivation)
+\end{center}
+and also
+\begin{center}
+(+) \hfill $\Phi \vdash \varphi_0$. \hfill (line 10 of the derivation)
+\end{center}
+By (L1), (+) entails that
+\begin{center}
+($**$) \hfill $\Phi \vdash \der{\varphi_0}$. \hfill \phantom{($**$)}
+\end{center}
+Then, ($*$) and ($**$) together contradict the hypothesis that $\Phi$ is consistent.\\
+\ \\
+(Alternatively, we may take further step to obtain
+\begin{center}
+(++) \hfill $\Phi \vdash \neg\varphi_0$ \hfill \phantom{(++)}
+\end{center}
+from ($**$) and the hypothesis that $\Phi \vdash (\varphi_0 \leftrightarrow \neg\der{\varphi_0})$. (+) and (++) together still contradict that $\Phi$ is consistent; this is what we did in the proof of 7.9.)\nolinebreak\hfill$\talloblong$
+\\
+\ \\
+\textit{Remark.} The argument of showing $\Phi \vdash (\neg\der{\neg\underline{0} \equiv \underline{0}} \rightarrow \neg\der{\varphi_0})$ in this exercise results in ($***$) in text.\\
+\ \\
+Recall that in the argument around 7.9 in text, the consistency of an R-decidable set $\Phi$ of $S_\ar$-sentences that allows representations is expressed by
+\[
+\consis{\Phi} \colonequals \neg\Der{\Phi}(\mbf{n}^{\neg 0 \equiv 0}).
+\]
+Indeed, the G\"{o}del number $\mbf{n}^{\neg 0 \equiv 0}$ in the righthand-side sentence above can be replaced by any G\"{o}del number of a sentence that is unsatisfiable: By Definition IV.7.1, we have
+\begin{center}
+$\con \Phi$ \ \ \ iff \ \ \ not $\Phi \vdash \psi$ for some $\psi \in L_0^{S_\ar}$ with $\models 
+\neg\psi$.
+\end{center}
+This point was made clear in the argument for showing $\Phi \vdash (\neg\der{\neg\underline{0} \equiv \underline{0}} \rightarrow \neg\der{\varphi_0})$.
+%
+\item* \textbf{Note to Arguments around 7.11.} There is a typo 2 lines above 7.11: the discussions about natural numbers defined in $\zfc$ are in VII.7, not in VIII.7.\\
+\ \\
+$[$INCOMPLETE: How can we translate $S_\ar$-formulas involving function symbols $+$ and $\cdot$ to $\{ \mbf{\in} \}$-formulas?$]$\\
+\ \\
+$[$INCOMPLETE: How can we apply the results of Matijasevi$\check{\rm c}$ to obtain the formulation of 7.11 in the last paragraph?$]$
+\end{enumerate}
+%End of Section X.7--------------------------------------------------------------------------------
+%End of Chapter X----------------------------------------------------------------------------------

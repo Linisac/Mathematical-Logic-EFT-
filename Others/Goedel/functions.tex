@@ -1,0 +1,217 @@
+\textbf{\Large Functions}
+\begin{enumerate}[1.]
+%
+\item Function constructions by composition, primitive recursion, and by bounded minimalization.
+%
+\item The unary function $fact(n)$ returns $n$ factorial:
+\[
+\begin{array}{lll}
+fact(0)     & \colonequals & 1 \cr
+fact(n + 1) & \colonequals & (n + 1) \mul fact(n).
+\end{array}
+\]
+%
+\item The unary function $prime(n)$ returns the $n$th prime:
+\[
+\begin{array}{lll}
+prime(0)     & \colonequals & 2 \cr
+prime(n + 1) & \colonequals & (\mu m \leq fact(prime(n)) + 1)[\varphi_{prime}(m) \land prime(n) < m].
+\end{array}
+\]
+%
+\item The binary function $index(a, n)$ returns the $n$th element ($n \geq 0$) of the sequence coded by $a$.
+%
+\item The unary function $leng(a)$ returns the length ($\geq 1$) of the sequence coded by $a$:
+\[
+a + 3 - (\mu k \leq a + 2)[\varphi_{div}(prime(a + 2 - k), a + 2)].
+\]
+%
+\item The binary function $exp(a, n)$ returns the $n$th power of $a$ (where $a^0 \colonequals 1$).
+%
+\item The unary function $seq(x)$ returns the number that codes the unit-length sequence of $x$:
+\[
+seq(x) = sub(exp(2, x + 1), 2).
+\]
+%
+\item The binary function $\pi(a, b)$ returns the number that codes the pair $\pair{a}{b}$.
+%
+\item The unary function $\pi_1(a)$ returns $n$ where $a$ codes the pair $\pair{n}{m}$.
+%
+\item The unary function $\pi_2(a)$ returns $m$ where $a$ codes the pair $\pair{n}{m}$.
+%
+\item Note that $\pi(\pi_1(a), \pi_2(a)) = a$.
+%
+\item The unary function $neg(x)$ returns the number that codes the negation $\neg\varphi$ of the formula $\varphi$ coded by $x$:
+\[
+neg(x) = 4x + 1.
+\]
+%
+\item The binary function $dsj(x, y)$ returns the number that codes the disjunction $\varphi \lor \psi$ of the formulas $\varphi$ and $\psi$ coded by $x$ and $y$, respectively:
+\[
+dsj(x, y) = 4\pi(x, y) + 2.
+\]
+%
+\item The binary function $exs(x, y)$ returns the number that codes the quantification $\exists v_x \varphi$ of the variable with index $x$ over the formula $\varphi$ coded by $y$:
+\[
+exs(x, y) = 4\pi(x, y) + 3.
+\]
+%
+\item The binary function $imp(x, y)$ returns the number that codes the implication $\varphi \limply \psi$ ($= \neg\varphi \lor \psi$) where $x$ codes $\varphi$ and $y$ codes $\psi$:
+\[
+imp(x, y) = dsj(neg(x), y).
+\]
+%
+\item The binary function $concat(a, b)$ returns the number that codes the concatenation of the two sequences coded by $a$ and $b$, respectively.
+%
+\item The unary function $sing(a)$ returns the number that codes the singleton set $\setenum{a}$.
+%
+\item The binary function $union(a, b)$ returns the number that codes the union of the two sets coded by $a$ and $b$, respectively.
+%
+\item The operation $t'\sbst{t}{v_n}$ is defined inductively as follows:
+\[
+\begin{array}{lll}
+c\sbst{t}{v_n} & \colonequals & c \cr
+v_n\sbst{t}{v_n} & \colonequals & t \cr
+v_k\sbst{t}{v_n} & \colonequals & v_n \ \mbox{for \(k \neq n\)} \cr
+(f\enum{t}{n})\sbst{t'}{v} & \colonequals & f\enump{t_0\sbst{t'}{v}}{t_n\sbst{t'}{v}}.
+\end{array}
+\]
+The binary function $tsub(t, n, u)$ returns the number that codes the term obtained by substituting all occurrences of $v_n$ with those of the term coded by $u$ in the term coded by $t$:
+\[
+\begin{array}{lll}
+tsub(1, n, u) & \colonequals & 1 \cr
+tsub(2, n, u) & \colonequals & 2 \cr
+tsub(3k, k, u) & \colonequals & u \cr
+tsub(3k, n, u) & \colonequals & 3k \ \mbox{for \(n \neq k\)} \cr
+tsub(3k + 1, n, u) & \colonequals & 3\pi(tsub(\pi_1(k), n, u), tsub(\pi_2(k), n, u)) + 1 \cr
+tsub(3k + 2, n, u) & \colonequals & 3\pi(tsub(\pi_1(k), n, u), tsub(\pi_2(k), n, u)) + 2.
+\end{array}
+\]
+%
+\item The operation $Rpl(\varphi, n, m)$ (``replacement'') returns the formula obtained by replacing each occurrence of $v_n$ (free or bound) by that of $v_m$ in the formula $\varphi$. For example, $Rpl(v_0 \equal v_1 \land \exists v_0 \ v_0 \equal v_2, 0, 2) = v_2 \equal v_1 \land \exists v_2 \ v_2 \equal v_2)$.
+\par It is defined below:
+\[
+\begin{array}{lll}
+Rpl(t_1 \equal t_2, n, m) & \colonequals & tsub(t_1, n, 3m) \equal tsub(t_2, n, 3m) \cr
+Rpl(\neg\varphi, n, m) & \colonequals & \neg Rpl(\varphi, n, m) \cr
+Rpl(\varphi \lor \psi, n, m) & \colonequals & Rpl(\varphi, n, m) \lor Rpl(\psi, n, m) \cr
+Rpl(\exists v_n \varphi, n, m) & \colonequals & \exists v_m Rpl(\varphi, n, m) \cr
+Rpl(\exists v_k \varphi, n, m) & \colonequals & \exists v_k Rpl(\varphi, n, m) \ \mbox{for \(k \neq n\)}.
+\end{array}
+\]
+%
+\item The operation $Sft(\varphi, n)$ (``shift'') returns the formula obtained by shifting the index $k$ of all \emph{bound} occurrences of any variable $v_k$ by $n$. For example, $Sft(v_0 \equal v_1 \land \exists v_0 \exists v_1 \ v_0 \equal v_1, 5) = v_0 \equal v_1 \land \exists v_5 \exists v_6 \ v_5 \equal v_6$.\par
+It is defined inductively below:
+\[
+\begin{array}{lll}
+Sft(t_1 \equal t_2, n) & \colonequals & t_1 \equal t_2 \cr
+Sft(\neg\varphi, n) & \colonequals & \neg Sft(\varphi, n) \cr
+Sft(\varphi \lor \psi, n) & \colonequals & Sft(\varphi, n) \lor Sft(\psi, n) \cr
+Sft(\exists v_k \varphi, n) & \colonequals & \exists v_{k + n} Rpl(Sft(\varphi, n), k, k + n).
+\end{array}
+\]
+It should be clear that if a variable $v$ occurs in $Sft(\varphi, n)$, where $n$ is greater than the greatest among all indices of variables occurring in $\varphi$, then the occurrences of $v$ are either all free or all bound.
+%
+\item The operation $Ssb(\varphi, n, t)$ (``simple substitution'') returns the formula obtained by replacing all \emph{free} occurrences of $v_n$ by those of $t$, ignoring the problem with free occurrences of variables mistakenly captured by quantiers. For example, $Ssb(\exists v_0 \ v_0 \equal v_1, 1, v_0 + 1) = \exists v_0 \ v_0 \equal v_0 + 1$.\par
+It can be defined inductively below:
+\[
+\begin{array}{lll}
+Ssb(t_1 \equal t_2, n, t) & \colonequals & tsub(t_1, n, t) \equal tsub(t_2, n, t) \cr
+Ssb(\neg\varphi, n, t) & \colonequals & \neg Ssb(\varphi, n, t) \cr
+Ssb(\varphi \lor \psi, n, t) & \colonequals & Ssb(\varphi, n, t) \lor Ssb(\psi, n, t) \cr
+Ssb(\exists v_n \varphi, n, t) & \colonequals & \exists v_n \varphi \cr
+Ssb(\exists v_k \varphi, n, t) & \colonequals & \exists v_k Ssb(\varphi, n, t) \ \mbox{for \(k \neq n\)}.
+\end{array}
+\]
+%
+\item The operation of $\varphi\sbst{t}{v_n}$ is defined inductively below:
+\[
+\begin{array}{lll}
+(t_1 \equal t_2)\sbst{t}{v_n} & \colonequals & t_1\sbst{t}{v_n} \equal t_2\sbst{t}{v_n} \cr
+(\neg\varphi)\sbst{t}{v_n} & \colonequals & \neg\varphi\sbst{t}{v_n} \cr
+(\varphi \lor \psi)\sbst{t}{v_n} & \colonequals & \varphi\sbst{t}{v_n} \lor \psi\sbst{t}{v_n} \cr
+(\exists v_k \varphi)\sbst{t}{v_n} & \colonequals & \exists v_k \varphi \ \mbox{if \(v_n \not\in \free{\exists v_k \varphi}\)} \cr
+(\exists v_k \varphi)\sbst{t}{v_n} & \colonequals & \exists v_k (\varphi\sbst{t}{v_n}) \ \mbox{if \(v_n \in \free{\exists v_k \varphi}\) and \(v_k\) does not appear in \(t\)} \cr
+(\exists v_k \varphi)\sbst{t}{v_n} & \colonequals & Ssb(Sft(\exists v_k \varphi, m), n, t) \ \mbox{otherwise},
+\end{array}
+\]
+where $m$ is greater than the greatest among all indices of variables occurring in $\exists v_k \varphi$ or $t$.
+%
+\item The unary function $\var{t}$ is defined inductively below:
+\[
+\begin{array}{lll}
+\var{0} & \colonequals & \emptyset \cr
+\var{1} & \colonequals & \emptyset \cr
+\var{v_n} & \colonequals & \setenum{n} \cr
+\var{t_1 + t_2} & \colonequals & \var{t_1} \setsum \var{t_2} \cr
+\var{t_1 \mul t_2} & \colonequals & \var{t_1} \setsum \var{t_2}
+\end{array}
+\]
+%
+\item The unary function $\free{\varphi}$ is defined inductively below:
+\[
+\begin{array}{lll}
+\free{t_1 \equal t_2} & \colonequals & \var{t_1} \setsum \var{t_2} \cr
+\free{\neg\varphi} & \colonequals & \free{\varphi} \cr
+\free{\varphi \lor \psi} & \colonequals & \free{\varphi} \cup \free{\psi} \cr
+\free{\exists x \varphi} & \colonequals & \free{\varphi} \setminus \setenum{x}
+\end{array}
+\]
+%
+\item The binary function $sqnt(x, y) = \pi(x, y)$ returns the number that codes the sequent in which $x$ codes the antecedent and $y$ codes the succedent.
+%
+\item The unary function $ant(x) = \pi_1(x)$ returns the number that codes the antecedent (implemented as a set) of the sequent coded by $x$.
+%
+\item The unary function $suc(x) = \pi_2(x)$ returns the number that codes the succedent (a formula) of the sequent coded by $x$.
+%
+\item (HERE)
+%
+\item The binary function symbol $\div$.
+%
+\item The binary function symbol $\uparrow$ introduced by the primitive recursion
+\[
+\begin{array}{lll}
+v_0 \uparrow 0 & \colonequals & 1;\cr
+v_0 \uparrow (v_1 + 1) & \colonequals & v_0 \cdot (v_0 \uparrow v_1)
+\end{array}
+\]
+defines the exponential function:
+\[
+\begin{array}{lll}
+m^0 & \colonequals & 1;\cr
+m^{n + 1} & \colonequals & m \cdot m^n.
+\end{array}
+\]
+Instead of $v_0 \uparrow v_1$ we shall write $v_0^{v_1}$.
+%
+\item The binary function symbol $\cup$.
+%
+\item The binary relation symbol $P_\in$ states that $v_0$ is a member of the set encoded by $v_1$:
+\[
+r((v_1 \div 2^{v_0}), 2) \equiv 1.
+\]
+%
+\item The binary relation symbol $P_\subset$ states that the set encoded by $v_0$ is a subset of the set encoded by $v_1$:
+\[
+(\forall v_2 < v_0)(P_\in (v_2, v_0) \rightarrow P_\in (v_2, v_1)).
+\]
+%
+\item The unary function symbol $Free$.
+%
+\item The ternary function symbol $FSbst$.
+%
+\item The binary function symbol $FBnd$.
+%
+\item The unary function symbol $FVar$.
+%
+\item The unary function symbol $Max$.
+%
+\item The binary relation symbol $P_{Div}$ states that $v_0$ divides $v_1$:
+\[
+(\exists v_2 < v_1 + 1)v_0 \cdot v_2 \equiv v_1.
+\]
+%
+\item The unary function symbol $Last$.
+%
+\end{enumerate}
+\ \\
