@@ -110,7 +110,7 @@ $\mbf{\sigma}^A (\underline{m})$ & $\colonequals$ & $\underline{m + 1}$ & for $m
 \end{medcenter}
 Both $\natstr_\sigma$ and $\struct{A}$ are countable; hence by 1.5(d) they are not partially isomorphic because they are not isomorphic. By 1.8, however, $\natstr_\sigma$ and $\struct{A}$ are finitely isomorphic since they are models of $\Phi_\sigma$.
 
-As another example, consider the two orderings $(\zah, <), (\zah', <')$ where
+As another example, consider the two orderings $\struct{Z}_1 = (\zah, <), \struct{Z}_2 = (\zah', <')$ where
 \[
 \zah' \defas \setenum{0, 1} \times \zah
 \]
@@ -144,10 +144,11 @@ d'((b_1, z_1), (b_2, z_2)) & \text{if \mathmode{d'((b_1, z_1), (b_2, z_2)) < 2^n
 \end{cases}. \cr
 \end{array}
 \]
-Then we have $\seqi{I_n}{n \in \nat} : \struct{A} \finiso \struct{B}$, where
+Then we have $\seqi{I_n}{n \in \nat} : \struct{Z}_1 \finiso \struct{Z}_2$ with
 \[
-I_n \defas \sett{p \in \partism{\struct{A}}{\struct{B}}}{\mathmode{\dom{p}} is finite and for all \mathmode{a, a' \in \dom{p}}, \mathmode{d_n(a, a') = d'_n(p(a), p(a')}}.
+I_n \defas \sett{p \in \partism{\struct{Z}_1}{\struct{Z}_2}}{\mathmode{\dom{p}} is finite and for all \mathmode{z, z' \in \dom{p}}, \mathmode{d_n(z, z') = d'_n(p(z), p(z')}}.
 \]
+But $\struct{Z}_1$ and $\struct{Z}_2$ are not partially isomorphic: For any partial isomorphism $p$ from $\struct{Z}_1$ to $\struct{Z}_2$, it can extended to a $p_1 \in \partism{\struct{Z}_1}{\struct{Z}_2}$ so that $(0, 0), (1, 0) \in \rg{p_1}$, say $p_1(n_1) = (0, 0), p_1(n_2) = (1, 0)$ for some $n_1, n_2 \in \zah$; $p_1$ cannot, however, be extended to any $p_2$ with $(0, 1), (0, 2), \ldots, (0, n_2 - n_1) \in \rg{p_2}$ such that $p_2 \in \partism{\struct{Z}_1}{\struct{Z}_2}$.
 %
 \item \textbf{Solution to Exercise 1.11.} Let $\struct{A} = \tuple{A, \intpted{\formal{\suc}}{A}, 0}$, where $A \defas \nat \union \setm{\underline{r}}{r \in \real}$ and
 \begin{medcenter}
