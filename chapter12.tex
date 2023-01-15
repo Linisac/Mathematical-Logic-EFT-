@@ -112,6 +112,46 @@ $\mbf{\sigma}^A (\underline{m})$ & $\colonequals$ & $\underline{m + 1}$ & for $m
 \end{tabular}
 \end{medcenter}
 Both $\natstr_\sigma$ and $\struct{A}$ are countable; hence by 1.5(d) they are not partially isomorphic because they are not isomorphic. By 1.8, however, $\natstr_\sigma$ and $\struct{A}$ are finitely isomorphic since they are models of $\Phi_\sigma$.
+\medskip\\
+As another example, consider the two orderings $\struct{Z}_1 = (\zah, <), \struct{Z}_2 = (\zah', <')$ where
+\[
+\zah' \defas \setenum{0, 1} \times \zah
+\]
+and for all $(b_1, z_1), (b_2, z_2) \in \zah'$,
+\begin{center}
+$(b_1, z_1) <' (b_2, z_2)$ \ \ iff \ \ ($b_1 < b_2$) or ($b_1 = b_2$ and $z_1 < z_2$).
+\end{center}
+Define the distance functions
+\[
+\begin{array}{l}
+d : \zah \times \zah \to \nat, d(z_1, z_2) = \absval{z_1 - z_2} \cr
+d' : \zah' \times \zah' \to \nat \union \setenum{\infty}, d'((b_1, z_1), (b_2, z_2)) =
+\begin{cases}
+\absval{z_1 - z_2} & \text{if \mathmode{b_1 = b_2}} \cr
+\infty & \text{otherwise} \cr
+\end{cases}\cr
+\end{array}
+\]
+and their ``truncated versions'', for $n \in \nat$,
+\[
+\begin{array}{l}
+d_n : \zah \times \zah \to \nat, d_n(z_1, z_2) =
+\begin{cases}
+d(z_1, z_2) & \text{if \mathmode{d(z_1, z_2) < 2^n}} \cr
+\infty      & \text{otherwise} \cr
+\end{cases}, \cr
+d'_n : \zah' \times \zah' \to \nat, d'_m((b_1, z_1), (b_2, z_2)) =
+\begin{cases}
+d'((b_1, z_1), (b_2, z_2)) & \text{if \mathmode{d'((b_1, z_1), (b_2, z_2)) < 2^n}} \cr
+\infty      & \text{otherwise} \cr
+\end{cases}. \cr
+\end{array}
+\]
+Then we have $\seqi{I_n}{n \in \nat} : \struct{Z}_1 \finiso \struct{Z}_2$ with
+\[
+I_n \defas \sett{p \in \partism{\struct{Z}_1}{\struct{Z}_2}}{\mathmode{\dom{p}} is finite and for all \mathmode{z, z' \in \dom{p}}, \mathmode{d_n(z, z') = d'_n(p(z), p(z'))}}.
+\]
+Observe that $\struct{Z}_1$ and $\struct{Z}_2$ are both countable and they are not isomorphic, hence by Lemma 1.5(d) they are not partially isomorphic.
 %%
 \end{enumerate}
 %
