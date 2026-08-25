@@ -20,6 +20,8 @@
 %New Commands for Abbreviations
 %%General
 \newcommand{\mathmode}[1]{\begin{math}#1\end{math}}
+\newcommand{\etc}{\cdots} %et cetera, with centered dots
+\newcommand{\etl}{\ldots} %et cetera, with lowered dots
 \newcommand{\defas}{\colonequals}
 \newcommand{\setenum}[1]{\{#1\}} %the set of which the elements are enumerated by #1
 \newcommand{\setsum}{\cup} %`A \setsum B' stands for the union of sets A and B
@@ -137,7 +139,7 @@
 \newcommand{\varbase}{\mathrm{var}} %the base symbol for the function var; DEPENDENCY: \var
 \newcommand{\var}[1]{{\varbase(#1)}} %the set of variables occurring in the term #1
 \newcommand{\freebase}{\mathrm{free}} %the base symbol for the function free; DEPENDENCY: \free
-\newcommand{\free}[1]{{\freebase(#1)}} %the set of free variables occurring in the formula #1
+\newcommand{\free}{\freebase} %the set of free variables occurring in the formula #1
 \newcommand{\SF}[1]{\mathop{\mathrm{SF}}(#1)} %to be \sbfmla
 \newcommand{\sbfmlabase}{\mathrm{SF}} %the base symbol for the function sbfmla; DEPENDENCY: \sbfmla
 \newcommand{\sbfmla}[1]{{\sbfmlabase(#1)}} %the set of subformulas of the formula #1
@@ -368,20 +370,20 @@
 \end{titlepage}
 \titleformat{\chapter}[display]{\huge\bfseries}{\thechapter}{.5em}{}
 \titleformat{\section}[hang]{\Large\rm}{\S\thesection.}{.5em}{}
-%\input{chapter1}
-%\input{chapter2}
-%\input{chapter3}
-%\input{chapter4}
-%\input{chapter5}
-%\input{chapter6}
-%\input{chapter7}
-%\input{chapter8}
-%\input{chapter9}
-%\input{chapter10}
-%\input{chapter11}
+\input{chapter1}
+\input{chapter2}
+\input{chapter3}
+\input{chapter4}
+\input{chapter5}
+\input{chapter6}
+\input{chapter7}
+\input{chapter8}
+\input{chapter9}
+\input{chapter10}
+\input{chapter11}
 \input{chapter12}
-%\input{chapter13}
-\appendix
+\input{chapter13}
+%\appendix
 %\input{appendixa}
 \begin{thebibliography}{10}
 \bibitem{Thomas_Jech} Thomas Jech \textsl{Set Theory} the third millennium edition, revised and expanded, Springer, 2000.

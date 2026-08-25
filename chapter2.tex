@@ -58,7 +58,7 @@ More specifically, $c \in I$ and $c \not\in \setm{\alpha(n)}{n \in \nat}$. We co
 \item \textbf{Solution to Exercise~1.4.} (INCOMPLETE, RESOLVE THE REFERENCE)
 \begin{asparaenum}[(a)]
 \item \label{chiisec1.4a}
-Let $M_0, M_1, \ldots$ be at most countable sets. Then there are injective maps $\beta_0: M_0 \to \nat, \beta_1: M_1 \to \nat, \ldots$ (cf.\ \reftitle{Lemma~1.1(c)}).\par
+Let $M_0, M_1, \ldots$ be at most countable sets. If $M_n = \emptyset$ for all $n \in \nat$, then $\bunion_{n \in \nat} M_n = \emptyset$, which is clearly at most countable. Otherwise, let $\beta_n: M_n \to \nat$ be an injective map given by \reftitle{Lemma~1.1(c)} for all $n \in \nat$ such that $M_n \neq \emptyset$.\par
 Let $p_n$ be the $n$th prime: $p_0 = 2, p_1 = 3, p_2 = 5$, and so on. We choose the map $\beta: \bsetsum_{n \in \nat} M_n \to \nat$ in which
 \[
 \beta(a) \colonequals p_k \mul p_{k + \beta_k(a) + 1},
@@ -271,8 +271,12 @@ and hence is not well defined.\nolinebreak\hfill$\talloblong$
 \begin{enumerate}[(i)]
 \item $k = 0$ ($\xi^\prime = \boxempty$): Let $t^\prime = t$, and $\eta^\prime = \boxempty$.
 %%
-\item $k > 0$: Let $t = \xi^\prime \zeta^\prime$. Then the first symbol of $\zeta^\prime$ must lie somewhere in $t_j$ for some $1 \leq j \leq n$. By induction bypothesis, there are strings $\xi^{\prime \prime}$ and $\eta^{\prime \prime}$ $\in \mathcal{A}_S^*$ and $t^{\prime \prime} \in T^S$ such that $t_j = \xi^{\prime \prime} t^{\prime \prime} \eta^{\prime \prime}$. Specifically, $\xi^{\prime \prime}$ is a postfix of $\xi^\prime$ and $\eta^{\prime \prime}$ is a prefix of $\eta^\prime$ and, at the same time, $t^{\prime \prime} = t^\prime$.\nolinebreak\hfill$\talloblong$
+\item $k > 0$: Let $t = \xi^\prime \zeta^\prime$. Then the first symbol of $\zeta^\prime$ must lie somewhere in $t_j$ for some $1 \leq j \leq n$. By induction hypothesis, there are strings $\xi^{\prime \prime}$ and $\eta^{\prime \prime}$ $\in \mathcal{A}_S^*$ and $t^{\prime \prime} \in T^S$ such that $t_j = \xi^{\prime \prime} t^{\prime \prime} \eta^{\prime \prime}$. Specifically, $\xi^{\prime \prime}$ is a postfix of $\xi^\prime$ and $\eta^{\prime \prime}$ is a prefix of $\eta^\prime$ and, at the same time, $t^{\prime \prime} = t^\prime$.\nolinebreak\hfill$\talloblong$
 \end{enumerate}
+
+\begin{remark}
+In fact, every term can be seen as a ``flattened'' formation tree in which variables or constants occur as leaf nodes whereas function symbols (if any) occur as internal nodes. In this view, the word $t_1 \etl t_n$ is a flattened forest and at each place it is the root of exactly one tree which is a subtree of some $t_i$.
+\end{remark}
 \end{enumerate}
 %End of II.4.9-----------------------------------------------------------------------------------------------
 %End of II.4-------------------------------------------------------------------------------------------------
